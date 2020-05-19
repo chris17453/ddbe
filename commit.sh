@@ -40,7 +40,10 @@ else
     major=$MAJOR_MIN
     minor=$MINOR_MIN
     patch=$PATCH_MIN
+    DIR=$(dirname "${version}")
 
+    mkdir -p "$DIR"
+  
 fi
 build=$major.$minor.$patch
 
