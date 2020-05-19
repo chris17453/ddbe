@@ -4,8 +4,9 @@
 # with that a version
 
 # version file
-# 1.0.0
+# auto creates if non existant
 version=source/version.txt
+
 # min and max for each variable
 # incase you want to limit range
 MAJOR_MIN=1
@@ -41,7 +42,6 @@ else
     minor=$MINOR_MIN
     patch=$PATCH_MIN
     DIR=$(dirname "${version}")
-
     mkdir -p "$DIR"
   
 fi
