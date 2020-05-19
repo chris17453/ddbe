@@ -71,7 +71,7 @@ int expr_expr(token_array_t* tokens,int depth){
         if(!expr_expr(tokens,depth)){
             tokens->position=pos;
         }
-        //goop(depth,"expression SUCCESS","--");
+        goop(depth,"expr SUCCESS","word up... good job sir.");
 
         return 1;
     }
