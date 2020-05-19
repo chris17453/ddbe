@@ -4,6 +4,30 @@ HEADER=builds/ddb.h
 SOURCE=builds/ddb.c
 
 
+# This gets the curent version.. and bumps the patch +1
+version=source/version.txt
+major=$(cat $version| cut -d '.' -f 1)
+minor=$(cat $version| cut -d '.' -f 2)
+patch=$(cat $version| cut -d '.' -f 3)
+
+patch=$((patch+1))
+if [[ $patch -gt 999 ]]; 
+then 
+  patch=0
+  minor=$((minor+1))
+fi
+if [[ $minor -gt 999 ]]; 
+then 
+  minor=0
+  major=$((major+1))
+fi
+build=$major.$minor.$patch
+echo $build>$version
+
+
+git add -add
+git commit -m 'Commiting Build '$build
+
 echo '// ddb all in one source'>$SOURCE
 echo '#include "ddb.h"'>>$SOURCE
 echo ''>>$SOURCE

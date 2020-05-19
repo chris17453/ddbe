@@ -87,7 +87,9 @@
         identifier_t identifier;
         char *function;
         char *alias;
-        int type;
+        int is_function;
+        int is_litteral;
+        int is_expr;
         int order;
     } data_column_t;
 
@@ -97,23 +99,6 @@
 
     } where_t;
 
-    
-    
-    typedef struct select_t{
-        int distinct;
-        data_column_t *columns;
-        identifier_t  *from;
-        where_t clause;
-        int limit_start;
-        int limit_length;
-
-        int has_where;
-        int has_select_column;
-        int has_limit;
-        int has_order_by;
-        int has_group_by;
-    } select_t;
-    
     typedef struct token_t{
         int type;
         char *value;
@@ -126,6 +111,22 @@
         char *alias;
     } dataset_t;
 
+    typedef struct select_t{
+        char *alias;
+        int distinct;
+        identifier_t from;
+        token_t *columns;
+        token_t *where;
+        token_t *order_by;
+        token_t *group_by;
+        int limit_start;
+        int limit_length;
+        int has_alias;
+        int has_columns;
+        int has_group;
+        int has_order;
+        int has_where;
+    } select_t;
 
     // A structure to represent a stack 
     typedef struct token_array_t{ 
@@ -133,22 +134,12 @@
         unsigned length; 
         token_t * array; 
         int position;
-        
-        dataset_t *dataset;
-        identifier_t identifier;
-        char *alias;
-        
+        void * target;
+        select_t * select;
     } token_array_t; 
 
 
-    typedef struct select_t{
-        identifier_t from;
-        token_t *columns;
-        token_t *where;
-        token_t *group;
-        int limit_start;
-        int limit_length;
-    } select_t;
+
 
     token_array_t *  token_array       (unsigned length);
     void             token_close       (token_array_t * arr);

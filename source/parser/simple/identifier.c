@@ -30,7 +30,11 @@ int expr_identifier(token_array_t *tokens,int depth){
 void set_identifier(token_array_t *tokens,int index1,int index2){
     char *db;
     char *table;
-    return;
+    if(tokens->target==NULL) {
+        ghost(ERR_TOKEN_TARGET_NULL);
+    }
+    identifier_t *ident=tokens->target;
+
     if(valid_token_index(tokens,index1)){
         db   =tokens->array[index1].value;
     } 
@@ -38,11 +42,11 @@ void set_identifier(token_array_t *tokens,int index1,int index2){
         table=tokens->array[index2].value;
     }
     if(index1>-1){
-        tokens->identifier.qualifier=db;
+        ident->qualifier=db;
         goop(0,"identity",db);
     } else {
-        tokens->identifier.qualifier="";
+        ident->qualifier="";
     }
     goop(0,"identity",table);
-    tokens->identifier.source=table;
+    ident->source=table;
 }

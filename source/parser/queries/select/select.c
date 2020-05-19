@@ -34,3 +34,37 @@ int expr_select(token_array_t *tokens,int depth){
 
     return 0;
 }
+
+void select_debug(select_t *select){
+    printf("SELECT_DEBUG\n");
+    printf("  has_alias      =%d\n"   ,select->has_alias);
+    printf("  has_columns    =%d\n"   ,select->has_columns);
+    printf("  has_group      =%d\n"   ,select->has_group);
+    printf("  has_order      =%d\n"   ,select->has_order);
+    printf("  has_where      =%d\n"   ,select->has_where);
+    printf("  alias          =%s\n"   ,select->alias);
+    printf("  distinct       =%d\n"   ,select->distinct);
+    printf("  from.qualifier =%s\n"   ,select->from.qualifier);
+    printf("  from.source    =%s\n"   ,select->from.source);
+    printf("  limit_length   =%d\n"   ,select->limit_length);
+    printf("  limit_start    =%d\n"   ,select->limit_start);
+}
+
+select_t *select_new(){
+    select_t *select=(select_t*)malloc(sizeof(select_t));
+    select->alias="";
+    select->distinct=-1;
+    select->from.qualifier="";
+    select->from.source="";
+    select->has_alias=-1;
+    select->has_columns=-1;
+    select->has_group=-1;
+    select->has_order=-1;
+    select->has_where=-1;
+    select->limit_length=-1;
+    select->limit_start=-1;
+    return select;
+}
+
+
+

@@ -51,6 +51,7 @@ void vomit(int err_no){
         case ERR_INVALID_SELECT_EXPR_ALIAS   : msg="select expression has an missing or invalid alias"; break;   
         case ERR_UNTERMINATED_LINE_COMENT    : msg="unterminated line comment"; break;
         case ERR_UNTERMINATED_BLOCK_COMENT   : msg="unterminated block comment"; break;
+        case ERR_TOKEN_TARGET_NULL           : msg="token target is null"; break;
 
         default: msg="NO CLUE";
     }

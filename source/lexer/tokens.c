@@ -83,10 +83,11 @@ token_array_t * token_array(unsigned length) {
     tokens->length = length; 
     tokens->top = -1; 
     tokens->position=0;
-    tokens->alias="";
     
-    tokens->identifier.qualifier="";
-    tokens->identifier.source="";
+    tokens->select=select_new();
+    tokens->target=&tokens->select->from;
+
+    
     tokens->array = (token_t*)malloc(tokens->length * sizeof(token_t));
     for(int i=0;i<length;i++) tokens->array[i].value=NULL;
     return tokens; 

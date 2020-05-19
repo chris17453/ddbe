@@ -20,6 +20,7 @@
     #define ERR_INVALID_SELECT_EXPR_ALIAS   15
     #define ERR_UNTERMINATED_LINE_COMENT    16
     #define ERR_UNTERMINATED_BLOCK_COMENT   17
+    #define ERR_TOKEN_TARGET_NULL           18
 
 #endif
 

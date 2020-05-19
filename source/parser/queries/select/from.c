@@ -25,7 +25,6 @@ int expr_from(token_array_t *tokens,int depth){
 }
 
 void set_from(token_array_t *tokens){
-    //tokens->dataset.identity=tokens->alias;
-    //tokens->dataset->identifier.source=tokens->identifier.source;
-    //tokens->dataset->identifier.qualifier=tokens->identifier.qualifier;
+    //tokens->selectidentifier->source=tokens->identifier.source;
+    //tokens->identifier-qualifier=tokens->identifier.qualifier;
 }
