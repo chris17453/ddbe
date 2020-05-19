@@ -25,7 +25,7 @@ build=$major.$minor.$patch
 echo $build>$version
 
 
-git add -add
+git add -A
 git commit -m 'Commiting Build '$build
 
 echo '// ddb all in one source'>$SOURCE
