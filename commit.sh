@@ -8,7 +8,7 @@
 version=source/version.txt
 # min and max for each variable
 # incase you want to limit range
-MAJOR_MIN=0
+MAJOR_MIN=1
 MINOR_MIN=0
 PATCH_MIN=0
 MAJOR_MAX=999
@@ -19,7 +19,7 @@ MINOR_INC=1
 PATCH_INC=1
 
 
-if [[ -f "$FILE" ]]; then
+if [[ -f "$version" ]]; then
     # This gets the curent version.. and bumps the patch +1
     major=$(cat $version| cut -d '.' -f 1)
     minor=$(cat $version| cut -d '.' -f 2)
@@ -46,6 +46,7 @@ build=$major.$minor.$patch
 
 #put new version in text file
 echo $build>$version
+echo Curent Version: $build
 
 # commit everything with build #
 git add -A
