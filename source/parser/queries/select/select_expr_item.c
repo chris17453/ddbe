@@ -29,6 +29,8 @@ int expr_select_expr(token_array_t *tokens,int depth){
         }
     } //end looper
     if(expr_list>0) {
+       printf("%d epressions",expr_list);
+
         return 1;
     }
     return 0;

@@ -8,6 +8,7 @@ int expr_select(token_array_t *tokens,int depth){
     #endif
 
     int pos=tokens->position;
+    int number_of_expressions=0;
     if(compare_token(tokens,0,TOKEN_SELECT)){
         // optional
         if(compare_token(tokens,0,TOKEN_DISTINCT)){
@@ -30,6 +31,7 @@ int expr_select(token_array_t *tokens,int depth){
         }
         return 1;
     }
+    
     tokens->position=pos;
 
     return 0;
