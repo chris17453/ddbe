@@ -1,5 +1,6 @@
 #include "../../../include/errors.h"
 #include "../../../include/tokens.h"
+#include "../../../include/select.h"
 
 int expr_select(token_array_t *tokens,int depth){
     ++depth;
