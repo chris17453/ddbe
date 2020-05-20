@@ -1,38 +1,20 @@
 #include "../../../include/errors.h"
 #include "../../../include/tokens.h"
 
-int expr_select_expr(token_array_t *tokens,int depth){
+//identifier or identifier as alias
+int expr_column_expr(token_array_t *tokens,int depth){
     ++depth;
-    int pos=tokens->position;
-    int pos2;
+
     #ifdef PARSE_ENTRANCE
-    goop(depth,"SEL-EXPR","IN");
+    goop(depth,"COLEXPR","IN");
     #endif
 
-    int looper=1;
-
-    int expr_list=0;
-
-    while(looper){
-        pos2=tokens->position;
-        if(!expr_column_expr(tokens,depth)) {
-            //no select epression
-            break;
-        }
-        ++expr_list;
-        print_token_range(tokens,"SELECT_EXPR SRC",pos2,tokens->position);
-
-        // if we have a delimiter.. loop else exit
-        if(!compare_token(tokens,0,TOKEN_LIST_DELIMITER)) {
-            looper=0;
-        } else {
-        }
-    } //end looper
-    if(expr_list>0) {
-       printf("%d epressions",expr_list);
-
+    int pos=tokens->position;
+    if(expr_simple_expr(tokens,depth)){
+        if(expr_alias(tokens,depth)) 
+            return 1;
         return 1;
     }
+    tokens->position=pos;
     return 0;
 }
-    
