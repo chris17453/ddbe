@@ -33,7 +33,7 @@ int expr_select(token_array_t *tokens,int depth){
             if(expr_limit(tokens,depth)){
             }
         }
-        select_debug();
+        select_debug(sel);
         return 1;
     }
     

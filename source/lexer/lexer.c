@@ -303,7 +303,7 @@ void process_queries(token_array_t *tokens){
     while(loop){
 
         expr_select(tokens,1);
-        select_debug(tokens->select);
+        
         if(!compare_token(tokens,0,TOKEN_DELIMITER)){
             loop=0;
         } 
