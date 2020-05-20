@@ -10,6 +10,10 @@ int expr_select(token_array_t *tokens,int depth){
     int pos=tokens->position;
     int number_of_expressions=0;
     if(compare_token(tokens,0,TOKEN_SELECT)){
+        select_t *sel=select_new();
+        //tokens->object=sel;
+        tokens->target=&sel->from;
+
         // optional
         if(compare_token(tokens,0,TOKEN_DISTINCT)){
             goop(depth,"SELECT","DISTINCT");
@@ -29,6 +33,7 @@ int expr_select(token_array_t *tokens,int depth){
             if(expr_limit(tokens,depth)){
             }
         }
+        select_debug();
         return 1;
     }
     

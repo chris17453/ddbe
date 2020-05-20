@@ -84,8 +84,7 @@ token_array_t * token_array(unsigned length) {
     tokens->top = -1; 
     tokens->position=0;
     
-    tokens->select=select_new();
-    tokens->target=&tokens->select->from;
+    tokens->object=NULL;
 
     
     tokens->array = (token_t*)malloc(tokens->length * sizeof(token_t));
