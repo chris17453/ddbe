@@ -19,9 +19,9 @@ source/include/expr.h
 source/include/expr_list.h
 source/include/from.h
 source/include/limit.h
+source/include/select.h
 source/include/select_expr_item.h
 source/include/select_expr.h
 source/include/where.h
-source/include/select.h
 source/include/simple_expr.h
 source/include/sub_query.h
