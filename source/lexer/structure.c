@@ -84,11 +84,11 @@ void select_debug(select_t *select){
     if(select->order  ==0) has_order  ="NO"; else has_order  ="YES";
     if(select->where  ==0) has_where  ="NO"; else has_where  ="YES";
 
-    printf("  has_alias      =%d\n"   ,has_alias);
-    printf("  has_columns    =%d\n"   ,has_columns);
-    printf("  has_group      =%d\n"   ,has_group);
-    printf("  has_order      =%d\n"   ,has_order);
-    printf("  has_where      =%d\n"   ,has_where);
+    printf("  has_alias      =%s\n"   ,has_alias);
+    printf("  has_columns    =%s\n"   ,has_columns);
+    printf("  has_group      =%s\n"   ,has_group);
+    printf("  has_order      =%s\n"   ,has_order);
+    printf("  has_where      =%s\n"   ,has_where);
     printf("  alias          =%s\n"   ,select->alias);
     printf("  distinct       =%d\n"   ,select->distinct);
     printf("  from.qualifier =%s\n"   ,select->from.qualifier);
