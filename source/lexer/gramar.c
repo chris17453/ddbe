@@ -12,5 +12,5 @@ gramar_t *gramar_create(token_array_t *tokens,int start,int end){
     gramar->length = length; 
     gramar->tokens = &tokens->array[start];
     
-    return tokens; 
+    return gramar; 
 } 

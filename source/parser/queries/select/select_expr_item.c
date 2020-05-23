@@ -11,6 +11,7 @@ int expr_column_expr(token_array_t *tokens,int depth){
 
     int pos=tokens->position;
     if(expr_simple_expr(tokens,depth)){
+        
         if(expr_alias(tokens,depth)) 
             return 1;
         return 1;

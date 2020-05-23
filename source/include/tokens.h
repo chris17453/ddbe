@@ -83,51 +83,31 @@
         char *item;
     } list;
 
+    # define COLUMN_TYPE_IDENTIFIER 1
+    # define COLUMN_TYPE_FUNCTION 1
+
+
     typedef struct  data_column_t{
-        identifier_t identifier;
-        char *function;
+        int   type;
+        int   ordinal;
+        void *object;
         char *alias;
-        int is_function;
-        int is_litteral;
-        int is_expr;
-        int order;
     } data_column_t;
 
+
+    
     typedef struct where_t{
 
         
 
-    } where_t;
+    } where_t; 
 
     typedef struct token_t{
         int type;
         char *value;
     } token_t;
 
-    typedef struct dataset_t{
-        int length;
-        data_column_t *columns;
-        identifier_t identifier;
-        char *alias;
-    } dataset_t;
-
-    typedef struct select_t{
-        char *alias;
-        int distinct;
-        identifier_t from;
-        token_t *columns;
-        token_t *where;
-        token_t *order_by;
-        token_t *group_by;
-        int limit_start;
-        int limit_length;
-        int has_alias;
-        int has_columns;
-        int has_group;
-        int has_order;
-        int has_where;
-    } select_t;
-
+    
     // A structure to represent a stack 
     typedef struct token_array_t{ 
         int top; 
