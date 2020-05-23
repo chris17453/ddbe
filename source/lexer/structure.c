@@ -2,7 +2,7 @@
 #include "include/structure.h"
 #include "include/errors.h"
 
-void structure_init(){
+select_t *select_new(){
     select_t obj;
     // init data structure
     // sub elements
@@ -25,6 +25,7 @@ void structure_init(){
     obj.has_limit_length =0;
     obj.has_limit_start  =0;
     obj.alias_target     =0;
+    return &obj;
 }
 
 

@@ -13,7 +13,7 @@ int expr_select(token_array_t *tokens,int depth){
     int number_of_expressions=0;
     if(compare_token(tokens,0,TOKEN_SELECT)){
         select_t *sel=select_new();
-        //tokens->object=sel;
+        tokens->object=sel;
         
         // optional
         if(compare_token(tokens,0,TOKEN_DISTINCT)){
