@@ -1,5 +1,6 @@
 #include "../../../include/errors.h"
 #include "../../../include/tokens.h"
+#include "../../../include/structure.h"
 #include "../../../include/select.h"
 
 int expr_select(token_array_t *tokens,int depth){
@@ -46,11 +47,24 @@ int expr_select(token_array_t *tokens,int depth){
 
 void select_debug(select_t *select){
     printf("SELECT_DEBUG\n");
-    printf("  has_alias      =%d\n"   ,select->has_alias);
-    printf("  has_columns    =%d\n"   ,select->has_columns);
-    printf("  has_group      =%d\n"   ,select->has_group);
-    printf("  has_order      =%d\n"   ,select->has_order);
-    printf("  has_where      =%d\n"   ,select->has_where);
+    
+    char *has_alias;
+    char *has_columns;
+    char *has_group;
+    char *has_order;
+    char *has_where;
+
+    if(select->alias  ==0) has_alias  ="NO"; else has_alias  ="YES";
+    if(select->columns==0) has_columns="NO"; else has_columns="YES";
+    if(select->group  ==0) has_group  ="NO"; else has_group  ="YES";
+    if(select->order  ==0) has_order  ="NO"; else has_order  ="YES";
+    if(select->where  ==0) has_where  ="NO"; else has_where  ="YES";
+
+    printf("  has_alias      =%d\n"   ,has_alias);
+    printf("  has_columns    =%d\n"   ,has_columns);
+    printf("  has_group      =%d\n"   ,has_group);
+    printf("  has_order      =%d\n"   ,has_order);
+    printf("  has_where      =%d\n"   ,has_where);
     printf("  alias          =%s\n"   ,select->alias);
     printf("  distinct       =%d\n"   ,select->distinct);
     printf("  from.qualifier =%s\n"   ,select->from.qualifier);
