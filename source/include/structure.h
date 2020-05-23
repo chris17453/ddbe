@@ -12,17 +12,12 @@ typedef struct select_t{
         //token_t *where;
         //token_t *order_by;
         //token_t *group_by;
-        int column_length;
+        int    column_length;
 
-        int limit_start;
-        int limit_length;
-        int has_alias;
-        int has_columns;
-        int has_where;
-        int has_group;
-        int has_order;
-        int has_limit_length;
-        int has_limit_start;
+        int    limit_start;
+        int    limit_length;
+        int    has_limit_length;
+        int    has_limit_start;
         void * alias_target;
     } select_t;
     

@@ -5,7 +5,7 @@
 void structure_init(){
     select_t obj;
     // init data structure
-    obj->alias            ="";
+    obj.alias            =0;
     obj.distinct         =0;
     obj.column_length    =0;
 
@@ -14,11 +14,6 @@ void structure_init(){
     obj.limit_start      =0;
     obj.limit_length     =0;
     
-    obj.has_alias        =0;
-    obj.has_columns      =0;
-    obj.has_group        =0;
-    obj.has_order        =0;
-    obj.has_where        =0;
     obj.has_limit_length =0;
     obj.has_limit_start  =0;
     obj.alias_target     =0;
