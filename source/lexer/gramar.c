@@ -1,3 +1,4 @@
+/*
 #include "include/errors.h"
 #include "include/gramar.h"
 
@@ -14,3 +15,4 @@ gramar_t *gramar_create(token_array_t *tokens,int start,int end){
     
     return gramar; 
 } 
+*/

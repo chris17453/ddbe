@@ -1,5 +1,5 @@
 #include "tokens.h"
-
+/*
 #if !defined(_GRAMAR_H_)
     #define _GRAMAR_H_ 1
 
@@ -17,3 +17,4 @@
 
 
 
+*/
