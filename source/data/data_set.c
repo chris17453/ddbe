@@ -1,6 +1,6 @@
 
 #include "../include/dataset.h"
-
+/*
 void dataset_create(int length){
     dataset_t data;
     data.length=length;
@@ -16,3 +16,4 @@ void dataset_create(int length){
     data.columns=(data_column_t*)malloc(sizeof(data_column_t)*length);
 }
 
+*/
