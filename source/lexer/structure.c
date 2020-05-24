@@ -69,8 +69,11 @@ void select_add_column(select_t obj){
     ++obj.column_length;
 }
 
+void set_distinct(select_t *obj){
+    obj->distinct=1;
+}
 
-void select_debug(select_t *select){
+void select_debug(select_t *obj){
     printf("SELECT_DEBUG\n");
     
     char *has_alias;
@@ -79,23 +82,23 @@ void select_debug(select_t *select){
     char *has_order;
     char *has_where;
 
-    if(select->alias  ==0) has_alias  ="NO"; else has_alias  ="YES";
-    if(select->columns==0) has_columns="NO"; else has_columns="YES";
-    if(select->group  ==0) has_group  ="NO"; else has_group  ="YES";
-    if(select->order  ==0) has_order  ="NO"; else has_order  ="YES";
-    if(select->where  ==0) has_where  ="NO"; else has_where  ="YES";
+    if(obj->alias  ==0) has_alias  ="NO"; else has_alias  ="YES";
+    if(obj->columns==0) has_columns="NO"; else has_columns="YES";
+    if(obj->group  ==0) has_group  ="NO"; else has_group  ="YES";
+    if(obj->order  ==0) has_order  ="NO"; else has_order  ="YES";
+    if(obj->where  ==0) has_where  ="NO"; else has_where  ="YES";
 
     printf("  has_alias      =%s\n"   ,has_alias);
     printf("  has_columns    =%s\n"   ,has_columns);
     printf("  has_group      =%s\n"   ,has_group);
     printf("  has_order      =%s\n"   ,has_order);
     printf("  has_where      =%s\n"   ,has_where);
-    printf("  alias          =%s\n"   ,select->alias);
-    printf("  distinct       =%d\n"   ,select->distinct);
-    printf("  from.qualifier =%s\n"   ,select->from.qualifier);
-    printf("  from.source    =%s\n"   ,select->from.source);
-    printf("  limit_length   =%d\n"   ,select->limit_length);
-    printf("  limit_start    =%d\n"   ,select->limit_start);
+    printf("  alias          =%s\n"   ,obj->alias);
+    printf("  distinct       =%d\n"   ,obj->distinct);
+    printf("  from.qualifier =%s\n"   ,obj->from.qualifier);
+    printf("  from.source    =%s\n"   ,obj->from.source);
+    printf("  limit_length   =%d\n"   ,obj->limit_length);
+    printf("  limit_start    =%d\n"   ,obj->limit_start);
 }
 
 

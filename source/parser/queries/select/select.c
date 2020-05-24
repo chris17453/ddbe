@@ -17,6 +17,7 @@ int expr_select(token_array_t *tokens,int depth){
         
         // optional
         if(compare_token(tokens,0,TOKEN_DISTINCT)){
+            set_distinct(sel);
             goop(depth,"SELECT","DISTINCT");
         }
         // not optional
