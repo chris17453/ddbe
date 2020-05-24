@@ -3,29 +3,29 @@
 #include "include/errors.h"
 
 select_t *select_new(){
-    select_t obj;
+    select_t *obj=safe_malloc(sizeof(select_t),1);
     // init data structure
     // sub elements
-    obj.columns          =0;
-    obj.where            =0;
-    obj.order            =0;
-    obj.group            =0;
+    obj->columns          =0;
+    obj->where            =0;
+    obj->order            =0;
+    obj->group            =0;
 
-    obj.from.qualifier   =0;
-    obj.from.source      =0;
+    obj->from.qualifier   =0;
+    obj->from.source      =0;
 
     // elements
-    obj.alias            =0;
-    obj.distinct         =0;
-    obj.limit_start      =0;
-    obj.limit_length     =0;
+    obj->alias            =0;
+    obj->distinct         =0;
+    obj->limit_start      =0;
+    obj->limit_length     =0;
     
     // internal
-    obj.column_length    =0;
-    obj.has_limit_length =0;
-    obj.has_limit_start  =0;
-    obj.alias_target     =0;
-    return &obj;
+    obj->column_length    =0;
+    obj->has_limit_length =0;
+    obj->has_limit_start  =0;
+    obj->alias_target     =0;
+    return obj;
 }
 
 
