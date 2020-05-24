@@ -28,8 +28,8 @@ int expr_identifier(token_array_t *tokens,int depth){
 }
 
 void set_identifier(token_array_t *tokens,int index1,int index2){
-    char *db;
-    char *table;
+    char *db=0;
+    char *table=0;
     if(tokens->target==0) {
         ghost(ERR_TOKEN_TARGET_NULL);
     }
