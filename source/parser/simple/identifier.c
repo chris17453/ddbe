@@ -34,6 +34,7 @@ void set_identifier(token_array_t *tokens,int index1,int index2){
         ghost(ERR_TOKEN_TARGET_NULL);
     }
     identifier_t *ident=tokens->target;
+    goop(0,"SET IDENTIFIER","");
 
     if(valid_token_index(tokens,index1)){
         db   =tokens->array[index1].value;
