@@ -10,7 +10,10 @@ int expr_from(token_array_t *tokens,int depth){
     int pos=tokens->position;
     
     if(compare_token(tokens,0,TOKEN_FROM)){
+        goop(depth,"SELECT","BEFORE FROM-ident");
+
         if(expr_identifier(tokens,depth)){        
+            goop(depth,"SELECT","BEFORE FROM-alias");
             
             if(expr_alias(tokens,depth)) {
             }
