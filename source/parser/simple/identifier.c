@@ -42,6 +42,8 @@ void set_identifier(token_array_t *tokens,int index1,int index2){
     if(valid_token_index(tokens,index2)){
         table=tokens->array[index2].value;
     }
+    goop(0,"SET IDENTIFIER","2");
+
     if(index1>-1){
         ident->qualifier=db;
         goop(0,"identity",db);
