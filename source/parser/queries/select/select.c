@@ -30,7 +30,7 @@ int expr_select(token_array_t *tokens,int depth){
         }
         goop(depth,"SELECT","BEFORE FROM");
 
-        tokens->target=*sel->from;
+        tokens->target=&sel->from;
 
         if(expr_from(tokens,depth)){
             goop(depth,"SELECT","BEFORE WHERE");
