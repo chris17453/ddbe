@@ -118,9 +118,13 @@ void select_debug(select_t *obj){
         printf ("    { ");
             printf(" alias: %s ,",obj->columns[i].alias);
             printf(" type: %s ,",token_type(obj->columns[i].type));
+            if (obj->columns[i].type==TOKEN_IDENTIFIER) {
+               identifier_t *ident=(identifier_t*)obj->columns[i].object;
+               printf("-%s,val: %s",ident->qualifier,ident->source);
+            }
             if (obj->columns[i].type==TOKEN_LITTERAL) {
-                //printf(" sub type: %s ,");
                 token_t *token=(token_t*)obj->columns[i].object;
+                //printf(" sub type: %s ,");
 
                 printf("-%s,val: %s",token_type(token->type),token->value );
 
