@@ -120,9 +120,9 @@ void select_debug(select_t *obj){
             printf(" type: %s ,",token_type(obj->columns[i].type));
             if (obj->columns[i].type==TOKEN_LITTERAL) {
                 //printf(" sub type: %s ,");
-                token_t *token=(token_t*)obj->columns[i].object);
+                token_t *token=(token_t*)obj->columns[i].object;
 
-                printf("%s=%s",token_type(token->type),token->value ));
+                printf("%s=%s",token_type(token->type),token->value );
 
             }
             printf(" ordinal: %d ",obj->columns[i].ordinal);
