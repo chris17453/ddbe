@@ -2,6 +2,9 @@
 #include "include/structure.h"
 #include "include/errors.h"
 #include <stdio.h>
+#include <string.h>
+
+
 select_t *select_new(){
     select_t *obj=safe_malloc(sizeof(select_t),1);
     // init data structure
