@@ -16,10 +16,8 @@ int expr_order_by(token_array_t *tokens,int depth,select_t* sel){
 
             int looper=1;
             int expr_list=0;
-            int pos2=0;
             tokens->object=0;
             while(looper){
-                pos2=tokens->position;
                 if(!expr_identifier(tokens,depth)){
                     goop(depth,"ORDER-BY","NO IDENTIFIER");
                     //no select epression
