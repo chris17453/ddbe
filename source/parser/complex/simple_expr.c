@@ -16,8 +16,11 @@ int expr_simple_expr(token_array_t* tokens,int depth){
     goop(depth,"SIMP-EXP","IN");
     #endif
 
-    if(expr_litteral(tokens,depth)) return 1;
+    
     if(expr_identifier(tokens,depth)) return 1;
+    
+    if(expr_litteral(tokens,depth)) return 1;
+    
     if(expr_sub_query(tokens,depth)) return 1;
     if(compare_token(tokens,0,TOKEN_MINUS)) {
 //        goop(depth,"MINUS","");

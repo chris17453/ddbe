@@ -12,7 +12,7 @@ int expr_identifier(token_array_t *tokens,int depth){
         int pos=tokens->position;
         if(compare_token(tokens,0,TOKEN_DOT)){
             if(compare_token(tokens,0,TOKEN_ALPHA)){
-                set_identifier(tokens,tokens->position-3,tokens->position-1);
+                create_identifier(tokens,tokens->position-3,tokens->position-1);
                 return 1;
             } else{
                 tokens->position=pos;
@@ -20,37 +20,29 @@ int expr_identifier(token_array_t *tokens,int depth){
             }
         } 
         
-        set_identifier(tokens,-1,tokens->position-1);
+        create_identifier(tokens,-1,tokens->position-1);
         
         return 1;
     }
     return 0;
 }
 
-void set_identifier(token_array_t *tokens,int index1,int index2){
-    return;
-    char *db=0;
-    char *table=0;
+identifier_t * create_identifier(token_array_t *tokens,int index1,int index2){
+    #ifdef PARSE_ENTRANCE
+    goop(depth,"create_identifier","in");
+    #endif
     if(tokens->target==0) {
         ghost(ERR_TOKEN_TARGET_NULL);
     }
-    identifier_t *ident=tokens->target;
-    goop(0,"SET IDENTIFIER","");
-
+    
+    identifier_t *ident=safe_malloc(sizeof(identifier_t),1);
     if(valid_token_index(tokens,index1)){
-        db   =tokens->array[index1].value;
+        ident->qualifier   =tokens->array[index1].value;
     } 
     if(valid_token_index(tokens,index2)){
-        table=tokens->array[index2].value;
+        ident->source=tokens->array[index2].value;
     }
-    goop(0,"SET IDENTIFIER","2");
-
-    if(index1>-1){
-        ident->qualifier=db;
-        goop(0,"identity",db);
-    } else {
-        ident->qualifier="";
-    }
-    goop(0,"identity",table);
-    ident->source=table;
+    tokens->object=ident;
+    tokens->object_type=TOKEN_IDENTIFIER;
+    return;
 }

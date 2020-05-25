@@ -116,6 +116,7 @@
         int position;
         void * target;
         void * object;
+        int * object_type;
         int has_object;
 
     } token_array_t; 
