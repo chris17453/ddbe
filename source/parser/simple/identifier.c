@@ -27,7 +27,7 @@ int expr_identifier(token_array_t *tokens,int depth){
     return 0;
 }
 
-identifier_t * create_identifier(int depth,token_array_t *tokens,int index1,int index2){
+void create_identifier(int depth,token_array_t *tokens,int index1,int index2){
     #ifdef PARSE_ENTRANCE
     goop(0,"create_identifier","in");
     #endif
