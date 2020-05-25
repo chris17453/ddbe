@@ -1,7 +1,7 @@
 SELECT 
     DISTINCT 
     res.col0, --identfier
-    4 as '5', --identifier
+    '4' as '5', --identifier
     f1.col0 as ID1_A1, --identfier with alias
     'col0', --litteral 
     'col0' as LIT1_A1, --litteral 
