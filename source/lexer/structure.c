@@ -102,6 +102,7 @@ void select_debug(select_t *obj){
     printf("  has_limit_start =%s\n"   ,has_limit_start);
     printf("  has_limit_length=%s\n"   ,has_limit_length);
     printf("  column length  =%d\n"   ,obj->column_length);
+    printf(" ----------------");
     
     printf("  alias          =%s\n"   ,obj->alias);
     printf("  distinct       =%d\n"   ,obj->distinct);
