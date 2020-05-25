@@ -169,7 +169,7 @@ void select_debug(select_t *obj){
                 printf("-%s,val: %s",token_type(token->type),token->value );
 
             }
-            printf(" ordinal: %d ",obj->columns[i].ordinal);
+            printf(" ordinal: %d \n",obj->columns[i].ordinal);
         }
         printf("} \n");
     }
