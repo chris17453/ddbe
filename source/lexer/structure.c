@@ -39,14 +39,10 @@ data_column_t *data_column_list_init(int length){
 }
 
 void data_column_init(data_column_t *column){
-    printf("columns init\n");
-
     column->alias=0;
     column->object=0;
     column->ordinal=-1;
     column->type=-1;
-    printf("done\n");
-
 }
 // init a list of columns with 
 
@@ -54,12 +50,10 @@ void data_column_init(data_column_t *column){
 void select_add_column(select_t *obj){
     // columns... create, copy, destroy old, replace
     // create
-    printf("new columns\n");
     data_column_t *new_columns=data_column_list_init(obj->column_length+1);
     memset(new_columns,0,sizeof(data_column_t)*obj->column_length+1);
     // if existing items exist
     if(obj->columns!=0) {
-        printf("old columns\n");
         // copy
         int data_size=sizeof(data_column_t)*obj->column_length;
         memcpy(new_columns,obj->columns,data_size);
@@ -69,14 +63,9 @@ void select_add_column(select_t *obj){
 
     // replace
     obj->columns=new_columns;
-    
     //init the newest column
     data_column_init(&obj->columns[obj->column_length]);
-    
     ++obj->column_length;
-    select_debug(obj);
-    printf("NO \n");
-
 }
 
 void set_distinct(select_t *obj){
