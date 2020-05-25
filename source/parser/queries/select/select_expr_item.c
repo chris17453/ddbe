@@ -12,7 +12,7 @@ int expr_column_expr(token_array_t *tokens,int depth,select_t *sel){
 
     int pos=tokens->position;
     if(expr_simple_expr(tokens,depth)){
-        select_add_column(sel);
+        //select_add_column(sel);
         //set_column()
         //sel->columns[sel->column_length].type=1;
         //sel->columns[sel->column_length].ordinal=sel->column_length;
