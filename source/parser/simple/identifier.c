@@ -1,5 +1,6 @@
 #include "../../include/errors.h"
 #include "../../include/tokens.h"
+#include "../../include/structure.h"
 
 // alpha or alpha.alpha
 int expr_identifier(token_array_t *tokens,int depth){
