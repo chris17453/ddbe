@@ -32,9 +32,6 @@ select_t *select_new(){
 }
 
 
-
-
-
 // init a list of columns with 
 data_column_t *data_column_list_init(int length){
     printf("data->columns malloc \n");
@@ -81,6 +78,7 @@ order_column_t *order_column_list_init(int length){
 void order_column_init(order_column_t *column){
     column->direction=TOKEN_ASC;
     column->identity=0;
+    column->ordinal=0;
 }
 
 void add_order_column(select_t *obj){
@@ -103,6 +101,41 @@ void add_order_column(select_t *obj){
     order_column_init(&obj->order[obj->order_length]);
     ++obj->order_length;
 }
+
+// init a list of columns with 
+group_column_t *group_column_list_init(int length){
+    printf("group->columns malloc \n");
+    group_column_t *columns =safe_malloc(sizeof(group_column_t),length);
+    return columns;
+}
+
+void group_column_init(order_column_t *column){
+    column->ordinal=0;
+    column->identity=0;
+}
+
+void add_group_column(select_t *obj){
+    // columns... create, copy, destroy old, replace
+    // create
+    group_column_t *new_columns=group_column_list_init(obj->group_length+1);
+    memset(new_columns,0,sizeof(group_column_t)*obj->group_length+1);
+    // if existing items exist
+    if(obj->group!=0) {
+        // copy
+        int data_size=sizeof(group_column_t)*obj->group_length;
+        memcpy(new_columns,obj->group,data_size);
+        // destroy old
+        free(obj->group);
+    }
+
+    // replace
+    obj->group=new_columns;
+    //init the newest column
+    order_group_init(&obj->group[obj->group_length]);
+    ++obj->group_length;
+}
+
+
 
 
 void set_distinct(select_t *obj){
@@ -173,6 +206,15 @@ void select_debug(select_t *obj){
         }
         printf("} \n");
     }
+
+    if (obj->group!=0){
+        printf (" group: \n");
+        for(int i=0;i<obj->group_length;i++){
+                group_column_t *group=&obj->group[i];
+                printf("   Qualifier: %s,Source: %s",group->identity->qualifier,group->identity->source);
+                printf(", ordinal: %d, \n",group->ordinal);
+        }
+    }    
 
     if (obj->order!=0){
         printf (" order: \n");

@@ -21,11 +21,13 @@ typedef struct  data_column_t{
 typedef struct order_column_t {
     identifier_t *identity;
     int direction;
+    int ordinal;
 } order_column_t;
 
-typedef struct group_column {
+typedef struct group_column_t {
     identifier_t *identity;
-} group_by;
+    int ordinal;
+} group_column_t;
 
 typedef struct select_t{
         // sub elements
@@ -33,7 +35,7 @@ typedef struct select_t{
         identifier_t    * from;
         void            * where;
         order_column_t  * order;
-        void            * group;
+        order_column_t  * group;
         
         // elements
         char          * alias;
@@ -58,6 +60,10 @@ typedef struct select_t{
     order_column_t * order_column_list_init(int length);
     void             order_column_init(order_column_t *column);
     void             add_order_column(select_t *obj);
+    group_column_t * group_column_list_init(int length);
+    void             group_column_init(order_column_t *column);
+    void             add_group_column(select_t *obj);
+
     void             set_distinct(select_t *obj);
     void             select_debug(select_t *obj);
 
