@@ -42,7 +42,7 @@ data_column_t *data_column_list_init(int length){
 void data_column_init(data_column_t *column){
     printf("columns init\n");
 
-    column->alias="BOB";
+    column->alias=0;
     column->object=0;
     column->ordinal=-1;
     column->type=-1;
