@@ -5,7 +5,9 @@
 #include "../include/errors.h"
 #include "../include/tokens.h"
 #include "../include/debug.h"
-  
+
+#define PARSE_ENTRANCE 1
+
 char *token_type(int t){
     switch(t){
         case  TOKEN_BLANK:           return "TOKEN_BLANK";
