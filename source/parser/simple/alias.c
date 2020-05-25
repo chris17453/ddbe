@@ -2,12 +2,12 @@
 #include "../../include/tokens.h"
 
 // alpha or alpha.alpha
-int expr_alias(token_array_t *tokens,int depth,char *target){
+int expr_alias(token_array_t *tokens,int depth,char **target){
     ++depth;
     #ifdef PARSE_ENTRANCE
     goop(depth,"ALIASEXPR","IN");
     #endif
-    target="GGG";
+    target='bob';
     
     int pos=tokens->position;
     if(compare_token(tokens,0,TOKEN_AS))
