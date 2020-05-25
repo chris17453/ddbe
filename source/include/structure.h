@@ -28,7 +28,7 @@ typedef struct select_t{
     select_t       *select_new();
     data_column_t  *data_column_list_init(int length);
     void            select_add_column(select_t *obj);
-    void            data_column_init(data_column_t column);
+    void            data_column_init(data_column_t *column);
     void            set_distinct(select_t *obj);
     void            select_debug(select_t *obj);
 
