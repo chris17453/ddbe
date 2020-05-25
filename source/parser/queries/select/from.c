@@ -20,7 +20,7 @@ int expr_from(token_array_t *tokens,int depth,select_t* sel){
                 goop(depth,"FORM","Found Alias");
             }
             
-            set_from(tokens);
+            set_from(tokens,sel);
 
             return 1;
         }
@@ -29,7 +29,7 @@ int expr_from(token_array_t *tokens,int depth,select_t* sel){
     return 0;
 }
 
-void set_from(token_array_t *tokens){
+void set_from(token_array_t *tokens,select_t* sel){
     //tokens->selectidentifier->source=tokens->identifier.source;
     //tokens->identifier-qualifier=tokens->identifier.qualifier;
 }
