@@ -73,7 +73,7 @@ void set_distinct(select_t *obj){
 }
 
 void select_debug(select_t *obj){
-    printf("SELECT_DEBUG\n");
+    printf("\nSELECT_DEBUG\n");
     
     char *has_limit_start;
     char *has_limit_length;
