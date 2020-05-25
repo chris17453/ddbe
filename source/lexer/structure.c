@@ -115,11 +115,11 @@ void select_debug(select_t *obj){
     if (obj->columns!=0){
         printf (" - columns: \n");
         for(int i=0;i<obj->column_length;i++){
-        printf ("   - column: \n");
-            printf("     - alias:%s \n",obj->columns[i].alias);
-            printf("     - type:%d \n",obj->columns[i].type);
-            printf("     - ordinal:%d \n",obj->columns[i].ordinal);
-            printf("\n");
+        printf ("   ,column: { \n");
+            printf("      alias:%s ",obj->columns[i].alias);
+            printf("     , type:%d ",obj->columns[i].type);
+            printf("     , ordinal:%d ",obj->columns[i].ordinal);
+            printf("} \n");
         }
     }
 }
