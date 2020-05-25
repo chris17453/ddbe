@@ -133,6 +133,6 @@
     token_t          token_peek        (token_array_t * arr);
     void             token_delete      (token_array_t* tokens,int index);
     void             token_print       (token_array_t * arr);
-    char            *token_type        (int t);
-
+    char           * token_type        (int t);
+    char           * get_token_value   (token_array_t * arr,int index);
 #endif

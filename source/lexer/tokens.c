@@ -194,3 +194,6 @@ void token_print(token_array_t *tokens){
 }
 
 //struct  token_array_t* tokens = createtokens(100); 
+char * get_token_value(token_array_t *tokens,int index){
+    return tokens->array[index].value;
+}
