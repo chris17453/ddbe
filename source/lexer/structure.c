@@ -107,8 +107,8 @@ void select_debug(select_t *obj){
     
     printf("  alias          =%s\n"   ,obj->alias);
     printf("  distinct       =%d\n"   ,obj->distinct);
-    printf("  from.qualifier =%s\n"   ,obj->from.qualifier);
-    printf("  from.source    =%s\n"   ,obj->from.source);
+    printf("  from qualifier =%s\n"   ,obj->from->qualifier);
+    printf("  from source    =%s\n"   ,obj->from->source);
     printf("  limit_length   =%d\n"   ,obj->limit_length);
     printf("  limit_start    =%d\n"   ,obj->limit_start);
     if (obj->columns!=0){
