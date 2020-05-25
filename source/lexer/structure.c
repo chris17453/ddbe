@@ -181,9 +181,9 @@ void select_debug(select_t *obj){
         for(int i=0;i<obj->order_length;i++){
 
                 order_column_t *order=(order_column_t)obj->order[i];
-                printf("Qualifier: %s,Source: %s",order.identity->qualifier,order.identity->source);
+                printf("Qualifier: %s,Source: %s",order->identity->qualifier,order->identity->source);
             
-                printf(" %s, ",token_type(order.direction));
+                printf(" %s, ",token_type(order->direction));
         }
         printf("} \n");
     }    
