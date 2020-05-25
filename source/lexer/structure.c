@@ -131,7 +131,7 @@ void add_group_column(select_t *obj){
     // replace
     obj->group=new_columns;
     //init the newest column
-    order_group_init(&obj->group[obj->group_length]);
+    group_column_init(&obj->group[obj->group_length]);
     ++obj->group_length;
 }
 
