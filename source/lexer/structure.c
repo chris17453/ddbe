@@ -223,7 +223,7 @@ void select_debug(select_t *obj){
                 order_column_t *order=&obj->order[i];
                 printf("   Qualifier: %s,Source: %s",order->identity->qualifier,order->identity->source);
             
-                printf(" %s, \n",token_type(order->direction));
+                printf(" %s, ordinal: %d\n",token_type(order->direction),order->ordinal);
         }
     }    
 }
