@@ -3,7 +3,7 @@
 #if !defined(_ALIAS_H_)
     #define _ALIAS_H_ 1
 
-    int expr_alias(token_array_t *tokens,int depth,char **target);
+    int expr_alias(token_array_t *tokens,int depth,char *target);
     void set_alias(token_array_t *tokens,int index,char *target);
 
 #endif
