@@ -28,6 +28,7 @@ int expr_identifier(token_array_t *tokens,int depth){
 }
 
 void set_identifier(token_array_t *tokens,int index1,int index2){
+    return;
     char *db=0;
     char *table=0;
     if(tokens->target==0) {
