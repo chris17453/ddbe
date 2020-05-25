@@ -21,7 +21,6 @@ int expr_column_expr(token_array_t *tokens,int depth,select_t *sel){
         if(expr_alias(tokens,depth,bob)){ //sel->columns[sel->column_length].alias
             goop(depth,"alias","found");
         }
-        ++sel->column_length;
         return 1;
     }
     tokens->position=pos;
