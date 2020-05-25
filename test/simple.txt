@@ -1,4 +1,5 @@
 SELECT 
+    DISTINCT 
     res.col0, --identfier
     res.col0 as ID1_A1, --identfier with alias
     'col0', --litteral 
