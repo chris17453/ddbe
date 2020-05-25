@@ -35,6 +35,8 @@ int expr_select(token_array_t *tokens,int depth){
             goop(depth,"SELECT","BEFORE WHERE");
             if(expr_where(tokens,depth)){
             }
+            if(expr_group_by(tokens,depth,sel)){
+            }
             if(expr_order_by(tokens,depth,sel)){
             }
             if(expr_limit(tokens,depth,sel)){
