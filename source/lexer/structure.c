@@ -65,11 +65,11 @@ void select_add_column(select_t *obj){
         int data_size=sizeof(data_column_t)*obj->column_length;
         //memcpy(new_columns,obj->columns,data_size);
         // destroy old
-        free(&obj->columns);
+        free(obj->columns);
     }
 
     // replace
-    obj->columns=&new_columns;
+    &obj->columns=&new_columns;
     
     printf("column init\n");
     //init the newest column
