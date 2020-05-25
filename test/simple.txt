@@ -21,7 +21,7 @@ SELECT
         or x =1
         or id=0x04F
         or id=0x04A
-    
+    group by col3,f1.col2
     ORDER BY COL3,LIT2_A2 DESC,LIT1_A1 ASC,res.col0,f1.col1 desc
     LIMIT 
         1, 11;
