@@ -32,6 +32,7 @@ select_t *select_new(){
 
 // init a list of columns with 
 data_column_t *data_column_list_init(int length){
+    printf("data->columns malloc \n");
     data_column_t *columns =safe_malloc(sizeof(data_column_t),length);
     return columns;
 }
@@ -48,12 +49,12 @@ void data_column_init(data_column_t *column){
 void select_add_column(select_t *obj){
     // columns... create, copy, destroy old, replace
     // create
-    printf("new columns");
+    printf("new columns\n");
     data_column_t *new_columns=data_column_list_init(obj->column_length+1);
     
     // if existing items exist
     if(obj->columns!=0) {
-        printf("old columns");
+        printf("old columns\n");
         // copy
         int data_size=sizeof(data_column_t)*obj->column_length;
         memcpy(new_columns,obj->columns,data_size);
