@@ -66,6 +66,7 @@ void select_add_column(select_t *obj){
     data_column_init(&obj->columns[obj->column_length]);
 
     obj->alias_target=&obj->columns[obj->column_length];
+    obj->column_ptr=&obj->columns[obj->column_length];
     ++obj->column_length;
 }
 
