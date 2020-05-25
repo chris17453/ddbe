@@ -1,7 +1,8 @@
 SELECT 
     DISTINCT 
     res.col0, --identfier
-    res.col0 as ID1_A1, --identfier with alias
+    res.4, --identifier
+    f1.col0 as ID1_A1, --identfier with alias
     'col0', --litteral 
     'col0' as LIT1_A1, --litteral 
     4, --litteral 
@@ -21,5 +22,6 @@ SELECT
         or id=0x04F
         or id=0x04A
     
+    ORDER BY COL3,LIT2_A2 DESC,LIT1_A1 ASC,res.col0,f1.col1 desc
     LIMIT 
         1, 11;
