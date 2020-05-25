@@ -65,7 +65,7 @@ void select_add_column(select_t *obj){
     obj->columns=new_columns;
     
     //init the newest column
-    data_column_init(obj->columns[obj->column_length]);
+    data_column_init(&obj->columns[obj->column_length]);
 
     ++obj->column_length;
 }
