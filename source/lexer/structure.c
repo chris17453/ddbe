@@ -106,10 +106,11 @@ void select_debug(select_t *obj){
     printf("  limit_length   =%d\n"   ,obj->limit_length);
     printf("  limit_start    =%d\n"   ,obj->limit_start);
     if (obj->columns!=0){
+        printf (" Columns: \n");
         for(int i=0;i<obj->column_length;i++){
-            printf("alias:%s ",obj->columns[i].alias);
-            printf("type:%d ",obj->columns[i].type);
-            printf("ordinal:%d ",obj->columns[i].ordinal);
+            printf(" alias:%s ",obj->columns[i].alias);
+            printf(" type:%d ",obj->columns[i].type);
+            printf(" ordinal:%d ",obj->columns[i].ordinal);
             printf("\n");
         }
     }
