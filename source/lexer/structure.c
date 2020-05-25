@@ -109,7 +109,7 @@ group_column_t *group_column_list_init(int length){
     return columns;
 }
 
-void group_column_init(order_column_t *column){
+void group_column_init(group_column_t *column){
     column->ordinal=0;
     column->identity=0;
 }
