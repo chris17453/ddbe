@@ -94,25 +94,25 @@ void select_debug(select_t *obj){
     if(obj->limit_length==0) has_limit_length="NO"; else has_limit_length="YES";
 
     printf(" -flags-----------\n");
-    printf("  has_from        =%s\n"   ,has_from);
-    printf("  has_alias       =%s\n"   ,has_alias);
-    printf("  has_columns     =%s\n"   ,has_columns);
-    printf("  has_group       =%s\n"   ,has_group);
-    printf("  has_order       =%s\n"   ,has_order);
-    printf("  has_where       =%s\n"   ,has_where);
-    printf("  has_limit_start =%s\n"   ,has_limit_start);
-    printf("  has_limit_length=%s\n"   ,has_limit_length);
-    printf("  column length   =%d\n"   ,obj->column_length);
+    printf("   has_from        =%s\n"   ,has_from);
+    printf("   has_alias       =%s\n"   ,has_alias);
+    printf("   has_columns     =%s\n"   ,has_columns);
+    printf("   has_group       =%s\n"   ,has_group);
+    printf("   has_order       =%s\n"   ,has_order);
+    printf("   has_where       =%s\n"   ,has_where);
+    printf("   has_limit_start =%s\n"   ,has_limit_start);
+    printf("   has_limit_length=%s\n"   ,has_limit_length);
+    printf("   column length   =%d\n"   ,obj->column_length);
     printf(" -values----------\n");
     
-    printf("  alias           =%s\n"   ,obj->alias);
-    printf("  distinct        =%d\n"   ,obj->distinct);
+    printf("   alias           =%s\n"   ,obj->alias);
+    printf("   distinct        =%d\n"   ,obj->distinct);
     if(obj->from){
-        printf("  from qualifier  =%s\n"   ,obj->from->qualifier);
-        printf("  from source     =%s\n"   ,obj->from->source);
+        printf("   from qualifier  =%s\n"   ,obj->from->qualifier);
+        printf("   from source     =%s\n"   ,obj->from->source);
     }
-    printf("  limit_length    =%d\n"   ,obj->limit_length);
-    printf("  limit_start     =%d\n"   ,obj->limit_start);
+    printf("   limit_length    =%d\n"   ,obj->limit_length);
+    printf("   limit_start     =%d\n"   ,obj->limit_start);
     if (obj->columns!=0){
         printf (" columns:{ \n");
         for(int i=0;i<obj->column_length;i++){
