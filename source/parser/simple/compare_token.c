@@ -2,7 +2,7 @@
 #include "../../include/tokens.h"
 
 int compare_token(token_array_t *tokens,int optional,int token){
-    if(tokens->position>tokens->length) return 0;
+    if(tokens->position>=tokens->length) return 0;
 
     if(tokens->array[tokens->position].type==token) {
         ++tokens->position;
