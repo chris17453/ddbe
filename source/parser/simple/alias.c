@@ -2,7 +2,7 @@
 #include "../../include/tokens.h"
 
 // alpha or alpha.alpha
-int expr_alias(token_array_t *tokens,int depth,char **target){
+int expr_alias(token_array_t *tokens,int depth,char *target){
     ++depth;
     #ifdef PARSE_ENTRANCE
     goop(depth,"ALIASEXPR","IN");
@@ -22,7 +22,7 @@ int expr_alias(token_array_t *tokens,int depth,char **target){
 }
 
 
-void set_alias(token_array_t *tokens,int index,char **target){
+void set_alias(token_array_t *tokens,int index,char *target){
     goop(0,"ALIAS",tokens->array[index].value);
     target=*tokens->array[index].value;
     //tokens->alias=tokens->array[index].value;
