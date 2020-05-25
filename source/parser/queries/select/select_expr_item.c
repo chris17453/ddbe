@@ -14,12 +14,11 @@ int expr_column_expr(token_array_t *tokens,int depth,select_t *sel){
     if(expr_simple_expr(tokens,depth)){
         int index=sel->column_length;
         select_add_column(sel);
-        //set_column()
         sel->columns[index].type=1;
         sel->columns[index].ordinal=index;
-        sel->columns[index].alias="BOBO";
-        char *bob="sam";
-        if(expr_alias(tokens,depth,bob)){ //sel->columns[sel->column_length].alias
+        
+        
+        if(expr_alias(tokens,depth,sel->columns[index].alias)){ //sel->columns[sel->column_length].alias
             goop(depth,"alias","found");
         }
         return 1;
