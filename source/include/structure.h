@@ -61,7 +61,7 @@ typedef struct select_t{
     void             order_column_init(order_column_t *column);
     void             add_order_column(select_t *obj);
     group_column_t * group_column_list_init(int length);
-    void             group_column_init(order_column_t *column);
+    void             group_column_init(group_column_t *column);
     void             add_group_column(select_t *obj);
 
     void             set_distinct(select_t *obj);
