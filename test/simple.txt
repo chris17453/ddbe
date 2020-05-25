@@ -1,5 +1,5 @@
 SELECT 
-    col0,
+    res.col0,
     col1 as ACOL,
     col2 as BCOL,
     col3 as CCOL,
