@@ -40,13 +40,13 @@ data_column_t *data_column_list_init(int length){
 }
 
 void data_column_init(data_column_t column){
-    printf("old columns\n");
+    printf(" columns init\n");
 
     column.alias="BOB";
     column.object=0;
     column.ordinal=-1;
     column.type=-1;
-    printf("old columns\n");
+    printf("done\n");
 
 }
 // init a list of columns with 
@@ -74,7 +74,7 @@ void select_add_column(select_t *obj){
     printf("column init\n");
     //init the newest column
     data_column_init(obj->columns[obj->column_length]);
-    obj->columns[obj->column_length].alias="BOB";
+    
     ++obj->column_length;
     select_debug(obj);
     printf("NO \n");
