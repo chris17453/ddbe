@@ -20,19 +20,23 @@ int expr_order_by(token_array_t *tokens,int depth,select_t* sel){
 
             while(looper){
                 pos2=tokens->position;
-                if(!expr_identifier(tokens,depth,sel)){
+                if(!expr_identifier(tokens,depth)){
                     //no select epression
                     break;
                 }
                 if(compare_token(tokens,0,TOKEN_ASC)) {
+                    add_order_column(sel);
+                    sel->order[sel->order_length-1].identity=&tokens->object;
+                    sel->order[sel->order_length-1].direction=TOKEN_ASC;
                 
                 } else 
                     if(compare_token(tokens,0,TOKEN_DESC)) {
+                        sel->order[sel->order_length-1].identity=&tokens->object;
+                        sel->order[sel->order_length-1].direction=TOKEN_DESC;
 
                     }  else {
-                        looper=0;
-                        tokens->position=pos2;
-                        break;
+                        sel->order[sel->order_length-1].identity=&tokens->object;
+                        sel->order[sel->order_length-1].direction=TOKEN_ASC;
                     }
 
 
