@@ -13,7 +13,7 @@ int expr_column_expr(token_array_t *tokens,int depth,select_t *sel){
     int pos=tokens->position;
     if(expr_simple_expr(tokens,depth)){
         ++sel->column_length;
-        if(expr_alias(tokens,depth,sel->target)){
+        if(expr_alias(tokens,depth,sel->alias_target)){
             return 1;
         }
         return 1;
