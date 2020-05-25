@@ -36,11 +36,11 @@ data_column_t *data_column_list_init(int length){
     return columns;
 }
 
-void data_column_init(data_column_t *column){
-    column->alias=0;
-    column->object=0;
-    column->ordinal=-1;
-    column->type=-1;
+void data_column_init(data_column_t column){
+    column.alias=0;
+    column.object=0;
+    column.ordinal=-1;
+    column.type=-1;
 }
 // init a list of columns with 
 
@@ -65,7 +65,7 @@ void select_add_column(select_t *obj){
     obj->columns=new_columns;
     
     //init the newest column
-    data_column_init(&obj->columns[obj->column_length]);
+    data_column_init(obj->columns[obj->column_length]);
 
     ++obj->column_length;
 }
