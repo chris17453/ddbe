@@ -62,12 +62,14 @@ void select_add_column(select_t *obj){
     }
 
     // replace
-    obj->columns=&new_columns;
+    obj->columns=new_columns;
     
     //init the newest column
     data_column_init(&obj->columns[obj->column_length]);
 
     ++obj->column_length;
+    select_debug(obj);
+
 }
 
 void set_distinct(select_t *obj){
