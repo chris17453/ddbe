@@ -7,7 +7,7 @@ int expr_alias(token_array_t *tokens,int depth,char **target){
     #ifdef PARSE_ENTRANCE
     goop(depth,"ALIASEXPR","IN");
     #endif
-    target="bob";
+    target=&"bob";
     
     int pos=tokens->position;
     if(compare_token(tokens,0,TOKEN_AS))
