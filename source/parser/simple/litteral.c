@@ -24,7 +24,7 @@ int expr_litteral(token_array_t* tokens,int depth){
 
 void set_litteral(token_array_t *tokens,int index){
     goop(0,"Litteral",tokens->array[index].value);
-    tokens->object=&tokens->array[index];
+    tokens->object=(void *)tokens->array[index];
     tokens->object_type=TOKEN_LITTERAL;
 
 }
