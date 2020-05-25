@@ -93,6 +93,8 @@ void select_debug(select_t *obj){
     printf("  has_group      =%s\n"   ,has_group);
     printf("  has_order      =%s\n"   ,has_order);
     printf("  has_where      =%s\n"   ,has_where);
+    printf("  column length  =%d\n"   ,obj->column_length);
+    
     printf("  alias          =%s\n"   ,obj->alias);
     printf("  distinct       =%d\n"   ,obj->distinct);
     printf("  from.qualifier =%s\n"   ,obj->from.qualifier);
