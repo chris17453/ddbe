@@ -1,4 +1,4 @@
-TEST_SQL=test/cli.txt
+TEST_SQL=test/simple.txt
 
 .PHONY: func
 

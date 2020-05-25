@@ -1,0 +1,19 @@
+SELECT 
+    col0,
+    col1 as ACOL,
+    col2 as BCOL,
+    col3 as CCOL,
+    col1,col2,
+    col3 as COL3
+    
+    FROM    
+        test.mock as f1
+    
+    WHERE 
+        first_name='bob'
+        or x =1
+        or id=0x04F
+        or id=0x04A
+    
+    LIMIT 
+        1,11
