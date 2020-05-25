@@ -183,7 +183,7 @@ void select_debug(select_t *obj){
                 order_column_t order=(order_column_t)obj->order[i];
                 //printf("Qualifier: %s,Source: %s",order.identity->qualifier,order.identity->source);
             
-                printf(" %s \n",token_type(order.direction));
+                printf(" %s, ",token_type(order.direction));
             
             printf("}, \n");
         }
