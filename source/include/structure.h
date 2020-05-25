@@ -20,8 +20,6 @@ typedef struct select_t{
         int            limit_length;
 
         // internal
-        void         * column_ptr;
-        char        ** alias_target;
         int            has_limit_length;
         int            has_limit_start;
     } select_t;
