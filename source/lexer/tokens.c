@@ -72,6 +72,11 @@ char *token_type(int t){
         case  TOKEN_NEW_LINE:        return "TOKEN_NEW_LINE";
         case  TOKEN_LINE_FEED:       return "TOKEN_LINE_FEED";
         case  TOKEN_TAB:             return "TOKEN_TAB";
+        case  TOKEN_LITTERAL:        return "TOKEN_LITTERAL";
+        case  TOKEN_IDENTIFIER:      return "TOKEN_IDENTIFIER";
+        case  TOKEN_SUB_QUERY:       return "TOKEN_SUB_QUERY";
+        case  TOKEN_FUNCTION:        return "TOKEN_FUNCTION";
+
     }
     return "UNK";
 }

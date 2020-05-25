@@ -11,14 +11,18 @@ int expr_column_expr(token_array_t *tokens,int depth,select_t *sel){
     #endif
 
     int pos=tokens->position;
+    tokens->object_type=0;
+    
     if(expr_simple_expr(tokens,depth)){
         int index=sel->column_length;
-        select_add_column(sel);
-        sel->columns[index].type=1;
-        sel->columns[index].ordinal=index;
         
+        select_add_column(sel);
+        sel->columns[index].type=tokens->object_type;
+        sel->columns[index].object=tokens->object;
+        sel->columns[index].ordinal=index;
         sel->columns[index].alias=0;
-        if(expr_alias(tokens,depth,&sel->columns[index].alias)){ //sel->columns[sel->column_length].alias
+
+        if(expr_alias(tokens,depth,&sel->columns[index].alias)){
             goop(depth,"alias","found");
         }
         return 1;

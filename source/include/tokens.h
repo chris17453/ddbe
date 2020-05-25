@@ -69,8 +69,12 @@
     #define TOKEN_NEW_LINE       75
     #define TOKEN_LINE_FEED      76
     #define TOKEN_TAB            77
-    //#define TOKEN_ALIAS          78
-    //#define TOKEN_EXPRESSION     78
+    #define TOKEN_ALIAS          79
+    #define TOKEN_EXPRESSION     80
+    #define TOKEN_LITTERAL       81
+    #define TOKEN_IDENTIFIER     82
+    #define TOKEN_SUB_QUERY      83
+    #define TOKEN_FUNCTION       84
 
     
 
@@ -80,7 +84,7 @@
     } identifier_t;
 
     typedef struct list{
-        char *item;
+        char *item;T
     } list;
 
     # define COLUMN_TYPE_IDENTIFIER 1
