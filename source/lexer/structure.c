@@ -117,7 +117,7 @@ void select_debug(select_t *obj){
         for(int i=0;i<obj->column_length;i++){
         printf ("    { ");
             printf(" alias: %s ,",obj->columns[i].alias);
-            printf(" type: %d ,",token_type(obj->columns[i].type));
+            printf(" type: %s ,",token_type(obj->columns[i].type));
             printf(" ordinal: %d ",obj->columns[i].ordinal);
             printf("}, \n");
         }
