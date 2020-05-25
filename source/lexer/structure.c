@@ -154,9 +154,8 @@ void select_debug(select_t *obj){
     printf("   limit_length    =%d\n"   ,obj->limit_length);
     printf("   limit_start     =%d\n"   ,obj->limit_start);
     if (obj->columns!=0){
-        printf (" columns:{ \n");
+        printf (" columns: \n");
         for(int i=0;i<obj->column_length;i++){
-        printf ("    { ");
             printf(" alias: %s ,",obj->columns[i].alias);
             printf(" type: %s ,",token_type(obj->columns[i].type));
             if (obj->columns[i].type==TOKEN_IDENTIFIER) {
@@ -171,13 +170,12 @@ void select_debug(select_t *obj){
 
             }
             printf(" ordinal: %d ",obj->columns[i].ordinal);
-            printf("}, \n");
         }
         printf("} \n");
     }
 
     if (obj->order!=0){
-        printf (" order:{ \n");
+        printf (" order: \n");
         for(int i=0;i<obj->order_length;i++){
 
                 order_column_t *order=&obj->order[i];
@@ -185,7 +183,6 @@ void select_debug(select_t *obj){
             
                 printf(" %s, \n",token_type(order->direction));
         }
-        printf("} \n");
     }    
 }
 
