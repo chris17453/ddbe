@@ -3,7 +3,7 @@
 #include "../../../include/structure.h"
 #include <math.h>
 // alpha or alpha.alpha
-int expr_limit(token_array_t *tokens,int depth,select_t*sel){
+int expr_limit(token_array_t *tokens,int depth,select_t *sel){
     ++depth;
     #ifdef PARSE_ENTRANCE
     goop(depth,"limit EXPR","IN");
