@@ -12,7 +12,7 @@ int expr_identifier(token_array_t *tokens,int depth){
         int pos=tokens->position;
         if(compare_token(tokens,0,TOKEN_DOT)){
             if(compare_token(tokens,0,TOKEN_ALPHA)){
-                create_identifier(tokens,tokens->position-3,tokens->position-1);
+                create_identifier(depth,tokens,tokens->position-3,tokens->position-1);
                 return 1;
             } else{
                 tokens->position=pos;
@@ -20,16 +20,16 @@ int expr_identifier(token_array_t *tokens,int depth){
             }
         } 
         
-        create_identifier(tokens,-1,tokens->position-1);
+        create_identifier(depth,tokens,-1,tokens->position-1);
         
         return 1;
     }
     return 0;
 }
 
-identifier_t * create_identifier(token_array_t *tokens,int index1,int index2){
+identifier_t * create_identifier(int depth,token_array_t *tokens,int index1,int index2){
     #ifdef PARSE_ENTRANCE
-    goop(depth,"create_identifier","in");
+    goop(0,"create_identifier","in");
     #endif
     if(tokens->target==0) {
         ghost(ERR_TOKEN_TARGET_NULL);
