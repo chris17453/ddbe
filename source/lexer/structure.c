@@ -122,7 +122,7 @@ void select_debug(select_t *obj){
                 //printf(" sub type: %s ,");
                 token_t *token=(token_t*)obj->columns[i].object;
 
-                printf("%s=%s",token_type(token->type),token->value );
+                printf(" %s,val: %s",token_type(token->type),token->value );
 
             }
             printf(" ordinal: %d ",obj->columns[i].ordinal);
