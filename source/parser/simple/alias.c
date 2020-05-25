@@ -15,12 +15,8 @@ int expr_alias(token_array_t *tokens,int depth,char **target){
             printf("*COMP-> %d %s\n",pos+1,tokens->array[pos+1].value);
             printf("*COMP-> %s\n",get_token_value(tokens,tokens->position-1));
             
-            *target=get_token_value(tokens,tokens->position-1);
 
-            //tokens->array[tokens->position-1].value;
-            //printf("*TARGET-> %s\n",target);
-            
-         //   set_alias(tokens,tokens->position-1,target);
+            set_alias(tokens,tokens->position-1,target);
             return 1;
         }
 
@@ -29,8 +25,7 @@ int expr_alias(token_array_t *tokens,int depth,char **target){
 }
 
 
-void set_alias(token_array_t *tokens,int index,char *target){
+void set_alias(token_array_t *tokens,int index,char **target){
     goop(0,"ALIAS",tokens->array[index].value);
-    //target=*tokens->array[index].value;
-    //tokens->alias=tokens->array[index].value;
+    *target=get_token_value(tokens,tokens->position-1);
 }
