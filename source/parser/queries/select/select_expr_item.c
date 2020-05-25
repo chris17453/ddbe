@@ -15,9 +15,9 @@ int expr_column_expr(token_array_t *tokens,int depth,select_t *sel){
         int index=sel->column_length;
         select_add_column(sel);
         //set_column()
-        sel->columns[sel->column_length].type=1;
-        sel->columns[sel->column_length].ordinal=index;
-        sel->columns[sel->column_length].alias="BOBO";
+        //sel->columns[sel->column_length].type=1;
+        //sel->columns[sel->column_length].ordinal=index;
+        //sel->columns[sel->column_length].alias="BOBO";
         char *bob;
         if(expr_alias(tokens,depth,bob)){ //sel->columns[sel->column_length].alias
             goop(depth,"alias","found");
