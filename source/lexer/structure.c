@@ -184,8 +184,6 @@ void select_debug(select_t *obj){
                 //printf("Qualifier: %s,Source: %s",order.identity->qualifier,order.identity->source);
             
                 printf(" %s, ",token_type(order.direction));
-            
-            printf("}, \n");
         }
         printf("} \n");
     }    
