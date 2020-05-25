@@ -14,25 +14,46 @@ int expr_order_by(token_array_t *tokens,int depth,select_t* sel){
         if(compare_token(tokens,0,TOKEN_BY)){
             goop(depth,"ORDER BY","START");
 
-            if(expr_identifier(tokens,depth)){        
-                //sel->from=tokens->object;
-                
-                if(expr_alias(tokens,depth,&sel->alias)) {
-                    goop(depth,"FORM","Found Alias");
-                }
-                
-                set_from(tokens,sel);
+            int looper=1;
+            int expr_list=0;
+            int pos2=0;
 
+            while(looper){
+                pos2=tokens->position;
+                if(!expr_identifier(tokens,depth,sel)){
+                    //no select epression
+                    break;
+                }
+                if(compare_token(tokens,0,TOKEN_ASC)) {
+                
+                } else 
+                    if(compare_token(tokens,0,TOKEN_DESC)) {
+
+                    }  else {
+                        looper=0;
+                        tokens->position=pos2;
+                        break;
+                    }
+
+
+                ++expr_list;
+
+
+                // if we have a delimiter.. loop else exit
+                if(!compare_token(tokens,0,TOKEN_LIST_DELIMITER)) {
+                    looper=0;
+                } else {
+                }
+            } //end looper
+            
+            if(expr_list>0) {
+                printf("%d order by columns",expr_list);
                 return 1;
             }
 
+        
         }
     } //end order by        
     tokens->position=pos;
     return 0;
-}
-
-void set_from(token_array_t *tokens,select_t* sel){
-    //tokens->selectidentifier->source=tokens->identifier.source;
-    //tokens->identifier-qualifier=tokens->identifier.qualifier;
 }

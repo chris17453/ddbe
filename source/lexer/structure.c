@@ -33,6 +33,8 @@ select_t *select_new(){
 
 
 
+
+
 // init a list of columns with 
 data_column_t *data_column_list_init(int length){
     printf("data->columns malloc \n");
@@ -48,8 +50,7 @@ void data_column_init(data_column_t *column){
 }
 // init a list of columns with 
 
-
-void select_add_column(select_t *obj){
+void add_data_column(select_t *obj){
     // columns... create, copy, destroy old, replace
     // create
     data_column_t *new_columns=data_column_list_init(obj->column_length+1);
@@ -69,6 +70,40 @@ void select_add_column(select_t *obj){
     data_column_init(&obj->columns[obj->column_length]);
     ++obj->column_length;
 }
+
+// init a list of columns with 
+order_column_t *order_column_list_init(int length){
+    printf("order->columns malloc \n");
+    order_column_t *columns =safe_malloc(sizeof(order_column_t),length);
+    return columns;
+}
+
+void order_column_init(order_column_t *column){
+    column->direction=TOKEN_ASC;
+    column->identity=0;
+}
+
+void add_order_column(select_t *obj){
+    // columns... create, copy, destroy old, replace
+    // create
+    order_column_t *new_columns=order_column_list_init(obj->order_length+1);
+    memset(new_columns,0,sizeof(order_column_t)*obj->order_length+1);
+    // if existing items exist
+    if(obj->order!=0) {
+        // copy
+        int data_size=sizeof(order_column_t)*obj->order_length;
+        memcpy(new_columns,obj->order,data_size);
+        // destroy old
+        free(obj->order);
+    }
+
+    // replace
+    obj->order=new_columns;
+    //init the newest column
+    order_column_init(&obj->order[obj->order_length]);
+    ++obj->order_length;
+}
+
 
 void set_distinct(select_t *obj){
     obj->distinct=1;

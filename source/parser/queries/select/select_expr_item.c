@@ -16,7 +16,7 @@ int expr_column_expr(token_array_t *tokens,int depth,select_t *sel){
     if(expr_simple_expr(tokens,depth)){
         int index=sel->column_length;
         
-        select_add_column(sel);
+        add_data_column(sel);
         sel->columns[index].type=tokens->object_type;
         sel->columns[index].object=tokens->object;
         sel->columns[index].ordinal=index;
