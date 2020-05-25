@@ -17,7 +17,7 @@ int expr_order_by(token_array_t *tokens,int depth,select_t* sel){
             int looper=1;
             int expr_list=0;
             int pos2=0;
-
+            tokens->object=0;
             while(looper){
                 pos2=tokens->position;
                 if(!expr_identifier(tokens,depth)){
@@ -27,18 +27,18 @@ int expr_order_by(token_array_t *tokens,int depth,select_t* sel){
                 }
                 if(compare_token(tokens,0,TOKEN_ASC)) {
                     add_order_column(sel);
-                    sel->order[sel->order_length-1].identity=&tokens->object;
+                    sel->order[sel->order_length-1].identity=tokens->object;
                     sel->order[sel->order_length-1].direction=TOKEN_ASC;
                 
                 } else 
                     if(compare_token(tokens,0,TOKEN_DESC)) {
                         add_order_column(sel);
-                        sel->order[sel->order_length-1].identity=&tokens->object;
+                        sel->order[sel->order_length-1].identity=tokens->object;
                         sel->order[sel->order_length-1].direction=TOKEN_DESC;
 
                     }  else {
                         add_order_column(sel);
-                        sel->order[sel->order_length-1].identity=&tokens->object;
+                        sel->order[sel->order_length-1].identity=tokens->object;
                         sel->order[sel->order_length-1].direction=TOKEN_ASC;
                     }
 
