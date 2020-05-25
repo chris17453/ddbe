@@ -10,11 +10,10 @@ select_t *select_new(){
     // init data structure
     // sub elements
     obj->columns          =0;
-    obj->where            =0;
-    obj->order            =0;
-    obj->group            =0;
-
     obj->from             =0;
+    obj->where            =0;
+    obj->group            =0;
+    obj->order            =0;
 
     // elements
     obj->alias            =0;
@@ -24,6 +23,9 @@ select_t *select_new(){
     
     // internal
     obj->column_length    =0;
+    obj->where_length     =0;
+    obj->order_length     =0;
+    obj->group_length     =0;
     obj->has_limit_length =0;
     obj->has_limit_start  =0;
     return obj;
@@ -103,6 +105,9 @@ void select_debug(select_t *obj){
     printf("   has_limit_start =%s\n"   ,has_limit_start);
     printf("   has_limit_length=%s\n"   ,has_limit_length);
     printf("   column length   =%d\n"   ,obj->column_length);
+    printf("   order length    =%d\n"   ,obj->order_length);
+    printf("   group length    =%d\n"   ,obj->group_length);
+    printf("   where length    =%d\n"   ,obj->where_length);
     printf(" -values----------\n");
     
     printf("   alias           =%s\n"   ,obj->alias);

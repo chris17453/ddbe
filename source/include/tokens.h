@@ -78,25 +78,9 @@
 
     
 
-    typedef struct identifier_t {
-        char *qualifier;
-        char *source;
-    } identifier_t;
-
-    typedef struct list{
-        char *item;
-    } list;
 
     # define COLUMN_TYPE_IDENTIFIER 1
     # define COLUMN_TYPE_FUNCTION 1
-
-
-    typedef struct  data_column_t{
-        int   type;
-        int   ordinal;
-        void *object;
-        char *alias;
-    } data_column_t;
 
 
     
