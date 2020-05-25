@@ -12,7 +12,7 @@ int expr_alias(token_array_t *tokens,int depth,char *target){
     int pos=tokens->position;
     if(compare_token(tokens,0,TOKEN_AS))
         if(compare_token(tokens,0,TOKEN_ALPHA)){        
-            printf("COMP");
+            printf("COMP-> %d %s",pos+2,tokens->array[pos+2].value);
             *target=tokens->array[pos].value;
             printf("COMP3");
             //target=&tokens->array[tokens->position-1].value;
