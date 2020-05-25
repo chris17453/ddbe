@@ -156,7 +156,7 @@ void select_debug(select_t *obj){
     if (obj->columns!=0){
         printf (" columns: \n");
         for(int i=0;i<obj->column_length;i++){
-            printf(" alias: %s ,",obj->columns[i].alias);
+            printf("   alias: %s ,",obj->columns[i].alias);
             printf(" type: %s ,",token_type(obj->columns[i].type));
             if (obj->columns[i].type==TOKEN_IDENTIFIER) {
                identifier_t *ident=(identifier_t*)obj->columns[i].object;
@@ -179,7 +179,7 @@ void select_debug(select_t *obj){
         for(int i=0;i<obj->order_length;i++){
 
                 order_column_t *order=&obj->order[i];
-                printf("Qualifier: %s,Source: %s",order->identity->qualifier,order->identity->source);
+                printf("   Qualifier: %s,Source: %s",order->identity->qualifier,order->identity->source);
             
                 printf(" %s, \n",token_type(order->direction));
         }
