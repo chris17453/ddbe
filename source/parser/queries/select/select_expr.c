@@ -1,7 +1,8 @@
 #include "../../../include/errors.h"
 #include "../../../include/tokens.h"
+#include "../../../include/structure.h"
 
-int expr_select_expr(token_array_t *tokens,int depth){
+int expr_select_expr(token_array_t *tokens,int depth,select_t *sel){
     ++depth;
     int pos=tokens->position;
     int pos2;
@@ -15,7 +16,7 @@ int expr_select_expr(token_array_t *tokens,int depth){
 
     while(looper){
         pos2=tokens->position;
-        if(!expr_column_expr(tokens,depth)) {
+        if(!expr_column_expr(tokens,depth,sel)) {
             //no select epression
             break;
         }

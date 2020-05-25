@@ -21,7 +21,7 @@ int expr_select(token_array_t *tokens,int depth){
             goop(depth,"SELECT","DISTINCT");
         }
         // not optional
-        if(expr_select_expr(tokens,depth)){
+        if(expr_select_expr(tokens,depth,sel)){
             goop(depth,"SELECT","FOUND select expression");
         } else {
             goop(depth,"UHOH","erms?");
