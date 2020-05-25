@@ -24,7 +24,6 @@ select_t *select_new(){
     obj->column_length    =0;
     obj->has_limit_length =0;
     obj->has_limit_start  =0;
-    obj->alias_target     =0;
     return obj;
 }
 
