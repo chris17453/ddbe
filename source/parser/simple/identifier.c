@@ -43,6 +43,6 @@ identifier_t * create_identifier(int depth,token_array_t *tokens,int index1,int 
         ident->source=tokens->array[index2].value;
     }
     tokens->object=ident;
-    tokens->object_type=1;
+    tokens->object_type=TOKEN_IDENTIFIER;
     return;
 }
