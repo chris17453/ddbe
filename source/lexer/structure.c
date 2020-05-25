@@ -86,6 +86,8 @@ void set_distinct(select_t *obj){
 void select_debug(select_t *obj){
     printf("SELECT_DEBUG\n");
     
+    char *has_limit_start;
+    char *has_limit_length;
     char *has_from;
     char *has_alias;
     char *has_columns;
@@ -99,6 +101,8 @@ void select_debug(select_t *obj){
     if(obj->order  ==0) has_order  ="NO"; else has_order  ="YES";
     if(obj->where  ==0) has_where  ="NO"; else has_where  ="YES";
     if(obj->from   ==0) has_from   ="NO"; else has_from   ="YES";
+    if(obj->limit_start ==0) has_limit_start ="NO"; else has_limit_start ="YES";
+    if(obj->limit_length==0) has_limit_length="NO"; else has_limit_length="YES";
 
     printf("  has_from       =%s\n"   ,has_from);
     printf("  has_alias      =%s\n"   ,has_alias);
@@ -106,6 +110,8 @@ void select_debug(select_t *obj){
     printf("  has_group      =%s\n"   ,has_group);
     printf("  has_order      =%s\n"   ,has_order);
     printf("  has_where      =%s\n"   ,has_where);
+    printf("  has_limit_start =%s\n"   ,has_limit_start);
+    printf("  has_limit_length=%s\n"   ,has_limit_length);
     printf("  column length  =%d\n"   ,obj->column_length);
     
     printf("  alias          =%s\n"   ,obj->alias);

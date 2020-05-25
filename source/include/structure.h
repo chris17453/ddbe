@@ -15,11 +15,11 @@ typedef struct select_t{
         // elements
         char          *alias;
         int            distinct;
-        int            column_length;     
         int            limit_start;
         int            limit_length;
 
         // internal
+        int            column_length;     
         int            has_limit_length;
         int            has_limit_start;
     } select_t;
