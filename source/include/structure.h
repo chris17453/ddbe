@@ -35,7 +35,7 @@ typedef struct select_t{
         identifier_t    * from;
         void            * where;
         order_column_t  * order;
-        order_column_t  * group;
+        group_column_t  * group;
         
         // elements
         char          * alias;
