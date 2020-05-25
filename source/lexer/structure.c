@@ -76,7 +76,7 @@ void select_add_column(select_t *obj){
     data_column_init(obj->columns[obj->column_length]);
 
     ++obj->column_length;
-   // select_debug(obj);
+    select_debug(obj);
     printf("NO \n");
 
 }
