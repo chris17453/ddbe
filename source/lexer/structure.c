@@ -120,8 +120,8 @@ void select_debug(select_t *obj){
             printf(" type: %d ,",obj->columns[i].type);
             printf(" ordinal: %d ",obj->columns[i].ordinal);
             printf("}, \n");
-            printf("} \n");
         }
+        printf("} \n");
     }
 }
 
