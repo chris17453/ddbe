@@ -1,8 +1,9 @@
 #include "../../../include/errors.h"
 #include "../../../include/tokens.h"
-
+#include "../../../include/structure.h"
+#include <math.h>
 // alpha or alpha.alpha
-int expr_limit(token_array_t *tokens,int depth){
+int expr_limit(token_array_t *tokens,int depth,select_t*sel){
     ++depth;
     #ifdef PARSE_ENTRANCE
     goop(depth,"limit EXPR","IN");
@@ -15,12 +16,20 @@ int expr_limit(token_array_t *tokens,int depth){
         if(compare_token(tokens,0,TOKEN_NUMERIC)){
             if(compare_token(tokens,0,TOKEN_LIST_DELIMITER)){
                 if(compare_token(tokens,0,TOKEN_NUMERIC)){
+
                     goop(depth,"LIMIT start",tokens->array[tokens->position-3].value);
                     goop(depth,"LIMIT length",tokens->array[tokens->position-1].value);
+                    sel->limit_start=atoi(tokens->array[tokens->position-3].value);
+                    sel->limit_length=atoi(tokens->array[tokens->position-1].value);
+                    sel->has_limit_start=1;
+                    sel->has_limit_length=1;
+                    
                     return 1;
                 }                
             } else {
                 goop(depth,"LIMIT length",tokens->array[tokens->position-1].value);
+                sel->limit_length=atoi(tokens->array[tokens->position-1].value);
+                sel->has_limit_length=1;
                 return 1;
             }
         }
