@@ -46,6 +46,7 @@ void data_column_init(data_column_t *column){
 
 
 void select_add_column(select_t *obj){
+    return;
     // columns... create, copy, destroy old, replace
     // create
     data_column_t *new_columns=data_column_list_init(obj->column_length+1);
