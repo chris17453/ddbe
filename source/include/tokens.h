@@ -84,7 +84,7 @@
     } identifier_t;
 
     typedef struct list{
-        char *item;T
+        char *item;
     } list;
 
     # define COLUMN_TYPE_IDENTIFIER 1
