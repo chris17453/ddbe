@@ -14,8 +14,7 @@ select_t *select_new(){
     obj->order            =0;
     obj->group            =0;
 
-    obj->from.qualifier   =0;
-    obj->from.source      =0;
+    obj->from             =0;
 
     // elements
     obj->alias            =0;

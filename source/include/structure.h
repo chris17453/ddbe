@@ -7,7 +7,7 @@
 typedef struct select_t{
         // sub elements
         data_column_t *columns;
-        identifier_t   from;
+        identifier_t  *from;
         void          *where;
         void          *order;
         void          *group;
