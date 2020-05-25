@@ -93,6 +93,7 @@ void select_debug(select_t *obj){
     if(obj->limit_start ==0) has_limit_start ="NO"; else has_limit_start ="YES";
     if(obj->limit_length==0) has_limit_length="NO"; else has_limit_length="YES";
 
+    printf(" ----------------\n");
     printf("  has_from       =%s\n"   ,has_from);
     printf("  has_alias      =%s\n"   ,has_alias);
     printf("  has_columns    =%s\n"   ,has_columns);
@@ -102,7 +103,7 @@ void select_debug(select_t *obj){
     printf("  has_limit_start =%s\n"   ,has_limit_start);
     printf("  has_limit_length=%s\n"   ,has_limit_length);
     printf("  column length  =%d\n"   ,obj->column_length);
-    printf(" ----------------");
+    printf(" ----------------\n");
     
     printf("  alias          =%s\n"   ,obj->alias);
     printf("  distinct       =%d\n"   ,obj->distinct);
