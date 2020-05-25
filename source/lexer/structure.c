@@ -1,7 +1,7 @@
 #include "include/core.h"
 #include "include/structure.h"
 #include "include/errors.h"
-
+#include <stdio.h>
 select_t *select_new(){
     select_t *obj=safe_malloc(sizeof(select_t),1);
     // init data structure
