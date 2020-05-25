@@ -293,7 +293,7 @@ void consolidate_tokens(token_array_t *tokens){
         }
     }
                   
-    token_print(tokens);
+    //token_print(tokens);
 
     process_queries(tokens);
 }
