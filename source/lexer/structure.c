@@ -204,7 +204,6 @@ void select_debug(select_t *obj){
             }
             printf(" ordinal: %d \n",obj->columns[i].ordinal);
         }
-        printf("} \n");
     }
 
     if (obj->group!=0){
