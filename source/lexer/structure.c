@@ -53,7 +53,7 @@ void select_add_column(select_t *obj){
     // create
     printf("new columns\n");
     data_column_t *new_columns=data_column_list_init(obj->column_length+1);
-    memset(&new_columns,sizeof(data_column_t)*obj->column_length+1);
+    memset(&new_columns,0,sizeof(data_column_t)*obj->column_length+1);
     // if existing items exist
     if(obj->columns!=0) {
         printf("old columns\n");
