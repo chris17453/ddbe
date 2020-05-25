@@ -45,28 +45,28 @@ void data_column_init(data_column_t *column){
 // init a list of columns with 
 
 
-void select_add_column(select_t obj){
+void select_add_column(select_t *obj){
     // columns... create, copy, destroy old, replace
     // create
-    data_column_t *new_columns=data_column_list_init(obj.column_length+1);
+    data_column_t *new_columns=data_column_list_init(obj->column_length+1);
     
     // if existing items exist
-    if(obj.columns!=0) {
+    if(obj->columns!=0) {
         // copy
-        int data_size=sizeof(data_column_t)*obj.column_length;
-        memcpy(new_columns,obj.columns,data_size);
+        int data_size=sizeof(data_column_t)*obj->column_length;
+        memcpy(new_columns,obj->columns,data_size);
         // destroy old
-        free(obj.columns);
+        free(obj->columns);
     }
 
     // replace
-    obj.columns=new_columns;
+    obj->columns=new_columns;
     
     //init the newest column
-    data_column_init(&obj.columns[obj.column_length]);
+    data_column_init(&obj->columns[obj->column_length]);
 
-    obj.alias_target=&obj.columns[obj.column_length];
-    ++obj.column_length;
+    obj->alias_target=&obj->columns[obj->column_length];
+    ++obj->column_length;
 }
 
 void set_distinct(select_t *obj){
