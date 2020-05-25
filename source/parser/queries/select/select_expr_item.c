@@ -19,7 +19,7 @@ int expr_column_expr(token_array_t *tokens,int depth,select_t *sel){
         
         sel->columns[index].alias=0;
         if(expr_alias(tokens,depth,sel->columns[index].alias)){ //sel->columns[sel->column_length].alias
-            sel->columns[index].alias="BOB";
+            //sel->columns[index].alias="BOB";
             goop(depth,"alias","found");
         }
         return 1;
