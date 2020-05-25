@@ -187,7 +187,7 @@ void select_debug(select_t *obj){
     printf("   limit_length    =%d\n"   ,obj->limit_length);
     printf("   limit_start     =%d\n"   ,obj->limit_start);
     if (obj->columns!=0){
-        printf (" columns: \n");
+        printf(" -data-columns----------\n");
         for(int i=0;i<obj->column_length;i++){
             printf("   alias: %s ,",obj->columns[i].alias);
             printf(" type: %s ,",token_type(obj->columns[i].type));
@@ -208,7 +208,7 @@ void select_debug(select_t *obj){
     }
 
     if (obj->group!=0){
-        printf (" group: \n");
+        printf(" -group-----------\n");
         for(int i=0;i<obj->group_length;i++){
                 group_column_t *group=&obj->group[i];
                 printf("   Qualifier: %s,Source: %s",group->identity->qualifier,group->identity->source);
@@ -217,7 +217,7 @@ void select_debug(select_t *obj){
     }    
 
     if (obj->order!=0){
-        printf (" order: \n");
+        printf(" -order-----------\n");
         for(int i=0;i<obj->order_length;i++){
 
                 order_column_t *order=&obj->order[i];
