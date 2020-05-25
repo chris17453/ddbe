@@ -16,7 +16,7 @@ int expr_from(token_array_t *tokens,int depth,select_t* sel){
         if(expr_identifier(tokens,depth)){        
             goop(depth,"SELECT","BEFORE FROM-alias");
             
-            if(expr_alias(tokens,depth,sel->alias)) {
+            if(expr_alias(tokens,depth,&sel->alias)) {
                 goop(depth,"FORM","Found Alias");
             }
             
