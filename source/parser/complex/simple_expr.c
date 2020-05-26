@@ -21,7 +21,9 @@ void add_simple_expr(token_array_t *tokens){
     simple_expr->sign=0;
     simple_expr->type=tokens->object_type;
     simple_expr->ptr=tokens->object;
-    tokens->object=ptr;
+    
+    tokens->object=simple_expr;
+    tokens->object_type=simple_expr;
 
 }
 
@@ -37,12 +39,12 @@ int expr_simple_expr(token_array_t* tokens,int depth){
     
 
     if(expr_identifier(tokens,depth)) {
-        add_simple_expr(tokens);
+       // add_simple_expr(tokens);
         return 1;
     }
     
     if(expr_litteral(tokens,depth)) {
-        add_simple_expr(tokens);
+       // add_simple_expr(tokens);
         return 1;
     }
     
@@ -50,13 +52,13 @@ int expr_simple_expr(token_array_t* tokens,int depth){
     //if(expr_sub_query(tokens,depth)) return 1;
     if(compare_token(tokens,0,TOKEN_MINUS)) {
        if(expr_simple_expr(tokens,depth)) {
-           (simple_expr_t*)tokens->object.sign=TOKEN_MINUS;
+          // (simple_expr_t*)tokens->object.sign=TOKEN_MINUS;
            return 1;
        }
     }
     if(compare_token(tokens,0,TOKEN_PLUS)) {
         if(expr_simple_expr(tokens,depth)) {
-           (simple_expr_t*)tokens->object.sign=TOKEN_PLUS;
+          // (simple_expr_t*)tokens->object.sign=TOKEN_PLUS;
            return 1;
         }
         
