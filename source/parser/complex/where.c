@@ -15,7 +15,8 @@ int expr_where(token_array_t *tokens,int depth,select_t *sel){
         
 
         if(expr_expr(tokens,depth)){
-            sel->where->tokens=tokens->array[pos+1];
+            sel->where=safe_malloc(sizeof(where_expr_t),1);
+            sel->where->tokens=&tokens->array[pos+1];
             sel->where->length=tokens->position-pos-1;
             sel->where->ordinal=0;
             return 1;
