@@ -15,7 +15,7 @@ typedef struct simple_expr_t{
 
 
 } simple_expr_t;
-
+/*
 void add_simple_expr(token_array_t *tokens){
     simple_expr_t *simple_expr=safe_malloc(sizeof(simple_expr_t),1);
     simple_expr->sign=0;
@@ -26,7 +26,7 @@ void add_simple_expr(token_array_t *tokens){
     tokens->object_type=simple_expr;
 
 }
-
+*/
 
 
 int expr_simple_expr(token_array_t* tokens,int depth){
