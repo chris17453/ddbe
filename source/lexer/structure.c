@@ -210,9 +210,11 @@ void select_debug(select_t *obj){
     if (obj->where!=0){
         printf(" -where----------\n");
         for(int i=0;i<obj->where_length;i++){
-            token_t *token=&obj->where->tokens[i];
-            printf("%s,val: %s\n",token_type(token->type),token->value );
-
+            int *sub_len=(where_expr_t*)obj->where[i].length;
+            for(int w=0;w<sub_len;w++) {
+                token_t *token=&obj->where[i].tokens[w];
+                printf("%s,val: %s\n",token_type(token->type),token->value );
+            }
         }
     }
     
