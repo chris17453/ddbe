@@ -88,7 +88,7 @@ typedef struct select_t{
     void             group_column_init(group_column_t *column);
     void             add_group_column(select_t *obj);
     where_expr_t   * where_expr_list_init(int length);
-    void             where_exp_init(where_expr_t *exp);
+    void             where_expr_init(where_expr_t *exp);
     void             add_where_expr(select_t *obj);
 
     void             set_distinct(select_t *obj);

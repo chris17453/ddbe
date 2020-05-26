@@ -140,7 +140,7 @@ where_expr_t *where_expr_list_init(int length){
     return expr;
 }
 
-void where_exp_init(where_expr_t *exp){
+void where_expr_init(where_expr_t *exp){
     exp->NOT=0;
     exp->length=0;
     exp->comparitor=0;
