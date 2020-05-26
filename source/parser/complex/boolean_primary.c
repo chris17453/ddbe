@@ -27,9 +27,7 @@ int expr_boolean_primary(token_array_t *tokens,int depth){
 
         //comparison_operator predicate
         if(expr_comparison_operator(tokens,depth)){
-            goop(depth,"boolean primary","--->");
             if(expr_predicate(tokens,depth)){
-                goop(depth,"boolean primary","<-----Got a comparitor");
                 return 1;
             }
 
