@@ -242,7 +242,7 @@ void select_debug(select_t *obj){
         printf(" -where----------\n");
         for(int i=0;i<obj->where_length;i++){
             where_expr_t *where=&obj->where[i];
-            printf(" -ordinal %d",where->ordinal);
+            printf("   -ordinal %d",where->ordinal);
             printf(" -length %d",where->length);
             printf(" -not %d",where->NOT);
             printf(" -comparitor %s\n",token_type(where->comparitor));
