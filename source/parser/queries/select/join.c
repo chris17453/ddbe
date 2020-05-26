@@ -16,7 +16,13 @@ int expr_join(token_array_t *tokens,int depth,select_t *sel){
         case TOKEN_FULL_OUTER_JOIN: break;
         default: return 0;
     }
-    tokens->position++;
+    ++tokens->position;
+
+    if(compare_token(tokens,0,TOKEN_ALPHA)){
+        goop(depth,"join identity",tokens->array[tokens->position].value);    
+    } else {
+        ghost(ERR_INVALID_JOIN_IDENTITY);
+    }
 
     goop(depth,"join pre AS",tokens->array[tokens->position].value);
     if(compare_token(tokens,0,TOKEN_AS)){

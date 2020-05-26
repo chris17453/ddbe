@@ -55,6 +55,7 @@ void vomit(int err_no){
         case ERR_INVALID_JOIN_ALIAS          : msg="invalid join alias"; break;
         case ERR_JOIN_WITHOUT_ON             : msg="join without on clause"; break;
         case ERR_JOIN_WITHOUT_EXPR           : msg="join missing conditional expresion"; break;
+        case ERR_INVALID_JOIN_IDENTITY       : msg="join identity missing "; break;
 
         default: msg="NO CLUE";
     }

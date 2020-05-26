@@ -24,6 +24,7 @@
     #define ERR_INVALID_JOIN_ALIAS          19
     #define ERR_JOIN_WITHOUT_ON             20
     #define ERR_JOIN_WITHOUT_EXPR           21
+    #define ERR_INVALID_JOIN_IDENTITY       22
 
 #endif
 
