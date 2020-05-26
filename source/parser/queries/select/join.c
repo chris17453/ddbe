@@ -38,6 +38,7 @@ int expr_join(token_array_t *tokens,int depth,select_t *sel){
     if(compare_token(tokens,0,TOKEN_ON)) {
         goop(depth,"join on",tokens->array[tokens->position].value);
         if(expr_expr(tokens,depth,sel)){
+            tokens->object=0;
             return 1;
         } else {
             ghost(ERR_JOIN_WITHOUT_EXPR);
