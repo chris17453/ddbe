@@ -119,8 +119,8 @@ token_array_t *lex(char * query){
                     else if(0==strncasecmp(new_token,"LIKE"     ,10) ) t=TOKEN_LIKE;
                     else if(0==strncasecmp(new_token,"FROM"     ,10) ) t=TOKEN_FROM;
                     else if(0==strncasecmp(new_token,"NULL"     ,10) ) t=TOKEN_NULL;
-                    else if(0==strncasecmp(new_token,"TRUE"     ,10) ) t=TOKEN_FALSE;
-                    else if(0==strncasecmp(new_token,"FALSE"    ,10) ) t=TOKEN_TRUE;
+                    else if(0==strncasecmp(new_token,"FALSE"    ,10) ) t=TOKEN_FALSE;
+                    else if(0==strncasecmp(new_token,"TRUE"     ,10) ) t=TOKEN_TRUE;
                     else if(0==strncasecmp(new_token,"UNKNOWN"  ,10) ) t=TOKEN_UNKNOWN;
                     else if(0==strncasecmp(new_token,"AND"      ,10) ) t=TOKEN_AND;
                     else if(0==strncasecmp(new_token,"ASC"      ,10) ) t=TOKEN_ASC;
