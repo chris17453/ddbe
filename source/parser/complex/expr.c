@@ -71,7 +71,7 @@ int expr_expr(token_array_t* tokens,int depth,select_t *sel){
         add_where_expr(sel);
         where_expr_t *where=&sel->where[sel->where_length-1];
         where->ordinal=sel->where_length-1;
-        where->length=pos2-pos;
+        where->length=0;//pos2-pos;
         where->tokens=&tokens->array[pos];
 
         switch(tokens->array[tokens->position].type){
