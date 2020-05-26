@@ -29,10 +29,10 @@ typedef struct group_column_t {
     int ordinal;
 } group_column_t;
 
-typedef struct group_column_t {
+typedef struct where_expr_t {
     identifier_t *identity;
     int ordinal;
-} group_column_t;
+} where_expr_t;
 
 
 
