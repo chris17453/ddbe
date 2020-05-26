@@ -15,9 +15,10 @@ int expr_where(token_array_t *tokens,int depth,select_t *sel){
         if(expr_expr(tokens,depth)){
             printf("OMG YES");
 
-            sel->where=safe_malloc(sizeof(where_expr_t),2);
+            sel->where=safe_malloc(sizeof(where_expr_t),1);
+
             sel->where->tokens=&tokens->array[pos+1];
-            sel->where->length=1;
+            sel->where->length=123;
             sel->where->ordinal=1;
             return 1;
         }
