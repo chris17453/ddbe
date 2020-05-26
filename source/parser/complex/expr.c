@@ -64,8 +64,9 @@ int expr_expr(token_array_t* tokens,int depth,select_t *sel){
     tokens->position=pos;
 
     //expr
+    pos=tokens->position;
     if(expr_core(tokens,depth)) {
-        pos=tokens->position;
+        int pos2=tokens->position;
         //expr [and/or] expr
         switch(tokens->array[pos].type){
             case TOKEN_SHORT_AND : break;
@@ -89,7 +90,7 @@ int expr_expr(token_array_t* tokens,int depth,select_t *sel){
         ++tokens->position;
 
         if(!expr_expr(tokens,depth,sel)){
-            tokens->position=pos;
+            tokens->position=pos2;
         }
         goop(depth,"expr SUCCESS","word up... good job sir.");
 
