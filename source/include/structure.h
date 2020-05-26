@@ -32,7 +32,7 @@ typedef struct group_column_t {
 typedef struct where_expr_t {
     int NOT;
     token_t *tokens;
-    where_expr_t *expr;
+    struct where_expr_t *expr;
     int comparitor;
     int length;
     int ordinal;
