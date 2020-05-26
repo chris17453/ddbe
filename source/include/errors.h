@@ -21,6 +21,9 @@
     #define ERR_UNTERMINATED_LINE_COMENT    16
     #define ERR_UNTERMINATED_BLOCK_COMENT   17
     #define ERR_TOKEN_TARGET_NULL           18
+    #define ERR_INVALID_JOIN_ALIAS          19
+    #define ERR_JOIN_WITHOUT_ON             20
+    #define ERR_JOIN_WITHOUT_EXPR           21
 
 #endif
 

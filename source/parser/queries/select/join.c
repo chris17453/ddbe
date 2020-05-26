@@ -4,46 +4,37 @@
 int expr_join(token_array_t *tokens,int depth,select_t *sel){
     ++depth;
     int pos=tokens->position;
-    int pos2;
     #ifdef PARSE_ENTRANCE
-    goop(depth,"SEL-EXPR","IN");
+    goop(depth,"expr_join","IN");
     #endif
 
-    int looper=1;
 
-    int expr_list=0;
-
-    while(looper){
-        pos2=tokens->position;
-
-        /*
-            JOIN
-            LEFT JOIN
-            RIGHT JOIN
-            FULL OUTER JOIN
-            INNER JOIN
-        */
-
-
-
-
-        if(!expr_column_expr(tokens,depth,sel)) {
-            //no select epression
-            break;
-        }
-        ++expr_list;
-        //print_token_range(tokens,"SELECT_EXPR SRC",pos2,tokens->position);
-
-        // if we have a delimiter.. loop else exit
-        if(!compare_token(tokens,0,TOKEN_LIST_DELIMITER)) {
-            looper=0;
-        } else {
-        }
-    } //end looper
-    if(expr_list>0) {
-       //printf("%d epressions",expr_list);
-        return 1;
+    switch(tokens->array[tokens->position].type){
+        case TOKEN_JOIN: break;
+        case TOKEN_LEFT_JOIN: break;
+        case TOKEN_RIGHT_JOIN: break;
+        case TOKEN_INNER_JOIN: break;
+        case TOKEN_FULL_OUTER_JOIN: break;
+        default: return 0;
     }
-    return 0;
+    tokens->position++;
+
+    if(compare_token(tokens,0,TOKEN_AS)){
+        if(compare_token(tokens,0,TOKEN_ALPHA)){
+            goop(depth,"join alias",tokens->array[tokens->position].value);
+        } else {
+            ghost(ERR_INVALID_JOIN_ALIAS);
+        }
+    }
+
+    if(compare_token(tokens,0,TOKEN_ON)) {
+        if(expr_expr(tokens,depth,sel)){
+            return 1;
+        } else {
+            ghost(ERR_JOIN_WITHOUT_EXPR);
+        }
+    } else {
+        ghost(ERR_JOIN_WITHOUT_ON);
+    }
 }
     

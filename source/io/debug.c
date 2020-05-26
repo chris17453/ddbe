@@ -52,6 +52,9 @@ void vomit(int err_no){
         case ERR_UNTERMINATED_LINE_COMENT    : msg="unterminated line comment"; break;
         case ERR_UNTERMINATED_BLOCK_COMENT   : msg="unterminated block comment"; break;
         case ERR_TOKEN_TARGET_NULL           : msg="token target is null"; break;
+        case ERR_INVALID_JOIN_ALIAS          : msg="invalid join alias"; break;
+        case ERR_JOIN_WITHOUT_ON             : msg="join without on clause"; break;
+        case ERR_JOIN_WITHOUT_EXPR           : msg="join missing conditional expresion"; break;
 
         default: msg="NO CLUE";
     }
