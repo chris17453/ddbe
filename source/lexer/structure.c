@@ -186,6 +186,8 @@ void select_debug(select_t *obj){
     }
     printf("   limit_length    =%d\n"   ,obj->limit_length);
     printf("   limit_start     =%d\n"   ,obj->limit_start);
+    
+    
     if (obj->columns!=0){
         printf(" -data-columns----------\n");
         for(int i=0;i<obj->column_length;i++){
@@ -205,7 +207,15 @@ void select_debug(select_t *obj){
             printf(" ordinal: %d \n",obj->columns[i].ordinal);
         }
     }
+    if (obj->where!=0){
+        printf(" -where----------\n");
+        for(int i=0;i<obj->where_length;i++){
+            token_t *token=&obj->where->tokens[i];
+            printf("%s,val: %s\n",token_type(token->type),token->value );
 
+        }
+    }
+    
     if (obj->group!=0){
         printf(" -group-----------\n");
         for(int i=0;i<obj->group_length;i++){
