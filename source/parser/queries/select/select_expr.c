@@ -21,7 +21,7 @@ int expr_select_expr(token_array_t *tokens,int depth,select_t *sel){
             break;
         }
         ++expr_list;
-        print_token_range(tokens,"SELECT_EXPR SRC",pos2,tokens->position);
+        //print_token_range(tokens,"SELECT_EXPR SRC",pos2,tokens->position);
 
         // if we have a delimiter.. loop else exit
         if(!compare_token(tokens,0,TOKEN_LIST_DELIMITER)) {
@@ -30,7 +30,7 @@ int expr_select_expr(token_array_t *tokens,int depth,select_t *sel){
         }
     } //end looper
     if(expr_list>0) {
-       printf("%d epressions",expr_list);
+       //printf("%d epressions",expr_list);
 
         return 1;
     }
