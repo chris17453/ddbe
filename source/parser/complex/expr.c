@@ -69,7 +69,7 @@ int expr_expr(token_array_t* tokens,int depth,select_t *sel){
             case TOKEN_OR        : where->comparitor=tokens->array[tokens->position].type; break;
             default: return 1; //already passed core.. PEACE OUT
         }
-        goop(depth,"expression binder",tokens->array[tokens->position].value);
+        //goop(depth,"expression binder",tokens->array[tokens->position].value);
 
         //Tru for 2nd expr_core... but if not.. reset position and PEACE OUT!
         //if(!expr_core(tokens,depth)){
@@ -79,11 +79,10 @@ int expr_expr(token_array_t* tokens,int depth,select_t *sel){
         if(!expr_expr(tokens,depth,sel)){
             tokens->position=pos3;
         }
-        goop(depth,"expr SUCCESS","word up... good job sir.");
+        //goop(depth,"expr SUCCESS","word up... good job sir.");
 
         return 1;
     } 
     tokens->position=pos;
-    goop(depth,"expression FEIL","--");
     return 0;
 }
