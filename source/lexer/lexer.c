@@ -101,12 +101,19 @@ token_array_t *lex(char * query){
                             break;
                         }
                     }
+
+                    
                     if     (0==strncasecmp(new_token,"DISTINCT" ,10) ) t=TOKEN_DISTINCT;
                     else if(0==strncasecmp(new_token,"SELECT"   ,10) ) t=TOKEN_SELECT;
                     else if(0==strncasecmp(new_token,"WHERE"    ,10) ) t=TOKEN_WHERE;
                     else if(0==strncasecmp(new_token,"ORDER"    ,10) ) t=TOKEN_ORDER;
                     else if(0==strncasecmp(new_token,"GROUP"    ,10) ) t=TOKEN_GROUP;
                     else if(0==strncasecmp(new_token,"LIMIT"    ,10) ) t=TOKEN_LIMIT;
+                    else if(0==strncasecmp(new_token,"OUTER"    ,10) ) t=TOKEN_OUTER;
+                    else if(0==strncasecmp(new_token,"INNER"    ,10) ) t=TOKEN_INNER;
+                    else if(0==strncasecmp(new_token,"LEFT"     ,10) ) t=TOKEN_LEFT;
+                    else if(0==strncasecmp(new_token,"RIGHT"    ,10) ) t=TOKEN_RIGHT;
+                    else if(0==strncasecmp(new_token,"FULL"     ,10) ) t=TOKEN_FULL;
                     else if(0==strncasecmp(new_token,"DESC"     ,10) ) t=TOKEN_DESC;
                     else if(0==strncasecmp(new_token,"JOIN"     ,10) ) t=TOKEN_JOIN;
                     else if(0==strncasecmp(new_token,"LIKE"     ,10) ) t=TOKEN_LIKE;
@@ -267,15 +274,65 @@ token_array_t *lex(char * query){
 }
 
 
+void token_combine(token_array_t *tokens,int *list,int combo_token,int length){
+    int list_index=0;    
+    for(int i=0;i<tokens->length;i++){
+        if(tokens->array[i].type==list[list_index]) {
+            ++list_index;
+            if(list_index==length){
+                tokens->array[i].type=combo_token;
+                
+                for(int w=0;w<length;w++){
+                    tokens->array[i].value=strcat(tokens->array[i].value,tokens->array[i+1].value);
+                    token_delete(tokens,i+1);
+                }
+                i+=length-1;
+                list_index=0;
+
+            }
+        } else {
+            list_index=0;
+        }
+    }    
+}
+
+
 void consolidate_tokens(token_array_t *tokens){
     token_t d;
     token_t e;
     int buffer_len;
+
+
+
+    int token1[] ={TOKEN_DOT,    TOKEN_NUMERIC};
+    int token2[] ={TOKEN_NUMERIC,TOKEN_DOT    ,TOKEN_NUMERIC};
+    int token3[] ={TOKEN_LEFT,   TOKEN_JOIN};
+    int token4[] ={TOKEN_RIGHT,  TOKEN_JOIN};
+    int token5[] ={TOKEN_INNER,  TOKEN_JOIN};
+    int token6[] ={TOKEN_FULL,   TOKEN_OUTER ,TOKEN_JOIN};
+
+   // starts with a dot... REAL        
+    token_combine(tokens,token1,TOKEN_REAL,2);
+    token_combine(tokens,token2,TOKEN_REAL,3);
+    token_combine(tokens,token3,TOKEN_LEFT_JOIN,2);
+    token_combine(tokens,token4,TOKEN_RIGHT_JOIN,2);
+    token_combine(tokens,token5,TOKEN_INNER_JOIN,2);
+    token_combine(tokens,token6,TOKEN_FULL_OUTER_JOIN,3);
+     
+/*
     for(int i=0;i<tokens->length;i++){
         buffer_len=tokens->length-i;
-
+        int token1=0;
+        int token2=0;
+        int token3=0;
+        
+        token1=tokens->array[i].type;
+        token2=tokens->array[i+1].type;
+        token3=tokens->array[i+2].type;
+        
+        
         // starts with a dot... REAL        
-        if (buffer_len>2 && tokens->array[i].type==TOKEN_DOT && tokens->array[i+1].type==TOKEN_NUMERIC){
+        if (buffer_len>1 && token1==TOKEN_DOT && token2==TOKEN_NUMERIC){
             tokens->array[i].type=TOKEN_REAL;
             tokens->array[i].value=strcat(tokens->array[i].value,tokens->array[i+1].value);
             token_delete(tokens,i+1);
@@ -283,18 +340,36 @@ void consolidate_tokens(token_array_t *tokens){
             continue;
         }
         // starts with a numeric dot numeric ... REAL        
-        if (buffer_len>3 &&  tokens->array[i].type==TOKEN_NUMERIC && tokens->array[i+1].type==TOKEN_DOT && tokens->array[i+2].type==TOKEN_NUMERIC){
+        if (buffer_len>3 &&  token1==TOKEN_NUMERIC && token2==TOKEN_DOT && token3==TOKEN_NUMERIC){
             tokens->array[i].type=TOKEN_REAL;
             tokens->array[i].value=strcat(tokens->array[i].value,tokens->array[i+1].value);
             tokens->array[i].value=strcat(tokens->array[i].value,tokens->array[i+2].value);
             token_delete(tokens,i+1);
-            token_delete(tokens,i+1);
             i+=2;
         }
-    }
-                  
-    //token_print(tokens);
+   
+        if (buffer_len>2 &&  token1==TOKEN_LEFT  && token2==TOKEN_JOIN){
+            tokens->array[i].type=TOKEN_LEFT_JOIN;
+            tokens->array[i].value="LEFT JOIN";
+            token_delete(tokens,i+1);
+        }
 
+        if (buffer_len>2 &&  token1==TOKEN_RIGHT  && token2==TOKEN_JOIN){
+            tokens->array[i].type=TOKEN_RIGHT_JOIN;
+            tokens->array[i].value="RIGHT JOIN";
+            token_delete(tokens,i+1);
+        }
+        if (buffer_len>2 &&  token1==TOKEN_INNER  && token2==TOKEN_JOIN){
+            tokens->array[i].type=TOKEN_INNER_JOIN;
+            tokens->array[i].value="INNER JOIN";
+            token_delete(tokens,i+1);
+        }
+        if (buffer_len>2 &&  token1==TOKEN_FULL  && token2==TOKEN_OUTER && token3==TOKEN_JOIN){
+        }
+                  
+        //token_print(tokens);
+        }
+        */
     process_queries(tokens);
 }
 

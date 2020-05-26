@@ -53,7 +53,6 @@ char *token_type(int t){
         case  TOKEN_LIMIT:           return "LIMIT";
         case  TOKEN_ASC:             return "ASC";
         case  TOKEN_DESC:            return "DESC";
-        case  TOKEN_JOIN:            return "JOIN";
         case  TOKEN_ON:              return "ON";
         case  TOKEN_IN:              return "IN";
         case  TOKEN_IS:              return "IS";
@@ -76,6 +75,18 @@ char *token_type(int t){
         case  TOKEN_IDENTIFIER:      return "IDENTIFIER";
         case  TOKEN_SUB_QUERY:       return "SUB_QUERY";
         case  TOKEN_FUNCTION:        return "FUNCTION";
+        case  TOKEN_JOIN:            return "JOIN";
+        case  TOKEN_LEFT_JOIN:       return "LEFT_JOIN";
+        case  TOKEN_RIGHT_JOIN:      return "RIGHT_JOIN";
+        case  TOKEN_FULL_OUTER_JOIN: return "FULL_OUTER_JOIN";
+        case  TOKEN_INNER_JOIN:      return "INNER_JOIN";
+        case  TOKEN_OUTER:           return "OUTER";
+        case  TOKEN_INNER:           return "INNER";
+        case  TOKEN_LEFT:            return "LEFT";
+        case  TOKEN_RIGHT:           return "RIGHT";
+        case  TOKEN_FULL:            return "FULL";
+
+    
 
     }
     return "UNK";

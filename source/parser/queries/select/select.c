@@ -28,6 +28,12 @@ int expr_select(token_array_t *tokens,int depth){
 
         
         if(expr_from(tokens,depth,sel)){
+            
+            while(expr_join(tokens,depth,sel)){
+                goop(depth,"join","GOT ONE");
+            }
+
+
             if(expr_where(tokens,depth,sel)){
             }
             if(expr_group_by(tokens,depth,sel)){
