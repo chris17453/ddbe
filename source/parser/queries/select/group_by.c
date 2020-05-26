@@ -10,9 +10,7 @@ int expr_group_by(token_array_t *tokens,int depth,select_t* sel){
     #endif
     int pos=tokens->position;
     
-    if(compare_token(tokens,0,TOKEN_GROUP)){
-        if(compare_token(tokens,0,TOKEN_BY)){
-
+    if(compare_token(tokens,0,TOKEN_GROUP_BY)){
             int looper=1;
             int expr_list=0;
             int index=0;
@@ -40,9 +38,6 @@ int expr_group_by(token_array_t *tokens,int depth,select_t* sel){
             if(expr_list>0) {
                 return 1;
             }
-
-        
-        }
     } //end order by        
     tokens->position=pos;
     return 0;
