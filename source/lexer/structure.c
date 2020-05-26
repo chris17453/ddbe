@@ -153,7 +153,7 @@ void add_where_expr(select_t *obj){
     // create
     where_expr_t *new_expr=where_expr_list_init(obj->where_length+1);
     // if existing items exist
-    if(obj->group!=0) {
+    if(obj->where!=0) {
         // copy
         int data_size=sizeof(where_expr_t)*obj->where_length;
         memcpy(new_expr,obj->where,data_size);
