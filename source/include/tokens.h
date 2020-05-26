@@ -105,7 +105,7 @@
         unsigned length; 
         token_t * array; 
         int position;
-        void * target;
+
         void * object;
         int    object_type;
         int has_object;
