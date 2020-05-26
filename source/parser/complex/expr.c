@@ -84,8 +84,8 @@ int expr_expr(token_array_t* tokens,int depth,select_t *sel){
         where_expr_t *where=&sel->where[sel->where_length-1];
         where->comparitor=tokens->array[tokens->position].type;
         where->ordinal=sel->where_length-1;
-        where->length=tokens->position-pos;
-        where->tokens=&tokens->array[pos+1];
+        where->length=pos-pos2;
+        where->tokens=&tokens->array[pos];
 
         ++tokens->position;
 
