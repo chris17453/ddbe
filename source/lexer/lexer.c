@@ -283,11 +283,13 @@ void token_combine(token_array_t *tokens,int *list){
         if(tokens->array[i].type==list[list_index]) {
             ++list_index;
             if(list_index==length){
-                tokens->array[i].type=combo_token;
+                int start_index=i-length;
+
+                tokens->array[start_index].type=combo_token;
                 
                 for(int w=0;w<length;w++){
-                    tokens->array[i].value=strcat(tokens->array[i].value,tokens->array[i+1].value);
-                    token_delete(tokens,i+1);
+                    tokens->array[start_index].value=strcat(tokens->array[start_index].value,tokens->array[start_index+1].value);
+                    token_delete(tokens,start_index+1);
                 }
                 i+=length-1;
                 list_index=0;
