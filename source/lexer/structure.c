@@ -243,6 +243,11 @@ void select_debug(select_t *obj){
         for(int i=0;i<obj->where_length;i++){
             int *sub_len=(where_expr_t*)obj->where[i].length;
             for(int w=0;w<sub_len;w++) {
+                printf(" -expr-------%s\n");
+                printf(" -ordinal----%d\n",(where_expr_t*)obj->where[i].ordinal);
+                printf(" -length-----%d\n",(where_expr_t*)obj->where[i].length);
+                printf(" -not--------%d\n",(where_expr_t*)obj->where[i].NOT);
+                printf(" -comparitor-%s\n",token_type((where_expr_t*)obj->where[i].comparitor));
                 token_t *token=&obj->where[i].tokens[w];
                 printf("     %s,val: %s\n",token_type(token->type),token->value );
             }
