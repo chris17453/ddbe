@@ -21,7 +21,8 @@ int expr_simple_expr(token_array_t* tokens,int depth){
     
     if(expr_litteral(tokens,depth)) return 1;
     
-    if(expr_sub_query(tokens,depth)) return 1;
+/*    
+    //if(expr_sub_query(tokens,depth)) return 1;
     if(compare_token(tokens,0,TOKEN_MINUS)) {
 //        goop(depth,"MINUS","");
         if(expr_simple_expr(tokens,depth)) return 1;
@@ -32,7 +33,7 @@ int expr_simple_expr(token_array_t* tokens,int depth){
         if(expr_simple_expr(tokens,depth)) return 1;
         tokens->position=pos;
     }
-
+*/
     return 0;
 }
 

@@ -61,9 +61,10 @@ int expr_expr(token_array_t* tokens,int depth,select_t *sel){
         where->tokens=&tokens->array[pos2];
         where->NOT=is_not;
 
+
         switch(tokens->array[tokens->position].type){
-            case TOKEN_SHORT_AND : 
-            case TOKEN_SHORT_OR  : 
+            case TOKEN_SHORT_AND :
+            case TOKEN_SHORT_OR  :
             //case TOKEN_XOR       : break;
             case TOKEN_AND       : 
             case TOKEN_OR        : where->comparitor=tokens->array[tokens->position].type; break;

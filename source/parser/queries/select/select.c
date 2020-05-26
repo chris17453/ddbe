@@ -30,7 +30,7 @@ int expr_select(token_array_t *tokens,int depth){
         if(expr_from(tokens,depth,sel)){
             
             while(expr_join(tokens,depth,sel)){
-                goop(depth,"join","GOT ONE");
+                //goop(depth,"join","GOT ONE");
             }
 
 
