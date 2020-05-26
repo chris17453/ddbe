@@ -51,7 +51,6 @@ void add_data_column(select_t *obj){
     // columns... create, copy, destroy old, replace
     // create
     data_column_t *new_columns=data_column_list_init(obj->column_length+1);
-    memset(new_columns,0,sizeof(data_column_t)*obj->column_length+1);
     // if existing items exist
     if(obj->columns!=0) {
         // copy
@@ -85,7 +84,6 @@ void add_order_column(select_t *obj){
     // columns... create, copy, destroy old, replace
     // create
     order_column_t *new_columns=order_column_list_init(obj->order_length+1);
-    memset(new_columns,0,sizeof(order_column_t)*obj->order_length+1);
     // if existing items exist
     if(obj->order!=0) {
         // copy
@@ -118,7 +116,6 @@ void add_group_column(select_t *obj){
     // columns... create, copy, destroy old, replace
     // create
     group_column_t *new_columns=group_column_list_init(obj->group_length+1);
-    memset(new_columns,0,sizeof(group_column_t)*obj->group_length+1);
     // if existing items exist
     if(obj->group!=0) {
         // copy
@@ -136,6 +133,40 @@ void add_group_column(select_t *obj){
 }
 
 
+// init a list of columns with 
+where_expr_t *where_expr_list_init(int length){
+    printf("where->expr malloc \n");
+    where_expr_t *expr =safe_malloc(sizeof(where_expr_t),length);
+    return expr;
+}
+
+void where_exp_init(where_expr_t *exp){
+    exp->NOT=0;
+    exp->length=0;
+    exp->comparitor=0;
+    exp->ordinal=0;
+    exp->tokens=0;
+}
+
+void add_where_expr(select_t *obj){
+    // columns... create, copy, destroy old, replace
+    // create
+    where_expr_t *new_expr=where_expr_list_init(obj->where_length+1);
+    // if existing items exist
+    if(obj->group!=0) {
+        // copy
+        int data_size=sizeof(where_expr_t)*obj->where_length;
+        memcpy(new_expr,obj->where,data_size);
+        // destroy old
+        free(obj->where);
+    }
+
+    // replace
+    obj->where=new_expr;
+    //init the newest expr
+    where_expr_init(&obj->where[obj->where_length]);
+    ++obj->where_length;
+}
 
 
 void set_distinct(select_t *obj){

@@ -1,5 +1,6 @@
 #include "../../include/errors.h"
 #include "../../include/tokens.h"
+#include "../../include/structure.h"
 
 //    boolean_primary IS [NOT] {TRUE | FALSE | UNKNOWN}
 //  | boolean_primary
@@ -38,7 +39,7 @@ int expr_core(token_array_t *tokens,int depth){
 //   | ! expr
 //   | boolean_primary IS [NOT] {TRUE | FALSE | UNKNOWN}
 //   | boolean_primary
-int expr_expr(token_array_t* tokens,int depth){
+int expr_expr(token_array_t* tokens,int depth,select_t *sel){
     ++depth;
     int pos=tokens->position;
     #ifdef PARSE_ENTRANCE
@@ -47,7 +48,18 @@ int expr_expr(token_array_t* tokens,int depth){
     // not expr
     int res=compare_token(tokens,0,TOKEN_NOT);
     if (res) {
-        return expr_core(tokens,depth);
+        if(expr_core(tokens,depth)){
+            add_where_expr(sel);
+            where_expr_t *where=&sel->where[sel->where_length-1];
+            where->NOT=1;
+            where->ordinal=sel->where_length-1;
+            where->length=tokens->position-pos-1;
+            where->tokens=&tokens->array[pos+1];
+
+            return 1;
+        } else {
+            return 0;
+        }
     }
     tokens->position=pos;
 
@@ -64,11 +76,19 @@ int expr_expr(token_array_t* tokens,int depth){
             default: return 1; //already passed core.. PEACE OUT
         }
         goop(depth,"expression binder",tokens->array[pos].value);
-        ++tokens->position;
 
         //Tru for 2nd expr_core... but if not.. reset position and PEACE OUT!
         //if(!expr_core(tokens,depth)){
-        if(!expr_expr(tokens,depth)){
+        add_where_expr(sel);
+        where_expr_t *where=&sel->where[sel->where_length-1];
+        where->comparitor=tokens->array[tokens->position].type;
+        where->ordinal=sel->where_length-1;
+        where->length=tokens->position-pos-1;
+        where->tokens=&tokens->array[pos+1];
+
+        ++tokens->position;
+
+        if(!expr_expr(tokens,depth,sel)){
             tokens->position=pos;
         }
         goop(depth,"expr SUCCESS","word up... good job sir.");
