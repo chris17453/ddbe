@@ -274,8 +274,11 @@ token_array_t *lex(char * query){
 }
 
 
-void token_combine(token_array_t *tokens,int *list,int combo_token,int length){
+void token_combine(token_array_t *tokens,int *list){
     int list_index=0;    
+    int combo_token=list[1];
+    int length=list[0];
+    list=&list[2];
     for(int i=0;i<tokens->length;i++){
         if(tokens->array[i].type==list[list_index]) {
             ++list_index;
@@ -304,20 +307,20 @@ void consolidate_tokens(token_array_t *tokens){
 
 
 
-    int token1[] ={TOKEN_DOT,    TOKEN_NUMERIC};
-    int token2[] ={TOKEN_NUMERIC,TOKEN_DOT    ,TOKEN_NUMERIC};
-    int token3[] ={TOKEN_LEFT,   TOKEN_JOIN};
-    int token4[] ={TOKEN_RIGHT,  TOKEN_JOIN};
-    int token5[] ={TOKEN_INNER,  TOKEN_JOIN};
-    int token6[] ={TOKEN_FULL,   TOKEN_OUTER ,TOKEN_JOIN};
+    int token1[] ={2,TOKEN_REAL,TOKEN_DOT,    TOKEN_NUMERIC};
+    int token2[] ={3,TOKEN_REAL,TOKEN_NUMERIC,TOKEN_DOT    ,TOKEN_NUMERIC};
+    int token3[] ={2,TOKEN_LEFT_JOIN,TOKEN_LEFT,   TOKEN_JOIN};
+    int token4[] ={2,TOKEN_RIGHT_JOIN,TOKEN_RIGHT,  TOKEN_JOIN};
+    int token5[] ={2,TOKEN_INNER_JOIN,TOKEN_INNER,  TOKEN_JOIN};
+    int token6[] ={3,TOKEN_FULL_OUTER_JOIN,TOKEN_FULL,   TOKEN_OUTER ,TOKEN_JOIN};
 
    // starts with a dot... REAL        
-    token_combine(tokens,token1,TOKEN_REAL,2);
-    token_combine(tokens,token2,TOKEN_REAL,3);
-    token_combine(tokens,token3,TOKEN_LEFT_JOIN,2);
-    token_combine(tokens,token4,TOKEN_RIGHT_JOIN,2);
-    token_combine(tokens,token5,TOKEN_INNER_JOIN,2);
-    token_combine(tokens,token6,TOKEN_FULL_OUTER_JOIN,3);
+    token_combine(tokens,token1);
+    token_combine(tokens,token2);
+    token_combine(tokens,token3);
+    token_combine(tokens,token4);
+    token_combine(tokens,token5);
+    token_combine(tokens,token6);
      
 /*
     for(int i=0;i<tokens->length;i++){
