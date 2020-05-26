@@ -22,6 +22,9 @@ int expr_alias(token_array_t *tokens,int depth,char **target){
 
 
 void set_alias(token_array_t *tokens,int index,char **target){
-    goop(0,"ALIAS",tokens->array[index].value);
+   #ifdef PARSE_ENTRANCE
+   goop(0,"set alias","in");
+   #endif
+
     *target=get_token_value(tokens,tokens->position-1);
 }
