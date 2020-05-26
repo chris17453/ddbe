@@ -18,21 +18,16 @@ int expr_select(token_array_t *tokens,int depth){
         // optional
         if(compare_token(tokens,0,TOKEN_DISTINCT)){
             set_distinct(sel);
-            goop(depth,"SELECT","DISTINCT");
         }
         // not optional
         if(expr_select_expr(tokens,depth,sel)){
-            goop(depth,"SELECT","FOUND select expression");
         } else {
-            goop(depth,"UHOH","erms?");
             tokens->position=pos;
             return 0;
         }
-        goop(depth,"SELECT","BEFORE FROM");
 
         
         if(expr_from(tokens,depth,sel)){
-            goop(depth,"SELECT","BEFORE WHERE");
             if(expr_where(tokens,depth,sel)){
             }
             if(expr_group_by(tokens,depth,sel)){
