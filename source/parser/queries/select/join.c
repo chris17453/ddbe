@@ -3,7 +3,6 @@
 
 int expr_join(token_array_t *tokens,int depth,select_t *sel){
     ++depth;
-    int pos=tokens->position;
     #ifdef PARSE_ENTRANCE
     goop(depth,"expr_join","IN");
     #endif
@@ -36,5 +35,6 @@ int expr_join(token_array_t *tokens,int depth,select_t *sel){
     } else {
         ghost(ERR_JOIN_WITHOUT_ON);
     }
+    return 0;
 }
     
