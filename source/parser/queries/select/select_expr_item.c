@@ -23,7 +23,7 @@ int expr_column_expr(token_array_t *tokens,int depth,select_t *sel){
         sel->columns[index].alias=0;
 
         if(expr_alias(tokens,depth,&sel->columns[index].alias)){
-            goop(depth,"alias","found");
+           // goop(depth,"alias","found");
         }
         return 1;
     }

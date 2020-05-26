@@ -56,7 +56,6 @@ int expr_order_by(token_array_t *tokens,int depth,select_t* sel){
             } //end looper
             
             if(expr_list>0) {
-                printf("%d order by columns",expr_list);
                 return 1;
             }
 

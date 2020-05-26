@@ -20,7 +20,6 @@ int expr_group_by(token_array_t *tokens,int depth,select_t* sel){
             tokens->object=0;
             while(looper){
                 if(!expr_identifier(tokens,depth)){
-                    goop(depth,"GROUP-BY","NO IDENTIFIER");
                     //no select epression
                     break;
                 }
@@ -42,7 +41,6 @@ int expr_group_by(token_array_t *tokens,int depth,select_t* sel){
             } //end looper
             
             if(expr_list>0) {
-                printf("%d group by columns",expr_list);
                 return 1;
             }
 
