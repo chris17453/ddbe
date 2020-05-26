@@ -287,7 +287,7 @@ void token_combine(token_array_t *tokens,int *list){
 
                 tokens->array[start_index].type=combo_token;
                 
-                for(int w=1;w<length;w++){
+                for(int w=0;w<length;w++){
                     tokens->array[start_index].value=strcat(tokens->array[start_index].value,tokens->array[start_index+1].value);
                     token_delete(tokens,start_index+1);
                 }
