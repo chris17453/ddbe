@@ -18,7 +18,7 @@ SELECT
     
     WHERE 
         first_name='bob'
-        or x =1
+        or NOT x =1
         or id=0x04F
         or id=0x04A
         or x =-1-1
