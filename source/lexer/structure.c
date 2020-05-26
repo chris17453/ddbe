@@ -242,12 +242,12 @@ void select_debug(select_t *obj){
         printf(" -where----------\n");
         for(int i=0;i<obj->where_length;i++){
             where_expr_t *where=&obj->where[i];
+            printf(" -ordinal %d",where->ordinal);
+            printf(" -length %d",where->length);
+            printf(" -not %d",where->NOT);
+            printf(" -comparitor %s\n",token_type(where->comparitor));
             for(int w=0;w<where->length;w++) {
                 printf(" -expr-------%s\n");
-                printf(" -ordinal %d",where->ordinal);
-                printf(" -length %d",where->length);
-                printf(" -not %d",where->NOT);
-                printf(" -comparitor %s\n",token_type(where->comparitor));
                 token_t *token=&where->tokens[w];
                 printf("     %s,val: %s\n",token_type(token->type),token->value );
             }
