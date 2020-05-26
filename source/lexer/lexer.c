@@ -286,14 +286,14 @@ void token_combine(token_array_t *tokens,int *list){
                 int start_index=i-length+1;
 
                 tokens->array[start_index].type=combo_token;
-                char *concat_str=0;
+                char *concat_str=tokens->array[start_index].value;
                 for(int w=1;w<length;w++){
-                    concat_str=strcat(tokens->array[start_index].value,
-                                      tokens->array[start_index+1].value);
-                                      
-                    token_delete(tokens,start_index+1);
+                    concat_str=strcat(concat_str,tokens->array[start_index+w].value);
                 }
                 tokens->array[start_index].value=concat_str;
+                for(int w=1;w<length;w++){
+                    token_delete(tokens,start_index+1);
+                }
                 i+=length-1;
                 list_index=0;
 
