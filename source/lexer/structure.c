@@ -213,7 +213,7 @@ void select_debug(select_t *obj){
             int *sub_len=(where_expr_t*)obj->where[i].length;
             for(int w=0;w<sub_len;w++) {
                 token_t *token=&obj->where[i].tokens[w];
-                printf("%s,val: %s\n",token_type(token->type),token->value );
+                printf("     %s,val: %s\n",token_type(token->type),token->value );
             }
         }
     }
