@@ -68,7 +68,7 @@ int expr_expr(token_array_t* tokens,int depth,select_t *sel){
     if(expr_core(tokens,depth)) {
         int pos2=tokens->position;
         //expr [and/or] expr
-        switch(tokens->array[pos].type){
+        switch(tokens->array[tokens->position].type){
             case TOKEN_SHORT_AND : break;
             case TOKEN_SHORT_OR  : break;
             //case TOKEN_XOR       : break;
@@ -76,7 +76,7 @@ int expr_expr(token_array_t* tokens,int depth,select_t *sel){
             case TOKEN_OR        : break;
             default: return 1; //already passed core.. PEACE OUT
         }
-        goop(depth,"expression binder",tokens->array[pos].value);
+        goop(depth,"expression binder",tokens->array[tokens->position].value);
 
         //Tru for 2nd expr_core... but if not.. reset position and PEACE OUT!
         //if(!expr_core(tokens,depth)){
