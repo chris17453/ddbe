@@ -38,13 +38,14 @@ typedef struct comparison_t {
     identifier_t *identity;
     int comparitor;
     identifier_t *identity;
-} where_expr_t;
+} comparison_t;
 
 
 /****
 
 identity comparitor expr
 identity not in list
+identity in list
 
  *****/
 
