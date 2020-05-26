@@ -34,7 +34,6 @@ select_t *select_new(){
 
 // init a list of columns with 
 data_column_t *data_column_list_init(int length){
-    printf("data->columns malloc \n");
     data_column_t *columns =safe_malloc(sizeof(data_column_t),length);
     return columns;
 }
@@ -69,7 +68,6 @@ void add_data_column(select_t *obj){
 
 // init a list of columns with 
 order_column_t *order_column_list_init(int length){
-    printf("order->columns malloc \n");
     order_column_t *columns =safe_malloc(sizeof(order_column_t),length);
     return columns;
 }
@@ -102,7 +100,6 @@ void add_order_column(select_t *obj){
 
 // init a list of columns with 
 group_column_t *group_column_list_init(int length){
-    printf("group->columns malloc \n");
     group_column_t *columns =safe_malloc(sizeof(group_column_t),length);
     return columns;
 }
@@ -135,7 +132,6 @@ void add_group_column(select_t *obj){
 
 // init a list of columns with 
 where_expr_t *where_expr_list_init(int length){
-    printf("where->expr malloc \n");
     where_expr_t *expr =safe_malloc(sizeof(where_expr_t),length);
     return expr;
 }
