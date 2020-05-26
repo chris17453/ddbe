@@ -34,6 +34,19 @@ typedef struct where_expr_t {
     int ordinal;
 } where_expr_t;
 
+typedef struct comparison_t {
+    identifier_t *identity;
+    int comparitor;
+    identifier_t *identity;
+} where_expr_t;
+
+
+/****
+
+identity comparitor expr
+identity not in list
+
+ *****/
 
 
 typedef struct select_t{
