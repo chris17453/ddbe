@@ -283,7 +283,7 @@ void token_combine(token_array_t *tokens,int *list){
         if(tokens->array[i].type==list[list_index]) {
             ++list_index;
             if(list_index==length){
-                int start_index=i-length;
+                int start_index=i-length-1;
 
                 tokens->array[start_index].type=combo_token;
                 
