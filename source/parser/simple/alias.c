@@ -12,10 +12,6 @@ int expr_alias(token_array_t *tokens,int depth,char **target){
     int pos=tokens->position;
     if(compare_token(tokens,0,TOKEN_AS))
         if(compare_token(tokens,0,TOKEN_ALPHA)){        
-            printf("*COMP-> %d %s\n",pos+1,tokens->array[pos+1].value);
-            printf("*COMP-> %s\n",get_token_value(tokens,tokens->position-1));
-            
-
             set_alias(tokens,tokens->position-1,target);
             return 1;
         }
