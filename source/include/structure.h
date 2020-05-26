@@ -30,7 +30,8 @@ typedef struct group_column_t {
 } group_column_t;
 
 typedef struct where_expr_t {
-    identifier_t *identity;
+    token_t *tokens;
+    int length;
     int ordinal;
 } where_expr_t;
 
