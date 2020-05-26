@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
     //printf("Query: \n\n%s\n --\n",query_str);
     //match_function(query_str);
     token_array_t *tokens=lex(query_str);
-
+    free(query_str);
     consolidate_tokens(tokens);
     atexit(janitor);
     return 0;
