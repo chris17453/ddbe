@@ -28,9 +28,7 @@ int expr_group_by(token_array_t *tokens,int depth,select_t* sel){
                 sel->group[sel->group_length-1].identity=tokens->object;
                 sel->group[sel->group_length-1].ordinal=index;
 
-
                 ++expr_list;
-
 
                 // if we have a delimiter.. loop else exit
                 if(!compare_token(tokens,0,TOKEN_LIST_DELIMITER)) {
