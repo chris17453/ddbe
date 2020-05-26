@@ -23,5 +23,8 @@ int expr_comparison_operator(token_array_t *tokens,int depth){
 }
 
 void set_comparison(token_array_t *tokens,int index){
-    goop(0,"Comparison",tokens->array[index].value);
+    #ifdef PARSE_ENTRANCE
+    goop(depth,"set_Comparison,","IN");
+    #endif
+    //goop(0,"Comparison",tokens->array[index].value);
 }
