@@ -46,33 +46,20 @@ int expr_expr(token_array_t* tokens,int depth,select_t *sel){
     goop(depth,"expr","..\n\n");
     #endif
     // not expr
-    int res=compare_token(tokens,0,TOKEN_NOT);
-    if (res) {
-        if(expr_core(tokens,depth)){
-            add_where_expr(sel);
-            where_expr_t *where=&sel->where[sel->where_length-1];
-            where->NOT=1;
-            where->ordinal=sel->where_length-1;
-            where->length=tokens->position-pos-1;
-            where->tokens=&tokens->array[pos+1];
+    int is_not=compare_token(tokens,0,TOKEN_NOT);
 
-            return 1;
-        } else {
-            return 0;
-        }
-    }
-    tokens->position=pos;
 
     //expr
-    pos=tokens->position;
+    int pos2=tokens->position;
     if(expr_core(tokens,depth)) {
-        int pos2=tokens->position;
+        int pos3=tokens->position;
         //expr [and/or] expr
         add_where_expr(sel);
         where_expr_t *where=&sel->where[sel->where_length-1];
         where->ordinal=sel->where_length-1;
-        where->length=pos2-pos;
-        where->tokens=&tokens->array[pos];
+        where->length=pos3-pos2;
+        where->tokens=&tokens->array[pos2];
+        where->NOT=is_not;
 
         switch(tokens->array[tokens->position].type){
             case TOKEN_SHORT_AND : 
@@ -90,12 +77,13 @@ int expr_expr(token_array_t* tokens,int depth,select_t *sel){
         ++tokens->position;
 
         if(!expr_expr(tokens,depth,sel)){
-            tokens->position=pos2;
+            tokens->position=pos3;
         }
         goop(depth,"expr SUCCESS","word up... good job sir.");
 
         return 1;
-    }
+    } 
+    tokens->position=pos;
     goop(depth,"expression FEIL","--");
     return 0;
 }
