@@ -18,6 +18,7 @@ int expr_join(token_array_t *tokens,int depth,select_t *sel){
     }
     tokens->position++;
 
+    goop(depth,"join pre AS",tokens->array[tokens->position].value);
     if(compare_token(tokens,0,TOKEN_AS)){
             goop(depth,"join as",tokens->array[tokens->position].value);
         if(compare_token(tokens,0,TOKEN_ALPHA)){
