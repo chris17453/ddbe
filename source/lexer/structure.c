@@ -250,7 +250,7 @@ void select_debug(select_t *obj){
                 token_t *token=&where->tokens[w];
                 printf("     %s, %s  \n",token_type(token->type),token->value );
             }
-            printf(" -comparitor %s\n",token_type(where->comparitor));
+            printf("     -comparitor %s\n",token_type(where->comparitor));
 //            printf("\n");
         }
     }
