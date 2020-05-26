@@ -15,19 +15,32 @@ int expr_litteral(token_array_t* tokens,int depth){
         case TOKEN_STRING:
         case TOKEN_NUMERIC:
         case TOKEN_REAL: 
-                        set_litteral(tokens,tokens->position);
+                        
+                        //return create_litteral(tokens,tokens->position);
                         ++tokens->position; 
                         return 1;
     }
     return 0;
 }
-
-void set_litteral(token_array_t *tokens,int index){
+/*
+void create_litteral(token_array_t *tokens,int index){
     #ifdef PARSE_ENTRANCE
-    goop(0,"set_litteral","in");
+    goop(0,"create_litteral","in");
     #endif
 
-    tokens->object=&tokens->array[index];
-    tokens->object_type=TOKEN_LITTERAL;
-
+    token_t token;
+    token.type=&tokens->array[index].type;
+    token.value=strdup(&tokens->array[index].value)
+    return token;
+    //tokens->object=&tokens->array[index];
+    //tokens->object_type=TOKEN_LITTERAL;
 }
+
+typedef struct fragment{
+    token_t *tokens;
+    int length;
+    int type;
+};
+
+token_array{}
+*/
