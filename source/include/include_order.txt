@@ -20,6 +20,7 @@ source/include/boolean_primary.h
 source/include/expr.h
 source/include/expr_list.h
 source/include/from.h
+source/include/where.h
 source/include/group_by.h
 source/include/order_by.h
 source/include/limit.h

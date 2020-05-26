@@ -83,13 +83,6 @@
     # define COLUMN_TYPE_FUNCTION 1
 
 
-    
-    typedef struct where_t{
-
-        
-
-    } where_t; 
-
     typedef struct token_t{
         int type;
         char *value;

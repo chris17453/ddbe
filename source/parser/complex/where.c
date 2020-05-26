@@ -1,8 +1,9 @@
 #include "../../include/errors.h"
 #include "../../include/tokens.h"
+#include "../../include/structure.h"
 
 // alpha or alpha.alpha
-int expr_where(token_array_t *tokens,int depth){
+int expr_where(token_array_t *tokens,int depth,select_t *obj){
     ++depth;
     #ifdef PARSE_ENTRANCE
     goop(depth,"WHERE EXPR","IN");

@@ -29,11 +29,18 @@ typedef struct group_column_t {
     int ordinal;
 } group_column_t;
 
+typedef struct group_column_t {
+    identifier_t *identity;
+    int ordinal;
+} group_column_t;
+
+
+
 typedef struct select_t{
         // sub elements
         data_column_t   * columns;
         identifier_t    * from;
-        void            * where;
+        where_expr_t    * where;
         order_column_t  * order;
         group_column_t  * group;
         
