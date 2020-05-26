@@ -68,24 +68,24 @@ int expr_expr(token_array_t* tokens,int depth,select_t *sel){
     if(expr_core(tokens,depth)) {
         int pos2=tokens->position;
         //expr [and/or] expr
+        add_where_expr(sel);
+        where_expr_t *where=&sel->where[sel->where_length-1];
+        where->ordinal=sel->where_length-1;
+        where->length=pos-pos2;
+        where->tokens=&tokens->array[pos];
+
         switch(tokens->array[tokens->position].type){
-            case TOKEN_SHORT_AND : break;
-            case TOKEN_SHORT_OR  : break;
+            case TOKEN_SHORT_AND : 
+            case TOKEN_SHORT_OR  : 
             //case TOKEN_XOR       : break;
-            case TOKEN_AND       : break;
-            case TOKEN_OR        : break;
+            case TOKEN_AND       : 
+            case TOKEN_OR        : where->comparitor=tokens->array[tokens->position].type; break;
             default: return 1; //already passed core.. PEACE OUT
         }
         goop(depth,"expression binder",tokens->array[tokens->position].value);
 
         //Tru for 2nd expr_core... but if not.. reset position and PEACE OUT!
         //if(!expr_core(tokens,depth)){
-        add_where_expr(sel);
-        where_expr_t *where=&sel->where[sel->where_length-1];
-        where->comparitor=tokens->array[tokens->position].type;
-        where->ordinal=sel->where_length-1;
-        where->length=pos-pos2;
-        where->tokens=&tokens->array[pos];
 
         ++tokens->position;
 
