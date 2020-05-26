@@ -12,7 +12,6 @@ int expr_group_by(token_array_t *tokens,int depth,select_t* sel){
     
     if(compare_token(tokens,0,TOKEN_GROUP)){
         if(compare_token(tokens,0,TOKEN_BY)){
-            goop(depth,"GROUPBY","START");
 
             int looper=1;
             int expr_list=0;

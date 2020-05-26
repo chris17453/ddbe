@@ -12,7 +12,6 @@ int expr_order_by(token_array_t *tokens,int depth,select_t* sel){
     
     if(compare_token(tokens,0,TOKEN_ORDER)){
         if(compare_token(tokens,0,TOKEN_BY)){
-            goop(depth,"ORDER BY","START");
 
             int looper=1;
             int expr_list=0;
@@ -20,7 +19,6 @@ int expr_order_by(token_array_t *tokens,int depth,select_t* sel){
             tokens->object=0;
             while(looper){
                 if(!expr_identifier(tokens,depth)){
-                    goop(depth,"ORDER-BY","NO IDENTIFIER");
                     //no select epression
                     break;
                 }
