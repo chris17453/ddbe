@@ -8,6 +8,24 @@
 //  | ~ simple_expr
 //  | ! simple_expr
 
+typedef struct simple_expr_t{
+    int   sign;
+    int   type;
+    void *ptr;
+
+
+} simple_expr_t;
+
+void add_simple_expr(token_array_t *tokens){
+    simple_expr_t *simple_expr=safe_malloc(sizeof(simple_expr_t),1);
+    simple_expr->sign=0;
+    simple_expr->type=tokens->object_type;
+    simple_expr->ptr=tokens->object;
+    tokens->object=ptr;
+
+}
+
+
 
 int expr_simple_expr(token_array_t* tokens,int depth){
     ++depth;
@@ -17,23 +35,36 @@ int expr_simple_expr(token_array_t* tokens,int depth){
     #endif
 
     
-    if(expr_identifier(tokens,depth)) return 1;
+
+    if(expr_identifier(tokens,depth)) {
+        add_simple_expr(tokens);
+        return 1;
+    }
     
-    if(expr_litteral(tokens,depth)) return 1;
+    if(expr_litteral(tokens,depth)) {
+        add_simple_expr(tokens);
+        return 1;
+    }
     
-/*    
+    
     //if(expr_sub_query(tokens,depth)) return 1;
     if(compare_token(tokens,0,TOKEN_MINUS)) {
-//        goop(depth,"MINUS","");
-        if(expr_simple_expr(tokens,depth)) return 1;
-        tokens->position=pos;
+       if(expr_simple_expr(tokens,depth)) {
+           (simple_expr_t*)tokens->object.sign=TOKEN_MINUS;
+           return 1;
+       }
     }
     if(compare_token(tokens,0,TOKEN_PLUS)) {
-//        goop(depth,"PLUS","");
-        if(expr_simple_expr(tokens,depth)) return 1;
-        tokens->position=pos;
+        if(expr_simple_expr(tokens,depth)) {
+           (simple_expr_t*)tokens->object.sign=TOKEN_PLUS;
+           return 1;
+        }
+        
     }
-*/
+    
+    tokens->position=pos;
     return 0;
 }
+
+
 
