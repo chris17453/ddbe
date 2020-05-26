@@ -12,11 +12,15 @@ int expr_where(token_array_t *tokens,int depth,select_t *sel){
     int pos=tokens->position;
 
     if(compare_token(tokens,0,TOKEN_WHERE)){
+            sel->where=safe_malloc(sizeof(where_expr_t),2);
+            sel->where->tokens=&tokens->array[pos+1];
+            sel->where->length=1;
+            sel->where->ordinal=1;
         
 
         if(expr_expr(tokens,depth)){
             sel->where=safe_malloc(sizeof(where_expr_t),2);
-            //sel->where->tokens=&tokens->array[pos+1];
+            sel->where->tokens=&tokens->array[pos+1];
             sel->where->length=1;
             sel->where->ordinal=1;
             return 1;
