@@ -162,7 +162,7 @@ void token_delete(token_array_t* tokens,int index) {
     if (tokens->top == -1) {
         ghost(ERR_TOKENS_OUT_OF_BOUNDS);
     }
-    int section_length=sizeof(token_t)*(tokens->length-index);
+    int section_length=sizeof(token_t)*(tokens->length-index-1);
 
     void *pos1_ptr=&tokens->array[index];
     void *pos2_ptr=&tokens->array[index+1];
