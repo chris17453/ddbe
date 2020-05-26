@@ -37,7 +37,7 @@ typedef struct where_expr_t {
 typedef struct comparison_t {
     identifier_t *identity;
     int comparitor;
-    identifier_t *identity;
+    //identifier_t *identity;
 } comparison_t;
 
 
