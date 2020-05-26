@@ -295,6 +295,7 @@ void token_combine(token_array_t *tokens,int *list){
                 for(int w=0;w<length;w++){
                     strcat(new_token,tokens->array[start_index+w].value);
                 }
+                
                 for(int w=1;w<length;w++){
                     token_delete(tokens,start_index+1);
                 }
