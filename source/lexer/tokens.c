@@ -112,7 +112,10 @@ token_array_t * token_array(unsigned length) {
     return tokens; 
 } 
 
-void token_close(token_array_t *tokens){
+void token_destroy(token_array_t *tokens){
+    for(int i=0;i<tokens->length;i++){
+        free(tokens->array[i].value);
+    }
     free(tokens->array);
     free(tokens);
 }

@@ -116,7 +116,7 @@
 
 
     token_array_t *  token_array       (unsigned length);
-    void             token_close       (token_array_t * arr);
+    void             token_destroy       (token_array_t * arr);
     int              valid_token_index(token_array_t *tokens,int index);
     int              token_is_full     (token_array_t * arr);
     int              token_is_empty    (token_array_t * arr);
