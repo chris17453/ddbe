@@ -247,9 +247,9 @@ void select_debug(select_t *obj){
             printf(" -not %d",where->NOT);
             printf(" -comparitor %s\n",token_type(where->comparitor));
             for(int w=0;w<where->length;w++) {
-                printf("     -expr--: ");
+                //printf("     -expr--: ");
                 token_t *token=&where->tokens[w];
-                printf("     %s, %s  ",token_type(token->type),token->value );
+                printf("     %s, %s  \n",token_type(token->type),token->value );
             }
             printf("\n");
         }
