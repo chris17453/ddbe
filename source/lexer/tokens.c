@@ -158,7 +158,7 @@ token_t token_pop(token_array_t* tokens) {
   
 // selete a token in the array
 void token_delete(token_array_t* tokens,int index) { 
-    printf("%d",index);
+    printf("INDEX: %d\n",index);
     if (tokens->top == -1) {
         ghost(ERR_TOKENS_OUT_OF_BOUNDS);
     }
