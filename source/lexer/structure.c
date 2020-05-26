@@ -249,7 +249,7 @@ void select_debug(select_t *obj){
             for(int w=0;w<where->length;w++) {
                 printf(" -expr-------%s\n");
                 token_t *token=&where->tokens[w];
-                printf("     %s,val: %s\n",token_type(token->type),token->value );
+                printf("     %s\n",token_type(token->type) );
             }
         }
     }
