@@ -18,7 +18,7 @@ SELECT
     
     WHERE 
         res.first_name='bob'
-        or ( NOT x =1
+        or (x =1
         and  id=0x04F )
         or id=0x04A
         or x =-1-1
