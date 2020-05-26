@@ -26,5 +26,7 @@ void set_comparison(token_array_t *tokens,int index){
     #ifdef PARSE_ENTRANCE
     goop(depth,"set_Comparison,","IN");
     #endif
+    token_add_type(TOKEN_COMPARITOR,index);
+
     //goop(0,"Comparison",tokens->array[index].value);
 }

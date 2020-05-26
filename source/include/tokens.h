@@ -86,6 +86,12 @@
     #define TOKEN_FULL             93
     #define TOKEN_GROUP_BY         94 // calculated
     #define TOKEN_ORDER_BY         95 // calculated
+    #define TOKEN_QUALIFIER        96 
+    #define TOKEN_SOURCE           97
+    #define TOKEN_BOOLEAN          98 
+    #define TOKEN_COMPARITOR       99  
+    #define TOKEN_ALIAS            100
+
     
 
 
@@ -96,6 +102,8 @@
     typedef struct token_t{
         int type;
         char *value;
+        int expr[10];
+        int depth;
     } token_t;
 
     

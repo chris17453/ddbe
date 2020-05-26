@@ -85,8 +85,10 @@ char *token_type(int t){
         case  TOKEN_LEFT:            return "LEFT";
         case  TOKEN_RIGHT:           return "RIGHT";
         case  TOKEN_FULL:            return "FULL";
-        case  TOKEN_GROUP_BY:        return "TOKEN_GROUP_BY";
-        case  TOKEN_ORDER_BY:        return "TOKEN_ORDER_BY";
+        case  TOKEN_GROUP_BY:        return "GROUP_BY";
+        case  TOKEN_ORDER_BY:        return "ORDER_BY";
+        case  TOKEN_QUALIFIER:       return "QUALIFIER";
+        case  TOKEN_SOURCE:          return "SOURCE";
 
     
 
