@@ -367,9 +367,10 @@ void consolidate_tokens(token_array_t *tokens){
         if (buffer_len>2 &&  token1==TOKEN_FULL  && token2==TOKEN_OUTER && token3==TOKEN_JOIN){
         }
                   
-        //token_print(tokens);
+        //
         }
         */
+    token_print(tokens);
     process_queries(tokens);
 }
 
