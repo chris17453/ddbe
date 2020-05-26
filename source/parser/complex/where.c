@@ -15,6 +15,7 @@ int expr_where(token_array_t *tokens,int depth,select_t *sel){
         if(expr_expr(tokens,depth)){
             printf("OMG YES");
             int length=tokens->position-pos-1;
+            printf("length %d",length);
             sel->where=safe_malloc(sizeof(where_expr_t),1);
 
             sel->where->tokens=&tokens->array[pos+1];
