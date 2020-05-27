@@ -6,5 +6,5 @@
     int expr_select(token_array_t *tokens,int depth);
     select_t *select_new();
     
-    void select_debug(select_t *select);
+    void select_debug();
 #endif  
