@@ -101,6 +101,8 @@ char *token_type(int t){
         case  TOKEN_ALIAS:           return "ALIAS";
         case  TOKEN_BOOLEAN:         return "BOOLEAN";
         case  TOKEN_COMPARITOR:      return "COMPARITOR";
+        case  TOKEN_FROM:            return "FROM";
+
 
 
 
