@@ -106,7 +106,7 @@ char *token_type(int t){
 
     }
     char *token_id=calloc(1,10);
-    sprintf(token_id,"%c",t);
+    sprintf(token_id,"%d",t);
     return token_id;
     
 }
