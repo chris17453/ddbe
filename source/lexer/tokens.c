@@ -107,7 +107,7 @@ char *token_type(int t){
     }
     char token_id[15];
     return sprintf(token_id,"%d",t);
-    return token_id;
+    return *token_id;
 }
 
 
