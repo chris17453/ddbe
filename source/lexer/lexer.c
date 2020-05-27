@@ -303,6 +303,7 @@ void token_combine(token_array_t *tokens,int *list){
                 for(int w=1;w<length;w++){
                     token_delete(tokens,start_index+1);
                 }
+                tokens->array[start_index].value=new_token;
                 i+=length-1;
                 list_index=0;
 
