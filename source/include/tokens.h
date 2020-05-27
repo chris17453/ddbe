@@ -134,6 +134,8 @@
     void             token_delete      (token_array_t* tokens,int index);
     void             token_print       (token_array_t * arr);
     void             token_add_type    (token_array_t * arr,int type,int index);
+    void             token_set_type    (token_array_t * arr,int type,int index);
+
 
     char           * token_type        (int t);
     char           * get_token_value   (token_array_t * arr,int index);
