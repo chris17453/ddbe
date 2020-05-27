@@ -94,6 +94,7 @@ char *token_type(int t){
         case  TOKEN_BIT_EXPR:        return "BIT_EXPR";
         case  TOKEN_COLUMN_EXPR:     return "COLUMN_EXPR";
         case  TOKEN_SELECT_EXPR:     return "SELECT_EXPR";
+        case  TOKEN_SIMPLE_EXPR:     return "SIMPLE_EXPR";
         case  TOKEN_EXPR_LIST:       return "EXPR_LIST";
         case  TOKEN_BOOLEAN_PRIMARY: return "BOOLEAN_PRIMARY";
         case  TOKEN_EXPR:            return "EXPR";

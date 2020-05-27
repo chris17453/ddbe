@@ -95,6 +95,7 @@
     #define TOKEN_BIT_EXPR         103
     #define TOKEN_COLUMN_EXPR      104
     #define TOKEN_SELECT_EXPR      105
+    #define TOKEN_SIMPLE_EXPR      106
     #define TOKEN_EXPR_LIST        107
     #define TOKEN_BOOLEAN_PRIMARY  108
     #define TOKEN_EXPR             109
