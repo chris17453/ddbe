@@ -105,7 +105,9 @@ char *token_type(int t){
     
 
     }
-    return "UNK";
+    char *token_id;
+    return sprintf(token_id,"%d",t);
+    return token_id;
 }
 
 
