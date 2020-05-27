@@ -43,6 +43,10 @@ int expr_select(token_array_t *tokens,int depth){
         }
         token_add_type_range(tokens,TOKEN_SELECT,pos);
 
+
+        build_select(tokens,pos,tokens->position);
+
+
         debug(tokens);
         return 1;
     }
@@ -52,4 +56,6 @@ int expr_select(token_array_t *tokens,int depth){
     return 0;
 }
 
-
+void build_select(){
+    
+}
