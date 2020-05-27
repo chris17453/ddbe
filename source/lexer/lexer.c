@@ -80,6 +80,7 @@ token_array_t *lex(char * query){
             else if (c=='\t')                    { t=TOKEN_TAB;             skip=0; }
     
             else t=0;
+            if(1==0)
             switch(t){
                 case TOKEN_ALPHA:
                     for(int lazer=i+1;lazer<query_length;lazer++){
@@ -295,7 +296,9 @@ void token_combine(token_array_t *tokens,int *list){
                 for(int w=0;w<length;w++){
                     strcat(new_token,tokens->array[start_index+w].value);
                 }
+                //free up replaced token value
                 free(tokens->array[start_index].value);
+                
                 for(int w=1;w<length;w++){
                     token_delete(tokens,start_index+1);
                 }
