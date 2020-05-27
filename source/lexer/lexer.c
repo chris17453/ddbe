@@ -260,9 +260,9 @@ token_array_t *lex(char * query){
                 t!=TOKEN_TAB) {
                 token_t *token=malloc(sizeof(token_t));
                 token->depth=0;
-                for(int i=0;i<TOKEN_MAX_DEPTH;i++) {
-                    token->expr[i]=0;
-                }
+                //for(int i=0;i<TOKEN_MAX_DEPTH;i++) {
+                //    token->expr[i]=0;
+                //}
                 token->type=t;
                 token->value=new_token;
                 token_push(tokens,token);
