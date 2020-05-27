@@ -3,7 +3,7 @@
 #include "../../../include/structure.h"
 
 // alpha or alpha.alpha
-int expr_group_by(token_array_t *tokens,int depth,select_t* sel){
+int expr_group_by(token_array_t *tokens,int depth){
     ++depth;
     #ifdef PARSE_ENTRANCE
     goop(depth,"group_by","IN");
@@ -14,17 +14,14 @@ int expr_group_by(token_array_t *tokens,int depth,select_t* sel){
             int looper=1;
             int expr_list=0;
             int index=0;
-            tokens->object=0;
+
             while(looper){
                 if(!expr_identifier(tokens,depth)){
                     //no select epression
                     break;
-                }
+                } 
 
-                add_group_column(sel);
                 ++index;
-                sel->group[sel->group_length-1].identity=tokens->object;
-                sel->group[sel->group_length-1].ordinal=index;
 
                 ++expr_list;
 
@@ -34,8 +31,10 @@ int expr_group_by(token_array_t *tokens,int depth,select_t* sel){
                 } else {
                 }
             } //end looper
+            token_add_type_range(tokens,TOKEN_GROUP_BY,pos);
             
             if(expr_list>0) {
+
                 return 1;
             }
     } //end order by        

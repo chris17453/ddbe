@@ -91,6 +91,15 @@
     #define TOKEN_BOOLEAN          98 
     #define TOKEN_COMPARITOR       99  
     #define TOKEN_ALIAS            100
+    #define TOKEN_LIMIT_START      101
+    #define TOKEN_LIMIT_LENGTH     102
+    #define TOKEN_BIT_EXPR         103
+    #define TOKEN_COLUMN_EXPR      104
+    #define TOKEN_SELECT_EXPR      105
+    #define TOKEN_EXPR_LIST        107
+    #define TOKEN_BOOLEAN_PRIMARY  108
+    #define TOKEN_EXPR             109
+
 
     
 

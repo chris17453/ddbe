@@ -1,8 +1,9 @@
 #include "../../../include/errors.h"
 #include "../../../include/structure.h"
 
-int expr_join(token_array_t *tokens,int depth,select_t *sel){
+int expr_join(token_array_t *tokens,int depth){
     ++depth;
+    int pos=tokens->position;
     #ifdef PARSE_ENTRANCE
     goop(depth,"expr_join","IN");
     #endif
@@ -18,7 +19,7 @@ int expr_join(token_array_t *tokens,int depth,select_t *sel){
     }
     ++tokens->position;
 
-    if(!compare_token(tokens,0,TOKEN_ALPHA)){
+    if(!expr_identity(tokens,depth)){
         ghost(ERR_INVALID_JOIN_IDENTITY);
     }
 
@@ -30,8 +31,9 @@ int expr_join(token_array_t *tokens,int depth,select_t *sel){
     }
 
     if(compare_token(tokens,0,TOKEN_ON)) {
-        if(expr_expr(tokens,depth,sel)){
-            tokens->object=0;
+        if(expr_expr(tokens,depth)){
+            token_add_type_range(tokens,TOKEN_JOIN,pos);
+
             return 1;
         } else {
             ghost(ERR_JOIN_WITHOUT_EXPR);

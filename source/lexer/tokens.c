@@ -89,6 +89,17 @@ char *token_type(int t){
         case  TOKEN_ORDER_BY:        return "ORDER_BY";
         case  TOKEN_QUALIFIER:       return "QUALIFIER";
         case  TOKEN_SOURCE:          return "SOURCE";
+        case  TOKEN_LIMIT_START:     return "LIMIT_START";
+        case  TOKEN_LIMIT_LENGTH:    return "LIMIT_LENGTH";
+        case  TOKEN_BIT_EXPR:        return "BIT_EXPR";
+        case  TOKEN_COLUMN_EXPR:     return "COLUMN_EXPR";
+        case  TOKEN_SELECT_EXPR:     return "SELECT_EXPR";
+        case  TOKEN_EXPR_LIST:       return "EXPR_LIST";
+        case  TOKEN_BOOLEAN_PRIMARY: return "BOOLEAN_PRIMARY";
+        case  TOKEN_EXPR:            return "EXPR";
+
+
+
 
     
 

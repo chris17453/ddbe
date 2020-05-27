@@ -2,6 +2,7 @@
 #include "../../include/tokens.h"
 
 int expr_expr_list(token_array_t *tokens,int depth){
+    int pos=tokens->position;
     #ifdef PARSE_ENTRANCE
     goop(depth,"expr-list","IN");
     #endif
@@ -24,6 +25,7 @@ int expr_expr_list(token_array_t *tokens,int depth){
 
         if(expr_list>0) {
             if(compare_token(tokens,0,TOKEN_PAREN_RIGHT)){
+                token_add_type_range(tokens,TOKEN_EXPR_LIST,pos);
                 return 1;
             }
         }         

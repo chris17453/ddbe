@@ -15,11 +15,9 @@ int expr_select(token_array_t *tokens,int depth){
         
         // optional
         if(compare_token(tokens,0,TOKEN_DISTINCT)){
-            token_add_type(tokens,TOKEN_SELECT,tokens->position-1);
         }
         // not optional
         if(expr_select_expr(tokens,depth)){
-            token_add_type(tokens,TOKEN_SELECT,tokens->position-1);
 
         } else {
             tokens->position=pos;
@@ -43,6 +41,8 @@ int expr_select(token_array_t *tokens,int depth){
             if(expr_limit(tokens,depth)){
             }
         }
+        token_add_type_range(tokens,TOKEN_SELECT,pos);
+
         select_debug();
         return 1;
     }

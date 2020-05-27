@@ -5,7 +5,6 @@
 int expr_select_expr(token_array_t *tokens,int depth,select_t *sel){
     ++depth;
     int pos=tokens->position;
-    int pos2;
     #ifdef PARSE_ENTRANCE
     goop(depth,"SEL-EXPR","IN");
     #endif
@@ -15,7 +14,6 @@ int expr_select_expr(token_array_t *tokens,int depth,select_t *sel){
     int expr_list=0;
 
     while(looper){
-        pos2=tokens->position;
         if(!expr_column_expr(tokens,depth,sel)) {
             //no select epression
             break;
@@ -30,7 +28,7 @@ int expr_select_expr(token_array_t *tokens,int depth,select_t *sel){
         }
     } //end looper
     if(expr_list>0) {
-       //printf("%d epressions",expr_list);
+        token_add_type_range(tokens,TOKEN_SELECT_EXPR,pos);
 
         return 1;
     }

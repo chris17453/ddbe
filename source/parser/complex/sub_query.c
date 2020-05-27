@@ -14,6 +14,7 @@ int expr_sub_query(token_array_t* tokens,int depth){
         if(expr_select(tokens,depth)){
             if(tokens->array[tokens->position].type==TOKEN_PAREN_RIGHT){
                 ++tokens->position;
+                token_add_type_range(tokens,TOKEN_SUB_QUERY,pos);
                 return 1;
             }
         }

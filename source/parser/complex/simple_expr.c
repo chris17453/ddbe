@@ -39,12 +39,12 @@ int expr_simple_expr(token_array_t* tokens,int depth){
     
 
     if(expr_identifier(tokens,depth)) {
-       // add_simple_expr(tokens);
+        token_add_type_range(tokens,TOKEN_SIMPLE_EXPR,pos);
         return 1;
     }
     
     if(expr_litteral(tokens,depth)) {
-       // add_simple_expr(tokens);
+        token_add_type_range(tokens,TOKEN_SIMPLE_EXPR,pos);
         return 1;
     }
     
@@ -52,14 +52,14 @@ int expr_simple_expr(token_array_t* tokens,int depth){
     //if(expr_sub_query(tokens,depth)) return 1;
     if(compare_token(tokens,0,TOKEN_MINUS)) {
        if(expr_simple_expr(tokens,depth)) {
-          // (simple_expr_t*)tokens->object.sign=TOKEN_MINUS;
+            token_add_type_range(tokens,TOKEN_SIMPLE_EXPR,pos);
            return 1;
        }
     }
     if(compare_token(tokens,0,TOKEN_PLUS)) {
         if(expr_simple_expr(tokens,depth)) {
-          // (simple_expr_t*)tokens->object.sign=TOKEN_PLUS;
-           return 1;
+          token_add_type_range(tokens,TOKEN_SIMPLE_EXPR,pos);
+          return 1;
         }
         
     }

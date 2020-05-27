@@ -15,6 +15,7 @@ int expr_predicate(token_array_t *tokens,int depth){
     #endif
 
     if(expr_bit_expr(tokens,depth)){
+        
         int pos=tokens->position;
 /*        // optional
         goop(depth,"predicate",tokens->array[tokens->position].value);

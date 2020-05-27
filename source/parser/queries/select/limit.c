@@ -3,7 +3,7 @@
 #include "../../../include/structure.h"
 #include <math.h>
 // alpha or alpha.alpha
-int expr_limit(token_array_t *tokens,int depth,select_t *sel){
+int expr_limit(token_array_t *tokens,int depth){
     ++depth;
     #ifdef PARSE_ENTRANCE
     goop(depth,"limit EXPR","IN");
@@ -17,16 +17,12 @@ int expr_limit(token_array_t *tokens,int depth,select_t *sel){
             if(compare_token(tokens,0,TOKEN_LIST_DELIMITER)){
                 if(compare_token(tokens,0,TOKEN_NUMERIC)){
 
-                    sel->limit_start=atoi(tokens->array[tokens->position-3].value);
-                    sel->limit_length=atoi(tokens->array[tokens->position-1].value);
-                    sel->has_limit_start=1;
-                    sel->has_limit_length=1;
-                    
+                    token_add_type(tokens,TOKEN_LIMIT_START,tokens->position-3);
+                    token_add_type(tokens,TOKEN_LIMIT_LENGTH,tokens->position-1);
                     return 1;
                 }                
             } else {
-                sel->limit_length=atoi(tokens->array[tokens->position-1].value);
-                sel->has_limit_length=1;
+                token_add_type(tokens,TOKEN_LIMIT_LENGTH,tokens->position-1);
                 return 1;
             }
         }

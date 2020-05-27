@@ -19,12 +19,13 @@
 //   | simple_expr
 int expr_bit_expr(token_array_t *tokens,int depth){
     ++depth;
+    int pos=tokens->position;
     #ifdef PARSE_ENTRANCE
     goop(depth,"bit-expr","in");
     #endif
 
     if(expr_simple_expr(tokens,depth)){
-        int pos=tokens->position;
+        int pos2=tokens->position;
         switch(tokens->array[tokens->position].type){
             case TOKEN_BIT_OR : break;
             case TOKEN_BIT_AND : break;
@@ -36,8 +37,7 @@ int expr_bit_expr(token_array_t *tokens,int depth){
             case TOKEN_DIVIDE : break;
             case TOKEN_MODULUS : break;
             default: 
-                //goop(depth,"bit-exp",tokens->array[tokens->position].value);
-                //goop(depth,"bit-exp","No bit operation");
+                token_add_type_range(tokens,TOKEN_BIT_EXPR,pos);
                 return 1;
         }
         //goop(depth,"bit-exp",tokens->array[tokens->position].value);
@@ -46,13 +46,17 @@ int expr_bit_expr(token_array_t *tokens,int depth){
         ++tokens->position;
         if(expr_simple_expr(tokens,depth)) {
            // goop(depth,"bit-exp","got a simple");
+            token_add_type_range(tokens,TOKEN_BIT_EXPR,pos);
             return 1;
         }
-        tokens->position=pos;
+        tokens->position=pos2;
+        token_add_type_range(tokens,TOKEN_BIT_EXPR,pos);
         return 1;
     }
         
     return 0;
 }
+
+
 
 
