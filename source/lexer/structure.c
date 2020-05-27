@@ -171,7 +171,7 @@ void set_distinct(select_t *obj){
 
 void select_debug(token_array_t *tokens){
 
-    for(int i=0;i<tokens->position;i++){
+    for(int i=0;i<tokens->position-1;i++){
         char *t_type=token_type(tokens->array[i].type);
         char *t_value=token_type(tokens->array[i].value);
 
