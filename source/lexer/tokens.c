@@ -106,11 +106,8 @@ token_array_t * token_array(unsigned length) {
     tokens->top = -1; 
     tokens->position=0;
     
-    tokens->object=NULL;
-
+    tokens->array = (token_t*)safe_malloc(sizeof(token_t),tokens->length);
     
-    tokens->array = (token_t*)malloc(tokens->length * sizeof(token_t));
-    for(int i=0;i<length;i++) tokens->array[i].value=NULL;
     return tokens; 
 } 
 void token_add_type(token_array_t * arr,int type,int index){
