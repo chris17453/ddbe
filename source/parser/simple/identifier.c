@@ -34,22 +34,13 @@ void create_identifier(int depth,token_array_t *tokens,int index1,int index2){
     #endif
 
 
-    if(tokens->target==0) {
-        ghost(ERR_TOKEN_TARGET_NULL);
-    }
-    
-    identifier_t *ident=safe_malloc(sizeof(identifier_t),1);
     if(valid_token_index(tokens,index1)){
         token_add_type(tokens,TOKEN_IDENTIFIER,index1);
         token_set_type(tokens,TOKEN_QUALIFIER,index2);
-        ident->qualifier   =tokens->array[index1].value;
     } 
     if(valid_token_index(tokens,index2)){
         token_add_type(tokens,TOKEN_IDENTIFIER,index2);
         token_set_type(tokens,TOKEN_SOURCE,index2);
-        ident->source=tokens->array[index2].value;
     }
-    tokens->object=ident;
-    tokens->object_type=TOKEN_IDENTIFIER;
     return;
 }
