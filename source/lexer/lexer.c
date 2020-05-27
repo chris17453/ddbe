@@ -264,7 +264,7 @@ token_array_t *lex(char * query){
                     token->expr[i]=0;
                 }
                 token->type=t;
-                token->value=malloc(1);//new_token;
+                //token->value=malloc(1);//new_token;
                 //token_push(tokens,token);
             } else {
                 if(new_token) free(new_token);
