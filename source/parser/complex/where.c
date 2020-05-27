@@ -3,7 +3,7 @@
 #include "../../include/structure.h"
 
 // alpha or alpha.alpha
-int expr_where(token_array_t *tokens,int depth,select_t *sel){
+int expr_where(token_array_t *tokens,int depth){
     ++depth;
     #ifdef PARSE_ENTRANCE
     goop(depth,"WHERE EXPR","IN");
