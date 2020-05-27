@@ -19,7 +19,7 @@ int expr_join(token_array_t *tokens,int depth){
     }
     ++tokens->position;
 
-    if(!expr_identity(tokens,depth)){
+    if(!expr_identifier(tokens,depth)){
         ghost(ERR_INVALID_JOIN_IDENTITY);
     }
 
