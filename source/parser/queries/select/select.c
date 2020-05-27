@@ -43,7 +43,7 @@ int expr_select(token_array_t *tokens,int depth){
         }
         token_add_type_range(tokens,TOKEN_SELECT,pos);
 
-        select_debug();
+        debug(tokens);
         return 1;
     }
     

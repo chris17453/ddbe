@@ -92,6 +92,6 @@ typedef struct select_t{
     void             add_where_expr(select_t *obj);
 
     void             set_distinct(select_t *obj);
-    void             select_debug();
+    void             debug(token_array_t *tokens);
 
 #endif
