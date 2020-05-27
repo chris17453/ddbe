@@ -14,18 +14,18 @@ int expr_boolean_primary(token_array_t *tokens,int depth){
         // IS [NOT] NULL
         if(compare_token(tokens,0,TOKEN_IS))
             if(compare_token(tokens,1,TOKEN_NOT))
-                if(compare_token(tokens,0,TOKEN_NULL))
+                if(compare_token(tokens,0,TOKEN_NULL)) {
                     token_add_type_range(tokens,TOKEN_BOOLEAN_PRIMARY,pos);
-
                     return 1;
+                }
+
         tokens->position=pos;
 
         // ok that didnt work out lets do the next test RESET
         // <=> predicate
         if(compare_token(tokens,0,TOKEN_NULL_EQ)){
              if(expr_predicate(tokens,depth)){
-                    token_add_type_range(tokens,TOKEN_BOOLEAN_PRIMARY,pos);
-
+                 token_add_type_range(tokens,TOKEN_BOOLEAN_PRIMARY,pos);
                  return 1;
              }
         }
