@@ -277,6 +277,8 @@ token_array_t *lex(char * query){
 
 
 void token_combine(token_array_t *tokens,int *list){
+    if (tokens==0 || list==0) return;
+
     int list_index=0;    
     int combo_token=list[1];
     int length=list[0];
