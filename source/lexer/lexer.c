@@ -23,6 +23,8 @@ token_array_t *lex(char * query){
     char *new_token=0;
     token_array_t *tokens=token_array(1000);
 
+    if(1==0)
+
     for(int i=0;i<query_length;i++){
         buffer_len=query_length-i;
         c=query[i];
@@ -80,7 +82,6 @@ token_array_t *lex(char * query){
             else if (c=='\t')                    { t=TOKEN_TAB;             skip=0; }
     
             else t=0;
-            if(1==0)
             switch(t){
                 case TOKEN_ALPHA:
                     for(int lazer=i+1;lazer<query_length;lazer++){
