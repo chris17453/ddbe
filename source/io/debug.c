@@ -6,7 +6,7 @@
 #include "../include/debug.h"
 
 #define DEBUG 1
-//#define PARSE_ENTRANCE 1
+#define PARSE_ENTRANCE 1
 
 
 void gabble(char *source,char *msg){
