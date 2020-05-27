@@ -176,10 +176,10 @@ void select_debug(token_array_t *tokens){
         char *t_value=token_type(tokens->array[i].value);
 
         printf(" %s - %s  ",t_value,t_type);
-        for(int e=0;e<tokens->array[i].depth;e++){
+       /* for(int e=0;e<tokens->array[i].depth;e++){
             t_type=token_type(tokens->array[i].expr[e]);
             printf(" %s ",t_type);
-        }
+        }*/
         printf("\n");
 
 
