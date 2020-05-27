@@ -132,18 +132,19 @@
 
 
 
-    token_array_t *  token_array       (unsigned length);
+    token_array_t *  token_array          (unsigned length);
     void             tokens_destroy       (token_array_t * arr);
-    int              valid_token_index(token_array_t *tokens,int index);
-    int              token_is_full     (token_array_t * arr);
-    int              token_is_empty    (token_array_t * arr);
-    void             token_push        (token_array_t * arr, token_t *item);
-    token_t          token_pop         (token_array_t * arr);
-    token_t          token_peek        (token_array_t * arr);
-    void             token_delete      (token_array_t* tokens,int index);
-    void             token_print       (token_array_t * arr);
-    void             token_add_type    (token_array_t * arr,int type,int index);
-    void             token_set_type    (token_array_t * arr,int type,int index);
+    int              valid_token_index    (token_array_t *tokens,int index);
+    int              token_is_full        (token_array_t * arr);
+    int              token_is_empty       (token_array_t * arr);
+    void             token_push           (token_array_t * arr, token_t *item);
+    token_t          token_pop            (token_array_t * arr);
+    token_t          token_peek           (token_array_t * arr);
+    void             token_delete         (token_array_t* tokens,int index);
+    void             token_print          (token_array_t * arr);
+    void             token_add_type       (token_array_t * arr,int type,int index);
+    void             token_add_type_range (token_array_t * arr,int type,int index);
+    void             token_set_type       (token_array_t * arr,int type,int index);
 
 
     char           * token_type        (int t);

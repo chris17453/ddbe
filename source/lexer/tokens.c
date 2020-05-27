@@ -128,6 +128,16 @@ void token_add_type(token_array_t * arr,int type,int index){
         ++arr->array[index].depth;
     }
 }
+
+void token_add_type_range(token_array_t * arr,int type,int index){
+    for(int i=index;i<arr->position;i++){
+        if(arr->array[i].depth<TOKEN_MAX_DEPTH){
+            arr->array[i].expr[arr->array[i].depth]=type;
+            ++arr->array[i].depth;
+        }
+    }
+}
+
 void token_set_type(token_array_t * arr,int type,int index){
     arr->array[index].type=type;
 }
