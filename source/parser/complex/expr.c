@@ -54,12 +54,6 @@ int expr_expr(token_array_t* tokens,int depth){
     if(expr_core(tokens,depth)) {
         int pos3=tokens->position;
         //expr [and/or] expr
-        add_where_expr(sel);
-        where_expr_t *where=&sel->where[sel->where_length-1];
-        where->ordinal=sel->where_length-1;
-        where->length=pos3-pos2;
-        where->tokens=&tokens->array[pos2];
-        where->NOT=is_not;
 
 
         switch(tokens->array[tokens->position].type){
@@ -67,7 +61,7 @@ int expr_expr(token_array_t* tokens,int depth){
             case TOKEN_SHORT_OR  :
             //case TOKEN_XOR       : break;
             case TOKEN_AND       : 
-            case TOKEN_OR        : where->comparitor=tokens->array[tokens->position].type; break;
+            case TOKEN_OR        :  break;
             default: 
                      token_add_type_range(tokens,TOKEN_EXPR,pos);
                      return 1; //already passed core.. PEACE OUT
@@ -79,7 +73,7 @@ int expr_expr(token_array_t* tokens,int depth){
 
         ++tokens->position;
 
-        if(!expr_expr(tokens,depth,sel)){
+        if(!expr_expr(tokens,depth)){
             tokens->position=pos3;
         }
         token_add_type_range(tokens,TOKEN_EXPR,pos3);
