@@ -293,8 +293,8 @@ void token_combine(token_array_t *tokens,int *list){
                 int token_len=0;
                 
                 for(int w=0;w<length;w++) token_len+=strlen(tokens->array[start_index+w].value);
-                char *new_token=malloc(token_len+1);
-                memset(new_token,0,length+1);
+                char *new_token=calloc(1,token_len+1);
+                
 
                 for(int w=0;w<length;w++){
                     strcat(new_token,tokens->array[start_index+w].value);
