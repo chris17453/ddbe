@@ -128,7 +128,7 @@ token_array_t *lex(char * query){
                     else if(0==strncasecmp(new_token,"IN"       ,10) ) t=TOKEN_IN;
                     else if(0==strncasecmp(new_token,"NOT"      ,10) ) t=TOKEN_NOT;
                     break;
-
+/*
                 case TOKEN_NUMERIC: 
 
                     for(int lazer=i+1;lazer<query_length;lazer++){
@@ -181,7 +181,7 @@ token_array_t *lex(char * query){
                         c=query[lazer];
                         if (c<32) continue;
                         else {
-                            continue;
+
                             new_token=sub_str_cpy(query,i,lazer-i);
                             skip=lazer-i-1;
                             break;
@@ -244,6 +244,8 @@ token_array_t *lex(char * query){
                     printf("%c",c);
                     exit(ERR_UNKNOWN_SQL);
                     break;
+
+*/                    
                 default:
                     new_token=sub_str_cpy(query,i,skip+1);
                     break;
