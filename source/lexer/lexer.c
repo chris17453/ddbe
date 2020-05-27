@@ -267,7 +267,7 @@ token_array_t *lex(char * query){
                 token->value=new_token;
                 token_push(tokens,token);
             } else {
-                free(new_token);
+                if(new_token) free(new_token);
             }
                 
             i+=skip;
