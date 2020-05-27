@@ -14,7 +14,7 @@ int expr_select_expr(token_array_t *tokens,int depth){
     int expr_list=0;
 
     while(looper){
-        if(!expr_column_expr(tokens,depth,sel)) {
+        if(!expr_column_expr(tokens,depth)) {
             //no select epression
             break;
         }
