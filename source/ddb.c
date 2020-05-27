@@ -34,8 +34,8 @@ int main(int argc, char* argv[]) {
     token_array_t *tokens=lex(query_str);
 
     free(query_str);
-    consolidate_tokens(tokens);
-    tokens_destroy(tokens);
+    //consolidate_tokens(tokens);
+    //tokens_destroy(tokens);
     atexit(janitor);
     return 0;
 }
