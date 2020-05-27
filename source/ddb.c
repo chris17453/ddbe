@@ -31,11 +31,11 @@ int main(int argc, char* argv[]) {
     gobble("main","Starting");
     //printf("Query: \n\n%s\n --\n",query_str);
     //match_function(query_str);
-    //token_array_t *tokens=lex(query_str);
+    token_array_t *tokens=lex(query_str);
 
     free(query_str);
-    //consolidate_tokens(tokens);
-    //tokens_destroy(tokens);
+    consolidate_tokens(tokens);
+    tokens_destroy(tokens);
     atexit(janitor);
     return 0;
 }
