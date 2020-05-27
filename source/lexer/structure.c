@@ -173,7 +173,7 @@ void debug(token_array_t *tokens){
 
     for(int i=0;i<tokens->position;i++){
         char *t_type=token_type(tokens->array[i].type);
-        char *t_value=token_type(tokens->array[i].value);
+        char *t_value=tokens->array[i].value;
         printf(" %s - %s  ",t_value,t_type);
         for(int e=0;e<tokens->array[i].depth;e++){
             t_type=token_type(tokens->array[i].expr[e]);
