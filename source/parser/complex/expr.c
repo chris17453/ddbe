@@ -39,7 +39,7 @@ int expr_core(token_array_t *tokens,int depth){
 //   | ! expr
 //   | boolean_primary IS [NOT] {TRUE | FALSE | UNKNOWN}
 //   | boolean_primary
-int expr_expr(token_array_t* tokens,int depth,select_t *sel){
+int expr_expr(token_array_t* tokens,int depth){
     ++depth;
     int pos=tokens->position;
     #ifdef PARSE_ENTRANCE
