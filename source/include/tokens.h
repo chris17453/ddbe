@@ -90,7 +90,6 @@
     #define TOKEN_SOURCE           97
     #define TOKEN_BOOLEAN          98 
     #define TOKEN_COMPARITOR       99  
-    #define TOKEN_ALIAS            100
     #define TOKEN_LIMIT_START      101
     #define TOKEN_LIMIT_LENGTH     102
     #define TOKEN_BIT_EXPR         103
