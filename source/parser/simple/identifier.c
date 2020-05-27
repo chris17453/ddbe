@@ -36,10 +36,10 @@ void create_identifier(int depth,token_array_t *tokens,int index1,int index2){
 
     if(valid_token_index(tokens,index1)){
         token_add_type(tokens,TOKEN_IDENTIFIER,index1);
+        token_add_type(tokens,TOKEN_IDENTIFIER,index1+1);
         token_set_type(tokens,TOKEN_QUALIFIER,index1);
     } 
     if(valid_token_index(tokens,index2)){
-        token_add_type(tokens,TOKEN_IDENTIFIER,index2-1);
         token_add_type(tokens,TOKEN_IDENTIFIER,index2);
         token_set_type(tokens,TOKEN_SOURCE,index2);
     }
