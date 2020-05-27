@@ -15,13 +15,6 @@ token_array_t *lex(char * query){
 
     }
 
-    char *sanitized_sql=query;
-    query_length=strlen(sanitized_sql);
-    if (query_length<1){
-        ghost(ERR_EMPTY_QUERY_STRING);
-    }
-    
-
     int new_word=0;
     char c,d,e;
     int skip=0;
@@ -32,13 +25,13 @@ token_array_t *lex(char * query){
 
     for(int i=0;i<query_length;i++){
         buffer_len=query_length-i;
-        c=sanitized_sql[i];
+        c=query[i];
 
         //The start of a new token....
         
         if(new_word==0){
-            if (buffer_len>2) d=sanitized_sql[i+1]; else  d=0;
-            if (buffer_len>3) e=sanitized_sql[i+2]; else  e=0;
+            if (buffer_len>2) d=query[i+1]; else  d=0;
+            if (buffer_len>3) e=query[i+2]; else  e=0;
             skip=0;
             if      (c>='a' && c<='z')           { t=TOKEN_ALPHA;            }
             else if (c>='A' && c<='Z')           { t=TOKEN_ALPHA;            }
@@ -90,13 +83,13 @@ token_array_t *lex(char * query){
             switch(t){
                 case TOKEN_ALPHA:
                     for(int lazer=i+1;lazer<query_length;lazer++){
-                        c=sanitized_sql[lazer];
+                        c=query[lazer];
                         if ((c>='a' && c<='z') ||   
                             (c>='A' && c<='Z') ||
                             (c=='_' ) ||
                             (c>='0' && c<='9')) continue;
                         else {
-                            new_token=sub_str_cpy(sanitized_sql,i,lazer-i);
+                            new_token=sub_str_cpy(query,i,lazer-i);
                             skip=lazer-i-1;
                             break;
                         }
@@ -136,10 +129,10 @@ token_array_t *lex(char * query){
                 case TOKEN_NUMERIC: 
 
                     for(int lazer=i+1;lazer<query_length;lazer++){
-                        c=sanitized_sql[lazer];
+                        c=query[lazer];
                         if (c>='0' && c<='9') continue;
                         else {
-                            new_token=sub_str_cpy(sanitized_sql,i,lazer-i);
+                            new_token=sub_str_cpy(query,i,lazer-i);
                             skip=lazer-i-1;
                             break;
                         }
@@ -149,10 +142,10 @@ token_array_t *lex(char * query){
 
                 case TOKEN_HEX: 
                     for(int lazer=i+2;lazer<query_length;lazer++){
-                        c=sanitized_sql[lazer];
+                        c=query[lazer];
                         if ((c>='0' && c<='9') || ( (c>='a' && c<='f') || (c>='A' && c<='F') ) ) continue;
                         else {
-                            new_token=sub_str_cpy(sanitized_sql,i,lazer-i);
+                            new_token=sub_str_cpy(query,i,lazer-i);
                             skip=lazer-i-1;
                             break;
                         }
@@ -164,10 +157,10 @@ token_array_t *lex(char * query){
 
                 case TOKEN_BINARY: 
                     for(int lazer=i+2;lazer<query_length;lazer++){
-                        c=sanitized_sql[lazer];
+                        c=query[lazer];
                         if (c=='0' || c=='1') continue;
                         else {
-                            new_token=sub_str_cpy(sanitized_sql,i,lazer-i);
+                            new_token=sub_str_cpy(query,i,lazer-i);
                             skip=lazer-i-1;
                             break;
                         }
@@ -182,10 +175,10 @@ token_array_t *lex(char * query){
 
                 case TOKEN_WHITESPACE: 
                     for(int lazer=i+1;lazer<query_length;lazer++){
-                        c=sanitized_sql[lazer];
+                        c=query[lazer];
                         if (c<32) continue;
                         else {
-                            new_token=sub_str_cpy(sanitized_sql,i,lazer-i);
+                            new_token=sub_str_cpy(query,i,lazer-i);
                             skip=lazer-i-1;
                             break;
                         }
@@ -195,7 +188,7 @@ token_array_t *lex(char * query){
                     //is it long enough
                     skip=-1;
                     for(int lazer=i+2;lazer<query_length;lazer++){
-                        c=sanitized_sql[lazer];
+                        c=query[lazer];
                         if (c=='\n') {
                             new_token=sub_str_cpy(sanitized_sql,i+2,lazer-i-2);
                             skip=lazer-i-1;
@@ -211,11 +204,11 @@ token_array_t *lex(char * query){
                     //is it long enough
                     if(query_length-i-3>0){
                         for(int lazer=i+2;lazer<query_length-1;lazer++){
-                            c=sanitized_sql[lazer];
-                            d=sanitized_sql[lazer+1];
+                            c=query[lazer];
+                            d=query[lazer+1];
                             
                             if (c=='*' && d=='/') {;
-                                new_token=sub_str_cpy(sanitized_sql,i+2,lazer-i-2);
+                                new_token=sub_str_cpy(query,i+2,lazer-i-2);
                                 skip=lazer-i+1;
                                 break;
                             }
@@ -231,12 +224,12 @@ token_array_t *lex(char * query){
                 case TOKEN_STRING:
                     skip=-1;
                     for(int lazer=i+1;lazer<query_length;lazer++){
-                        if(sanitized_sql[lazer]==c) {
+                        if(query[lazer]==c) {
                             // it's an empty string.....
                             if (lazer-i==1) 
                                 new_token="";
                             else
-                                new_token=sub_str_cpy(sanitized_sql,i+1,lazer-i-1);
+                                new_token=sub_str_cpy(query,i+1,lazer-i-1);
                             skip=lazer-i;
                             break;
                         }
@@ -248,7 +241,7 @@ token_array_t *lex(char * query){
                     exit(ERR_UNKNOWN_SQL);
                     break;
                 default:
-                    new_token=sub_str_cpy(sanitized_sql,i,skip+1);
+                    new_token=sub_str_cpy(query,i,skip+1);
                     break;
             }//end switch
 
