@@ -2,7 +2,7 @@
 
 #if !defined(_TOKENS_H_)
     #define _TOKENS_H_ 1
-    #define TOKEN_MAX_DEPTH        10
+    #define TOKEN_MAX_DEPTH        15
 
     #define TOKEN_BLANK            0
     #define TOKEN_REAL             1
