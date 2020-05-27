@@ -23,7 +23,7 @@ token_array_t *lex(char * query){
     char *new_token=0;
     token_array_t *tokens=token_array(1000);
 
-    if(1==0)
+    if(1==1)
 
     for(int i=0;i<query_length;i++){
         buffer_len=query_length-i;
