@@ -2,7 +2,7 @@
 #include "../../../include/tokens.h"
 #include "../../../include/structure.h"
 
-int expr_select_expr(token_array_t *tokens,int depth,select_t *sel){
+int expr_select_expr(token_array_t *tokens,int depth){
     ++depth;
     int pos=tokens->position;
     #ifdef PARSE_ENTRANCE
