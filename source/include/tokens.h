@@ -2,7 +2,7 @@
 
 #if !defined(_TOKENS_H_)
     #define _TOKENS_H_ 1
-
+    #define TOKEN_MAX_DEPTH        10
 
     #define TOKEN_BLANK            0
     #define TOKEN_REAL             1
@@ -102,7 +102,7 @@
     typedef struct token_t{
         int type;
         char *value;
-        int expr[10];
+        int expr[TOKEN_MAX_DEPTH];
         int depth;
     } token_t;
 
@@ -113,10 +113,10 @@
         unsigned length; 
         token_t * array; 
         int position;
-        void * target;
+        /*void * target;
         void * object;
         int    object_type;
-        int has_object;
+        int has_object;*/
 
     } token_array_t; 
 
@@ -133,6 +133,8 @@
     token_t          token_peek        (token_array_t * arr);
     void             token_delete      (token_array_t* tokens,int index);
     void             token_print       (token_array_t * arr);
+    void             token_add_type    (token_array_t * arr,int type,int index);
+
     char           * token_type        (int t);
     char           * get_token_value   (token_array_t * arr,int index);
 #endif

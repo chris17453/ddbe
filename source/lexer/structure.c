@@ -170,6 +170,8 @@ void set_distinct(select_t *obj){
 }
 
 void select_debug(select_t *obj){
+    return;
+    /*
     printf("\nSELECT_DEBUG\n");
     
     char *has_limit_start;
@@ -270,6 +272,7 @@ void select_debug(select_t *obj){
                 printf(" %s, ordinal: %d\n",token_type(order->direction),order->ordinal);
         }
     }    
+    */
 }
 
 

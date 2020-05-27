@@ -11,7 +11,7 @@ int expr_bool(token_array_t* tokens,int depth){
     if (tokens->array[tokens->position].type==TOKEN_TRUE || 
         tokens->array[tokens->position].type==TOKEN_FALSE || 
         tokens->array[tokens->position].type==TOKEN_UNKNOWN){
-            token_add_type(TOKEN_BOOLEAN,index);
+            token_add_type(tokens,TOKEN_BOOLEAN,index);
             set_bool(tokens,tokens->position);
             ++tokens->position;
             return 1; 

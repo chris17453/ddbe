@@ -12,7 +12,7 @@ int expr_alias(token_array_t *tokens,int depth,char **target){
     int pos=tokens->position;
     if(compare_token(tokens,0,TOKEN_AS))
         if(compare_token(tokens,0,TOKEN_ALPHA)){        
-            set_alias(tokens,tokens->position-1,target);
+            token_add_type(tokens,TOKEN_ALIAS,tokens->position-1);
             return 1;
         }
 
@@ -21,11 +21,3 @@ int expr_alias(token_array_t *tokens,int depth,char **target){
 }
 
 
-void set_alias(token_array_t *tokens,int index,char **target){
-   #ifdef PARSE_ENTRANCE
-   goop(0,"set alias","in");
-   #endif
-    token_add_type(TOKEN_ALIAS,index);
-
-    *target=get_token_value(tokens,tokens->position-1);
-}

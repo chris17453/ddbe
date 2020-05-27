@@ -14,7 +14,7 @@ int expr_comparison_operator(token_array_t *tokens,int depth){
         case TOKEN_LESS:
         case TOKEN_GREATER:
         case TOKEN_NOT_EQ:
-        case TOKEN_ASSIGNMENT: set_comparison(tokens,tokens->position);
+        case TOKEN_ASSIGNMENT: token_add_type(tokens,TOKEN_COMPARITOR,tokens->position);
                                ++tokens->position; 
                                return 1;
         default:
@@ -22,11 +22,3 @@ int expr_comparison_operator(token_array_t *tokens,int depth){
     }
 }
 
-void set_comparison(token_array_t *tokens,int index){
-    #ifdef PARSE_ENTRANCE
-    goop(depth,"set_Comparison,","IN");
-    #endif
-    token_add_type(TOKEN_COMPARITOR,index);
-
-    //goop(0,"Comparison",tokens->array[index].value);
-}

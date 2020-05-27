@@ -113,6 +113,16 @@ token_array_t * token_array(unsigned length) {
     for(int i=0;i<length;i++) tokens->array[i].value=NULL;
     return tokens; 
 } 
+void token_add_type(token_array_t * arr,int type,int index){
+    if(arr->array[index].depth<TOKEN_MAX_DEPTH){
+        arr->array[index].expr[arr->array[index].depth]=type;
+        ++arr->array[index].depth;
+    }
+}
+void token_set_type(token_array_t * arr,int type,int index){
+    arr->array[index].type=type;
+}
+
 
 void tokens_destroy(token_array_t *tokens){
     for(int i=0;i<tokens->length;i++){

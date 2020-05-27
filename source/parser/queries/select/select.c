@@ -12,38 +12,38 @@ int expr_select(token_array_t *tokens,int depth){
     int pos=tokens->position;
     int number_of_expressions=0;
     if(compare_token(tokens,0,TOKEN_SELECT)){
-        select_t *sel=select_new();
-        tokens->object=sel;
         
         // optional
         if(compare_token(tokens,0,TOKEN_DISTINCT)){
-            set_distinct(sel);
+            token_add_type(tokens,TOKEN_SELECT,tokens->position-1);
         }
         // not optional
-        if(expr_select_expr(tokens,depth,sel)){
+        if(expr_select_expr(tokens,depth)){
+            token_add_type(tokens,TOKEN_SELECT,tokens->position-1);
+
         } else {
             tokens->position=pos;
             return 0;
         }
 
         
-        if(expr_from(tokens,depth,sel)){
+        if(expr_from(tokens,depth)){
             
-            while(expr_join(tokens,depth,sel)){
+            while(expr_join(tokens,depth)){
                 //goop(depth,"join","GOT ONE");
             }
 
 
-            if(expr_where(tokens,depth,sel)){
+            if(expr_where(tokens,depth)){
             }
-            if(expr_group_by(tokens,depth,sel)){
+            if(expr_group_by(tokens,depth)){
             }
-            if(expr_order_by(tokens,depth,sel)){
+            if(expr_order_by(tokens,depth)){
             }
-            if(expr_limit(tokens,depth,sel)){
+            if(expr_limit(tokens,depth)){
             }
         }
-        select_debug(sel);
+        select_debug();
         return 1;
     }
     

@@ -16,21 +16,10 @@ int expr_litteral(token_array_t* tokens,int depth){
         case TOKEN_NUMERIC:
         case TOKEN_REAL: 
                         
-                        return set_litteral(tokens,tokens->position);
+                        token_add_type(tokens,TOKEN_LITTERAL,tokens->position);
                         ++tokens->position; 
                         return 1;
     }
     return 0;
-}
-
-void set_litteral(token_array_t *tokens,int index){
-    #ifdef PARSE_ENTRANCE
-    goop(0,"create_litteral","in");
-    #endif
-
-    token_add_type(TOKEN_LITERAL,index);
-
-    //tokens->object=&tokens->array[index];
-    //tokens->object_type=TOKEN_LITTERAL;
 }
 
