@@ -98,6 +98,10 @@ char *token_type(int t){
         case  TOKEN_EXPR_LIST:       return "EXPR_LIST";
         case  TOKEN_BOOLEAN_PRIMARY: return "BOOLEAN_PRIMARY";
         case  TOKEN_EXPR:            return "EXPR";
+        case  TOKEN_ALIAS:           return "ALIAS";
+        case  TOKEN_BOOLEAN:         return "BOOLEAN";
+        case  TOKEN_COMPARITOR:      return "COMPARITOR";
+
 
 
 
