@@ -175,12 +175,12 @@ void select_debug(token_array_t *tokens){
         char *t_type=tokens_type(tokens->array[i].type);
         char *t_value=tokens_type(tokens->array[i].value);
 
-        print(" %s - %s  ",t_value,t_type);
+        printf(" %s - %s  ",t_value,t_type);
         for(int e=0;e<tokens->array[i].depth;e++){
             t_type=tokens_type(tokens->array[i].expr[e]);
-            print(" %s ",t_type);
+            printf(" %s ",t_type);
         }
-        print("\n");
+        printf("\n");
 
 
 
