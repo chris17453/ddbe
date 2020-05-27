@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
 
     free(query_str);
     consolidate_tokens(tokens);
-    //tokens_destroy(tokens);
+    tokens_destroy(tokens);
     atexit(janitor);
     return 0;
 }
