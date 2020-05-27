@@ -190,7 +190,7 @@ token_array_t *lex(char * query){
                     for(int lazer=i+2;lazer<query_length;lazer++){
                         c=query[lazer];
                         if (c=='\n') {
-                            new_token=sub_str_cpy(sanitized_sql,i+2,lazer-i-2);
+                            new_token=sub_str_cpy(query,i+2,lazer-i-2);
                             skip=lazer-i-1;
                             break;
                         }
