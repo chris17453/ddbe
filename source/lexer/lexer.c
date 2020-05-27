@@ -20,7 +20,7 @@ token_array_t *lex(char * query){
     int skip=0;
     char t=0;
     int buffer_len=0;
-    char *new_token;
+    char *new_token=0;
     token_array_t *tokens=token_array(1000);
 
     for(int i=0;i<query_length;i++){
@@ -262,6 +262,7 @@ token_array_t *lex(char * query){
                 token_push(tokens,token);
             } else {
                 if(new_token) free(new_token);
+                new_token=0;
             }
             
                 
