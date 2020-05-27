@@ -3,7 +3,7 @@
 #include "../../../include/structure.h"
 
 //identifier or identifier as alias
-int expr_column_expr(token_array_t *tokens,int depth,select_t *sel){
+int expr_column_expr(token_array_t *tokens,int depth){
     ++depth;
 
     #ifdef PARSE_ENTRANCE
