@@ -181,8 +181,8 @@ token_array_t *lex(char * query){
                         c=query[lazer];
                         if (c<32) continue;
                         else {
-
-                            //new_token=sub_str_cpy(query,i,lazer-i);
+                            continue;
+                            new_token=sub_str_cpy(query,i,lazer-i);
                             skip=lazer-i-1;
                             break;
                         }
