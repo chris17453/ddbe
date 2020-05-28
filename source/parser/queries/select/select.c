@@ -256,7 +256,7 @@ void build_select(token_array_t *tokens,int start,int end){
                                                             select.columns[i].ordinal );
                                     break;
             }
-
+        }
     }
     if (select.from) {
         printf("FROM");
