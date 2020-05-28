@@ -24,7 +24,7 @@ SELECT
     
     WHERE 
         res.first_name='bob'
-        or (1 is not true or 2)
+        or 1 is not true or 2
         or x=1.54
         and  id=0x04F 
         or id=0x04A
