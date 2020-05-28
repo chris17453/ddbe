@@ -78,6 +78,7 @@ typedef struct select_t{
         // sub elements
         data_column_t   * columns;
         identifier_t    * from;
+        join_t          * join;
         where_expr_t    * where;
         order_column_t  * order;
         group_column_t  * group;
@@ -90,9 +91,10 @@ typedef struct select_t{
 
         // internal
         int             column_length;     
+        int             join_length;     
+        int             where_length;     
         int             order_length;     
         int             group_length;     
-        int             where_length;     
         int             has_limit_length;
         int             has_limit_start;
     } select_t;
