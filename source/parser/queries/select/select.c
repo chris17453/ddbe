@@ -67,6 +67,23 @@ int match_pattern(token_array_t *tokens,int *pattern,int position){
     return 1;
 }
 
+identifier_t * process_identifier(token_array_t *tokens,int index){
+    identifier_t *ident;
+    switch(token_at(tokens,index)->type) {
+        case TOKEN_QUALIFIER:   ident=safe_malloc(sizeof(identifier_t),1);
+                                ident->qualifier=token_at(tokens,index)->value;
+                                ident->source   =token_at(tokens,index+1)->value;
+                                return ident;
+
+        case TOKEN_SOURCE:         
+                            ident=safe_malloc(sizeof(identifier_t),1);
+                            ident->qualifier=0;
+                            ident->source   =token_at(tokens,index)->value;
+                            return ident;
+    }
+    return 0;
+}
+
 void build_select(token_array_t *tokens,int start,int end){
     int limit_length=0;
     int limit_start=0;
@@ -138,9 +155,7 @@ void build_select(token_array_t *tokens,int start,int end){
 
 
             case TOKEN_QUALIFIER:      
-                                       ident=safe_malloc(sizeof(identifier_t),1);
-                                       ident->qualifier=token_at(tokens,i)->value;
-                                       ident->source   =token_at(tokens,i+1)->value;
+                                       ident=process_identifier(tokens,i);
                                        i+=2;
                                        add_data_column(&select);
                                        dc=&select.columns[select.column_length-1];
@@ -157,9 +172,7 @@ void build_select(token_array_t *tokens,int start,int end){
                                        break;
 
             case TOKEN_SOURCE:         
-                                       ident=safe_malloc(sizeof(identifier_t),1);
-                                       ident->qualifier=0;
-                                       ident->source   =token_at(tokens,i)->value;
+                                       ident=process_identifier(tokens,i);
                                        ++i;
                                        add_data_column(&select);
                                        dc=&select.columns[select.column_length-1];
@@ -189,13 +202,16 @@ void build_select(token_array_t *tokens,int start,int end){
     loop=1;
     index=0;
     while(loop){
+        join_t *join;
         switch(token_at(tokens,i)->type){
             case TOKEN_JOIN:
             case TOKEN_LEFT_JOIN:
             case TOKEN_RIGHT_JOIN:
             case TOKEN_FULL_OUTER_JOIN:
             case TOKEN_INNER_JOIN: 
-                                    
+                                        join=safe_malloc(sizeof(join_t),1);
+                                        
+                                        join->identifier=process_identifier(tokens,i);
 
 
                                         break;

@@ -19,13 +19,13 @@ typedef struct  data_column_t{
 } data_column_t;
 
 typedef struct order_column_t {
-    identifier_t * identity;
+    identifier_t * identifier;
     int direction;
     int ordinal;
 } order_column_t;
 
 typedef struct group_column_t {
-    identifier_t * identity;
+    identifier_t * identifier;
     int ordinal;
 } group_column_t;
 
@@ -42,7 +42,7 @@ typedef struct conditions_t {
 
 typedef struct join_t {
     int             type;
-    identifier_t  * identity;
+    identifier_t  * identifier;
     char          * alias;
     conditions_t  * conditions;
 
