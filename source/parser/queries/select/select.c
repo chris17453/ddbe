@@ -159,7 +159,7 @@ void build_select(token_array_t *tokens,int start,int end){
             case TOKEN_SOURCE:         
                                        ident=safe_malloc(sizeof(identifier_t),1);
                                        ident->qualifier=0;
-                                       ident->source   =token_at(tokens,i+1)->value;
+                                       ident->source   =token_at(tokens,i)->value;
                                        ++i;
                                        add_data_column(&select);
                                        dc=&select.columns[select.column_length-1];
