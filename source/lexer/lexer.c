@@ -248,7 +248,7 @@ token_array_t *lex(char * query){
 
 */                    
                 default:
-                    //new_token=sub_str_cpy(query,i,skip+1);
+                    new_token=sub_str_cpy(query,i,skip+1);
                     break;
             }//end switch
 
