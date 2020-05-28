@@ -17,6 +17,7 @@ int expr_limit(token_array_t *tokens,int depth){
             if(compare_token(tokens,0,TOKEN_LIST_DELIMITER)){
                 if(compare_token(tokens,0,TOKEN_NUMERIC)){
                     token_set_type(tokens,TOKEN_LIMIT_START,tokens->position-3);
+                    token_set_type(tokens,TOKEN_LIMIT_LENGTH,tokens->position-1);
                     token_add_type(tokens,TOKEN_LIMIT_START,tokens->position-3);
                     token_add_type(tokens,TOKEN_LIMIT_START,tokens->position-1);
 
