@@ -81,47 +81,69 @@ void build_select(token_array_t *tokens,int start,int end){
 
     
 
-    while(loop){
-        token_t *t=token_at(tokens,i);
-        
-        switch(t->type){
-            case TOKEN_SELECT:   break;
-            case TOKEN_DISTINCT: select.distinct=1;         break;
-            case TOKEN_FROM:     ++i;
-                                 identifier_t *ident=safe_malloc(sizeof(identifier_t),1);
-                                 if(token_at(tokens,i)->type==TOKEN_QUALIFIER) {
-                                     ident->qualifier=token_at(tokens,i)->value;
-                                     i+=2;
-                                     ident->source=token_at(tokens,i)->value;
-                                 } else {
-                                    if(token_at(tokens,i)->type==TOKEN_SOURCE) {
-                                     ident->source=token_at(tokens,i)->value;
-                                    }
-                                 }
-                                select.from=ident;
+    // switch        
+    switch(token_at(tokens,i)->type){
+        case TOKEN_SELECT:   ++i; break;
+        default:             printf("ERROR");
+    }//end switch                
 
-                                  
+    // distinct
+    switch(token_at(tokens,i)->type){
+        case TOKEN_DISTINCT: select.distinct=1;         
+                             ++i;
+                             break;
+        default:             printf("NO DISTINCT");
+                             break;
+    }//end switch                
+
+  /*                                
                                  break;
             case TOKEN_WHERE:    break;
             case TOKEN_GROUP_BY: break;
             case TOKEN_ORDER_BY: break;
-            
+*/            
+
+    // FROM
+    switch(token_at(tokens,i)->type){
+        case TOKEN_FROM:     ++i;
+                            identifier_t *ident=safe_malloc(sizeof(identifier_t),1);
+                            if(token_at(tokens,i)->type==TOKEN_QUALIFIER) {
+                                ident->qualifier=token_at(tokens,i)->value;
+                                i+=2;
+                                ident->source=token_at(tokens,i)->value;
+                            } else {
+                                if(token_at(tokens,i)->type==TOKEN_SOURCE) {
+                                ident->source=token_at(tokens,i)->value;
+                                }
+                            }
+                            ++i;
+                            select.from=ident;
+                            break;
+
+        default:    printf("NO FROM");
+                    break;
+    }// end switch
+    
 
 
-            case TOKEN_LIMIT:         break;
-            case TOKEN_LIMIT_START:   select.has_limit_start=1;
-                                      select.limit_start=atoi(token_at(tokens,i)->value);
-                                      break;
-            case TOKEN_LIMIT_LENGTH:  select.has_limit_length=1;
-                                      select.limit_length=atoi(token_at(tokens,i)->value);    
-                                      break;
-                                 
-            default: break;
+    loop=1;
+    while(loop){
+        switch(token_at(tokens,i)->type){
+            case TOKEN_LIMIT_START: select.has_limit_start=1;
+                                    select.limit_start=atoi(token_at(tokens,i)->value);
+                                    i++;
+                                    break;
+            case TOKEN_LIMIT_LENGTH: select.has_limit_length=1;
+                                     select.limit_length=atoi(token_at(tokens,i)->value);    
+                                     i++;
+                                     break;
+            default: loop=0; break;
         }//end switch
-        i++;
-        if (i>=end) loop=0;
     }
 
+
+    
+    // DEBUGGING INFORMATION
 
     if (select.distinct) printf("DISTINCT\n");
     if (select.from) {
