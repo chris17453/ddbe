@@ -344,7 +344,7 @@ void consolidate_tokens(token_array_t *tokens){
     int token6[] ={2,TOKEN_INNER_JOIN      ,TOKEN_INNER,  TOKEN_JOIN};
     int token7[] ={2,TOKEN_GROUP_BY        ,TOKEN_GROUP,  TOKEN_BY};
     int token8[] ={2,TOKEN_ORDER_BY        ,TOKEN_ORDER,  TOKEN_BY};
-
+/*
    // starts with a dot... REAL        
     token_combine(tokens,token1);
     token_combine(tokens,token2);
@@ -354,8 +354,8 @@ void consolidate_tokens(token_array_t *tokens){
     token_combine(tokens,token6);
     token_combine(tokens,token7);
     token_combine(tokens,token8);
-    
-    //token_print(tokens);
+  */  
+    token_print(tokens);
     //process_queries(tokens);
 }
 
