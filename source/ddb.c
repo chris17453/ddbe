@@ -22,9 +22,11 @@ int main(int argc, char* argv[]) {
     int opt; 
   
     int opt_print_tokens=0;
+    int opt_debug=0;
     while((opt = getopt(argc, argv, ":if:lrx")) != -1) {  
         switch(opt)  {  
             case 't':  opt_print_tokens=1;  break;
+            case 'd':  opt_debug=1;  break;
         }  
     }  
 
@@ -41,13 +43,11 @@ int main(int argc, char* argv[]) {
       query_str=read_file(argv[1]);
     }
 
-    token_array_t *tokens=lex(query_str);
 
+
+    token_array_t *tokens=lex(query_str);
     free(query_str);
-    
-    
     if(opt_print_tokens) token_print(tokens);
-    
     process_queries(tokens);
     
     
