@@ -74,7 +74,7 @@ order_column_t *order_column_list_init(int length){
 
 void order_column_init(order_column_t *column){
     column->direction=TOKEN_ASC;
-    column->identity=0;
+    column->identifier=0;
     column->ordinal=0;
 }
 
