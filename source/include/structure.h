@@ -47,7 +47,7 @@ typedef struct join_t {
     conditions_t  * conditions;
 
     int ordinal;
-} group_column_t;
+} join_t;
 
 
 typedef struct where_expr_t {
