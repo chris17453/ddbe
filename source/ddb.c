@@ -49,8 +49,8 @@ int main(int argc, char* argv[]) {
     free(query_str);
     if(opt_debug) debug(tokens);
 
-    if(opt_print_tokens) token_print(tokens);
     process_queries(tokens);
+    if(opt_print_tokens) token_print(tokens);
     
     
     tokens_destroy(tokens);

@@ -107,6 +107,33 @@ void build_select(token_array_t *tokens,int start,int end){
                              break;
     }//end switch                
 
+    // select list
+    loop=0;
+    while(loop){
+        int index=0;
+        switch(token_at(tokens,i)->type){
+            // litterals
+            case TOKEN_STRING:
+            case TOKEN_NUMERIC:
+            case TOKEN_HEX:
+            case TOKEN_BINARY:
+            case TOKEN_REAL:
+            case TOKEN_NULL: data_column_t dc;
+                             dc.type=token_at(tokens,i)->type;
+                             dc.ordinal=index;
+                             ++index;
+                             break;
+
+
+
+            case TOKEN_QUALIFIER:      break;
+            case TOKEN_SOURCE:         break;
+            case TOKEN_LIST_DELIMITER: break;
+        }
+        // end switch
+    } // end while
+
+
   /*                                
                                  break;
             case TOKEN_WHERE:    break;
