@@ -116,8 +116,10 @@ void build_select(token_array_t *tokens,int start,int end){
                                       select.limit_length=token_at(tokens,i)->value;    
                                       break;
                                  
-            default: i++;  if (i>=end) break;
+            default: break;
         }//end switch
+        i++;
+        if (i>=end) loop=0;
     }
 
 
