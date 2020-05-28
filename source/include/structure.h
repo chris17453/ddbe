@@ -7,39 +7,54 @@
 
 
 typedef struct identifier_t {
-    char *qualifier;
-    char *source;
+    char * qualifier;
+    char * source;
 } identifier_t;
 
 typedef struct  data_column_t{
-    int   type;
-    int   ordinal;
-    void *object;
-    char *alias;
+    int    type;
+    int    ordinal;
+    void * object;
+    char * alias;
 } data_column_t;
 
 typedef struct order_column_t {
-    identifier_t *identity;
+    identifier_t * identity;
     int direction;
     int ordinal;
 } order_column_t;
 
 typedef struct group_column_t {
-    identifier_t *identity;
+    identifier_t * identity;
     int ordinal;
 } group_column_t;
 
+typedef struct conditions_t {
+    
+} conditions_t;
+
+
+typedef struct join_t {
+    int             type;
+    identifier_t  * identity;
+    char          * alias;
+    conditions_t  * conditions;
+
+    int ordinal;
+} group_column_t;
+
+
 typedef struct where_expr_t {
     int NOT;
-    token_t *tokens;
-    int comparitor;
-    int length;
-    int ordinal;
+    token_t * tokens;
+    int       comparitor;
+    int       length;
+    int       ordinal;
 } where_expr_t;
 
 typedef struct comparison_t {
-    identifier_t *identity;
-    int comparitor;
+    identifier_t * identity;
+    int            comparitor;
     //identifier_t *identity;
 } comparison_t;
 
