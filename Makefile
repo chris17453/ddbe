@@ -13,7 +13,7 @@ build-profile:
 
 run:
 	@echo builds/ddbc -d $(TEST_SQL)
-	@builds/ddbc -d $(TEST_SQL)
+	@builds/ddbc -d< $(TEST_SQL)
 
 go: build run
 
