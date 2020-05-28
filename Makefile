@@ -12,8 +12,8 @@ build-profile:
 	@/usr/bin/gcc -Wno-unused-variable -Wall -pg  builds/ddb.c  -o builds/ddbc
 
 run:
-	@echo builds/ddbc $(TEST_SQL)
-	@builds/ddbc $(TEST_SQL)
+	@echo builds/ddbc -d $(TEST_SQL)
+	@builds/ddbc -d $(TEST_SQL)
 
 go: build run
 
