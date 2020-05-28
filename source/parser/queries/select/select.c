@@ -209,6 +209,7 @@ void build_select(token_array_t *tokens,int start,int end){
                             }
                             ++i;
                             if(token_at(tokens,i)->type==TOKEN_ALIAS) {
+                                printf("SELECT ALIAS\n");
                                 select.alias=token_at(tokens,i)->value;
                                 ++i;
                             }
