@@ -106,7 +106,7 @@ group_column_t *group_column_list_init(int length){
 
 void group_column_init(group_column_t *column){
     column->ordinal=0;
-    column->identity=0;
+    column->identifier=0;
 }
 
 void add_group_column(select_t *obj){
