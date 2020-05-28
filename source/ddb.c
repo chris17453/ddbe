@@ -21,8 +21,8 @@ int main(int argc, char* argv[]) {
 
     int opt; 
   
-    int opt_print_tokens=1;
-    int opt_debug=0;
+    int opt_print_tokens=0;
+    int opt_debug=1;
     while((opt = getopt(argc, argv, ":if:lrx")) != -1) {  
         switch(opt)  {  
             case 't':  opt_print_tokens=1;  break;
