@@ -112,6 +112,7 @@ void build_select(token_array_t *tokens,int start,int end){
     int index=0;
     while(loop){
         data_column_t *dc;
+        identifier_t *ident;
         switch(token_at(tokens,i)->type){
             // litterals
             case TOKEN_STRING:
@@ -136,7 +137,7 @@ void build_select(token_array_t *tokens,int start,int end){
 
 
             case TOKEN_QUALIFIER:      
-                                       identifier_t *ident=safe_malloc(sizeof(identifier_t),1);
+                                       ident=safe_malloc(sizeof(identifier_t),1);
                                        ident->qualifier=token_at(tokens,i)->value;
                                        ident->source   =token_at(tokens,i+1)->value;
                                        i+=2;
@@ -156,7 +157,7 @@ void build_select(token_array_t *tokens,int start,int end){
             case TOKEN_SOURCE:         
             
             
-                                       identifier_t *ident=safe_malloc(sizeof(identifier_t),1);
+                                       ident=safe_malloc(sizeof(identifier_t),1);
                                        ident->qualifier=0;
                                        ident->source   =token_at(tokens,i+1)->value;
                                        ++i;
@@ -192,7 +193,7 @@ void build_select(token_array_t *tokens,int start,int end){
     // FROM
     switch(token_at(tokens,i)->type){
         case TOKEN_FROM:     ++i;
-                            identifier_t *ident=safe_malloc(sizeof(identifier_t),1);
+                            ident=safe_malloc(sizeof(identifier_t),1);
                             if(token_at(tokens,i)->type==TOKEN_QUALIFIER) {
                                 ident->qualifier=token_at(tokens,i)->value;
                                 i+=2;
