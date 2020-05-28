@@ -12,7 +12,9 @@ int expr_alias(token_array_t *tokens,int depth){
     int pos=tokens->position;
     if(compare_token(tokens,0,TOKEN_AS))
         if(compare_token(tokens,0,TOKEN_ALPHA)){        
+            token_delete(tokens,tokens->position-2);
             token_add_type(tokens,TOKEN_ALIAS,tokens->position-1);
+            token_set_type(tokens,TOKEN_ALIAS,tokens->position-1);
             return 1;
         }
 
