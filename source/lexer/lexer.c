@@ -348,7 +348,7 @@ void consolidate_tokens(token_array_t *tokens){
     token_combine(tokens,token8);
   
     token_print(tokens);
-    //process_queries(tokens);
+    process_queries(tokens);
 }
 
 void process_queries(token_array_t *tokens){
