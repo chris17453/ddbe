@@ -174,10 +174,14 @@ void build_select(token_array_t *tokens,int start,int end){
                                            dc->alias=0;
                                        }
                                        break;
+            default: loop=0;
+        }
+        switch(token_at(tokens,i)->type){
             case TOKEN_LIST_DELIMITER: ++i; 
                                        break;
             default: loop=0;
         }
+
         // end switch
     } // end while
     printf("select expressions: %d",index);
