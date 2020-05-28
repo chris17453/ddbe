@@ -226,6 +226,7 @@ void token_delete(token_array_t* tokens,int index) {
     
     memset (pos3_ptr,0,sizeof(token_t));
     free(buffer);
+    if(tokens->position>=index) tokens->position--;
     tokens->top--;
 } 
 
