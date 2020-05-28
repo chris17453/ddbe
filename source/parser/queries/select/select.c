@@ -208,6 +208,10 @@ void build_select(token_array_t *tokens,int start,int end){
                                 }
                             }
                             ++i;
+                            if(token_at(tokens,i)->type==TOKEN_ALIAS) {
+                                select.alias=token_at(tokens,i)->value;
+                                ++i;
+                            }
                             select.from=ident;
                             break;
 
@@ -263,6 +267,7 @@ void build_select(token_array_t *tokens,int start,int end){
             }
         }
     }
+   
     if (select.from) {
         printf("FROM");
         if(select.from->qualifier) {
