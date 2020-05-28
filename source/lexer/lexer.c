@@ -252,7 +252,8 @@ token_array_t *lex(char * query){
                     break;
             }//end switch
 
-          /*  //we are not addng whitespace stuffs
+            //we are not addng whitespace stuffs
+
             if (t!= TOKEN_WHITESPACE && 
                 t!=TOKEN_LINE_COMMENT && 
                 t!=TOKEN_BLOCK_COMMENT && 
@@ -267,10 +268,12 @@ token_array_t *lex(char * query){
                 token->value=new_token;
                 token_push(tokens,token);
             } else {
-                */
-                if(new_token) free(new_token);
+            
+                if(new_token) {
+                    free(new_token);
+                }
                 new_token=0;
-            //}
+            }
             
                 
             i+=skip;
