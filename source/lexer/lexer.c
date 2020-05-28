@@ -294,7 +294,7 @@ void token_combine(token_array_t *tokens,int *list){
 
                 tokens->array[start_index].type=combo_token;
                 int token_len=0;
-                printf("%d",i);
+                printf("---%d\n",i);
                 for(int w=0;w<length;w++) token_len+=strlen(tokens->array[start_index+w].value);
                 char *new_token=calloc(1,token_len+1);
                 
