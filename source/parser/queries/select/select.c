@@ -58,7 +58,7 @@ void build_select(token_array_t *tokens,int start,int end){
         if(t->type==TOKEN_WHERE) { printf("HAS WHERE\n");  }
         if(t->type==TOKEN_GROUP_BY) { printf("HAS GROUP_BY\n");  }
         if(t->type==TOKEN_ORDER_BY) { printf("HAS ORDER_BY\n");  }
-        if(t->type==TOKEN_LIMIT) { printf("HAS ORDER_BY\n");  }
+        if(t->type==TOKEN_LIMIT) { printf("HAS LIMIT\n");  }
         
 
     }
