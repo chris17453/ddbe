@@ -253,7 +253,7 @@ token_array_t *lex(char * query){
             }//end switch
 
             //we are not addng whitespace stuffs
-            if (new_token && t!= TOKEN_WHITESPACE && 
+            if (t!= TOKEN_WHITESPACE && 
                 t!=TOKEN_LINE_COMMENT && 
                 t!=TOKEN_BLOCK_COMMENT && 
                 t!=TOKEN_NEW_LINE &&
