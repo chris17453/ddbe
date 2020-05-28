@@ -30,7 +30,13 @@ typedef struct group_column_t {
 } group_column_t;
 
 typedef struct conditions_t {
+    int mode;
+    int not;
+    int negative;
+    int positive;
+    void *expr;
     
+
 } conditions_t;
 
 
