@@ -154,7 +154,7 @@ void token_set_type(token_array_t * arr,int type,int index){
 
 void tokens_destroy(token_array_t *tokens){
     for(int i=0;i<tokens->length;i++){
-        free(tokens->array[i].value);
+        if(tokens->array[i].value!=0) free(tokens->array[i].value);
     }
     free(tokens->array);
     free(tokens);
