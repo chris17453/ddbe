@@ -193,7 +193,7 @@ void build_select(token_array_t *tokens,int start,int end){
     // FROM
     switch(token_at(tokens,i)->type){
         case TOKEN_FROM:     ++i;
-                            ident=safe_malloc(sizeof(identifier_t),1);
+                            identifier_t *ident=safe_malloc(sizeof(identifier_t),1);
                             if(token_at(tokens,i)->type==TOKEN_QUALIFIER) {
                                 ident->qualifier=token_at(tokens,i)->value;
                                 i+=2;
