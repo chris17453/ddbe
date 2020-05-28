@@ -88,12 +88,12 @@ char *sub_str_cpy(char *data,int start,int length){
         //exit(EMPTY_STRING);
         return "?";
     }
-    char *buffer=malloc(length+1);
+    char *buffer=calloc(1,length+1);
+    
     if (buffer==NULL){
         ghost(ERR_MEMORY_ALLOCATION_ERR);
     }
 
-    memset(buffer,0,length+1);
     memcpy(buffer,&data[start],length);
 
     return buffer;
