@@ -268,5 +268,4 @@ void build_select(token_array_t *tokens,int start,int end){
     }
     free(select.columns);
     if(select.from) free(select.from);
-    free (select);
 }
