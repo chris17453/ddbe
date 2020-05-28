@@ -127,10 +127,10 @@ void build_select(token_array_t *tokens,int start,int end){
     if (select.from) {
         printf("FROM ");
         if(select.from->qualifier) {
-            printf("FROM %s.",select.from->qualifier);
+            printf("%s.",select.from->qualifier);
         }
         if(select.from->source) {
-            printf(".%s\n",select.from->source);
+            printf("%s\n",select.from->source);
         }
         
     }
