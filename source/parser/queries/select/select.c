@@ -124,6 +124,7 @@ void build_select(token_array_t *tokens,int start,int end){
                              dc=&select.columns[select.column_length-1];
                              dc->type=token_at(tokens,i)->type;
                              dc->ordinal=index;
+                             dc->object=token_at(tokens,i)->value;
                              ++index;
                              ++i;
                              if(token_at(tokens,i)->type==TOKEN_ALIAS){
@@ -246,7 +247,10 @@ void build_select(token_array_t *tokens,int start,int end){
                 case TOKEN_HEX:
                 case TOKEN_BINARY:
                 case TOKEN_REAL:
-                case TOKEN_NULL:  printf("%s-%s,%d\n",token_type(select.columns[i].type),(char*)select.columns[i].object ,select.columns[i].ordinal );
+                case TOKEN_NULL:  printf("%s-%s,%d\n",
+                                                        token_type(select.columns[i].type),
+                                                        (char*)select.columns[i].object ,
+                                                        select.columns[i].ordinal);
                                   break;
                 case TOKEN_QUALIFIER:
                 case TOKEN_SOURCE: 
