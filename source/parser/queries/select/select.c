@@ -147,7 +147,7 @@ void build_select(token_array_t *tokens,int start,int end){
 
     if (select.distinct) printf("DISTINCT\n");
     if (select.from) {
-        printf("FROM ");
+        printf("FROM \n");
         if(select.from->qualifier) {
             printf("%s.",select.from->qualifier);
         }
