@@ -154,9 +154,8 @@ void build_select(token_array_t *tokens,int start,int end){
                                            dc->alias=0;
                                        }
                                        break;
+
             case TOKEN_SOURCE:         
-            
-            
                                        ident=safe_malloc(sizeof(identifier_t),1);
                                        ident->qualifier=0;
                                        ident->source   =token_at(tokens,i+1)->value;
@@ -269,5 +268,5 @@ void build_select(token_array_t *tokens,int start,int end){
     }
     free(select.columns);
     if(select.from) free(select.from);
-    
+    free (select):
 }
