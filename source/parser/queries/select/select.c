@@ -123,8 +123,8 @@ void build_select(token_array_t *tokens,int start,int end){
     }
 
 
-    if (select.distinct) printf("DISTINCT");
-    if (select.has_limit_start) printf("LIMIT_START:   %d",select.limit_start);
-    if (select.has_limit_length) printf("LIMIT_LENGTH : %d",select.limit_length);
+    if (select.distinct) printf("DISTINCT\n");
+    if (select.has_limit_start) printf("LIMIT_START:   %d\n",select.limit_start);
+    if (select.has_limit_length) printf("LIMIT_LENGTH : %d\n",select.limit_length);
     
 }
