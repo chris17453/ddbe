@@ -23,7 +23,7 @@ int expr_limit(token_array_t *tokens,int depth){
                     token_add_type_range(tokens,TOKEN_LIMIT,pos);
 
                     token_delete(tokens,tokens->position-2);
-                    token_delete(tokens,tokens->position-3);
+                    token_delete(tokens,tokens->position-4);
 
                     return 1;
                 }                
