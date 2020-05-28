@@ -8,6 +8,7 @@
 #include "include/warp_gate.h"
 #include "include/lexer.h"
 #include "include/debug.h"
+#include <unistd.h>  
 
 
 void janitor(){
@@ -16,6 +17,18 @@ void janitor(){
 
 
 int main(int argc, char* argv[]) {
+
+
+    int opt; 
+  
+    int opt_print_tokens=0;
+    while((opt = getopt(argc, argv, ":if:lrx")) != -1) {  
+        switch(opt)  {  
+            case 't':  opt_print_tokens=1;  break;
+        }  
+    }  
+
+
     char *query_str;
     // if not a terminal grab from pipe
     if (!isatty(0)) {   
@@ -28,13 +41,16 @@ int main(int argc, char* argv[]) {
       query_str=read_file(argv[1]);
     }
 
-    gobble("main","Starting");
-    //printf("Query: \n\n%s\n --\n",query_str);
-    //match_function(query_str);
     token_array_t *tokens=lex(query_str);
 
     free(query_str);
-    consolidate_tokens(tokens);
+    
+    
+    if(opt_print_tokens) token_print(tokens);
+    
+    process_queries(tokens);
+    
+    
     tokens_destroy(tokens);
     atexit(janitor);
     return 0;

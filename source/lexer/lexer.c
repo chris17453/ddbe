@@ -273,6 +273,8 @@ token_array_t *lex(char * query){
             i+=skip;
         }//end new word
     }
+
+    consolidate_tokens(tokens);
     return tokens;
 
 }
@@ -346,9 +348,6 @@ void consolidate_tokens(token_array_t *tokens){
     token_combine(tokens,token6);
     token_combine(tokens,token7);
     token_combine(tokens,token8);
-  
-    token_print(tokens);
-    process_queries(tokens);
 }
 
 void process_queries(token_array_t *tokens){
