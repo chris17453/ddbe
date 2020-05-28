@@ -291,6 +291,9 @@ void token_combine(token_array_t *tokens,int *list){
             ++list_index;
             printf("---%d-%d\n",i,tokens->top);
             if(list_index==length){
+                for(int w=0;w<tokens->top;w++) {
+                    printf("%s\n",tokens->array[w].value);
+                }
                 int start_index=i-length+1;
 
                 tokens->array[start_index].type=combo_token;
