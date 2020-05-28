@@ -184,7 +184,26 @@ void build_select(token_array_t *tokens,int start,int end){
 
         // end switch
     } // end while
-    printf("select expressions: %d\n",index);
+
+
+    loop=1;
+    index=0;
+    while(loop){
+        switch(token_at(tokens,i)->type){
+            case TOKEN_JOIN:
+            case TOKEN_LEFT_JOIN:
+            case TOKEN_RIGHT_JOIN:
+            case TOKEN_FULL_OUTER_JOIN:
+            case TOKEN_INNER_JOIN: 
+                                    
+
+
+                                        break;
+
+            default: loop=0; 
+                     break;
+        }
+    }
 
 
   /*                                
