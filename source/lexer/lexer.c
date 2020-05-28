@@ -20,12 +20,13 @@ token_array_t *lex(char * query){
     int skip=0;
     char t=0;
     int buffer_len=0;
-    char *new_token=0;
     token_array_t *tokens=token_array(1000);
 
     if(1==1)
 
     for(int i=0;i<query_length;i++){
+        char *new_token=0;
+
         buffer_len=query_length-i;
         c=query[i];
 
