@@ -124,6 +124,16 @@ void build_select(token_array_t *tokens,int start,int end){
 
 
     if (select.distinct) printf("DISTINCT\n");
+    if (select.from) {
+        printf("FROM ");
+        if(select.from->qualifier) {
+            printf("FROM %s.",select.from->qualifier);
+        }
+        if(select.from->source) {
+            printf(".%s\n",select.from->source);
+        }
+        
+    }
     if (select.has_limit_start) printf("LIMIT_START:   %d\n",select.limit_start);
     if (select.has_limit_length) printf("LIMIT_LENGTH : %d\n",select.limit_length);
     
