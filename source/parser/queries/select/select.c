@@ -252,8 +252,7 @@ void build_select(token_array_t *tokens,int start,int end){
                                                         (char*)select.columns[i].object ,
                                                         select.columns[i].ordinal);
                                   break;
-                case TOKEN_QUALIFIER:
-                case TOKEN_SOURCE: 
+                case TOKEN_IDENTIFIER: 
                                   printf("%s- %s.%s ,%d\n",token_type(select.columns[i].type),
                                                             ((identifier_t *)select.columns[i].object)->qualifier ,
                                                             ((identifier_t *)select.columns[i].object)->source ,
