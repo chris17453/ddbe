@@ -50,28 +50,79 @@ token_t * token_at(token_array_t *tokens,int index){
     return &tokens->array[index];
 }
 
+
+int match_pattern(token_array_t *tokens,int *pattern,int position){
+    int length=&pattern[0];
+    
+    for(int p=0;p<length;p++){
+        int new_pos=p+position;
+        if (valid_token_index(tokens,new_pos)) {
+            if (pattern[p]!=token_at(tokens,new_pos)->type){
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 void build_select(token_array_t *tokens,int start,int end){
     int limit_length=0;
     int limit_start=0;
+    int loop=1;
+    int i=start;
+    int identity_2 []={3,TOKEN_ALPHA,TOKEN_LIST_DELIMITER,TOKEN_NUMERIC};
+    int limit_range[]={3,TOKEN_NUMERIC,TOKEN_LIST_DELIMITER,TOKEN_NUMERIC};
+    int limit[]      ={1,TOKEN_NUMERIC};
     
-    for(int i=start;i<end;i++) {
-        token_t *t=token_at(tokens,i);
-        if(t->type==TOKEN_SELECT)   { printf("SELECT\n");    }
-        if(t->type==TOKEN_DISTINCT) { printf("HAS FROM\n");  }
-        if(t->type==TOKEN_FROM)     { printf("HAS FROM\n");  }
-        if(t->type==TOKEN_WHERE)    { printf("HAS WHERE\n");  }
-        if(t->type==TOKEN_GROUP_BY) { printf("HAS GROUP_BY\n");  }
-        if(t->type==TOKEN_ORDER_BY) { printf("HAS ORDER_BY\n");  }
-        if(t->type==TOKEN_LIMIT)    { printf("HAS LIMIT\n");  }
+    
+    select_t select;
 
-        if(t->type==TOKEN_LIMIT_START)    { 
-            printf("HAS LIMIT START\n");
-            limit_start=atoi(t->value);
-        }
-        if(t->type==TOKEN_LIMIT_LENGTH)    { 
-            printf("HAS LIMIT LENGTH\n");
-            limit_length=atoi(t->value);
-        }
+    
+
+    while(loop){
+        token_t *t=token_at(tokens,i);
+        
+        switch(t->type){
+            case TOKEN_SELECT:   break;
+            case TOKEN_DISTINCT: select.distinct=1;         break;
+            case TOKEN_FROM:     ++i;
+                                 identifier_t ident;
+                                 if(token_at(tokens,i)->type==TOKEN_QUALIFIER) {
+                                     ident.qualifier=token_at(tokens,i)->value;
+                                     i+=2;
+                                     ident.source=token_at(tokens,i)->value;
+                                 } else {
+                                    if(token_at(tokens,i)->type==TOKEN_SOURCE) {
+                                     ident.source=token_at(tokens,i)->value;
+                                    }
+                                 }
+                                select.from=&ident;
+
+                                  
+                                 break;
+            case TOKEN_WHERE:    break;
+            case TOKEN_GROUP_BY: break;
+            case TOKEN_ORDER_BY: break;
+            
+
+
+            case TOKEN_LIMIT:         break;
+            case TOKEN_LIMIT_START:   select.has_limit_start=1;
+                                      select.limit_start=token_at(tokens,i)->value;
+                                      break;
+            case TOKEN_LIMIT_LENGTH:  select.has_limit_length=1;
+                                      select.limit_length=token_at(tokens,i)->value;    
+                                      break;
+                                 
+            default: i++;  if (i>=end) break;
+        }//end switch
     }
+
+
+    if (select.distinct) printf("DISTINCT");
+    if (select.has_limit_start) printf("LIMIT_START:   %d",select.limit_start);
+    if (select.has_limit_length) printf("LIMIT_LENGTH : %d",select.limit_length);
     
 }
