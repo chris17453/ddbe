@@ -95,7 +95,7 @@ void build_select(token_array_t *tokens,int start,int end){
     // switch        
     switch(token_at(tokens,i)->type){
         case TOKEN_SELECT:   ++i; break;
-        default:             printf("ERROR");
+        default:             printf("ERROR\n");
     }//end switch                
 
     // distinct
@@ -103,7 +103,7 @@ void build_select(token_array_t *tokens,int start,int end){
         case TOKEN_DISTINCT: select.distinct=1;         
                              ++i;
                              break;
-        default:             printf("NO DISTINCT");
+        default:             printf("NO DISTINCT\n");
                              break;
     }//end switch                
 
@@ -184,7 +184,7 @@ void build_select(token_array_t *tokens,int start,int end){
 
         // end switch
     } // end while
-    printf("select expressions: %d",index);
+    printf("select expressions: %d\n",index);
 
 
   /*                                
@@ -211,7 +211,7 @@ void build_select(token_array_t *tokens,int start,int end){
                             select.from=ident;
                             break;
 
-        default:    printf("NO FROM");
+        default:    printf("NO FROM\n");
                     break;
     }// end switch
     
