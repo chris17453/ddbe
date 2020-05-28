@@ -247,15 +247,17 @@ void build_select(token_array_t *tokens,int start,int end){
                 case TOKEN_HEX:
                 case TOKEN_BINARY:
                 case TOKEN_REAL:
-                case TOKEN_NULL:  printf("%s-%s,%d\n",
+                case TOKEN_NULL:  printf("%s-%s ALIAS %s%d\n",
                                                         token_type(select.columns[i].type),
                                                         (char*)select.columns[i].object ,
+                                                        select.columns[i].alias ,
                                                         select.columns[i].ordinal);
                                   break;
                 case TOKEN_IDENTIFIER: 
-                                  printf("%s- %s.%s ,%d\n",token_type(select.columns[i].type),
+                                  printf("%s- %s.%s ALIAS %s,%d\n",token_type(select.columns[i].type),
                                                             ((identifier_t *)select.columns[i].object)->qualifier ,
                                                             ((identifier_t *)select.columns[i].object)->source ,
+                                                            select.columns[i].alias ,
                                                             select.columns[i].ordinal );
                                     break;
             }
