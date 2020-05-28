@@ -108,7 +108,7 @@ void build_select(token_array_t *tokens,int start,int end){
     }//end switch                
 
     // select list
-    loop=0;
+    loop=1;
     int index=0;
     while(loop){
         data_column_t *dc;
