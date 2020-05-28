@@ -289,19 +289,12 @@ void token_combine(token_array_t *tokens,int *list){
     for(int i=0;i<tokens->top;i++){
         if(tokens->array[i].type==list[list_index]) {
             ++list_index;
-            printf("---%d-%d\n",i,tokens->top);
             if(list_index==length){
-                for(int w=0;w<tokens->top;w++) {
-                    printf("%s\n",tokens->array[w].value);
-                }
                 int start_index=i-length+1;
 
                 tokens->array[start_index].type=combo_token;
                 int token_len=0;
-                printf("-BINGO--%d\n",i);
                 for(int w=0;w<length;w++) {
-                    printf("-BING--%d\n",start_index+w);
-                    printf("%s\n",tokens->array[start_index+w].value);
                     token_len+=strlen(tokens->array[start_index+w].value);
                 }
                 char *new_token=calloc(1,token_len+1);
