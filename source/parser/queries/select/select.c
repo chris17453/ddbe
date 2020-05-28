@@ -236,6 +236,28 @@ void build_select(token_array_t *tokens,int start,int end){
     // DEBUGGING INFORMATION
 
     if (select.distinct) printf("DISTINCT\n");
+    if(select.columns){
+
+        for(int i=0;i<select.column_length;i++) {
+            switch(select.columns[i].type){
+
+                case TOKEN_STRING:
+                case TOKEN_NUMERIC:
+                case TOKEN_HEX:
+                case TOKEN_BINARY:
+                case TOKEN_REAL:
+                case TOKEN_NULL:  printf("%s-%s,%d\n",token_type(select.columns[i].type),(char*)select.columns[i].object ,select.columns[i].ordinal );
+                                  break;
+                case TOKEN_QUALIFIER:
+                case TOKEN_SOURCE: 
+                                  printf("%s- %s.%s ,%d\n",token_type(select.columns[i].type),
+                                                            ((identifier_t *)select.columns[i].object)->qualifier ,
+                                                            ((identifier_t *)select.columns[i].object)->source ,
+                                                            select.columns[i].ordinal );
+                                    break;
+            }
+
+    }
     if (select.from) {
         printf("FROM");
         if(select.from->qualifier) {
