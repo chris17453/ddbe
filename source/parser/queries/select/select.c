@@ -88,7 +88,7 @@ void build_select(token_array_t *tokens,int start,int end){
             case TOKEN_SELECT:   break;
             case TOKEN_DISTINCT: select.distinct=1;         break;
             case TOKEN_FROM:     ++i;
-                                 identifier_t *ident=safe_malloc(sizeof(identifier_t));
+                                 identifier_t *ident=safe_malloc(sizeof(identifier_t),1);
                                  if(token_at(tokens,i)->type==TOKEN_QUALIFIER) {
                                      ident->qualifier=token_at(tokens,i)->value;
                                      i+=2;
