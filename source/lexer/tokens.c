@@ -157,7 +157,7 @@ void tokens_destroy(token_array_t *tokens){
         if(tokens->array[i].value!=0) free(tokens->array[i].value);
         
         token_t *arr=&tokens->array[i];
-        if(arr==0) free (&tokens->array[i]);
+        free (&tokens->array[i]);
     }
     free(tokens->array);
     free(tokens);
