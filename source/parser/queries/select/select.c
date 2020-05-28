@@ -79,7 +79,7 @@ void build_select(token_array_t *tokens,int start,int end){
     
     select_t select;
 
-    
+    select.from=0;
 
     // switch        
     switch(token_at(tokens,i)->type){
@@ -147,7 +147,7 @@ void build_select(token_array_t *tokens,int start,int end){
 
     if (select.distinct) printf("DISTINCT\n");
     if (select.from) {
-        printf("FROM \n");
+        printf("FROM");
         if(select.from->qualifier) {
             printf("%s.",select.from->qualifier);
         }
