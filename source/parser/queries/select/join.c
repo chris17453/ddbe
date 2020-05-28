@@ -23,7 +23,7 @@ int expr_join(token_array_t *tokens,int depth){
         ghost(ERR_INVALID_JOIN_IDENTITY);
     }
 
-    if(expr_alias(tokens)) {
+    if(expr_alias(tokens,depth)) {
 
     }
     /*
