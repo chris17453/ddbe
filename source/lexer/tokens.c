@@ -180,12 +180,15 @@ int token_is_empty(token_array_t* tokens) {
 } 
   
 // Function to add an item to tokens.  It increases top by 1 
-void token_push(token_array_t* tokens, token_t *item) { 
+void token_push(token_array_t* tokens, int type,char *value) { 
     if (tokens->top == tokens->length - 1)  {
         ghost(ERR_TOKENS_FULL);
         return; 
     }
-    tokens->array[++tokens->top] = *item; 
+    ++tokens->top;
+    tokens->array[tokens->top].type=type;
+    tokens->array[tokens->top].value=value;
+    
     //printf("%d pushed to tokens\n", item); 
 } 
   
