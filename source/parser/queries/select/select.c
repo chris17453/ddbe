@@ -83,6 +83,14 @@ void build_select(token_array_t *tokens,int start,int end){
     select.where=0;
     select.order=0;
     select.group=0;
+    select.has_limit_length=0;
+    select.has_limit_start=0;
+    select.limit_start=0;
+    select.limit_length=0;
+    select.column_length=0;
+    select.where_length=0;
+    select.order_length=0;
+    select.group_length=0;
 
     // switch        
     switch(token_at(tokens,i)->type){
