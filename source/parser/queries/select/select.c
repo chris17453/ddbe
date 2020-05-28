@@ -271,6 +271,7 @@ void build_select(token_array_t *tokens,int start,int end){
         if(select.from->source) {
             printf("%s\n",select.from->source);
         }
+        if(select.alias) printf("ALIAS: %s",select.alias);
         
     }
     if (select.has_limit_start) printf("LIMIT_START:   %d\n",select.limit_start);
