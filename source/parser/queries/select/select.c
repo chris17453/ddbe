@@ -268,5 +268,6 @@ void build_select(token_array_t *tokens,int start,int end){
   //      select.columns->object;
     }
     free(select.columns);
+    if(select.from) free(select.from);
     
 }
