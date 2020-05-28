@@ -118,10 +118,10 @@ void build_select(token_array_t *tokens,int start,int end){
             case TOKEN_HEX:
             case TOKEN_BINARY:
             case TOKEN_REAL:
-            case TOKEN_NULL: data_column_t dc;
+            case TOKEN_NULL:/* data_column_t dc;
                              dc.type=token_at(tokens,i)->type;
                              dc.ordinal=index;
-                             ++index;
+                             ++index;*/
                              break;
 
 
