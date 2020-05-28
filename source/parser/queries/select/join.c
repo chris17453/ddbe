@@ -23,6 +23,10 @@ int expr_join(token_array_t *tokens,int depth){
         ghost(ERR_INVALID_JOIN_IDENTITY);
     }
 
+    if(expr_alias(tokens)) {
+
+    }
+    /*
     if(compare_token(tokens,0,TOKEN_AS)){
         if(compare_token(tokens,0,TOKEN_ALPHA)){
             token_add_type(tokens,TOKEN_ALIAS,tokens->position-1);
@@ -30,7 +34,7 @@ int expr_join(token_array_t *tokens,int depth){
         } else {
             ghost(ERR_INVALID_JOIN_ALIAS);
         }
-    }
+    }*/
 
     if(compare_token(tokens,0,TOKEN_ON)) {
         if(expr_expr(tokens,depth)){
