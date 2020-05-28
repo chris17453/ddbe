@@ -53,7 +53,12 @@ token_t * token_at(token_array_t *tokens,int index){
 void build_select(token_array_t *tokens,int start,int end){
     for(int i=start;i<end;i++) {
         token_t *t=token_at(tokens,i);
-        if(t->type==TOKEN_SELECT) { printf("ITs a select");  }
+        if(t->type==TOKEN_SELECT) { printf("ITs a select\n");  }
+        if(t->type==TOKEN_FROM) { printf("HAS FROM\n");  }
+        if(t->type==TOKEN_WHERE) { printf("HAS WHERE\n");  }
+        if(t->type==TOKEN_GROUP_BY) { printf("HAS GROUP_BY\n");  }
+        if(t->type==TOKEN_ORDER_BY) { printf("HAS ORDER_BY\n");  }
+        if(t->type==TOKEN_LIMIT) { printf("HAS ORDER_BY\n");  }
         
 
     }
