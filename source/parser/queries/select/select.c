@@ -18,7 +18,6 @@ int expr_select(token_array_t *tokens,int depth){
         }
         // not optional
         if(expr_select_expr(tokens,depth)){
-
         } else {
             tokens->position=pos;
             return 0;
@@ -26,12 +25,8 @@ int expr_select(token_array_t *tokens,int depth){
 
         
         if(expr_from(tokens,depth)){
-            
             while(expr_join(tokens,depth)){
-                //goop(depth,"join","GOT ONE");
             }
-
-
             if(expr_where(tokens,depth)){
             }
             if(expr_group_by(tokens,depth)){
@@ -42,11 +37,7 @@ int expr_select(token_array_t *tokens,int depth){
             }
         }
         token_add_type_range(tokens,TOKEN_SELECT,pos);
-
-
         build_select(tokens,pos,tokens->position);
-
-
         return 1;
     }
     
@@ -55,6 +46,16 @@ int expr_select(token_array_t *tokens,int depth){
     return 0;
 }
 
+token_t * token_at(token_array_t *tokens,int index){
+    return &tokens->array[index];
+}
+
 void build_select(token_array_t *tokens,int start,int end){
+    for(int i=start;i<end;i++) {
+        token_t *t=token_at(tokens,i);
+        if(t->type==TOKEN_SELECT) { printf("ITs a select");  }
+        
+
+    }
     
 }
