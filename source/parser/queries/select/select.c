@@ -110,10 +110,10 @@ void build_select(token_array_t *tokens,int start,int end){
 
             case TOKEN_LIMIT:         break;
             case TOKEN_LIMIT_START:   select.has_limit_start=1;
-                                      select.limit_start=token_at(tokens,i)->value;
+                                      select.limit_start=atoi(token_at(tokens,i)->value);
                                       break;
             case TOKEN_LIMIT_LENGTH:  select.has_limit_length=1;
-                                      select.limit_length=token_at(tokens,i)->value;    
+                                      select.limit_length=atoi(token_at(tokens,i)->value);    
                                       break;
                                  
             default: break;
