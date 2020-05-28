@@ -111,6 +111,7 @@ void build_select(token_array_t *tokens,int start,int end){
     loop=0;
     int index=0;
     while(loop){
+        data_column_t *dc;
         switch(token_at(tokens,i)->type){
             // litterals
             case TOKEN_STRING:
@@ -118,16 +119,17 @@ void build_select(token_array_t *tokens,int start,int end){
             case TOKEN_HEX:
             case TOKEN_BINARY:
             case TOKEN_REAL:
-            case TOKEN_NULL: data_column_t dc;
-                             dc.type=token_at(tokens,i)->type;
-                             dc.ordinal=index;
+            case TOKEN_NULL: add_data_column(&select);
+                             dc=&select.columns[select.column_length-1];
+                             dc->type=token_at(tokens,i)->type;
+                             dc->ordinal=index;
                              ++index;
                              ++i;
                              if(token_at(tokens,i)->type==TOKEN_ALIAS){
-                                 dc.alias=token_at(tokens,i)->value;
+                                 dc->alias=token_at(tokens,i)->value;
                                  ++i;
                              } else {
-                                 dc.alias=0;
+                                 dc->alias=0;
                              }
                              break;
 
@@ -138,16 +140,17 @@ void build_select(token_array_t *tokens,int start,int end){
                                        ident->qualifier=token_at(tokens,i)->value;
                                        ident->source   =token_at(tokens,i+1)->value;
                                        i+=2;
-                                       data_column_t dc;
-                                       dc.ordinal=index;
-                                       dc.type=TOKEN_IDENTIFIER;
-                                       dc.object=ident;
+                                       add_data_column(&select);
+                                       dc=&select.columns[select.column_length-1];
+                                       dc->ordinal=index;
+                                       dc->type=TOKEN_IDENTIFIER;
+                                       dc->object=ident;
                                        ++index;
                                        if(token_at(tokens,i)->type==TOKEN_ALIAS){
-                                           dc.alias=token_at(tokens,i)->value;
+                                           dc->alias=token_at(tokens,i)->value;
                                            ++i;
                                        } else {
-                                           dc.alias=0;
+                                           dc->alias=0;
                                        }
                                        break;
             case TOKEN_SOURCE:         
@@ -157,16 +160,17 @@ void build_select(token_array_t *tokens,int start,int end){
                                        ident->qualifier=0;
                                        ident->source   =token_at(tokens,i+1)->value;
                                        ++i;
-                                       data_column_t dc;
-                                       dc.ordinal=index;
-                                       dc.type=TOKEN_IDENTIFIER;
-                                       dc.object=ident;
+                                       add_data_column(&select);
+                                       dc=&select.columns[select.column_length-1];
+                                       dc->ordinal=index;
+                                       dc->type=TOKEN_IDENTIFIER;
+                                       dc->object=ident;
                                        ++index;
                                        if(token_at(tokens,i)->type==TOKEN_ALIAS){
-                                           dc.alias=token_at(tokens,i)->value;
+                                           dc->alias=token_at(tokens,i)->value;
                                            ++i;
                                        } else {
-                                           dc.alias=0;
+                                           dc->alias=0;
                                        }
                                        break;
             case TOKEN_LIST_DELIMITER: ++i; 
