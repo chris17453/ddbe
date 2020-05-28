@@ -259,15 +259,8 @@ token_array_t *lex(char * query){
                 t!=TOKEN_BLOCK_COMMENT && 
                 t!=TOKEN_NEW_LINE &&
                 t!=TOKEN_TAB) {
-                token_t *token=malloc(sizeof(token_t));
-                token->depth=0;
-                for(int i=0;i<TOKEN_MAX_DEPTH;i++) {
-                    token->expr[i]=0;
-                }
-                token->type=t;
-                token->value=new_token;
+                token_push(tokens,t,new_token);
                 new_token=0;
-                token_push(tokens,token);
             } else {
             
                 if(new_token) {

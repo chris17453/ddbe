@@ -137,7 +137,7 @@
     int              valid_token_index    (token_array_t *tokens,int index);
     int              token_is_full        (token_array_t * arr);
     int              token_is_empty       (token_array_t * arr);
-    void             token_push           (token_array_t * arr, int type,char *value);
+    void             token_push           (token_array_t * arr,int type,char *value);
     token_t          token_pop            (token_array_t * arr);
     token_t          token_peek           (token_array_t * arr);
     void             token_delete         (token_array_t* tokens,int index);
