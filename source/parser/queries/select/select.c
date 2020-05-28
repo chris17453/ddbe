@@ -109,8 +109,8 @@ void build_select(token_array_t *tokens,int start,int end){
 
     // select list
     loop=0;
+    int index=0;
     while(loop){
-        int index=0;
         switch(token_at(tokens,i)->type){
             // litterals
             case TOKEN_STRING:
@@ -118,20 +118,64 @@ void build_select(token_array_t *tokens,int start,int end){
             case TOKEN_HEX:
             case TOKEN_BINARY:
             case TOKEN_REAL:
-            case TOKEN_NULL:/* data_column_t dc;
+            case TOKEN_NULL: data_column_t dc;
                              dc.type=token_at(tokens,i)->type;
                              dc.ordinal=index;
-                             ++index;*/
+                             ++index;
+                             ++i;
+                             if(token_at(tokens,i)->type==TOKEN_ALIAS){
+                                 dc.alias=token_at(tokens,i)->value;
+                                 ++i;
+                             } else {
+                                 dc.alias=0;
+                             }
                              break;
 
 
 
-            case TOKEN_QUALIFIER:      break;
-            case TOKEN_SOURCE:         break;
-            case TOKEN_LIST_DELIMITER: break;
+            case TOKEN_QUALIFIER:      
+                                       identifier_t *ident=safe_malloc(sizeof(identifier_t),1);
+                                       ident->qualifier=token_at(tokens,i)->value;
+                                       ident->source   =token_at(tokens,i+1)->value;
+                                       i+=2;
+                                       data_column_t dc;
+                                       dc.ordinal=index;
+                                       dc.type=TOKEN_IDENTIFIER;
+                                       dc.object=ident;
+                                       ++index;
+                                       if(token_at(tokens,i)->type==TOKEN_ALIAS){
+                                           dc.alias=token_at(tokens,i)->value;
+                                           ++i;
+                                       } else {
+                                           dc.alias=0;
+                                       }
+                                       break;
+            case TOKEN_SOURCE:         
+            
+            
+                                       identifier_t *ident=safe_malloc(sizeof(identifier_t),1);
+                                       ident->qualifier=0;
+                                       ident->source   =token_at(tokens,i+1)->value;
+                                       ++i;
+                                       data_column_t dc;
+                                       dc.ordinal=index;
+                                       dc.type=TOKEN_IDENTIFIER;
+                                       dc.object=ident;
+                                       ++index;
+                                       if(token_at(tokens,i)->type==TOKEN_ALIAS){
+                                           dc.alias=token_at(tokens,i)->value;
+                                           ++i;
+                                       } else {
+                                           dc.alias=0;
+                                       }
+                                       break;
+            case TOKEN_LIST_DELIMITER: ++i; 
+                                       break;
+            default: loop=0;
         }
         // end switch
     } // end while
+    printf("select expressions: %d",index);
 
 
   /*                                
