@@ -205,7 +205,7 @@ void build_select(token_array_t *tokens,int start,int end){
                             select.alias=process_alias(tokens,&i);
                             break;
 
-        default:    printf("NO FROM\n");
+        default: loop=0; break;
                     break;
     }// end switch
     
