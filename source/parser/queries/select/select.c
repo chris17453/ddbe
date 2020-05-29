@@ -39,7 +39,6 @@ int expr_select(token_array_t *tokens,int depth){
             }
         }
         token_add_type_range(tokens,TOKEN_SELECT,pos);
-        printf("BUILD SELECT");
         build_select(tokens,pos,tokens->position);
         return 1;
     }
@@ -126,7 +125,7 @@ void build_select(token_array_t *tokens,int start,int end){
     select.order_length=0;
     select.group_length=0;
 
-    printf("select");
+    printf("select\n");
 
     // switch        
     switch(token_at(tokens,i)->type){
@@ -143,7 +142,7 @@ void build_select(token_array_t *tokens,int start,int end){
                              break;
     }//end switch                
 
-    printf("select list");
+    printf("select list\n");
 
     // select list
     loop=1;
@@ -203,7 +202,7 @@ void build_select(token_array_t *tokens,int start,int end){
     } // end while
 
 
-    printf("from");
+    printf("from\n");
     // from
     switch(token_at(tokens,i)->type){
         case TOKEN_FROM:     ++i;
