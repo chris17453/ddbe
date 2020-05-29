@@ -140,6 +140,8 @@ void build_select(token_array_t *tokens,int start,int end){
                              break;
     }//end switch                
 
+    printf("select list");
+
     // select list
     loop=1;
     int index=0;
@@ -198,6 +200,7 @@ void build_select(token_array_t *tokens,int start,int end){
     } // end while
 
 
+    printf("from");
     // from
     switch(token_at(tokens,i)->type){
         case TOKEN_FROM:     ++i;
