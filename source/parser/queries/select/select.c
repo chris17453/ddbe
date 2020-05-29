@@ -52,9 +52,9 @@ token_t * token_at(token_array_t *tokens,int index){
     return &tokens->array[index];
 }
 
-
+/*
 int match_pattern(token_array_t *tokens,int *pattern,int position){
-    int length=*pattern[0];
+    int length=&pattern[0];
     
     for(int p=0;p<length;p++){
         int new_pos=p+position;
@@ -68,6 +68,7 @@ int match_pattern(token_array_t *tokens,int *pattern,int position){
     }
     return 1;
 }
+*/
 
 identifier_t * process_identifier(token_array_t *tokens,int *index){
     identifier_t *ident;
