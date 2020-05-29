@@ -201,22 +201,8 @@ void build_select(token_array_t *tokens,int start,int end){
     // from
     switch(token_at(tokens,i)->type){
         case TOKEN_FROM:     ++i;
-                            identifier_t *ident=safe_malloc(sizeof(identifier_t),1);
-                            if(token_at(tokens,i)->type==TOKEN_QUALIFIER) {
-                                ident->qualifier=token_at(tokens,i)->value;
-                                ++i;
-                                ident->source=token_at(tokens,i)->value;
-                            } else {
-                                if(token_at(tokens,i)->type==TOKEN_SOURCE) {
-                                ident->source=token_at(tokens,i)->value;
-                                }
-                            }
-                            ++i;
-                            if(token_at(tokens,i)->type==TOKEN_ALIAS) {
-                                select.alias=token_at(tokens,i)->value;
-                                ++i;
-                            }
-                            select.from=ident;
+                            select.from=process_identifier(tokens,&i);
+                            select.alias=process_alias(tokens,&i);
                             break;
 
         default:    printf("NO FROM\n");
