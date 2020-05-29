@@ -324,7 +324,7 @@ void build_select(token_array_t *tokens,int start,int end){
                     printf("%s.",select.join[i].identifier->qualifier);
                 }
                 if(select.join[i].identifier->source) {
-                    printf("%s\n",select.join[i].identifier->qualifier);
+                    printf("%s\n",select.join[i].identifier->source);
                 }
                 if(select.join[i].alias) printf("ALIAS: %s",select.join[i].identifier->qualifier);
                 printf("\n");
