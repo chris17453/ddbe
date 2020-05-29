@@ -71,22 +71,22 @@ int match_pattern(token_array_t *tokens,int *pattern,int position){
 */
 
 identifier_t * process_identifier(token_array_t *tokens,int *index){
-    identifier_t *ident;
+    identifier_t *ident=0;
     switch(token_at(tokens,*index)->type) {
         case TOKEN_QUALIFIER:   ident=safe_malloc(sizeof(identifier_t),1);
                                 ident->qualifier=token_at(tokens,*index)->value;
                                 ident->source   =token_at(tokens,*index+1)->value;
                                 *index+=2;
-                                return ident;
+                                break;
 
         case TOKEN_SOURCE:         
                             ident=safe_malloc(sizeof(identifier_t),1);
                             ident->qualifier=0;
                             ident->source   =token_at(tokens,*index)->value;
                             ++*index;
-                            return ident;
+                            break;
     }
-    return 0;
+    return ident;
 }
 
 char *process_alias(token_array_t *tokens,int *index){
