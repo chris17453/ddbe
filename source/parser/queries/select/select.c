@@ -249,6 +249,7 @@ void build_select(token_array_t *tokens,int start,int end){
             case TOKEN_ORDER_BY: break;
 */            
 
+    printf("limit\n");
     // limit
     loop=1;
     while(loop){
