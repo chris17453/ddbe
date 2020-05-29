@@ -234,9 +234,9 @@ void build_select(token_array_t *tokens,int start,int end){
                                         
                                         join->identifier=process_identifier(tokens,&i);
                                         if(join->identifier) printf ("IDENT GOOD\n");
-                                        
-                                        join->alias=process_alias(tokens,&i);
 
+                                        join->alias=process_alias(tokens,&i);
+                                        if(join->alias) printf ("ALIAS GOOD\n");
 
                                         break;
 
