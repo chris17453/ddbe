@@ -232,8 +232,7 @@ void build_select(token_array_t *tokens,int start,int end){
                                         add_join(&select);
                                         join_t *join=&select.join[select.join_length-1];
                                         join->identifier=process_identifier(tokens,&i);
-
-                                        //join->alias=process_alias(tokens,&i);
+                                        join->alias=process_alias(tokens,&i);
 
 
                                         break;
