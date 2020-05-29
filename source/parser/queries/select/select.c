@@ -90,7 +90,7 @@ char *process_alias(token_array_t *tokens,int *index){
     char *alias=0;
     switch(token_at(tokens,*index)->type) {
         case TOKEN_ALIAS: alias=token_at(tokens,*index)->value; 
-                          ++index; break;
+                          ++*index; break;
     }
 
     return alias;
