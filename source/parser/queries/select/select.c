@@ -54,7 +54,7 @@ token_t * token_at(token_array_t *tokens,int index){
 
 
 int match_pattern(token_array_t *tokens,int *pattern,int position){
-    int length=&pattern[0];
+    int length=*pattern[0];
     
     for(int p=0;p<length;p++){
         int new_pos=p+position;
