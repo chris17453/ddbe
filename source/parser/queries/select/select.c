@@ -198,6 +198,33 @@ void build_select(token_array_t *tokens,int start,int end){
     } // end while
 
 
+    // from
+    switch(token_at(tokens,i)->type){
+        case TOKEN_FROM:     ++i;
+                            identifier_t *ident=safe_malloc(sizeof(identifier_t),1);
+                            if(token_at(tokens,i)->type==TOKEN_QUALIFIER) {
+                                ident->qualifier=token_at(tokens,i)->value;
+                                ++i;
+                                ident->source=token_at(tokens,i)->value;
+                            } else {
+                                if(token_at(tokens,i)->type==TOKEN_SOURCE) {
+                                ident->source=token_at(tokens,i)->value;
+                                }
+                            }
+                            ++i;
+                            if(token_at(tokens,i)->type==TOKEN_ALIAS) {
+                                select.alias=token_at(tokens,i)->value;
+                                ++i;
+                            }
+                            select.from=ident;
+                            break;
+
+        default:    printf("NO FROM\n");
+                    break;
+    }// end switch
+    
+
+    // join
     loop=1;
     index=0;
     while(loop){
@@ -230,33 +257,7 @@ void build_select(token_array_t *tokens,int start,int end){
             case TOKEN_ORDER_BY: break;
 */            
 
-    // FROM
-    switch(token_at(tokens,i)->type){
-        case TOKEN_FROM:     ++i;
-                            identifier_t *ident=safe_malloc(sizeof(identifier_t),1);
-                            if(token_at(tokens,i)->type==TOKEN_QUALIFIER) {
-                                ident->qualifier=token_at(tokens,i)->value;
-                                ++i;
-                                ident->source=token_at(tokens,i)->value;
-                            } else {
-                                if(token_at(tokens,i)->type==TOKEN_SOURCE) {
-                                ident->source=token_at(tokens,i)->value;
-                                }
-                            }
-                            ++i;
-                            if(token_at(tokens,i)->type==TOKEN_ALIAS) {
-                                select.alias=token_at(tokens,i)->value;
-                                ++i;
-                            }
-                            select.from=ident;
-                            break;
-
-        default:    printf("NO FROM\n");
-                    break;
-    }// end switch
-    
-
-
+    // limit
     loop=1;
     while(loop){
         switch(token_at(tokens,i)->type){
