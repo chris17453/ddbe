@@ -228,6 +228,7 @@ void build_select(token_array_t *tokens,int start,int end){
             case TOKEN_FULL_OUTER_JOIN:
             case TOKEN_INNER_JOIN: 
                                         printf("PRE ADD\n");
+                                        ++i;
                                         add_join(&select);
                                         join_t *join=&select.join[select.join_length-1];
                                         join->identifier=process_identifier(tokens,&i);
