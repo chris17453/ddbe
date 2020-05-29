@@ -347,8 +347,7 @@ void build_select(token_array_t *tokens,int start,int end){
             case TOKEN_BINARY:
             case TOKEN_REAL:
             case TOKEN_NULL: break;
-            case TOKEN_QUALIFIER:
-            case TOKEN_SOURCE: free(select.columns[i].object); break;
+            case TOKEN_IDENTIFIER: free(select.columns[i].object); break;
         }
 //        if(select.columns->type)
   //      select.columns->object;
