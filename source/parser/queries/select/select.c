@@ -67,22 +67,35 @@ int match_pattern(token_array_t *tokens,int *pattern,int position){
     return 1;
 }
 
-identifier_t * process_identifier(token_array_t *tokens,int index){
+identifier_t * process_identifier(token_array_t *tokens,int *index){
     identifier_t *ident;
     switch(token_at(tokens,index)->type) {
         case TOKEN_QUALIFIER:   ident=safe_malloc(sizeof(identifier_t),1);
                                 ident->qualifier=token_at(tokens,index)->value;
                                 ident->source   =token_at(tokens,index+1)->value;
+                                index+=2;
                                 return ident;
 
         case TOKEN_SOURCE:         
                             ident=safe_malloc(sizeof(identifier_t),1);
                             ident->qualifier=0;
                             ident->source   =token_at(tokens,index)->value;
+                            ++index;
                             return ident;
     }
     return 0;
 }
+
+char *process_alias(token_array_t *tokens,int *index){
+    char *alias=0;
+    switch(token_at(tokens,index)->type) {
+        case TOKEN_ALIAS: alias=token_at(tokens,index)->value; 
+                          index++; break;
+    }
+
+    return alias;
+}
+
 
 void build_select(token_array_t *tokens,int start,int end){
     int limit_length=0;
@@ -144,48 +157,31 @@ void build_select(token_array_t *tokens,int start,int end){
                              dc->object=token_at(tokens,i)->value;
                              ++index;
                              ++i;
-                             if(token_at(tokens,i)->type==TOKEN_ALIAS){
-                                 dc->alias=token_at(tokens,i)->value;
-                                 ++i;
-                             } else {
-                                 dc->alias=0;
-                             }
+                             dc->alias=process_alias(tokens,&i);
                              break;
 
 
 
             case TOKEN_QUALIFIER:      
-                                       ident=process_identifier(tokens,i);
-                                       i+=2;
+                                       ident=process_identifier(tokens,&i);
                                        add_data_column(&select);
                                        dc=&select.columns[select.column_length-1];
                                        dc->ordinal=index;
                                        dc->type=TOKEN_IDENTIFIER;
                                        dc->object=ident;
                                        ++index;
-                                       if(token_at(tokens,i)->type==TOKEN_ALIAS){
-                                           dc->alias=token_at(tokens,i)->value;
-                                           ++i;
-                                       } else {
-                                           dc->alias=0;
-                                       }
+                                       dc->alias=process_alias(tokens,&i);
                                        break;
 
             case TOKEN_SOURCE:         
-                                       ident=process_identifier(tokens,i);
-                                       ++i;
+                                       ident=process_identifier(tokens,&i);
                                        add_data_column(&select);
                                        dc=&select.columns[select.column_length-1];
                                        dc->ordinal=index;
                                        dc->type=TOKEN_IDENTIFIER;
                                        dc->object=ident;
                                        ++index;
-                                       if(token_at(tokens,i)->type==TOKEN_ALIAS){
-                                           dc->alias=token_at(tokens,i)->value;
-                                           ++i;
-                                       } else {
-                                           dc->alias=0;
-                                       }
+                                       dc->alias=process_alias(tokens,&i);
                                        break;
             default: loop=0;
         }
@@ -211,8 +207,9 @@ void build_select(token_array_t *tokens,int start,int end){
             case TOKEN_INNER_JOIN: 
                                         add_join(&select);
                                         join_t *join=&select.join[select.join_length-1];
-                                        join->identifier=process_identifier(tokens,i);
+                                        join->identifier=process_identifier(tokens,&i);
 
+                                        join->alias=process_alias(tokens,&i);
 
 
                                         break;
