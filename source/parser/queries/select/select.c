@@ -73,14 +73,14 @@ identifier_t * process_identifier(token_array_t *tokens,int *index){
         case TOKEN_QUALIFIER:   ident=safe_malloc(sizeof(identifier_t),1);
                                 ident->qualifier=token_at(tokens,*index)->value;
                                 ident->source   =token_at(tokens,*index+1)->value;
-                                *index+=2;
+                                index+=2;
                                 return ident;
 
         case TOKEN_SOURCE:         
                             ident=safe_malloc(sizeof(identifier_t),1);
                             ident->qualifier=0;
                             ident->source   =token_at(tokens,*index)->value;
-                            *++index;
+                            ++index;
                             return ident;
     }
     return 0;
@@ -90,7 +90,7 @@ char *process_alias(token_array_t *tokens,int *index){
     char *alias=0;
     switch(token_at(tokens,*index)->type) {
         case TOKEN_ALIAS: alias=token_at(tokens,*index)->value; 
-                          *++index; break;
+                          ++index; break;
     }
 
     return alias;
