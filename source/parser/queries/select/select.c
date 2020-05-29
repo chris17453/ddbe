@@ -4,6 +4,8 @@
 #include "../../../include/select.h"
 
 void build_select(token_array_t *tokens,int start,int end);
+int select_free(select_t select) ;
+void select_print(select_t select);
 
 int expr_select(token_array_t *tokens,int depth){
     ++depth;
@@ -272,6 +274,39 @@ void build_select(token_array_t *tokens,int start,int end){
 
 
     
+  select_print(select);
+  select_free(select);
+}
+
+int select_free(select_t select) {
+    // free resources
+    for(int i=0;i<select.column_length;i++) {
+        switch(select.columns[i].type){
+
+            case TOKEN_STRING:
+            case TOKEN_NUMERIC:
+            case TOKEN_HEX:
+            case TOKEN_BINARY:
+            case TOKEN_REAL:
+            case TOKEN_NULL: break;
+            case TOKEN_IDENTIFIER: free(select.columns[i].object); break;
+        }
+//        if(select.columns->type)
+  //      select.columns->object;
+    }
+    free(select.columns);
+    if(select.from) free(select.from);
+    for(int i=0;i<select.join_length;i++){
+        if(select.join[i].identifier){
+            free(select.join[i].identifier);
+        }
+
+    }
+    free(select.join);
+    return 0;
+}
+
+void select_print(select_t select){
     // DEBUGGING INFORMATION
 
     if (select.distinct) printf("DISTINCT\n");
@@ -335,36 +370,4 @@ void build_select(token_array_t *tokens,int start,int end){
 
     if (select.has_limit_start) printf("LIMIT_START:   %d\n",select.limit_start);
     if (select.has_limit_length) printf("LIMIT_LENGTH : %d\n",select.limit_length);
-
-  select_free(select);
-
-
-}
-
-int select_free(select_t select) {
-    // free resources
-    for(int i=0;i<select.column_length;i++) {
-        switch(select.columns[i].type){
-
-            case TOKEN_STRING:
-            case TOKEN_NUMERIC:
-            case TOKEN_HEX:
-            case TOKEN_BINARY:
-            case TOKEN_REAL:
-            case TOKEN_NULL: break;
-            case TOKEN_IDENTIFIER: free(select.columns[i].object); break;
-        }
-//        if(select.columns->type)
-  //      select.columns->object;
-    }
-    free(select.columns);
-    if(select.from) free(select.from);
-    for(int i=0;i<select.join_length;i++){
-        if(select.join[i].identifier){
-            free(select.join[i].identifier);
-        }
-
-    }
-    free(select.join);
-    return 0;
 }
