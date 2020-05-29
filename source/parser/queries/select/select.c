@@ -299,29 +299,35 @@ void build_select(token_array_t *tokens,int start,int end){
         }
     }
    
-    if (select.from) {
-        printf("FROM");
-        if(select.from->qualifier) {
-            printf("%s.",select.from->qualifier);
-        }
-        if(select.from->source) {
-            printf("%s\n",select.from->source);
-        }
-        if(select.alias) printf("ALIAS: %s",select.alias);
-        
-    }
+
      if (select.from) {
         printf("FROM");
         if(select.from->qualifier) {
             printf("%s.",select.from->qualifier);
         }
         if(select.from->source) {
-            printf("%s\n",select.from->source);
+            printf("%s",select.from->source);
+            if(select.alias) printf(" ALIAS: %s ",select.alias);
+            printf("\n");
         }
-        if(select.alias) printf("ALIAS: %s",select.alias);
         
     }
-   
+
+    if (select.join) {
+        printf("JOIN");
+        for(int i=0;i<select.join_length;i++){
+            if(select.join[i].identifier->qualifier) {
+                printf("%s.",select.join[i].identifier->qualifier);
+            }
+            if(select.join[i].identifier->source) {
+                printf("%s\n",select.join[i].identifier->qualifier);
+            }
+            if(select.join[i].alias) printf("ALIAS: %s",select.join[i].identifier->qualifier);
+            printf("\n");
+        }
+        
+    }
+
     if (select.has_limit_start) printf("LIMIT_START:   %d\n",select.limit_start);
     if (select.has_limit_length) printf("LIMIT_LENGTH : %d\n",select.limit_length);
 
