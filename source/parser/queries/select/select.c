@@ -351,7 +351,7 @@ void build_select(token_array_t *tokens,int start,int end){
     if(select.from) free(select.from);
     for(int i=0;i<select.join_length;i++){
         if(select.join[i].identifier){
-            free(select.join[i].identifier);
+            //free(select.join[i].identifier);
         }
 
     }
