@@ -69,7 +69,7 @@ int match_pattern(token_array_t *tokens,int *pattern,int position){
 
 identifier_t * process_identifier(token_array_t *tokens,int *index){
     identifier_t *ident;
-    switch(token_at(tokens,*index)->type) {
+    switch(token_at(tokens,index)->type) {
         case TOKEN_QUALIFIER:   ident=safe_malloc(sizeof(identifier_t),1);
                                 ident->qualifier=token_at(tokens,*index)->value;
                                 ident->source   =token_at(tokens,*index+1)->value;
