@@ -39,6 +39,7 @@ int expr_select(token_array_t *tokens,int depth){
             }
         }
         token_add_type_range(tokens,TOKEN_SELECT,pos);
+        printf("BUILD SELECT");
         build_select(tokens,pos,tokens->position);
         return 1;
     }
