@@ -3,6 +3,8 @@
 #include "../../../include/structure.h"
 #include "../../../include/select.h"
 
+void build_select(token_array_t *tokens,int start,int end);
+
 int expr_select(token_array_t *tokens,int depth){
     ++depth;
     #ifdef PARSE_ENTRANCE
