@@ -125,6 +125,8 @@ void build_select(token_array_t *tokens,int start,int end){
     select.order_length=0;
     select.group_length=0;
 
+    printf("select");
+
     // switch        
     switch(token_at(tokens,i)->type){
         case TOKEN_SELECT:   ++i; break;
