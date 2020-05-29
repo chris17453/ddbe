@@ -127,12 +127,10 @@ void build_select(token_array_t *tokens,int start,int end){
     select.order_length=0;
     select.group_length=0;
 
-    printf("select\n");
 
     // switch        
     switch(token_at(tokens,i)->type){
         case TOKEN_SELECT:   ++i; break;
-        default:             printf("ERROR\n");
     }//end switch                
 
     // distinct
@@ -140,11 +138,8 @@ void build_select(token_array_t *tokens,int start,int end){
         case TOKEN_DISTINCT: select.distinct=1;         
                              ++i;
                              break;
-        default:             printf("NO DISTINCT\n");
-                             break;
     }//end switch                
 
-    printf("select list\n");
 
     // select list
     loop=1;
@@ -204,16 +199,12 @@ void build_select(token_array_t *tokens,int start,int end){
     } // end while
 
 
-    printf("from\n");
     // from
     switch(token_at(tokens,i)->type){
         case TOKEN_FROM:     ++i;
                             select.from=process_identifier(tokens,&i);
                             select.alias=process_alias(tokens,&i);
                             break;
-
-        default: loop=0; break;
-                    break;
     }// end switch
     
 
@@ -255,7 +246,6 @@ void build_select(token_array_t *tokens,int start,int end){
             case TOKEN_ORDER_BY: break;
 */            
 
-    printf("limit\n");
     // limit
     loop=1;
     while(loop){
