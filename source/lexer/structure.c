@@ -11,10 +11,10 @@ select_t *select_new(){
     // sub elements
     obj->columns          =0;
     obj->from             =0;
+    obj->join             =0;
     obj->where            =0;
     obj->group            =0;
     obj->order            =0;
-
     // elements
     obj->alias            =0;
     obj->distinct         =0;
@@ -23,6 +23,7 @@ select_t *select_new(){
     
     // internal
     obj->column_length    =0;
+    obj->join_length      =0;
     obj->where_length     =0;
     obj->order_length     =0;
     obj->group_length     =0;
@@ -44,8 +45,8 @@ void data_column_init(data_column_t *column){
     column->ordinal=-1;
     column->type=-1;
 }
-// init a list of columns with 
 
+// init a list of columns with 
 void add_data_column(select_t *obj){
     // columns... create, copy, destroy old, replace
     // create
@@ -65,6 +66,49 @@ void add_data_column(select_t *obj){
     data_column_init(&obj->columns[obj->column_length]);
     ++obj->column_length;
 }
+
+
+
+
+
+// init a list of join's
+join_t *join_list_init(int length){
+    join_t *join =safe_malloc(sizeof(join_t),length);
+    return join;
+}
+
+void join_init(join_t *join){
+    join->alias=0;
+    join->conditions=0;
+    join->identifier=0;
+    join->ordinal=0;
+    join->type=0;
+}
+
+// init a list of columns with 
+void add_join(select_t *obj){
+    // columns... create, copy, destroy old, replace
+    // create
+    join_t *new_join=join_list_init(obj->join_length+1);
+    // if existing items exist
+    if(obj->join!=0) {
+        // copy
+        int data_size=sizeof(join_t)*obj->join_length;
+        memcpy(new_join,obj->join,data_size);
+        // destroy old
+        free(obj->join);
+    }
+
+    // replace
+    obj->join=new_join;
+    //init the newest column
+    join_init(&obj->join[obj->join_length]);
+    ++obj->join_length;
+}
+
+
+
+
 
 // init a list of columns with 
 order_column_t *order_column_list_init(int length){

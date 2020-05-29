@@ -209,9 +209,10 @@ void build_select(token_array_t *tokens,int start,int end){
             case TOKEN_RIGHT_JOIN:
             case TOKEN_FULL_OUTER_JOIN:
             case TOKEN_INNER_JOIN: 
-                                        join=safe_malloc(sizeof(join_t),1);
-                                        
+                                        add_join(&select);
+                                        join_t *join=&select.join[select.join_length-1];
                                         join->identifier=process_identifier(tokens,i);
+
 
 
                                         break;
@@ -314,6 +315,18 @@ void build_select(token_array_t *tokens,int start,int end){
         if(select.alias) printf("ALIAS: %s",select.alias);
         
     }
+     if (select.from) {
+        printf("FROM");
+        if(select.from->qualifier) {
+            printf("%s.",select.from->qualifier);
+        }
+        if(select.from->source) {
+            printf("%s\n",select.from->source);
+        }
+        if(select.alias) printf("ALIAS: %s",select.alias);
+        
+    }
+   
     if (select.has_limit_start) printf("LIMIT_START:   %d\n",select.limit_start);
     if (select.has_limit_length) printf("LIMIT_LENGTH : %d\n",select.limit_length);
 

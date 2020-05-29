@@ -104,6 +104,10 @@ typedef struct select_t{
     data_column_t  * data_column_list_init(int length);
     void             add_data_column(select_t *obj);
     void             data_column_init(data_column_t *column);
+    join_t          *join_list_init(int length);
+    void             join_init(join_t *join);
+    void             add_join(select_t *obj);
+
     order_column_t * order_column_list_init(int length);
     void             order_column_init(order_column_t *column);
     void             add_order_column(select_t *obj);
