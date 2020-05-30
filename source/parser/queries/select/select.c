@@ -393,8 +393,9 @@ expression_t * process_predicate(token_array_t *tokens,int *index){
  */
 expression_t * process_boolean_primary(token_array_t *tokens,int *index){
     expression_t *expr=0;
-
+    printf( "bool-- INDEX:%d\n",*index);
     expr=process_predicate(tokens,index);
+    printf( "bool== INDEX:%d\n",*index);
     if(expr){
         int token=token_at(tokens,*index)->type;
         switch(token) {
