@@ -719,7 +719,7 @@ void debug_expr(expression_t *expr,int depth){
     char pad[depth+1];
     for(int i=0;i<depth;i++) pad[i]=' ';
     pad[depth-1]=0;
-    printf("%s- expr:",expr->);
+    printf("%s- expr:");
     printf("%s  - mode:       %d ",pad,expr->mode);
     printf("%s  - list:       %d ",pad,expr->list);
     printf("%s  - not:        %d ",pad,expr->not);
