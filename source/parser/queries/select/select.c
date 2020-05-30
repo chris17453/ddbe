@@ -240,12 +240,14 @@ expression_t * process_simple_expr(token_array_t *tokens,int *index){
         if (mode== 1) expr->positive=1;
         if (mode==-1) expr->negative=1;
         expr->literal=litteral;
+        expr->mode=2;
     } else {
         identifier_t *ident=process_identifier(tokens,index);
         expr=safe_malloc(sizeof(expression_t),1);
         if(ident) {
             if (mode== 1) expr->positive=1;
             if (mode==-1) expr->negative=1;
+            expr->mode=1;
         }
         expr->identifier=ident;
     }
