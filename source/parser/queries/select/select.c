@@ -267,7 +267,7 @@ expression_t * process_bit_expr(token_array_t *tokens,int *index){
     expression_t *expr=0;
     expression_t *temp_expr=0;
 
-    
+    printf( "bit== INDEX:%d\n",*index);
     expr=process_simple_expr(tokens,index);
     if(expr){
         int loop=1;
@@ -286,7 +286,7 @@ expression_t * process_bit_expr(token_array_t *tokens,int *index){
                                     expression_t *expr2=process_simple_expr(tokens,index);
                                     //debug_expr(expr2,10);
                                      expr2->operator=operator;
-                                    printf( "INDEX*:%d\n",index);
+                                    printf( "INDEX*:%d\n",*index);
                                     if(!add_expr(expr,expr2)){
                                         --*index;
                                         loop=0;
