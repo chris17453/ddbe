@@ -334,7 +334,7 @@ expression_t * process_expr_list(token_array_t *tokens,int *index){
 /* Function: process_predicate
  * -----------------------
  * match an bit_expression with a "list" or pass 
- *          an bit_expresion
+ *          an bit_expression
  * 
  * returns: nested list of expression_t if matched
  *          index pointer is incremented +n on match
