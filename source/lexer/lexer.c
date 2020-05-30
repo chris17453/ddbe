@@ -358,9 +358,9 @@ void consolidate_tokens(token_array_t *tokens){
     //identity update
     int length=tokens->top;
     for(int i=0;i<tokens->top;i++) {
-        if(&tokens->array[i].type== TOKEN_ALPHA) {
-            if(length>1 && &tokens->array[i+1].type== TOKEN_DOT){
-                if(length>2 && &tokens->array[i+2].type== TOKEN_ALPHA){
+        if(tokens->array[i].type== TOKEN_ALPHA) {
+            if(length>1 && tokens->array[i+1].type== TOKEN_DOT){
+                if(length>2 && tokens->array[i+2].type== TOKEN_ALPHA){
                     tokens->array[i].type=TOKEN_QUALIFIER;
                     tokens->array[i+2].type=TOKEN_SOURCE;
                     i+=2;
