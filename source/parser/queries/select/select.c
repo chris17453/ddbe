@@ -267,14 +267,14 @@ expression_t * process_bit_expr(token_array_t *tokens,int *index){
     if(expr){
         int operator=token_at(tokens,*index)->type;
         switch(operator) {
-            case TOKEN_BIT_OR : break;
-            case TOKEN_BIT_AND : break;
-            case TOKEN_SHIFT_LEFT : break;
-            case TOKEN_SHIFT_RIGHT : break; 
-            case TOKEN_PLUS :  break;
-            case TOKEN_MINUS : break;
-            case TOKEN_MULTIPLY : break;
-            case TOKEN_DIVIDE : break;
+            case TOKEN_BIT_OR : 
+            case TOKEN_BIT_AND : 
+            case TOKEN_SHIFT_LEFT :
+            case TOKEN_SHIFT_RIGHT :
+            case TOKEN_PLUS : 
+            case TOKEN_MINUS : 
+            case TOKEN_MULTIPLY :
+            case TOKEN_DIVIDE : 
             case TOKEN_MODULUS :  ++*index;
                                   if(add_expr(expr,process_bit_expr(tokens,index))){
                                       expr->operator=operator;
