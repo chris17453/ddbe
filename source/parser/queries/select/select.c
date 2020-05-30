@@ -131,6 +131,7 @@ void add_expr(expression_t *expression,expression_t *item){
         expression->expression=item;
         expression->expression_tail=item;
     } else {
+        expression->expression_tail->expression=item;
         expression->expression_tail=item;
     }
 }
