@@ -199,14 +199,15 @@ identifier_t * process_identifier(token_array_t *tokens,int *index){
  */
 token_t * process_litteral(token_array_t *tokens,int *index){
     token_t *token=token_at(tokens,*index);
+    token_t *temp_token=0;
     switch(token->type) {
         case TOKEN_NULL   :
         case TOKEN_HEX    :
         case TOKEN_BINARY :
         case TOKEN_STRING :
         case TOKEN_NUMERIC:
-        case TOKEN_REAL   : token_t *temp_token=duplicate_token(tokens,*index); 
-                            ++*index; 
+        case TOKEN_REAL   : temp_token=duplicate_token(tokens,*index); 
+                            if (temp_token) ++index;
                             return temp_token;
     }
     return 0;
