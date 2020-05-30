@@ -276,7 +276,7 @@ expression_t * process_bit_expr(token_array_t *tokens,int *index){
             case TOKEN_MULTIPLY : break;
             case TOKEN_DIVIDE : break;
             case TOKEN_MODULUS :  ++*index;
-                                  if(add_expr(expr,process_simple_expr(tokens,index))){
+                                  if(add_expr(expr,process_bit_expr(tokens,index))){
                                       expr->operator=operator;
                                   } else { 
                                       --*index;
@@ -391,7 +391,7 @@ expression_t * process_boolean_primary(token_array_t *tokens,int *index){
             case TOKEN_GREATER    :
             case TOKEN_NOT_EQ     :
             case TOKEN_ASSIGNMENT : ++*index;
-                                    if(add_expr(expr,process_boolean_primary(tokens,index))){
+                                    if(add_expr(expr,process_predicate(tokens,index))){
                                         expr->expression_tail->comparitor=token; 
                                     } else { 
                                         --*index;
