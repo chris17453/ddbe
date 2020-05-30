@@ -286,7 +286,7 @@ expression_t * process_bit_expr(token_array_t *tokens,int *index){
                                     expression_t *expr2=process_simple_expr(tokens,index);
                                     //debug_expr(expr2,10);
                                      expr2->operator=operator;
-                                    printf( "INDEX*:%d",index);
+                                    printf( "INDEX*:%d\n",&index);
                                     if(!add_expr(expr,expr2)){
                                         --*index;
                                         loop=0;
@@ -297,7 +297,7 @@ expression_t * process_bit_expr(token_array_t *tokens,int *index){
             }
         }
     }
-    printf( "INDEX:%d",index);
+    printf( "INDEX:%d\n",&index);
     return expr;
 } // end func
 
