@@ -695,6 +695,7 @@ void select_print(select_t select){
 
     if (select.join) {
         printf("JOIN %d\n",select.join_length);
+        return;
         for(int i=0;i<select.join_length;i++){
             printf("JOIN... IDENT\n");
             if(select.join[i].identifier) {
