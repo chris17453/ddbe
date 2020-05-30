@@ -21,6 +21,7 @@ void            debug_expr             (expression_t *expr,int depth);
 
 void            process_select(token_array_t *tokens,int start,int end);
 int             select_free(select_t select) ;
+void            free_expression(expression_t *expr);
 void            select_print(select_t select);
 
 /* Function: expr_select
@@ -325,7 +326,7 @@ expression_t * process_expr_list(token_array_t *tokens,int *index){
 
     switch(token_at(tokens,*index)->type) {
         case TOKEN_PAREN_RIGHT: ++*index;
-        default: *index=start_point; return 0;
+        default: *index=start_point; free_expression(expr); return 0;
     }
     
     return expr;
@@ -399,8 +400,6 @@ expression_t * process_boolean_primary(token_array_t *tokens,int *index){
     }
     return expr;
 } // end func
-
-
 
 /* Function: process_expression
  * -----------------------
@@ -655,6 +654,9 @@ int select_free(select_t select) {
     return 0;
 }
 
+void free_expression(expression_t *expr){
+
+}
 /* Function: select_print
  * -----------------------
  * visibly print the select data structure
