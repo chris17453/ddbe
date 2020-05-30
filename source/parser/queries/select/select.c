@@ -698,10 +698,7 @@ void select_print(select_t select){
     if (select.join) {
         printf("JOIN %d\n",select.join_length);
         for(int i=0;i<select.join_length;i++){
-            printf("JOIN... IDENT\n");
             if(select.join[i].identifier) {
-                printf("JOIN IDENT\n");
-                
                 if(select.join[i].identifier->qualifier) {
                     printf("%s.",select.join[i].identifier->qualifier);
                 }
@@ -711,7 +708,7 @@ void select_print(select_t select){
                 if(select.join[i].alias) printf("ALIAS: %s",select.join[i].alias);
                 printf("\n");
             }
-            //debug_expr(select.join[i].expression,0);
+            debug_expr(select.join[i].expression,0);
         }
         
     }
