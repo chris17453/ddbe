@@ -79,7 +79,7 @@ join_t *join_list_init(int length){
 
 void join_init(join_t *join){
     join->alias=0;
-    join->expression;
+    join->expression=0;
     join->identifier=0;
     join->ordinal=0;
     join->type=0;

@@ -284,7 +284,7 @@ expression_t * process_bit_expr(token_array_t *tokens,int *index){
  */
 expression_t * process_expr_list(token_array_t *tokens,int *index){
     expression_t *expr=0;
-    int start_point=index;
+    int start_point=*index;
 
     switch(token_at(tokens,*index)->type) {
         case TOKEN_PAREN_LEFT: ++*index;
@@ -383,7 +383,7 @@ expression_t * process_boolean_primary(token_array_t *tokens,int *index){
                                     expr->expression=process_predicate(tokens,index);
                                     if(expr->expression==0)  --*index;
                                     else { 
-                                        expr->comparitor==token; 
+                                        expr->comparitor=token; 
                                     }
                                     break;
         }
