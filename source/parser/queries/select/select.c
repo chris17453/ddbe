@@ -265,29 +265,35 @@ expression_t * process_simple_expr(token_array_t *tokens,int *index){
  */
 expression_t * process_bit_expr(token_array_t *tokens,int *index){
     expression_t *expr=0;
+    expression_t *temp_expr=0;
 
+    
     expr=process_simple_expr(tokens,index);
     if(expr){
-        int operator=token_at(tokens,*index)->type;
-        switch(operator) {
-            case TOKEN_BIT_OR : 
-            case TOKEN_BIT_AND : 
-            case TOKEN_SHIFT_LEFT :
-            case TOKEN_SHIFT_RIGHT :
-            case TOKEN_PLUS : 
-            case TOKEN_MINUS : 
-            case TOKEN_MULTIPLY :
-            case TOKEN_DIVIDE : 
-            case TOKEN_MODULUS :  ++*index;
-                                  expression_t *expr2=process_bit_expr(tokens,**index);
-                                  //debug_expr(expr2,10);
-                                  if(add_expr(expr,expr2)){
-                                      expr->operator=operator;
-                                  } else { 
-                                      --*index;
-                                  }
-                                  break;
+        int loop=1;
+        while(loop) {
+            int operator=token_at(tokens,*index)->type;
+            switch(operator) {
+                case TOKEN_BIT_OR : 
+                case TOKEN_BIT_AND : 
+                case TOKEN_SHIFT_LEFT :
+                case TOKEN_SHIFT_RIGHT :
+                case TOKEN_PLUS : 
+                case TOKEN_MINUS : 
+                case TOKEN_MULTIPLY :
+                case TOKEN_DIVIDE : 
+                case TOKEN_MODULUS :  ++*index;
+                                    expression_t *expr2=process_simple_expr(tokens,index);
+                                    //debug_expr(expr2,10);
+                                    if(add_expr(expr,expr2)){
+                                        expr->operator=operator;
+                                    } else { 
+                                        --*index;
+                                        loop=0;
+                                    }
+                                    break;
 
+            }
         }
     }
     return expr;
