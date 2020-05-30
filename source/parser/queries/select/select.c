@@ -563,7 +563,6 @@ void process_select(token_array_t *tokens,int start,int end){
                                         join->alias=process_alias(tokens,&i);
                                         switch(token_at(tokens,i)->type){
                                             case TOKEN_ON: ++i; 
-                                                            printf("JL %d\n",select.join_length);
                                                            join->expression=process_expression(tokens,&i);
                                                            if(join->expression==0)  {
                                                                printf("NO JOIN EXPRESSION\n");
@@ -698,7 +697,6 @@ void select_print(select_t select){
 
     if (select.join) {
         printf("JOIN %d\n",select.join_length);
-        return;
         for(int i=0;i<select.join_length;i++){
             printf("JOIN... IDENT\n");
             if(select.join[i].identifier) {
