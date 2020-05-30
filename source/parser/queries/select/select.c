@@ -403,8 +403,10 @@ expression_t * process_boolean_primary(token_array_t *tokens,int *index){
             case TOKEN_NOT_EQ     :
             case TOKEN_ASSIGNMENT : ++*index;
                                     expression_t *expr2=process_predicate(tokens,index);
+                                    debug_expr(expr2,10);
                                     if(expr2) expr2->comparitor=token; 
                                     if(add_expr(expr,expr2)){
+
                                     } else { 
                                         printf("DARNING\n");
                                         --*index;
