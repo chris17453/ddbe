@@ -125,7 +125,7 @@ char * copy_token_value_at(token_array_t *tokens,int index){
 void add_expr(expression_t *expression,expression_t *item){
     if(item==0) return;
 
-    if(expression->expr==0) {
+    if(expression->expression==0) {
         expression->expression=item;
         expression->expression_tail=&item->expression;
     } else {
