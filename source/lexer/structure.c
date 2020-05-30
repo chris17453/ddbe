@@ -83,6 +83,7 @@ void join_init(join_t *join){
     join->identifier=0;
     join->ordinal=0;
     join->type=0;
+
 }
 
 // init a list of columns with 
