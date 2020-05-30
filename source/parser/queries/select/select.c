@@ -282,6 +282,7 @@ expression_t * process_bit_expr(token_array_t *tokens,int *index){
                                   if(add_expr(expr,process_bit_expr(tokens,index))){
                                       expr->operator=operator;
                                   } else { 
+                                      printf("HAD A OPERATOR... \n");
                                       --*index;
                                   }
                                   break;
