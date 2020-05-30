@@ -116,7 +116,7 @@ char * copy_token_value_at(token_array_t *tokens,int index){
         char *value=tokens->array[index].value;
         if(value) return strdup(value);
     }
-    printf("ERROR: COPYING INVALID POSITION %d",index);
+    printf("ERROR: COPYING INVALID POSITION %d\n",index);
     return 0;
 } // end func
 
@@ -558,7 +558,16 @@ void process_select(token_array_t *tokens,int start,int end){
                                         join_t *join=&select.join[select.join_length-1];
                                         join->identifier=process_identifier(tokens,&i);
                                         join->alias=process_alias(tokens,&i);
+                                        switch(token_at(tokens,i)->type){
+                                            case TOKEN_ON: ++i; 
+                                                           join->expression=process_expression(tokens,&i);
+                                                           if(join->expression==0)  {
+                                                               printf("NO JOIN EXPRESSION\n")
+                                                           }
+                                                           break;
+                                        }//end switch                
 
+                                        
                                         
 
                                         break;
@@ -642,7 +651,7 @@ void select_print(select_t select){
     // DEBUGGING INFORMATION
 
     if (select.distinct) printf("DISTINCT\n");
-    if(select.columns){
+    if (select.columns){
 
         for(int i=0;i<select.column_length;i++) {
             switch(select.columns[i].type){
