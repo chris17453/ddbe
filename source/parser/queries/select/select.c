@@ -280,7 +280,7 @@ expression_t * process_bit_expr(token_array_t *tokens,int *index){
             case TOKEN_DIVIDE : 
             case TOKEN_MODULUS :  ++*index;
                                   if(add_expr(expr,process_bit_expr(tokens,index))){
-                                      printf("GOT A OPERATOR... \n");
+                                      printf("GOT  A OPERATOR... \n");
                                       expr->operator=operator;
                                   } else { 
                                       printf("HAD A OPERATOR... \n");
