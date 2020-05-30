@@ -708,7 +708,7 @@ void select_print(select_t select){
                 if(select.join[i].alias) printf("ALIAS: %s",select.join[i].alias);
                 printf("\n");
             }
-            //debug_expr(select.join[i].expression,0);
+            debug_expr(select.join[i].expression,0);
         }
         
     }
@@ -740,6 +740,6 @@ void debug_expr(expression_t *expr,int depth){
         printf("%s - Litteral: %s: %s\n",pad,token_type(expr->literal->type),expr->literal->value);
     }
 
-    if(expr->expression) debug_expr(expr->expression,depth+1);
+    //if(expr->expression) debug_expr(expr->expression,depth+1);
 
 }
