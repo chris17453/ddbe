@@ -411,7 +411,7 @@ expression_t * process_boolean_primary(token_array_t *tokens,int *index){
                                     if(add_expr(expr,expr2)){
 
                                     } else { 
-                                        printf("DARNING\n");
+                                        printf("WARNING %d %s %s\n",*index,token_type(token_at(tokens,index)->type),token_at(tokens,index)->value);
                                         --*index;
                                     }
                                     break;
