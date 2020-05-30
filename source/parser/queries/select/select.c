@@ -243,13 +243,13 @@ expression_t * process_simple_expr(token_array_t *tokens,int *index){
         expr->mode=2;
     } else {
         identifier_t *ident=process_identifier(tokens,index);
-        expr=safe_malloc(sizeof(expression_t),1);
         if(ident) {
+            expr=safe_malloc(sizeof(expression_t),1);
             if (mode== 1) expr->positive=1;
             if (mode==-1) expr->negative=1;
             expr->mode=1;
+            expr->identifier=ident;
         }
-        expr->identifier=ident;
     }
 
    return expr;
@@ -272,7 +272,6 @@ expression_t * process_bit_expr(token_array_t *tokens,int *index){
     expr=process_simple_expr(tokens,index);
     
     if(expr){
-        expr->mode=34;
         int loop=1;
         while(loop) {
             int operator=token_at(tokens,*index)->type;
