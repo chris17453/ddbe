@@ -719,10 +719,12 @@ void select_print(select_t select){
 
 
 void debug_expr(expression_t *expr,int depth){
-    char *pad=" ";
-    //char pad[depth+1];
-    //for(int i=0;i<depth;i++) pad[i]=' ';
-    //pad[depth-1]=0;
+    
+    char *pad="";
+    if(depth>0) pad=safe_malloc(depth+1,1)
+
+    for(int i=0;i<depth;i++) pad[i]=' ';
+    
     printf("%s- expr:\n",pad);
     printf("%s  - mode:       %d \n",pad,expr->mode);
     printf("%s  - list:       %d \n",pad,expr->list);
