@@ -359,7 +359,7 @@ void consolidate_tokens(token_array_t *tokens){
     for(int i=0;i<tokens->top;i++) {
         if(tokens->array[i].type== TOKEN_AS) {
             token_delete(tokens,i);
-            if(tokens->top-i>1 && tokens->array[i+1].type==TOKEN_ALPHA){
+            if(tokens->top-i>1 && tokens->array[i].type==TOKEN_ALPHA){
                 tokens->array[i].type=TOKEN_ALIAS;
             }
         } 
