@@ -369,7 +369,7 @@ void process_queries(token_array_t *tokens){
         } 
     }
     if(tokens->position<tokens->top){
-        printf("Limit:%d\n",tokens->top);
+        printf("\nToken Count:%d\n",tokens->top);
 
         printf ("error: unknown text at position :%d %s >>> %s  <<< \n",tokens->position,token_type(tokens->array[tokens->position].type),tokens->array[tokens->position].value);
         token_print(tokens);

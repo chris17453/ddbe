@@ -31,7 +31,8 @@ void            select_print(select_t select);
  * 
  * returns: select_t object if a match is found
  *          returns zero (NULL) otherwise
- */int expr_select(token_array_t *tokens,int depth){
+ */
+int expr_select(token_array_t *tokens,int depth){
     ++depth;
     #ifdef PARSE_ENTRANCE
     goop(depth,"SELECT","IN");
