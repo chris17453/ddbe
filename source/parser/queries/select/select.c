@@ -205,7 +205,9 @@ token_t * process_litteral(token_array_t *tokens,int *index){
         case TOKEN_BINARY :
         case TOKEN_STRING :
         case TOKEN_NUMERIC:
-        case TOKEN_REAL   : ++*index; return duplicate_token(tokens,*index);
+        case TOKEN_REAL   : token_t *temp_token=duplicate_token(tokens,*index); 
+                            ++*index; 
+                            return temp_token;
     }
     return 0;
 } // end func
