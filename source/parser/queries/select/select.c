@@ -279,7 +279,7 @@ expression_t * process_bit_expr(token_array_t *tokens,int *index){
             case TOKEN_MULTIPLY :
             case TOKEN_DIVIDE : 
             case TOKEN_MODULUS :  ++*index;
-                                  expression_t *expr2=process_bit_expr(tokens,&index);
+                                  expression_t *expr2=process_bit_expr(tokens,index);
                                   //debug_expr(expr2,10);
                                   if(add_expr(expr,expr2)){
                                       expr->operator=operator;
