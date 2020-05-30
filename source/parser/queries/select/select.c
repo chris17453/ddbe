@@ -7,7 +7,7 @@
 token_t       * token_at               (token_array_t *tokens,int  index);
 token_t       * duplicate_token        (token_array_t *tokens,int  index);
 char          * copy_token_value_at    (token_array_t *tokens,int  index);
-void            add_expr               (expression_t *expression,expression_t *item);
+int             add_expr               (expression_t *expression,expression_t *item);
 char          * process_alias          (token_array_t *tokens,int *index);
 token_t       * process_litteral       (token_array_t *tokens,int *index);
 expression_t  * process_simple_expr    (token_array_t *tokens,int *index);
@@ -123,9 +123,9 @@ char * copy_token_value_at(token_array_t *tokens,int index){
     return 0;
 } // end func
 
-void add_expr(expression_t *expression,expression_t *item){
+int add_expr(expression_t *expression,expression_t *item){
     printf("ADDING\n");
-    if(item==0) return;
+    if(item==0) 0;
 
     if(expression->expression==0) {
         expression->expression=item;
@@ -134,6 +134,7 @@ void add_expr(expression_t *expression,expression_t *item){
         expression->expression_tail->expression=item;
         expression->expression_tail=item;
     }
+    return 1;
 }
 
 /* Function: process_alias
@@ -275,8 +276,7 @@ expression_t * process_bit_expr(token_array_t *tokens,int *index){
             case TOKEN_MULTIPLY : break;
             case TOKEN_DIVIDE : break;
             case TOKEN_MODULUS :  ++*index;
-                                  add_expr(expr,process_simple_expr(tokens,index));
-                                  if(expr->expression_tail) {
+                                  if(add_expr(expr,process_simple_expr(tokens,index))){
                                       expr->operator=operator;
                                   } else { 
                                       --*index;
@@ -353,11 +353,10 @@ expression_t * process_predicate(token_array_t *tokens,int *index){
             case TOKEN_IN     : mode=1;  
             case TOKEN_NOT_IN : mode=-1; 
                                 ++*index;
-                                  add_expr(expr,process_expr_list(tokens,index));
-                                  if(expr->expression_tail) {
+                                  if(add_expr(expr,process_expr_list(tokens,index))){
                                       if(mode== 1) expr->not_in=1;
                                       else if(mode==-1) expr->in=1;
-                                  } else { 
+                                  } else {
                                       --*index;
                                   }
                                   break;
@@ -392,10 +391,10 @@ expression_t * process_boolean_primary(token_array_t *tokens,int *index){
             case TOKEN_GREATER    :
             case TOKEN_NOT_EQ     :
             case TOKEN_ASSIGNMENT : ++*index;
-                                    add_expr(expr,process_predicate(tokens,index));
-                                    if(expr->expression_tail==0)  --*index;
-                                    else { 
+                                    if(add_expr(expr,process_predicate(tokens,index))){
                                         expr->expression_tail->comparitor=token; 
+                                    else { 
+                                        --*index;
                                     }
                                     break;
         }
@@ -428,12 +427,10 @@ expression_t * process_expression(token_array_t *tokens,int *index){
             case TOKEN_SHORT_OR  :
             case TOKEN_AND       : 
             case TOKEN_OR        : ++*index;
-                                add_expr(expr,process_expression(tokens,index));
-                                
-                                if(expr->expression_tail==0) {
-                                    --*index;
-                                } else {
+                                if(add_expr(expr,process_expression(tokens,index))){
                                     expr->comparitor=token;
+                                } else {
+                                    --*index;
                                 }
                                 break;
         } //end switch
