@@ -361,7 +361,7 @@ void consolidate_tokens(token_array_t *tokens){
 void process_queries(token_array_t *tokens){
     int loop=1;
     while(loop){
-        process_select(tokens);
+        process_select(tokens,tpkens->position,tokens->top);
         //expr_select(tokens,1);
         
         if(!compare_token(tokens,0,TOKEN_DELIMITER)){
