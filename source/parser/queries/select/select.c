@@ -268,7 +268,6 @@ expression_t * process_bit_expr(token_array_t *tokens,int *index){
     expression_t *expr=0;
     expression_t *temp_expr=0;
 
-    printf( "bit== INDEX:%d\n",*index);
     expr=process_simple_expr(tokens,index);
     if(expr){
         int loop=1;
@@ -287,7 +286,6 @@ expression_t * process_bit_expr(token_array_t *tokens,int *index){
                                     expression_t *expr2=process_simple_expr(tokens,index);
                                     //debug_expr(expr2,10);
                                      expr2->operator=operator;
-                                    printf( "INDEX*:%d\n",*index);
                                     if(!add_expr(expr,expr2)){
                                         --*index;
                                         loop=0;
@@ -360,9 +358,7 @@ expression_t * process_expr_list(token_array_t *tokens,int *index){
 expression_t * process_predicate(token_array_t *tokens,int *index){
     expression_t *expr=0;
 
-    printf( "pred-- INDEX:%d\n",*index);
     expr=process_bit_expr(tokens,index);
-    printf( "pred== INDEX:%d\n",*index);
 
    /*
     if(expr){
@@ -394,9 +390,7 @@ expression_t * process_predicate(token_array_t *tokens,int *index){
  */
 expression_t * process_boolean_primary(token_array_t *tokens,int *index){
     expression_t *expr=0;
-    printf( "bool-- INDEX:%d\n",*index);
     expr=process_predicate(tokens,index);
-    printf( "bool== INDEX:%d\n",*index);
     if(expr){
         int token=token_at(tokens,*index)->type;
         switch(token) {
@@ -410,14 +404,10 @@ expression_t * process_boolean_primary(token_array_t *tokens,int *index){
             case TOKEN_GREATER    :
             case TOKEN_NOT_EQ     :
             case TOKEN_ASSIGNMENT : ++*index;
-
-                                    printf( "bool== INDEX:%d\n",*index);
                                     expression_t *expr2=process_predicate(tokens,index);
                                     expr2->comparitor=token; 
                                     if(add_expr(expr,expr2)){
-                                        printf( "I KNOW");
                                     } else { 
-                                        printf( "I DONT KNOW");
                                         --*index;
                                     }
                                     break;
