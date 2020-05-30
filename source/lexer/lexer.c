@@ -365,6 +365,7 @@ void consolidate_tokens(token_array_t *tokens){
                     tokens->array[i+2].type=TOKEN_SOURCE;
                     i+=2;
                     continue;
+                }
             }
             tokens->array[i].type=TOKEN_SOURCE;
         } 
