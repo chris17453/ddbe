@@ -374,7 +374,8 @@ void consolidate_tokens(token_array_t *tokens){
                 if(length>2 && tokens->array[i+2].type== TOKEN_ALPHA){
                     tokens->array[i].type=TOKEN_QUALIFIER;
                     tokens->array[i+2].type=TOKEN_SOURCE;
-                    i+=2;
+                    token_delete(tokens,i+1);
+                    ++i;
                     continue;
                 }
             }
