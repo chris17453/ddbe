@@ -719,7 +719,7 @@ void debug_expr(expression_t *expr,int depth){
     char pad[depth+1];
     for(int i=0;i<depth;i++) pad[i]=' ';
     pad[depth-1]=0;
-    printf("%s- expr:");
+    printf("%s- expr:",pad);
     printf("%s  - mode:       %d ",pad,expr->mode);
     printf("%s  - list:       %d ",pad,expr->list);
     printf("%s  - not:        %d ",pad,expr->not);
@@ -730,7 +730,7 @@ void debug_expr(expression_t *expr,int depth){
     printf("%s  - comparitor: %d ",pad,expr->comparitor);
     printf("%s  - operator:   %d ",pad,expr->operator);
     if(expr->identifier){
-        printf("%s - Identifier: %s.%s",pad,token_type(expr->identifier->qualifier),expr->identifier->source);
+        printf("%s - Identifier: %s.%s",pad,expr->identifier->qualifier,expr->identifier->source);
     }
     if(expr->literal) {
         printf("%s - Litteral: %s: %s",pad,token_type(expr->literal->type),expr->literal->value);
