@@ -207,7 +207,7 @@ token_t * process_litteral(token_array_t *tokens,int *index){
         case TOKEN_STRING :
         case TOKEN_NUMERIC:
         case TOKEN_REAL   : temp_token=duplicate_token(tokens,*index); 
-                            if (temp_token) ++index;
+                            if (temp_token) ++*index;
                             return temp_token;
     }
     return 0;
