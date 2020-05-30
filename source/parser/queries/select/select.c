@@ -612,7 +612,7 @@ void process_select(token_array_t *tokens,int start,int end){
     }
 
 
-printf("join \n");
+    printf("where \n");
     // join
     loop=1;
     index=0;
@@ -764,7 +764,7 @@ void select_print(select_t select){
         printf(" ---WHERE---")
         debug_expr(select.where,0)
     }
-    
+
     if (select.has_limit_start) printf("LIMIT_START:   %d\n",select.limit_start);
     if (select.has_limit_length) printf("LIMIT_LENGTH : %d\n",select.limit_length);
 }
