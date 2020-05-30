@@ -341,8 +341,7 @@ void consolidate_tokens(token_array_t *tokens){
     int token9 [] ={2,TOKEN_GROUP_BY        ,TOKEN_GROUP         ,TOKEN_BY                       };
     int token10[] ={2,TOKEN_ORDER_BY        ,TOKEN_ORDER         ,TOKEN_BY                       };
     int token11[] ={2,TOKEN_IS_NULL         ,TOKEN_IS            ,TOKEN_NULL                     };
-
-
+    
    // starts with a dot... REAL        
     token_combine(tokens,token1);
     token_combine(tokens,token2);
@@ -355,6 +354,24 @@ void consolidate_tokens(token_array_t *tokens){
     token_combine(tokens,token9);
     token_combine(tokens,token10);
     token_combine(tokens,token11);
+
+    //identity update
+    int length=tokens->top;
+    for(int i=0;i<tokens->top;i++) {
+        if(&tokens->array[i].type== TOKEN_ALPHA) {
+            if(length>1 && &tokens->array[i+1].type== TOKEN_DOT){
+                if(length>2 && &tokens->array[i+2].type== TOKEN_ALPHA){
+                    tokens->array[i].type=TOKEN_QUALIFIER;
+                    tokens->array[i+2].type=TOKEN_SOURCE;
+                    i+=2;
+                    continue;
+            }
+            tokens->array[i].type=TOKEN_SOURCE;
+        } 
+        length--;
+    }
+
+
 
 }
 
