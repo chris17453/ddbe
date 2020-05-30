@@ -359,7 +359,10 @@ expression_t * process_expr_list(token_array_t *tokens,int *index){
 expression_t * process_predicate(token_array_t *tokens,int *index){
     expression_t *expr=0;
 
+    printf( "pred-- INDEX:%d\n",*index);
     expr=process_bit_expr(tokens,index);
+    printf( "pred== INDEX:%d\n",*index);
+
    /*
     if(expr){
         int mode=0;
