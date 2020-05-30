@@ -59,14 +59,6 @@ typedef struct join_t {
 } join_t;
 
 
-typedef struct where_expr_t {
-    int NOT;
-    token_t * tokens;
-    int       comparitor;
-    int       length;
-    int       ordinal;
-} where_expr_t;
-
 typedef struct comparison_t {
     identifier_t * identity;
     int            comparitor;
@@ -88,7 +80,7 @@ typedef struct select_t{
         data_column_t   * columns;
         identifier_t    * from;
         join_t          * join;
-        where_expr_t    * where;
+        expression_t    * where;
         order_column_t  * order;
         group_column_t  * group;
         

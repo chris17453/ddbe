@@ -475,9 +475,6 @@ void process_select(token_array_t *tokens,int start,int end){
     int limit_start=0;
     int loop=1;
     int i=start;
-    int identity_2 []={3,TOKEN_ALPHA,TOKEN_LIST_DELIMITER,TOKEN_NUMERIC};
-    int limit_range[]={3,TOKEN_NUMERIC,TOKEN_LIST_DELIMITER,TOKEN_NUMERIC};
-    int limit[]      ={1,TOKEN_NUMERIC};
     
     
     select_t select;
@@ -615,9 +612,23 @@ void process_select(token_array_t *tokens,int start,int end){
     }
 
 
+printf("join \n");
+    // join
+    loop=1;
+    index=0;
+    while(loop){
+        join_t *join;
+        switch(token_at(tokens,i)->type){
+            case WHERE: ++i;
+                        select.where=process_expression(tokens,&i);
+                        break;
+            default: loop=0; 
+                     break;
+        }
+    }
+
+
   /*                                
-                                 break;
-            case TOKEN_WHERE:    break;
             case TOKEN_GROUP_BY: break;
             case TOKEN_ORDER_BY: break;
 */            
@@ -749,7 +760,11 @@ void select_print(select_t select){
         }
         
     }
-
+    if(select.where) {
+        printf(" ---WHERE---")
+        debug_expr(select.where,0)
+    }
+    
     if (select.has_limit_start) printf("LIMIT_START:   %d\n",select.limit_start);
     if (select.has_limit_length) printf("LIMIT_LENGTH : %d\n",select.limit_length);
 }
