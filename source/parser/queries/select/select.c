@@ -7,6 +7,7 @@
 token_t       * token_at               (token_array_t *tokens,int  index);
 token_t       * duplicate_token        (token_array_t *tokens,int  index);
 char          * copy_token_value_at    (token_array_t *tokens,int  index);
+void          * add_expr               (expresison_t *expression,expression_t *item);
 char          * process_alias          (token_array_t *tokens,int *index);
 token_t       * process_litteral       (token_array_t *tokens,int *index);
 expression_t  * process_simple_expr    (token_array_t *tokens,int *index);
@@ -120,6 +121,17 @@ char * copy_token_value_at(token_array_t *tokens,int index){
     printf("ERROR: COPYING INVALID POSITION %d\n",index);
     return 0;
 } // end func
+
+void add_expr(expresison_t *expression,expression_t *item){
+    if(item==0) return;
+
+    if(expression->expr==0) {
+        expression->expr=item;
+        expression->expression_tail=&item->expression;
+    } else {
+        expression->expression_tail=&item;
+    }
+}
 
 /* Function: process_alias
  * -----------------------
@@ -260,8 +272,8 @@ expression_t * process_bit_expr(token_array_t *tokens,int *index){
             case TOKEN_MULTIPLY : break;
             case TOKEN_DIVIDE : break;
             case TOKEN_MODULUS :  ++*index;
-                                  expr->expression=process_simple_expr(tokens,index);
-                                  if(expr->expression) {
+                                  add_expr(expr,process_simple_expr(tokens,index));
+                                  if(expr->expression_tail) {
                                       expr->operator=operator;
                                   } else { 
                                       --*index;
@@ -300,13 +312,9 @@ expression_t * process_expr_list(token_array_t *tokens,int *index){
         if(temp_expr==0) {
             break;
         }
-        if(expr==0) {
-            expr=temp_expr;
-            expr->list=1;
-        } else {
-            expr->expression=temp_expr;
-            expr->expression->list=1;
-        }
+        
+        temp_expr->list=1;
+        add_expr(expr,temp_expr);
         
 
         switch(token_at(tokens,*index)->type) {
@@ -342,8 +350,8 @@ expression_t * process_predicate(token_array_t *tokens,int *index){
             case TOKEN_IN     : mode=1;  
             case TOKEN_NOT_IN : mode=-1; 
                                 ++*index;
-                                  expr->expression=process_expr_list(tokens,index);
-                                  if(expr->expression) {
+                                  add_expr(expr,process_expr_list(tokens,index));
+                                  if(expr->expression_tail) {
                                       if(mode== 1) expr->not_in=1;
                                       else if(mode==-1) expr->in=1;
                                   } else { 
@@ -381,16 +389,18 @@ expression_t * process_boolean_primary(token_array_t *tokens,int *index){
             case TOKEN_GREATER    :
             case TOKEN_NOT_EQ     :
             case TOKEN_ASSIGNMENT : ++*index;
-                                    expr->expression=process_predicate(tokens,index);
-                                    if(expr->expression==0)  --*index;
+                                    add_expr(expr,process_predicate(tokens,index));
+                                    if(expr->expression_tail==0)  --*index;
                                     else { 
-                                        expr->expression->comparitor=token; 
+                                        expr->expression_tail->comparitor=token; 
                                     }
                                     break;
         }
     }
     return expr;
 } // end func
+
+
 
 /* Function: process_expression
  * -----------------------
@@ -417,8 +427,9 @@ expression_t * process_expression(token_array_t *tokens,int *index){
             case TOKEN_SHORT_OR  :
             case TOKEN_AND       : 
             case TOKEN_OR        : ++*index;
-                                expr->expression=process_expression(tokens,index);
-                                if(expr->expression==0) {
+                                add_expr(expr,process_expression(tokens,index));
+                                
+                                if(expr->expression_tail==0) {
                                     --*index;
                                 } else {
                                     expr->comparitor=token;

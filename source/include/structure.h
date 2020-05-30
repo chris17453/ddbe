@@ -44,6 +44,7 @@ typedef struct expression_t{
     identifier_t *identifier;
     token_t      *literal;
     struct expression_t *expression;
+    struct expression_t *expression_tail
 } expression_t;
 
 
