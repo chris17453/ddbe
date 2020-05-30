@@ -446,7 +446,7 @@ void process_select(token_array_t *tokens,int start,int end){
     int limit[]      ={1,TOKEN_NUMERIC};
     
     
-    select_t *select;
+    select_t select;
     select.columns=0;
     select.from=0;
     select.join=0;
