@@ -358,6 +358,7 @@ expression_t * process_predicate(token_array_t *tokens,int *index){
     expression_t *expr=0;
 
     expr=process_bit_expr(tokens,index);
+   /*
     if(expr){
         int mode=0;
         switch(token_at(tokens,*index)->type) {
@@ -372,7 +373,7 @@ expression_t * process_predicate(token_array_t *tokens,int *index){
                                   }
                                   break;
         }
-    }
+    }*/
     return expr;
 } // end func
 
@@ -427,6 +428,8 @@ expression_t * process_boolean_primary(token_array_t *tokens,int *index){
 expression_t * process_expression(token_array_t *tokens,int *index){
     expression_t *expr=0;
     // NOT
+    
+    
     int not=0;
     switch(token_at(tokens,*index)->type) {
             case TOKEN_NOT : ++*index; not=1; break;
