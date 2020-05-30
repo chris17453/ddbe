@@ -450,6 +450,8 @@ expression_t * process_expression(token_array_t *tokens,int *index){
             case TOKEN_SHORT_OR  :
             case TOKEN_AND       : 
             case TOKEN_OR        : ++*index;
+                                printf( "bool AND-- INDEX:%d\n",*index);
+    
                                 if(add_expr(expr,process_expression(tokens,index))){
                                     expr->comparitor=token;
                                 } else {
