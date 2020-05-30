@@ -384,7 +384,7 @@ expression_t * process_boolean_primary(token_array_t *tokens,int *index){
                                     expr->expression=process_predicate(tokens,index);
                                     if(expr->expression==0)  --*index;
                                     else { 
-                                        expr->comparitor=token; 
+                                        expr->expression->comparitor=token; 
                                     }
                                     break;
         }
