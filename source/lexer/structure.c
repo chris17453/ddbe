@@ -175,41 +175,6 @@ void add_group_column(select_t *obj){
 }
 
 
-// init a list of columns with 
-where_expr_t *where_expr_list_init(int length){
-    where_expr_t *expr =safe_malloc(sizeof(where_expr_t),length);
-    return expr;
-}
-
-void where_expr_init(where_expr_t *exp){
-    exp->NOT=0;
-    exp->length=0;
-    exp->comparitor=0;
-    exp->ordinal=0;
-    exp->tokens=0;
-}
-
-void add_where_expr(select_t *obj){
-    // columns... create, copy, destroy old, replace
-    // create
-    where_expr_t *new_expr=where_expr_list_init(obj->where_length+1);
-    // if existing items exist
-    if(obj->where!=0) {
-        // copy
-        int data_size=sizeof(where_expr_t)*obj->where_length;
-        memcpy(new_expr,obj->where,data_size);
-        // destroy old
-        free(obj->where);
-    }
-
-    // replace
-    obj->where=new_expr;
-    //init the newest expr
-    where_expr_init(&obj->where[obj->where_length]);
-    ++obj->where_length;
-}
-
-
 void set_distinct(select_t *obj){
     obj->distinct=1;
 }
