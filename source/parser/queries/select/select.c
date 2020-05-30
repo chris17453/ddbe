@@ -270,7 +270,9 @@ expression_t * process_bit_expr(token_array_t *tokens,int *index){
     expression_t *temp_expr=0;
 
     expr=process_simple_expr(tokens,index);
+    
     if(expr){
+        expr->mode=34;
         int loop=1;
         while(loop) {
             int operator=token_at(tokens,*index)->type;
