@@ -125,7 +125,6 @@ char * copy_token_value_at(token_array_t *tokens,int index){
 } // end func
 
 int add_expr(expression_t *expression,expression_t *item){
-    printf("ADDING\n");
     if(item==0) return 0;
 
     if(expression->expression==0) {
