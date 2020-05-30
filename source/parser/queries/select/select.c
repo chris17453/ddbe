@@ -122,7 +122,7 @@ char * copy_token_value_at(token_array_t *tokens,int index){
     return 0;
 } // end func
 
-void add_expr(expresison_t *expression,expression_t *item){
+void add_expr(expressison_t *expression,expression_t *item){
     if(item==0) return;
 
     if(expression->expr==0) {
