@@ -113,7 +113,7 @@ token_t * token_at(token_array_t *tokens,int index){
  */
 char * copy_token_value_at(token_array_t *tokens,int index){
     if(valid_token_index(tokens,index)){
-        char *value=&tokens->array[index].value;
+        char *value=tokens->array[index].value;
         if(value) return strdup(value);
         return 0;
     }
@@ -424,15 +424,12 @@ expression_t * process_expression(token_array_t *tokens,int *index){
     return expr;
 } //end func
 
-
-
 /* Function: process_select
  * -----------------------
  * process
  * 
  * returns: nothing. All output is via stdio
  */
-
 void process_select(token_array_t *tokens,int start,int end){
     int limit_length=0;
     int limit_start=0;
