@@ -758,6 +758,7 @@ void select_print(select_t select){
 void debug_expr(expression_t *expr,int depth){
     if(expr==0) {
         printf ("Expression NULL\n");
+        return;
     }
     char *pad="";
     if(depth>0) pad=safe_malloc(depth+1,1);
