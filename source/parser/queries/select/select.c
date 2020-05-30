@@ -391,7 +391,8 @@ expression_t * process_boolean_primary(token_array_t *tokens,int *index){
             case TOKEN_GREATER    :
             case TOKEN_NOT_EQ     :
             case TOKEN_ASSIGNMENT : ++*index;
-                                    if(add_expr(expr,boolean_primary(tokens,index))){
+                                    if(add_expr(expr,process_                                  } else { 
+boolean_primary(tokens,index))){
                                         expr->expression_tail->comparitor=token; 
                                     } else { 
                                         --*index;
