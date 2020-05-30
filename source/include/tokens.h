@@ -99,6 +99,10 @@
     #define TOKEN_EXPR_LIST        107
     #define TOKEN_BOOLEAN_PRIMARY  108
     #define TOKEN_EXPR             109
+    #define TOKEN_IS_NULL          110  // calculated 
+    #define TOKEN_NOT_IN           112  // calculated
+    #define TOKEN_IS_NOT_NULL      113  // calculated
+
 
 
     

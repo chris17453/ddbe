@@ -102,11 +102,9 @@ char *token_type(int t){
         case  TOKEN_BOOLEAN:         return "BOOLEAN";
         case  TOKEN_COMPARITOR:      return "COMPARITOR";
         case  TOKEN_FROM:            return "FROM";
-
-
-
-
-
+        case  TOKEN_IS_NULL:         return "IS_NULL";
+        case  TOKEN_NOT_IN:          return "NOT_IN";
+        case  TOKEN_IS_NOT_NULL:     return "IS_NOT_NULL";
 
     
 

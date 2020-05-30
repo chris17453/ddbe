@@ -29,24 +29,32 @@ typedef struct group_column_t {
     int ordinal;
 } group_column_t;
 
-typedef struct conditions_t {
+typedef struct expression_t{
     int mode;
-    int not;
-    int negative;
-    int positive;
-    void *expr;
+    int list;                 // expr list
+    int not;                  // expr 
+    int not_in;               // predicate 
+    int in;                   // predicate
+    int negative;             // simple expr  
+    int positive;             // simple expr             
+    int comparitor;           // expression
+    int operator;             // bit_expr
     
+    //this can be a LITTERAL OR a IDENTITY
+    identifier_t *identifier;
+    token_t      *literal;
+    struct expression_t *expression;
+} expression_t;
 
-} conditions_t;
 
 
 typedef struct join_t {
     int             type;
     identifier_t  * identifier;
     char          * alias;
-    conditions_t  * conditions;
-
-    int ordinal;
+    expression_t  * expression;
+    int             expression_length;
+    int             ordinal;
 } join_t;
 
 

@@ -3,11 +3,32 @@
 #include "../../../include/structure.h"
 #include "../../../include/select.h"
 
-void build_select(token_array_t *tokens,int start,int end);
-int select_free(select_t select) ;
-void select_print(select_t select);
 
-int expr_select(token_array_t *tokens,int depth){
+token_t       * token_at               (token_array_t *tokens,int  index);
+token_t       * duplicate_token        (token_array_t *tokens,int  index);
+char          * copy_token_value_at    (token_array_t *tokens,int  index);
+char          * process_alias          (token_array_t *tokens,int *index);
+token_t       * process_litteral       (token_array_t *tokens,int *index);
+expression_t  * process_simple_expr    (token_array_t *tokens,int *index);
+expression_t  * process_bit_expr       (token_array_t *tokens,int *index);
+expression_t  * process_expr_list      (token_array_t *tokens,int *index);
+expression_t  * process_predicate      (token_array_t *tokens,int *index);
+expression_t  * process_boolean_primary(token_array_t *tokens,int *index);
+expression_t  * process_expression     (token_array_t *tokens,int *index);
+
+
+void            process_select(token_array_t *tokens,int start,int end);
+int             select_free(select_t select) ;
+void            select_print(select_t select);
+
+/* Function: expr_select
+ * -----------------------------
+ * process a length of tokens from a token_array_t 
+ *          and build a select object;
+ * 
+ * returns: select_t object if a match is found
+ *          returns zero (NULL) otherwise
+ */int expr_select(token_array_t *tokens,int depth){
     ++depth;
     #ifdef PARSE_ENTRANCE
     goop(depth,"SELECT","IN");
@@ -41,68 +62,378 @@ int expr_select(token_array_t *tokens,int depth){
             }
         }
         token_add_type_range(tokens,TOKEN_SELECT,pos);
-        build_select(tokens,pos,tokens->position);
+        process_select(tokens,pos,tokens->position);
         return 1;
-    }
-    
+    }// end token select if
     tokens->position=pos;
-
     return 0;
+}// end func
+
+/* Function: duplicate_token
+ * -----------------------
+ * returns a copy of a token_t from an token_array_t
+ * 
+ * returns: token_t if the token and index are valid
+ *          returns zero (NULL) otherwise
+ */
+token_t * duplicate_token(token_array_t *tokens,int index){
+    token_t src=token_at(tokens,index);
+    // if its a bad token.. dont duplicate
+    if(src==0) return 0;
+    token_t *dst=safe_malloc(sizeof(token_t),1); 
+    dst->depth =src->depth;
+    dst->type  =token->type;
+    dst->value =copy_token_value_at(tokens,index);
+    for(int i=0;i<TOKEN_MAX_DEPTH;i++) dst->expr[i]=src->expr[i];
+    return dst;
 }
 
+/* Function: token_at
+ * -----------------------------
+ * return the token at a given index within a token_array_t
+ * 
+ * returns: a token if the token index is valid
+ *          and the token is not 0 (NULL)
+ *          returns zero (NULL) otherwise
+ */
 token_t * token_at(token_array_t *tokens,int index){
-    return &tokens->array[index];
-}
-
-/*
-int match_pattern(token_array_t *tokens,int *pattern,int position){
-    int length=&pattern[0];
-    
-    for(int p=0;p<length;p++){
-        int new_pos=p+position;
-        if (valid_token_index(tokens,new_pos)) {
-            if (pattern[p]!=token_at(tokens,new_pos)->type){
-                return 0;
-            }
-        } else {
-            return 0;
-        }
+    if(valid_token_index(tokens,index)){
+        return &tokens->array[index];
     }
-    return 1;
-}
-*/
+    return 0;
+}// end func
 
+/* Function: copy_token_value_at
+ * -----------------------------
+ * clone a token value
+ * 
+ * returns: cloned token value if the token index is valid
+ *          and the value is non 0 (NULL)
+ *          returns zero (NULL) otherwise
+ */
+char * copy_token_value_at(token_array_t *tokens,int index){
+    if(valid_token_index(tokens,index)){
+        char *value=&tokens->array[index].value;
+        if(value) return strdup(value);
+        return 0;
+    }
+} // end func
+
+/* Function: process_alias
+ * -----------------------
+ * returns a alias
+ * 
+ * returns: cloned token value if:
+ *               TOKEN_ALIAS
+ *          is matched
+ *          index pointer is incremented +1 on match
+ *          returns zero (NULL) otherwise
+ */
+char * process_alias(token_array_t *tokens,int *index){
+    char *alias=0;
+    switch(token_at(tokens,*index)->type) {
+        case TOKEN_ALIAS: alias=copy_token_value_at(tokens,*index); 
+                          ++*index; break;
+    }
+    return alias;
+}// end func
+
+/* Function: process_identifier
+ * -----------------------
+ * returns an identifier_t struct
+ * 
+ * returns: identifier_t if:
+ *            TOKEN_QUALIFIER  or  
+ *            TOKEN_SOURCE,TOKEN_QUALIFIER
+ *          match is found
+ *          index pointer is incremented +n on match
+ *          returns zero (NULL) otherwise
+ */
 identifier_t * process_identifier(token_array_t *tokens,int *index){
     identifier_t *ident=0;
     switch(token_at(tokens,*index)->type) {
         case TOKEN_QUALIFIER:   ident=safe_malloc(sizeof(identifier_t),1);
-                                ident->qualifier=token_at(tokens,*index)->value;
-                                ident->source   =token_at(tokens,*index+1)->value;
+                                ident->qualifier=copy_token_value_at(tokens,*index);
+                                ident->source   =copy_token_value_at(tokens,*index+1);
                                 *index+=2;
                                 break;
 
         case TOKEN_SOURCE:         
                             ident=safe_malloc(sizeof(identifier_t),1);
                             ident->qualifier=0;
-                            ident->source   =token_at(tokens,*index)->value;
+                            ident->source   =copy_token_value_at(tokens,*index);
                             ++*index;
                             break;
     }
     return ident;
-}
+} // end func
 
-char *process_alias(token_array_t *tokens,int *index){
-    char *alias=0;
+/* Function: process_litteral
+ * -----------------------
+ * returns an litteral token match
+ * 
+ * returns: token_t if :
+ *            TOKEN_NULL, TOKEN_HEX, TOKEN_BINARY
+ *            TOKEN_STRING, TOKEN_NUMERIC, TOKEN_REAL
+ *          match is found
+ *          index pointer is incremented +n on match
+ *          returns zero (NULL) otherwise
+ */
+token_t * process_litteral(token_array_t *tokens,int *index){
+    token_t *token=token_at(tokens,*index);
+    switch(token->type) {
+        case TOKEN_NULL   :
+        case TOKEN_HEX    :
+        case TOKEN_BINARY :
+        case TOKEN_STRING :
+        case TOKEN_NUMERIC:
+        case TOKEN_REAL   : ++*index; return duplicate_token(tokens,index);
+    }
+    return 0;
+} // end func
+
+/* Function: process_simple_expr
+ * -----------------------
+ * returns an litteral or identity type with flags
+ * 
+ * returns: expression_t if :
+ *            litteral
+ *            identifier_t 
+ *          match is found
+ *          flags for preapended -+ set
+ *          index pointer is incremented +n on match
+ *          returns zero (NULL) otherwise
+ */
+expression_t * process_simple_expr(token_array_t *tokens,int *index){
+    expression_t *expr=0;
+    int mode=0;
+
     switch(token_at(tokens,*index)->type) {
-        case TOKEN_ALIAS: alias=token_at(tokens,*index)->value; 
-                          ++*index; break;
+            case TOKEN_MINUS: mode=-1; ++*index; break;
+            case TOKEN_PLUS : mode= 1; ++*index; break;
     }
 
-    return alias;
-}
+    expr=process_litteral(tokens,index);
+    if(expr) {
+        if (mode== 1) expr->positive=1;
+        if (mode==-1) expr->negative=1;
+    } else {
+        expr=process_identifier(tokens,index);
+        if(expr) {
+            if (mode== 1) expr->positive=1;
+            if (mode==-1) expr->negative=1;
+        }
+    }
+
+   return expr;
+} // end func
+
+/* Function: process_bit_expr
+ * -----------------------
+ * match a nested simple expressions with 
+ *          bit operation glue or pass a 
+ *          simle expression
+ * 
+ * returns: nested expression_t if a  matched
+ *          index pointer is incremented +n on match
+ *          returns zero (NULL) otherwise
+ */
+expression_t * process_bit_expr(token_array_t *tokens,int *index){
+    expression_t *expr=0;
+
+    expr=process_simple_expr(tokens,index);
+    if(expr){
+        int operator=token_at(tokens,*index)->type;
+        switch(operator) {
+            case TOKEN_BIT_OR : break;
+            case TOKEN_BIT_AND : break;
+            case TOKEN_SHIFT_LEFT : break;
+            case TOKEN_SHIFT_RIGHT : break; 
+            case TOKEN_PLUS :  break;
+            case TOKEN_MINUS : break;
+            case TOKEN_MULTIPLY : break;
+            case TOKEN_DIVIDE : break;
+            case TOKEN_MODULUS :  ++*index;
+                                  expr->expression=process_simple_expr(tokens,index);
+                                  if(expr->expression) {
+                                      expr->operator=operator;
+                                  } else { 
+                                      --*index;
+                                  }
+                                  break;
+
+        }
+    }
+    return expr;
+} // end func
+
+/* Function: process_expr_list
+ * -----------------------
+ * match a list of simple_expressions
+ * 
+ * Ex: (x,y,1,'bob',0xFF,0b0101)
+ * 
+ * returns: nested list of expression_t if matched
+ *          index pointer is incremented +n on match
+ *          returns zero (NULL) otherwise
+ */
+expression_t * process_expr_list(token_array_t *tokens,int *index){
+    expression_t *expr=0;
+    int start_point=index;
+
+    switch(token_at(tokens,*index)->type) {
+        case TOKEN_PAREN_LEFT: ++*index;
+        default: return 0;
+    }
+
+    int loop=1;
+    expression_t *temp_expr=0;    
+    while(loop){
+        
+        temp_expr=process_simple_expr(tokens,index);
+        if(temp_expr==0) {
+            break;
+        }
+        if(expr==0) {
+            expr=temp_expr;
+            expr->list=1;
+        } else {
+            expr->expression=temp_expr;
+            expr->expression->list=1;
+        }
+        
+
+        switch(token_at(tokens,*index)->type) {
+            case TOKEN_LIST_DELIMITER: ++*index;
+            default: loop=0;
+        }
+    }
+
+    switch(token_at(tokens,*index)->type) {
+        case TOKEN_PAREN_RIGHT: ++*index;
+        default: *index=start_point; return 0;
+    }
+    
+    return expr;
+} // end func
+
+/* Function: process_predicate
+ * -----------------------
+ * match an bit_expression with a "list" or pass 
+ *          an bit_expresion
+ * 
+ * returns: nested list of expression_t if matched
+ *          index pointer is incremented +n on match
+ *          returns zero (NULL) otherwise
+ */
+expression_t * process_predicate(token_array_t *tokens,int *index){
+    expression_t *expr=0;
+
+    expr=process_bit_expr(tokens,index);
+    if(expr){
+        int mode=0;
+        switch(token_at(tokens,*index)->type) {
+            case TOKEN_IN     : mode=1;  
+            case TOKEN_NOT_IN : mode=-1; 
+                                ++*index;
+                                  expr->expression=process_expr_list(tokens,index);
+                                  if(expr->expression) {
+                                      if(mode== 1) expr->not_in=1;
+                                      else if(mode==-1) expr->in=1;
+                                  } else { 
+                                      --*index;
+                                  }
+                                  break;
+        }
+    }
+    return expr;
+} // end func
+
+/* Function: process_boolean_primary
+ * -----------------------
+ * match a nested predicate with comparitor glue
+ *          or pass an predicate
+ * 
+ * returns: nested list of expression_t if matched
+ *          index pointer is incremented +n on match
+ *          returns zero (NULL) otherwise
+ */
+expression_t * process_boolean_primary(token_array_t *tokens,int *index){
+    expression_t *expr=0;
+
+    expr=process_predicate(tokens,index);
+    if(expr){
+        int token=token_at(tokens,*index)->type;
+        switch(token) {
+            case TOKEN_IS_NOT_NULL:
+            case TOKEN_IS_NULL    : ++*index; expr->comparitor=token; break;
+            
+            case TOKEN_NULL_EQ    : 
+            case TOKEN_LESS_EQ    :
+            case TOKEN_GREATER_EQ :
+            case TOKEN_LESS       :
+            case TOKEN_GREATER    :
+            case TOKEN_NOT_EQ     :
+            case TOKEN_ASSIGNMENT : ++*index;
+                                    expr->expression=process_predicate(tokens,index);
+                                    if(expr->expression==0)  --*index;
+                                    else { 
+                                        expr->comparitor==token; 
+                                    }
+                                    break;
+        }
+    }
+    return expr;
+} // end func
+
+/* Function: process_expression
+ * -----------------------
+ * match a nested expression at the TOP MOST LEVEL
+ * 
+ * returns: nested list of expression_t if matched
+ *          index pointer is incremented +n on match
+ *          returns zero (NULL) otherwise
+ */
+expression_t * process_expression(token_array_t *tokens,int *index){
+    expression_t *expr=0;
+    // NOT
+    int not=0;
+    switch(token_at(tokens,*index)->type) {
+            case TOKEN_NOT : ++*index; not=1; break;
+    }
+
+    expr=process_boolean_primary(tokens,index);
+    if(expr) {
+        expr->not=not;
+        int token=token_at(tokens,*index)->type;
+        switch(token) {
+            case TOKEN_SHORT_AND :
+            case TOKEN_SHORT_OR  :
+            case TOKEN_AND       : 
+            case TOKEN_OR        : ++*index;
+                                expr->expression=process_expression(tokens,index);
+                                if(expr->expression==0) {
+                                    --*index;
+                                } else {
+                                    expr->comparitor=token;
+                                }
+                                break;
+        } //end switch
+    } //end if
+    
+    return expr;
+} //end func
 
 
-void build_select(token_array_t *tokens,int start,int end){
+
+/* Function: process_select
+ * -----------------------
+ * process
+ * 
+ * returns: nothing. All output is via stdio
+ */
+
+void process_select(token_array_t *tokens,int start,int end){
     int limit_length=0;
     int limit_start=0;
     int loop=1;
@@ -226,6 +557,8 @@ void build_select(token_array_t *tokens,int start,int end){
                                         join->identifier=process_identifier(tokens,&i);
                                         join->alias=process_alias(tokens,&i);
 
+                                        
+
                                         break;
 
             default: loop=0; 
@@ -263,6 +596,12 @@ void build_select(token_array_t *tokens,int start,int end){
   select_free(select);
 }
 
+/* Function: select_free
+ * -----------------------------
+ * free the data structure of a select_t
+ * 
+ * returns: 1 for success or 0 (NULL) for failure
+ */
 int select_free(select_t select) {
     // free resources
     for(int i=0;i<select.column_length;i++) {
@@ -291,6 +630,12 @@ int select_free(select_t select) {
     return 0;
 }
 
+/* Function: select_print
+ * -----------------------
+ * visibly print the select data structure
+ * 
+ * returns: nothing. All output is via stdio
+ */
 void select_print(select_t select){
     // DEBUGGING INFORMATION
 

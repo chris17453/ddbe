@@ -330,14 +330,18 @@ void consolidate_tokens(token_array_t *tokens){
 
 
     //             length-2 combo token     match pattern
-    int token1[] ={3,TOKEN_FULL_OUTER_JOIN ,TOKEN_FULL,   TOKEN_OUTER   ,TOKEN_JOIN};
-    int token2[] ={3,TOKEN_REAL            ,TOKEN_NUMERIC,TOKEN_DOT     ,TOKEN_NUMERIC};
-    int token3[] ={2,TOKEN_REAL            ,TOKEN_DOT,    TOKEN_NUMERIC};
-    int token4[] ={2,TOKEN_LEFT_JOIN       ,TOKEN_LEFT,   TOKEN_JOIN};
-    int token5[] ={2,TOKEN_RIGHT_JOIN      ,TOKEN_RIGHT,  TOKEN_JOIN};
-    int token6[] ={2,TOKEN_INNER_JOIN      ,TOKEN_INNER,  TOKEN_JOIN};
-    int token7[] ={2,TOKEN_GROUP_BY        ,TOKEN_GROUP,  TOKEN_BY};
-    int token8[] ={2,TOKEN_ORDER_BY        ,TOKEN_ORDER,  TOKEN_BY};
+    int token1 [] ={3,TOKEN_FULL_OUTER_JOIN ,TOKEN_FULL          ,TOKEN_OUTER    ,TOKEN_JOIN     };
+    int token2 [] ={3,TOKEN_IS_NOT_NULL     ,TOKEN_IS            ,TOKEN_NOT      ,TOKEN_NULL     };
+    int token3 [] ={3,TOKEN_REAL            ,TOKEN_NUMERIC       ,TOKEN_DOT      ,TOKEN_NUMERIC  };
+    int token4 [] ={2,TOKEN_NOT_IN          ,TOKEN_NOT           ,TOKEN_IN                       };
+    int token5 [] ={2,TOKEN_REAL            ,TOKEN_DOT           ,TOKEN_NUMERIC                  };
+    int token6 [] ={2,TOKEN_LEFT_JOIN       ,TOKEN_LEFT          ,TOKEN_JOIN                     };
+    int token7 [] ={2,TOKEN_RIGHT_JOIN      ,TOKEN_RIGHT         ,TOKEN_JOIN                     };
+    int token8 [] ={2,TOKEN_INNER_JOIN      ,TOKEN_INNER         ,TOKEN_JOIN                     };
+    int token9 [] ={2,TOKEN_GROUP_BY        ,TOKEN_GROUP         ,TOKEN_BY                       };
+    int token10[] ={2,TOKEN_ORDER_BY        ,TOKEN_ORDER         ,TOKEN_BY                       };
+    int token11[] ={2,TOKEN_IS_NULL         ,TOKEN_IS            ,TOKEN_NULL                     };
+
 
    // starts with a dot... REAL        
     token_combine(tokens,token1);
@@ -348,6 +352,10 @@ void consolidate_tokens(token_array_t *tokens){
     token_combine(tokens,token6);
     token_combine(tokens,token7);
     token_combine(tokens,token8);
+    token_combine(tokens,token9);
+    token_combine(tokens,token10);
+    token_combine(tokens,token11);
+
 }
 
 void process_queries(token_array_t *tokens){
