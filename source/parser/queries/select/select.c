@@ -405,6 +405,7 @@ expression_t * process_boolean_primary(token_array_t *tokens,int *index){
                                     if(add_expr(expr,process_predicate(tokens,index))){
                                         expr->expression_tail->comparitor=token; 
                                     } else { 
+                                        printf( "I DONT KNOW");
                                         --*index;
                                     }
                                     break;
