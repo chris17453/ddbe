@@ -721,10 +721,10 @@ void select_print(select_t select){
 void debug_expr(expression_t *expr,int depth){
     
     char *pad="";
-    if(depth>0) pad=safe_malloc(depth+1,1)
+    if(depth>0) pad=safe_malloc(depth+1,1);
 
     for(int i=0;i<depth;i++) pad[i]=' ';
-    
+
     printf("%s- expr:\n",pad);
     printf("%s  - mode:       %d \n",pad,expr->mode);
     printf("%s  - list:       %d \n",pad,expr->list);
@@ -742,6 +742,7 @@ void debug_expr(expression_t *expr,int depth){
         printf("%s - Litteral: %s: %s\n",pad,token_type(expr->literal->type),expr->literal->value);
     }
 
+    if(depth>0) free(pad);
     //if(expr->expression) debug_expr(expr->expression,depth+1);
 
 }
