@@ -115,8 +115,9 @@ char * copy_token_value_at(token_array_t *tokens,int index){
     if(valid_token_index(tokens,index)){
         char *value=tokens->array[index].value;
         if(value) return strdup(value);
-        return 0;
     }
+    printf("ERROR: COPYING INVALID POSITION %d",index);
+    return 0;
 } // end func
 
 /* Function: process_alias
