@@ -402,8 +402,10 @@ expression_t * process_boolean_primary(token_array_t *tokens,int *index){
             case TOKEN_GREATER    :
             case TOKEN_NOT_EQ     :
             case TOKEN_ASSIGNMENT : ++*index;
-                                    if(add_expr(expr,process_predicate(tokens,index))){
-                                        expr->expression_tail->comparitor=token; 
+                                    expression_t *expr2=process_predicate(tokens,index);
+                                    expr2->comparitor=token; 
+                                    if(add_expr(expr,expr2)){
+                                        printf( "I KNOW");
                                     } else { 
                                         printf( "I DONT KNOW");
                                         --*index;
