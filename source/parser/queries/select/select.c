@@ -288,6 +288,8 @@ expression_t * process_bit_expr(token_array_t *tokens,int *index){
                                     if(!add_expr(expr,expr2)){
                                         --*index;
                                         loop=0;
+                                    } else {
+                                        printf("NO\n");
                                     }
                                     break;
                 default: loop=0; break;
