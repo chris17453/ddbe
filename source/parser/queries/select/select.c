@@ -393,7 +393,7 @@ expression_t * process_boolean_primary(token_array_t *tokens,int *index){
             case TOKEN_ASSIGNMENT : ++*index;
                                     if(add_expr(expr,process_predicate(tokens,index))){
                                         expr->expression_tail->comparitor=token; 
-                                    else { 
+                                    } else { 
                                         --*index;
                                     }
                                     break;
