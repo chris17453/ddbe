@@ -746,7 +746,7 @@ void debug_expr(expression_t *expr,int depth){
     printf("%s  - negative:   %d \n",pad,expr->negative);
     printf("%s  - positive:   %d \n",pad,expr->positive);
     printf("%s  - comparitor: %s \n",pad,token_type(expr->comparitor));
-    printf("%s  - operator:   %d \n",pad,token_type(expr->operator));
+    printf("%s  - operator:   %s \n",pad,token_type(expr->operator));
     if(expr->identifier){
         printf("%s - Identifier: %s.%s\n",pad,expr->identifier->qualifier,expr->identifier->source);
     }
