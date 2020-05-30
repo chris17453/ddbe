@@ -464,7 +464,8 @@ expression_t * process_expression(token_array_t *tokens,int *index){
                                 break;
         } //end switch
     } //end if
-    
+   printf( "EXIT:INDEX:%d\n",*index);
+
     return expr;
 } //end func
 
