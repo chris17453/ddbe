@@ -15,6 +15,7 @@ expression_t  * process_expr_list      (token_array_t *tokens,int *index);
 expression_t  * process_predicate      (token_array_t *tokens,int *index);
 expression_t  * process_boolean_primary(token_array_t *tokens,int *index);
 expression_t  * process_expression     (token_array_t *tokens,int *index);
+void            debug_expr             (expression_t *expr,int depth);
 
 
 void            process_select(token_array_t *tokens,int start,int end);
