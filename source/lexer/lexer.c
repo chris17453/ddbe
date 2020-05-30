@@ -355,6 +355,17 @@ void consolidate_tokens(token_array_t *tokens){
     token_combine(tokens,token10);
     token_combine(tokens,token11);
 
+    //alias update
+    for(int i=0;i<tokens->top;i++) {
+        if(tokens->array[i].type== TOKEN_AS) {
+            token_delete(tokens,i);
+            if(tokens->top-i>1 && tokens->array[i+1].type==TOKEN_ALPHA){
+                tokens->array[i].type=TOKEN_ALIAS;
+            }
+        } 
+    }
+
+
     //identity update
     int length=tokens->top;
     for(int i=0;i<tokens->top;i++) {
