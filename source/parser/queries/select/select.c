@@ -708,7 +708,7 @@ void select_print(select_t select){
                 if(select.join[i].alias) printf("ALIAS: %s",select.join[i].alias);
                 printf("\n");
             }
-            debug_expr(select.join[i].expression,0);
+            //debug_expr(select.join[i].expression,0);
         }
         
     }
