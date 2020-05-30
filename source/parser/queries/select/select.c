@@ -712,3 +712,30 @@ void select_print(select_t select){
     if (select.has_limit_start) printf("LIMIT_START:   %d\n",select.limit_start);
     if (select.has_limit_length) printf("LIMIT_LENGTH : %d\n",select.limit_length);
 }
+
+
+void debug_expr(expression_t *expr,int depth){
+
+    char pad[depth+1];
+    for(int i=0;i<depth;i++) pad[i]='';
+    pad[depth-1]=0;
+    printf("%s- expr:",expr->);
+    printf("%s  - mode:       %d ",pad,expr->mode);
+    printf("%s  - list:       %d ",pad,expr->list);
+    printf("%s  - not:        %d ",pad,expr->not);
+    printf("%s  - not_in:     %d ",pad,expr->not_in);
+    printf("%s  - in:         %d ",pad,expr->in);
+    printf("%s  - negative:   %d ",pad,expr->negative);
+    printf("%s  - positive:   %d ",pad,expr->positive);
+    printf("%s  - comparitor: %d ",pad,expr->comparitor);
+    printf("%s  - operator:   %d ",pad,expr->operator);
+    if(expr->identifier){
+        printf("%s - Identifier: %s.%s",pad,token_type(expr->identifier->qualifier),expr->identifier->source);
+    }
+    if(expr->literal) {
+        printf("%s - Litteral: %s: %s",pad,token_type(expr->literal->type),expr->literal->value);
+    }
+
+    if(expr->expression) debug_expr(expr->expression,depth+1);
+
+}
