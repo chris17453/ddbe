@@ -562,7 +562,7 @@ void process_select(token_array_t *tokens,int start,int end){
                                             case TOKEN_ON: ++i; 
                                                            join->expression=process_expression(tokens,&i);
                                                            if(join->expression==0)  {
-                                                               printf("NO JOIN EXPRESSION\n")
+                                                               printf("NO JOIN EXPRESSION\n");
                                                            }
                                                            break;
                                         }//end switch                
