@@ -292,6 +292,7 @@ expression_t * process_bit_expr(token_array_t *tokens,int *index){
                                         loop=0;
                                     }
                                     break;
+                default: loop=0; break;
 
             }
         }
