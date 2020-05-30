@@ -7,7 +7,7 @@
 token_t       * token_at               (token_array_t *tokens,int  index);
 token_t       * duplicate_token        (token_array_t *tokens,int  index);
 char          * copy_token_value_at    (token_array_t *tokens,int  index);
-void            add_expr               (expresison_t *expression,expression_t *item);
+void            add_expr               (expression_t *expression,expression_t *item);
 char          * process_alias          (token_array_t *tokens,int *index);
 token_t       * process_litteral       (token_array_t *tokens,int *index);
 expression_t  * process_simple_expr    (token_array_t *tokens,int *index);
