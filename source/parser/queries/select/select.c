@@ -409,6 +409,8 @@ expression_t * process_boolean_primary(token_array_t *tokens,int *index){
             case TOKEN_GREATER    :
             case TOKEN_NOT_EQ     :
             case TOKEN_ASSIGNMENT : ++*index;
+
+                                    printf( "bool== INDEX:%d\n",*index);
                                     expression_t *expr2=process_predicate(tokens,index);
                                     expr2->comparitor=token; 
                                     if(add_expr(expr,expr2)){
@@ -441,6 +443,8 @@ expression_t * process_expression(token_array_t *tokens,int *index){
             case TOKEN_NOT : ++*index; not=1; break;
     }
 
+    printf( "expr-- INDEX:%d\n",*index);
+    
     expr=process_boolean_primary(tokens,index);
     if(expr) {
         expr->not=not;
@@ -450,7 +454,7 @@ expression_t * process_expression(token_array_t *tokens,int *index){
             case TOKEN_SHORT_OR  :
             case TOKEN_AND       : 
             case TOKEN_OR        : ++*index;
-                                printf( "bool AND-- INDEX:%d\n",*index);
+                                printf( "expr AND-- INDEX:%d\n",*index);
     
                                 if(add_expr(expr,process_expression(tokens,index))){
                                     expr->comparitor=token;
