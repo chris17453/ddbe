@@ -25,6 +25,7 @@ expression_t  * process_order_column_list(token_array_t *tokens,int *index);
 void            process_select(token_array_t *tokens,int *start);
 // cleaners
 int             select_free(select_t select) ;
+int             free_string(char *data);
 int             free_expression(expression_t *expr);
 int             free_ident(identifier_t *ident);
 int             free_litteral(token_t *token);
@@ -802,10 +803,23 @@ int select_free(select_t select) {
     if(select.join) {
         for(int i=0;i<select.join_length;i++) {
             free_expression(select.join[i].expression);
+            free_string(select.join[i].alias);
         }
     }
     free(select.join);
     return 0;
+}
+
+
+/* Function: free_string
+ * -----------------------------
+ * free the data structure of a char*
+ * 
+ * returns: 1 for success or 0 (NULL) for failure
+ */
+int free_string(char *data){
+    if(data) free(data);
+ return 1;
 }
 
 /* Function: free_expression
