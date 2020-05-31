@@ -327,7 +327,7 @@ void consolidate_tokens(token_array_t *tokens){
     token_t d;
     token_t e;
     int buffer_len;
-
+    printf("COIN\n");
 
     //             length-2 combo token     match pattern
     int token1 [] ={3,TOKEN_FULL_OUTER_JOIN ,TOKEN_FULL          ,TOKEN_OUTER    ,TOKEN_JOIN     };
@@ -412,7 +412,6 @@ void consolidate_tokens(token_array_t *tokens){
 void process_queries(token_array_t *tokens){
     int loop=1;
     while(loop){
-        printf("sel\n");
         process_select(tokens,&tokens->position);
 
         if(!compare_token(tokens,0,TOKEN_DELIMITER)){
