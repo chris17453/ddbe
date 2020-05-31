@@ -3,6 +3,8 @@
 #include "../../../include/structure.h"
 #include "../../../include/select.h"
 
+#define EXPRESSION_GROUP_BY 3
+#define EXPRESSION_ORDER_BY 4
 
 token_t       * token_at                 (token_array_t *tokens,int  index);
 token_t       * duplicate_token          (token_array_t *tokens,int  index);
@@ -478,9 +480,8 @@ expression_t * process_group_column_list(token_array_t *tokens,int *index){
         
         if(ident) {
             expr2=safe_malloc(sizeof(expression_t),1); 
-            expr2->direction=token;
             expr2->identifier=ident;
-            expr2->mode=3;
+            expr2->mode=EXPRESSION_GROUP_BY;
             if(expr==0) {
                 expr=expr2;
                 printf("replacing EXP\n");
@@ -521,7 +522,7 @@ expression_t * process_order_column_list(token_array_t *tokens,int *index){
                                 expr2=safe_malloc(sizeof(expression_t),1); 
                                 expr2->direction=token;
                                 expr2->identifier=ident;
-                                expr2->mode=3;
+                                expr2->mode=EXPRESSION_ORDER_BY;
                                 if(expr==0) {
                                     expr=expr2;
                                     printf("replacing EXP\n");
