@@ -24,9 +24,6 @@ select_t *select_new(){
     // internal
     obj->column_length    =0;
     obj->join_length      =0;
-    obj->where_length     =0;
-    obj->order_length     =0;
-    obj->group_length     =0;
     obj->has_limit_length =0;
     obj->has_limit_start  =0;
     return obj;
@@ -109,70 +106,6 @@ void add_join(select_t *obj){
 
 
 
-
-
-// init a list of columns with 
-order_column_t *order_column_list_init(int length){
-    order_column_t *columns =safe_malloc(sizeof(order_column_t),length);
-    return columns;
-}
-
-void order_column_init(order_column_t *column){
-    column->direction=TOKEN_ASC;
-    column->identifier=0;
-    column->ordinal=0;
-}
-
-void add_order_column(select_t *obj){
-    // columns... create, copy, destroy old, replace
-    // create
-    order_column_t *new_columns=order_column_list_init(obj->order_length+1);
-    // if existing items exist
-    if(obj->order!=0) {
-        // copy
-        int data_size=sizeof(order_column_t)*obj->order_length;
-        memcpy(new_columns,obj->order,data_size);
-        // destroy old
-        free(obj->order);
-    }
-
-    // replace
-    obj->order=new_columns;
-    //init the newest column
-    order_column_init(&obj->order[obj->order_length]);
-    ++obj->order_length;
-}
-
-// init a list of columns with 
-group_column_t *group_column_list_init(int length){
-    group_column_t *columns =safe_malloc(sizeof(group_column_t),length);
-    return columns;
-}
-
-void group_column_init(group_column_t *column){
-    column->ordinal=0;
-    column->identifier=0;
-}
-
-void add_group_column(select_t *obj){
-    // columns... create, copy, destroy old, replace
-    // create
-    group_column_t *new_columns=group_column_list_init(obj->group_length+1);
-    // if existing items exist
-    if(obj->group!=0) {
-        // copy
-        int data_size=sizeof(group_column_t)*obj->group_length;
-        memcpy(new_columns,obj->group,data_size);
-        // destroy old
-        free(obj->group);
-    }
-
-    // replace
-    obj->group=new_columns;
-    //init the newest column
-    group_column_init(&obj->group[obj->group_length]);
-    ++obj->group_length;
-}
 
 
 void set_distinct(select_t *obj){
