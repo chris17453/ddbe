@@ -780,14 +780,14 @@ void debug_expr(expression_t *expr,int depth){
     for(int i=0;i<depth;i++) pad[i]=' ';
 
     printf("%s- expr:\n",pad);
-    printf("%s  - mode:       %d \n",pad,expr->mode);
-    printf("%s  - list:       %d \n",pad,expr->list);
-    printf("%s  - not:        %d \n",pad,expr->not);
-    printf("%s  - not_in:     %d \n",pad,expr->not_in);
-    printf("%s  - in:         %d \n",pad,expr->in);
-    printf("%s  - negative:   %d \n",pad,expr->negative);
-    printf("%s  - positive:   %d \n",pad,expr->positive);
-    printf("%s  - comparitor: %s \n",pad,token_type(expr->comparitor));
+    printf("%s  - mode:   %d ",pad,expr->mode);
+    printf("%s  - list:   %d ",pad,expr->list);
+    printf("%s  - not:    %d ",pad,expr->not);
+    printf("%s  - not_in: %d ",pad,expr->not_in);
+    printf("%s  - in:     %d \n",pad,expr->in);
+    printf("%s  - negative:   %d ",pad,expr->negative);
+    printf("%s  - positive:   %d ",pad,expr->positive);
+    printf("%s  - comparitor: %s ",pad,token_type(expr->comparitor));
     printf("%s  - operator:   %s \n",pad,token_type(expr->operator));
     if(expr->identifier){
         printf("%s - Identifier: %s.%s\n",pad,expr->identifier->qualifier,expr->identifier->source);
@@ -798,5 +798,6 @@ void debug_expr(expression_t *expr,int depth){
 
     if(depth>0) free(pad);
     if(expr->expression) debug_expr(expr->expression,depth+1);
+    prntf("\n")
 
 }
