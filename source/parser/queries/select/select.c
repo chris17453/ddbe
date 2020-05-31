@@ -531,10 +531,19 @@ expression_t * process_order_column_list(token_array_t *tokens,int *index){
                                     printf("adding to EXP\n");
                                 }
                                 break;
-                default: free_ident(ident); 
-                         *index=start_pos;
-                         loop=0;
-                         break;
+                default: expr2=safe_malloc(sizeof(expression_t),1); 
+                                expr2->direction=TOKEN_ASC;
+                                expr2->identifier=ident;
+                                expr2->mode=EXPRESSION_ORDER_BY;
+                                if(expr==0) {
+                                    expr=expr2;
+                                    printf("replacing EXP\n");
+                                } 
+                                else {
+                                    add_expr(expr,expr2);
+                                    printf("adding to EXP\n");
+                                }
+                                break;
             }//end switch            
             if(token_at(tokens,*index)->type!=TOKEN_LIST_DELIMITER) {
                 loop=0;
