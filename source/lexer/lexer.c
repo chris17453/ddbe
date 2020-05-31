@@ -96,6 +96,7 @@ token_array_t *lex(char * query){
                         else {
                             printf("---%d,%d,%d\n",lazer-i,i,lazer);
                             new_token=sub_str_cpy(query,i,lazer-i);
+                            if(new_token==0) printf ("WTF NO token\n");
                             skip=lazer-i-1;
                             break;
                         }
