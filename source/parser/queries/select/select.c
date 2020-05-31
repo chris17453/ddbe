@@ -760,8 +760,8 @@ void select_print(select_t select){
         
     }
     if(select.where) {
-        printf(" ---WHERE---")
-        debug_expr(select.where,0)
+        printf(" ---WHERE---");
+        debug_expr(select.where,0);
     }
 
     if (select.has_limit_start) printf("LIMIT_START:   %d\n",select.limit_start);
