@@ -26,7 +26,6 @@ token_array_t *lex(char * query){
     if(1==1)
 
     for(int i=0;i<query_length;i++){
-        printf("COIN\n");
 
         buffer_len=query_length-i;
         c=query[i];
@@ -274,7 +273,7 @@ token_array_t *lex(char * query){
             i+=skip;
         }//end new word
     }
-
+    printf("CONSOLIDATE");
     consolidate_tokens(tokens);
     return tokens;
 
