@@ -714,7 +714,7 @@ void process_select(token_array_t *tokens,int start,int end){
       }
 
       switch(token_at(tokens,i)->type){
-            case TOKEN_ORDER_BY: printf("IN ORDERBY"); ++i; 
+            case TOKEN_ORDER_BY: printf("IN ORDERBY");
                                  ++i; 
                                  select.order=process_order_column_list(tokens,&i); 
                                  debug_expr(select.order,10);
