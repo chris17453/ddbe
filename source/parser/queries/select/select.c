@@ -735,7 +735,7 @@ void process_select(token_array_t *tokens,int *start){
         }//end switch
     }
 
-  printf("%d\n",*start);
+  printf("%d\n",start);
   ;
     
   select_print(select);
