@@ -387,8 +387,8 @@ void consolidate_tokens(token_array_t *tokens){
     // limit fixup
     for(int i=0;i<tokens->top;i++) {
         if(tokens->array[i].type== TOKEN_LIMIT) {
-            token_delete(tokens,i);
-
+            //token_delete(tokens,i);
+i++;
             if(
                 tokens->array[i  ].type==TOKEN_NUMERIC &&
                 tokens->array[i+1].type==TOKEN_LIST_DELIMITER && 
