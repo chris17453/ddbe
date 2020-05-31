@@ -88,10 +88,11 @@ token_array_t *lex(char * query){
                 case TOKEN_ALPHA:
                     for(int lazer=i+1;lazer<query_length;lazer++){
                         c=query[lazer];
-                        if ((c>='a' && c<='z') ||   
+                        if (lazer!=query_length-1 && (
+                            (c>='a' && c<='z') ||   
                             (c>='A' && c<='Z') ||
                             (c=='_' ) ||
-                            (c>='0' && c<='9')) continue;
+                            (c>='0' && c<='9')) ) continue;
                         else {
                             new_token=sub_str_cpy(query,i,lazer-i);
                             skip=lazer-i-1;
