@@ -100,7 +100,10 @@ token_array_t *lex(char * query){
                             break;
                         }
                     }
-                    if(new_token==0) new_token=sub_str_cpy(query,i,query_length-i);
+                    if(new_token==0) { 
+                        new_token=sub_str_cpy(query,i,query_length-i);
+                        skip=query_length-i-1;
+                    }
                     printf("%s",new_token);
                     
                     int new_token_len=strlen(new_token);
