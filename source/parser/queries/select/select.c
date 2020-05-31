@@ -894,7 +894,7 @@ void debug_expr(expression_t *expr,int depth){
     printf("%s  - not:    %d ",pad,expr->not);
     printf("%s  - not_in: %d ",pad,expr->not_in);
     printf("%s  - in:     %d \n",pad,expr->in);
-    printf("%s  - direction:  %d ",pad,token_type(expr->direction));
+    printf("%s  - direction:  %s ",pad,token_type(expr->direction));
     printf("%s  - negative:   %d ",pad,expr->negative);
     printf("%s  - positive:   %d ",pad,expr->positive);
     printf("%s  - comparitor: %s ",pad,token_type(expr->comparitor));
