@@ -3,8 +3,9 @@
 
 int compare_token(token_array_t *tokens,int optional,int token){
     if(tokens->position>=tokens->length) return 0;
-
+    printf ("hi\n");
     token_t *t=&tokens->array[tokens->position];
+    printf ("hirr\n");
 
     if(t==0) {
         return 0;
