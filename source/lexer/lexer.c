@@ -103,34 +103,34 @@ token_array_t *lex(char * query){
                     int new_token_len=strlen(new_token);
                     printf("%d,%d,%d---%d\n",i,query_length,buffer_len,new_token_len);
                     int o=0;
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"DISTINCT" ,8 ) ) {  printf("DISTINCT %d,%d\n",buffer_len,++o);  t=TOKEN_DISTINCT; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"UNKNOWN"  ,7 ) ) {  printf("UNKNOWN  %d,%d\n",buffer_len,++o);  t=TOKEN_UNKNOWN; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"SELECT"   ,6 ) ) {  printf("SELECT   %d,%d\n",buffer_len,++o);  t=TOKEN_SELECT; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"WHERE"    ,5 ) ) {  printf("WHERE    %d,%d\n",buffer_len,++o);  t=TOKEN_WHERE; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"ORDER"    ,5 ) ) {  printf("ORDER    %d,%d\n",buffer_len,++o);  t=TOKEN_ORDER; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"GROUP"    ,5 ) ) {  printf("GROUP    %d,%d\n",buffer_len,++o);  t=TOKEN_GROUP; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"LIMIT"    ,5 ) ) {  printf("LIMIT    %d,%d\n",buffer_len,++o);  t=TOKEN_LIMIT; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"OUTER"    ,5 ) ) {  printf("OUTER    %d,%d\n",buffer_len,++o);  t=TOKEN_OUTER; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"INNER"    ,5 ) ) {  printf("INNER    %d,%d\n",buffer_len,++o);  t=TOKEN_INNER; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"RIGHT"    ,5 ) ) {  printf("RIGHT    %d,%d\n",buffer_len,++o);  t=TOKEN_RIGHT; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"FALSE"    ,5 ) ) {  printf("FALSE    %d,%d\n",buffer_len,++o);  t=TOKEN_FALSE; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"LEFT"     ,4 ) ) {  printf("LEFT     %d,%d\n",buffer_len,++o);  t=TOKEN_LEFT; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"FULL"     ,4 ) ) {  printf("FULL     %d,%d\n",buffer_len,++o);  t=TOKEN_FULL; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"DESC"     ,4 ) ) {  printf("DESC     %d,%d\n",buffer_len,++o);  t=TOKEN_DESC; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"JOIN"     ,4 ) ) {  printf("JOIN     %d,%d\n",buffer_len,++o);  t=TOKEN_JOIN; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"LIKE"     ,4 ) ) {  printf("LIKE     %d,%d\n",buffer_len,++o);  t=TOKEN_LIKE; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"FROM"     ,4 ) ) {  printf("FROM     %d,%d\n",buffer_len,++o);  t=TOKEN_FROM; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"NULL"     ,4 ) ) {  printf("NULL     %d,%d\n",buffer_len,++o);  t=TOKEN_NULL; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"TRUE"     ,4 ) ) {  printf("TRUE     %d,%d\n",buffer_len,++o);  t=TOKEN_TRUE; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"AND"      ,3 ) ) {  printf("AND      %d,%d\n",buffer_len,++o);  t=TOKEN_AND; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"ASC"      ,3 ) ) {  printf("ASC      %d,%d\n",buffer_len,++o);  t=TOKEN_ASC; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"NOT"      ,3 ) ) {  printf("NOT      %d,%d\n",buffer_len,++o);  t=TOKEN_NOT; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"BY"       ,2 ) ) {  printf("BY       %d,%d\n",buffer_len,++o);  t=TOKEN_BY; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"AS"       ,2 ) ) {  printf("AS       %d,%d\n",buffer_len,++o);  t=TOKEN_AS; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"OR"       ,2 ) ) {  printf("OR       %d,%d\n",buffer_len,++o);  t=TOKEN_OR; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"ON"       ,2 ) ) {  printf("ON       %d,%d\n",buffer_len,++o);  t=TOKEN_ON; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"IS"       ,2 ) ) {  printf("IS       %d,%d\n",buffer_len,++o);  t=TOKEN_IS; } else
-                    if (new_token_len-buffer_len>1 && 0==strncasecmp(new_token,"IN"       ,2 ) ) {  printf("IN       %d,%d\n",buffer_len,++o);  t=TOKEN_IN; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"DISTINCT" ,8 ) ) {  printf("DISTINCT %d,%d\n",buffer_len,++o);  t=TOKEN_DISTINCT; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"UNKNOWN"  ,7 ) ) {  printf("UNKNOWN  %d,%d\n",buffer_len,++o);  t=TOKEN_UNKNOWN; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"SELECT"   ,6 ) ) {  printf("SELECT   %d,%d\n",buffer_len,++o);  t=TOKEN_SELECT; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"WHERE"    ,5 ) ) {  printf("WHERE    %d,%d\n",buffer_len,++o);  t=TOKEN_WHERE; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"ORDER"    ,5 ) ) {  printf("ORDER    %d,%d\n",buffer_len,++o);  t=TOKEN_ORDER; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"GROUP"    ,5 ) ) {  printf("GROUP    %d,%d\n",buffer_len,++o);  t=TOKEN_GROUP; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"LIMIT"    ,5 ) ) {  printf("LIMIT    %d,%d\n",buffer_len,++o);  t=TOKEN_LIMIT; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"OUTER"    ,5 ) ) {  printf("OUTER    %d,%d\n",buffer_len,++o);  t=TOKEN_OUTER; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"INNER"    ,5 ) ) {  printf("INNER    %d,%d\n",buffer_len,++o);  t=TOKEN_INNER; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"RIGHT"    ,5 ) ) {  printf("RIGHT    %d,%d\n",buffer_len,++o);  t=TOKEN_RIGHT; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"FALSE"    ,5 ) ) {  printf("FALSE    %d,%d\n",buffer_len,++o);  t=TOKEN_FALSE; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"LEFT"     ,4 ) ) {  printf("LEFT     %d,%d\n",buffer_len,++o);  t=TOKEN_LEFT; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"FULL"     ,4 ) ) {  printf("FULL     %d,%d\n",buffer_len,++o);  t=TOKEN_FULL; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"DESC"     ,4 ) ) {  printf("DESC     %d,%d\n",buffer_len,++o);  t=TOKEN_DESC; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"JOIN"     ,4 ) ) {  printf("JOIN     %d,%d\n",buffer_len,++o);  t=TOKEN_JOIN; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"LIKE"     ,4 ) ) {  printf("LIKE     %d,%d\n",buffer_len,++o);  t=TOKEN_LIKE; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"FROM"     ,4 ) ) {  printf("FROM     %d,%d\n",buffer_len,++o);  t=TOKEN_FROM; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"NULL"     ,4 ) ) {  printf("NULL     %d,%d\n",buffer_len,++o);  t=TOKEN_NULL; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"TRUE"     ,4 ) ) {  printf("TRUE     %d,%d\n",buffer_len,++o);  t=TOKEN_TRUE; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"AND"      ,3 ) ) {  printf("AND      %d,%d\n",buffer_len,++o);  t=TOKEN_AND; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"ASC"      ,3 ) ) {  printf("ASC      %d,%d\n",buffer_len,++o);  t=TOKEN_ASC; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"NOT"      ,3 ) ) {  printf("NOT      %d,%d\n",buffer_len,++o);  t=TOKEN_NOT; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"BY"       ,2 ) ) {  printf("BY       %d,%d\n",buffer_len,++o);  t=TOKEN_BY; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"AS"       ,2 ) ) {  printf("AS       %d,%d\n",buffer_len,++o);  t=TOKEN_AS; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"OR"       ,2 ) ) {  printf("OR       %d,%d\n",buffer_len,++o);  t=TOKEN_OR; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"ON"       ,2 ) ) {  printf("ON       %d,%d\n",buffer_len,++o);  t=TOKEN_ON; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"IS"       ,2 ) ) {  printf("IS       %d,%d\n",buffer_len,++o);  t=TOKEN_IS; } else
+                    if (new_token_len-buffer_len>0 && 0==strncasecmp(new_token,"IN"       ,2 ) ) {  printf("IN       %d,%d\n",buffer_len,++o);  t=TOKEN_IN; } else
                     break;
 
                 case TOKEN_NUMERIC: 
