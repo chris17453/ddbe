@@ -806,6 +806,7 @@ int select_free(select_t select) {
         }
         free(select.join);
     }
+    free_expression(select.where);
     free_expression(select.group);
     free_expression(select.order);
     
