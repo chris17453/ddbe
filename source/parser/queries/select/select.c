@@ -469,6 +469,7 @@ expression_t * process_column_list(token_array_t *tokens,int *index){
     expression_t *expr=0;
     expression_t *expr2=0;
     int loop=1;
+    int start_pos;
     while(loop) {
         start_pos=*index;
         ident=process_identifier(tokens,index);
