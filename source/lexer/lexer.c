@@ -99,7 +99,7 @@ token_array_t *lex(char * query){
                         }
                     }
                     //one off.. yea clean this up TODO: dont be a bone head
-                    if(new_token) { 
+                    if(new_token==) { 
                         //new_token=sub_str_cpy(query,i,query_length-i);
                         //skip=query_length-i-1;
                     
@@ -131,7 +131,7 @@ token_array_t *lex(char * query){
                         if (0==strncasecmp(new_token,"OR"       ,2 ) ) { t=TOKEN_OR;       } else
                         if (0==strncasecmp(new_token,"ON"       ,2 ) ) { t=TOKEN_ON;       } else
                         if (0==strncasecmp(new_token,"IS"       ,2 ) ) { t=TOKEN_IS;       } else
-                        if (0==strncasecmp(new_token,"IN"       ,2 ) ) { t=TOKEN_IN;       } else
+                        if (0==strncasecmp(new_token,"IN"       ,2 ) ) { t=TOKEN_IN;       } 
 
                     }
                     break;
