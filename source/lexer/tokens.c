@@ -136,6 +136,24 @@ void token_add_type(token_array_t * arr,int type,int index){
     }
 }
 
+int compare_token(token_array_t *tokens,int optional,int token){
+    if(tokens->position>=tokens->length) return 0;
+
+    token_t *t=&tokens->array[tokens->position];
+
+    if(t==0) {
+        return 0;
+    }
+    if(t->type==token) {
+        ++tokens->position;
+        return 1;
+    } 
+    if(optional==1) {
+        return 1;
+    }
+    return 0;
+}
+
 void token_add_type_range(token_array_t * arr,int type,int index){
     for(int i=index;i<arr->position;i++){
         if(arr->array[i].depth<TOKEN_MAX_DEPTH){

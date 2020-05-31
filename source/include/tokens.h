@@ -95,9 +95,8 @@
     #define TOKEN_BIT_EXPR         103
     #define TOKEN_COLUMN_EXPR      104
     #define TOKEN_SELECT_EXPR      105
-    #define TOKEN_SIMPLE_EXPR      106
-    #define TOKEN_EXPR_LIST        107
-    #define TOKEN_BOOLEAN_PRIMARY  108
+    #define TOKEN_SIMPLE_EXPR      106int compare_token(token_array_t *tokens,int optional,int token){
+
     #define TOKEN_EXPR             109
     #define TOKEN_IS_NULL          110  // calculated 
     #define TOKEN_NOT_IN           112  // calculated
@@ -149,6 +148,7 @@
     void             token_add_type       (token_array_t * arr,int type,int index);
     void             token_add_type_range (token_array_t * arr,int type,int index);
     void             token_set_type       (token_array_t * arr,int type,int index);
+    int              compare_token(token_array_t *tokens,int optional,int token);
 
 
     char           * token_type        (int t);
