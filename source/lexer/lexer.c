@@ -98,7 +98,7 @@ token_array_t *lex(char * query){
                             break;
                         }
                     }
-
+                    printf("%d,%d\n",i,query_length);
                     
                     if     (0==strncasecmp(new_token,"DISTINCT" ,10) ) t=TOKEN_DISTINCT;
                     else if(0==strncasecmp(new_token,"SELECT"   ,10) ) t=TOKEN_SELECT;
