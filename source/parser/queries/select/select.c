@@ -729,6 +729,17 @@ int select_free(select_t select) {
 void free_expression(expression_t *expr){
 
 }
+void free_ident(identifier_t *ident){
+    if(ident){
+        if(ident->qualifier) {
+            free(ident->qualifier);
+        }
+        if(ident->source) {
+            free(ident->source);
+        }
+        
+    }
+}
 /* Function: select_print
  * -----------------------
  * visibly print the select data structure
