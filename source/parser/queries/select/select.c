@@ -856,6 +856,7 @@ int free_litteral(token_t *token){
         if(token->value) {
             free(token->value);
         }
+        free(token);
     }
     return 1;
 }
