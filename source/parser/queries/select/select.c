@@ -4,19 +4,21 @@
 #include "../../../include/select.h"
 
 
-token_t       * token_at               (token_array_t *tokens,int  index);
-token_t       * duplicate_token        (token_array_t *tokens,int  index);
-char          * copy_token_value_at    (token_array_t *tokens,int  index);
-int             add_expr               (expression_t *expression,expression_t *item);
-char          * process_alias          (token_array_t *tokens,int *index);
-token_t       * process_litteral       (token_array_t *tokens,int *index);
-expression_t  * process_simple_expr    (token_array_t *tokens,int *index);
-expression_t  * process_bit_expr       (token_array_t *tokens,int *index);
-expression_t  * process_expr_list      (token_array_t *tokens,int *index);
-expression_t  * process_predicate      (token_array_t *tokens,int *index);
-expression_t  * process_boolean_primary(token_array_t *tokens,int *index);
-expression_t  * process_expression     (token_array_t *tokens,int *index);
-void            debug_expr             (expression_t *expr,int depth);
+token_t       * token_at                 (token_array_t *tokens,int  index);
+token_t       * duplicate_token          (token_array_t *tokens,int  index);
+char          * copy_token_value_at      (token_array_t *tokens,int  index);
+int             add_expr                 (expression_t *expression,expression_t *item);
+char          * process_alias            (token_array_t *tokens,int *index);
+token_t       * process_litteral         (token_array_t *tokens,int *index);
+expression_t  * process_simple_expr      (token_array_t *tokens,int *index);
+expression_t  * process_bit_expr         (token_array_t *tokens,int *index);
+expression_t  * process_expr_list        (token_array_t *tokens,int *index);
+expression_t  * process_predicate        (token_array_t *tokens,int *index);
+expression_t  * process_boolean_primary  (token_array_t *tokens,int *index);
+expression_t  * process_expression       (token_array_t *tokens,int *index);
+expression_t  * process_group_column_list(token_array_t *tokens,int *index);
+expression_t  * process_order_column_list(token_array_t *tokens,int *index);
+void            debug_expr               (expression_t *expr,int depth);
 
 
 void            process_select(token_array_t *tokens,int start,int end);
@@ -465,8 +467,30 @@ expression_t * process_expression(token_array_t *tokens,int *index){
     return expr;
 } //end func
 
+expression_t * process_group_column_list(token_array_t *tokens,int *index){
+    expression_t *expr=0;
+    expression_t *expr2=0;
+    identifier_t *ident=0;
+    int loop=1;
+    int start_pos;
+    while(loop) {
+        start_pos=*index;
+        ident=process_identifier(tokens,index);
+        if(ident) {
+            if(token_at(tokens,*index)->type!=TOKEN_LIST_DELIMITER) {
+                loop=0;
+            } else {
+                ++*index;
+            }
+        } else {
+            loop=0;
+        }
+    }
+    return expr;
+}
 
-expression_t * process_column_list(token_array_t *tokens,int *index){
+
+expression_t * process_order_column_list(token_array_t *tokens,int *index){
     expression_t *expr=0;
     expression_t *expr2=0;
     identifier_t *ident=0;
@@ -671,14 +695,14 @@ void process_select(token_array_t *tokens,int start,int end){
 
       switch(token_at(tokens,i)->type){
             case TOKEN_GROUP_BY: printf("IN GROUPBY"); ++i; 
-                                 select.group=process_column_list(tokens,&i); 
+                                 select.group=process_group_column_list(tokens,&i); 
                                  break;
       }
 
       switch(token_at(tokens,i)->type){
             case TOKEN_ORDER_BY: printf("IN ORDERBY"); ++i; 
                                  ++i; 
-                                 select.order=process_column_list(tokens,&i); 
+                                 select.order=process_order_column_list(tokens,&i); 
                                  debug_expr(select.order,10);
                                  break;
       }
