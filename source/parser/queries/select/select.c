@@ -792,7 +792,8 @@ void free_ident(identifier_t *ident){
 void select_print(select_t select){
     // DEBUGGING INFORMATION
 
-    if (select.distinct) printf("DISTINCT\n");
+    printf("SELECT\n")
+    if (select.distinct) printf("HAS DISTINCT\n");
     if (select.columns){
 
         for(int i=0;i<select.column_length;i++) {
