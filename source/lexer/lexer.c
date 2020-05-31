@@ -389,7 +389,7 @@ void consolidate_tokens(token_array_t *tokens){
         if(tokens->array[i].type== TOKEN_LIMIT) {
             token_delete(tokens,i);
 
-            if(
+            if(i+2<tokens->top && 
                 tokens->array[i  ].type==TOKEN_NUMERIC &&
                 tokens->array[i+1].type==TOKEN_LIST_DELIMITER && 
                 tokens->array[i+2].type==TOKEN_NUMERIC
