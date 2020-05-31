@@ -688,7 +688,7 @@ void process_select(token_array_t *tokens,int *start){
                             break;
     }// end switch
     
-    return;
+    /*
     // join
     loop=1;
     index=0;
@@ -763,7 +763,7 @@ void process_select(token_array_t *tokens,int *start){
         }//end switch
     }
 
-    
+    */
   select_print(select);
   select_free(select);
 }
@@ -791,7 +791,10 @@ int select_free(select_t select) {
   //      select.columns->object;
     }
     free(select.columns);
-    if(select.from) free(select.from);
+    if(select.from) {
+        free_ident(select.from);
+        free_string(select.alias);
+    }
     for(int i=0;i<select.join_length;i++){
         if(select.join[i].identifier){
             free_ident(select.join[i].identifier);
