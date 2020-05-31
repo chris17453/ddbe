@@ -417,9 +417,9 @@ void process_queries(token_array_t *tokens){
         if(!compare_token(tokens,0,TOKEN_DELIMITER)){
             loop=0;
         } 
-
+        printf("\nToken Count:%d of %d\n",tokens->position,tokens->top);
     }
-    printf("\nToken Count:%d of %d\n",tokens->position,tokens->top);
+    
     if(tokens->position<tokens->top){
 
         printf ("error: unknown text at position :%d %s >>> %s  <<< \n",tokens->position,token_type(tokens->array[tokens->position].type),tokens->array[tokens->position].value);
