@@ -617,9 +617,8 @@ void process_select(token_array_t *tokens,int start,int end){
     loop=1;
     index=0;
     while(loop){
-        join_t *join;
         switch(token_at(tokens,i)->type){
-            case WHERE: ++i;
+            case TOKEN_WHERE: ++i;
                         select.where=process_expression(tokens,&i);
                         break;
             default: loop=0; 
