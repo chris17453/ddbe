@@ -722,7 +722,7 @@ void process_select(token_array_t *tokens,int *start){
         }
     }
 
-/*
+
     // where
     loop=1;
     index=0;
@@ -735,7 +735,7 @@ void process_select(token_array_t *tokens,int *start){
                      break;
         }
     }
-
+/*
     switch(token_at(tokens,*start)->type){
         case TOKEN_GROUP_BY: ++*start; 
                                 select.group=process_group_column_list(tokens,start); 
@@ -808,6 +808,7 @@ int select_free(select_t select) {
     }
     free_expression(select.group);
     free_expression(select.order);
+    
     return 0;
 }
 
