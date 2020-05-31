@@ -558,7 +558,7 @@ void process_select(token_array_t *tokens,int *start){
     int limit_length=0;
     int limit_start=0;
     int loop=1;
-    int i=start;
+    int i=&start;
     
     
     select_t select;
