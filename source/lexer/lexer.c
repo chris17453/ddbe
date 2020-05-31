@@ -96,12 +96,13 @@ token_array_t *lex(char * query){
                         else {
                             printf("---%d,%d,%d\n",lazer-i,i,lazer);
                             new_token=sub_str_cpy(query,i,lazer-i);
-                            if(new_token==0) printf ("WTF NO token\n");
                             skip=lazer-i-1;
                             break;
                         }
                     }
-                    if(new_token==0) printf ("NO token\n");
+                    if(new_token==0) new_token=sub_str_cpy(query,i,query_length);
+                    printf("%s",new_token);
+                    
                     int new_token_len=strlen(new_token);
                     printf("%d,%d,%d---%d\n",i,query_length,buffer_len,new_token_len);
                     int o=0;
