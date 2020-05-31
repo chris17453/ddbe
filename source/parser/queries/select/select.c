@@ -656,7 +656,6 @@ void process_select(token_array_t *tokens,int *start){
     }// end switch
     
 
-    printf("join \n");
     // join
     loop=1;
     index=0;
@@ -676,9 +675,6 @@ void process_select(token_array_t *tokens,int *start){
                                         switch(token_at(tokens,*start)->type){
                                             case TOKEN_ON: ++*start; 
                                                            join->expression=process_expression(tokens,start);
-                                                           if(join->expression==0)  {
-                                                               printf("NO JOIN EXPRESSION\n");
-                                                           }
                                                            break;
                                         }//end switch                
 
@@ -693,7 +689,6 @@ void process_select(token_array_t *tokens,int *start){
     }
 
 
-    printf("where \n");
     // join
     loop=1;
     index=0;
@@ -708,14 +703,13 @@ void process_select(token_array_t *tokens,int *start){
     }
 
       switch(token_at(tokens,*start)->type){
-            case TOKEN_GROUP_BY: printf("IN GROUPBY"); ++*start; 
+            case TOKEN_GROUP_BY: ++*start; 
                                  select.group=process_group_column_list(tokens,start); 
                                  break;
       }
 
       switch(token_at(tokens,*start)->type){
-            case TOKEN_ORDER_BY: printf("IN ORDERBY");
-                                 ++*start; 
+            case TOKEN_ORDER_BY: ++*start; 
                                  select.order=process_order_column_list(tokens,start); 
                                  break;
       }
