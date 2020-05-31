@@ -688,9 +688,9 @@ void process_select(token_array_t *tokens,int *start){
                             break;
     }// end switch
     
-
+    return;l
     // join
-    loop=0;
+    loop=1;
     index=0;
     while(loop){
         join_t *join;
@@ -723,7 +723,7 @@ void process_select(token_array_t *tokens,int *start){
 
 
     // where
-    loop=0;
+    loop=1;
     index=0;
     while(loop){
         switch(token_at(tokens,*start)->type){
@@ -748,7 +748,7 @@ void process_select(token_array_t *tokens,int *start){
     }
 
     // limit
-    loop=0;
+    loop=1;
     while(loop){
         switch(token_at(tokens,*start)->type){
             case TOKEN_LIMIT_START: select.has_limit_start=1;
