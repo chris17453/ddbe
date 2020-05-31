@@ -797,9 +797,11 @@ int select_free(select_t select) {
         }
 
     }
-  //  free_expression(select.join->expression);
     free_expression(select.group);
     free_expression(select.order);
+    if(select.join) {
+        free_expression(select.join->expression);
+    }
     free(select.join);
     return 0;
 }
