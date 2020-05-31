@@ -23,7 +23,7 @@ expression_t  * process_order_column_list(token_array_t *tokens,int *index);
 void            debug_expr               (expression_t *expr,int depth);
 
 
-void            process_select(token_array_t *tokens,int start,int end);
+void            process_select(token_array_t *tokens,int *start);
 int             select_free(select_t select) ;
 void            free_expression(expression_t *expr);
 void            free_ident(identifier_t *ident);
