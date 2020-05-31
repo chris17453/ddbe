@@ -82,8 +82,8 @@ typedef struct select_t{
         identifier_t    * from;
         join_t          * join;
         expression_t    * where;
-        order_column_t  * order;
-        group_column_t  * group;
+        expression_t  * order;
+        expression_t  * group;
         
         // elements
         char          * alias;
