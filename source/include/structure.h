@@ -115,9 +115,6 @@ typedef struct select_t{
     group_column_t * group_column_list_init(int length);
     void             group_column_init(group_column_t *column);
     void             add_group_column(select_t *obj);
-    where_expr_t   * where_expr_list_init(int length);
-    void             where_expr_init(where_expr_t *exp);
-    void             add_where_expr(select_t *obj);
 
     void             set_distinct(select_t *obj);
     void             debug(token_array_t *tokens);
