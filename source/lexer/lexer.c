@@ -100,6 +100,7 @@ token_array_t *lex(char * query){
                             break;
                         }
                     }
+                    //one off.. yea clean this up TODO: dont be a bone head
                     if(new_token==0) { 
                         new_token=sub_str_cpy(query,i,query_length-i);
                         skip=query_length-i-1;
