@@ -472,11 +472,24 @@ expression_t * process_group_column_list(token_array_t *tokens,int *index){
     expression_t *expr2=0;
     identifier_t *ident=0;
     int loop=1;
-    int start_pos;
     while(loop) {
         start_pos=*index;
         ident=process_identifier(tokens,index);
+        
         if(ident) {
+            expr2=safe_malloc(sizeof(expression_t),1); 
+            expr2->direction=token;
+            expr2->identifier=ident;
+            expr2->mode=3;
+            if(expr==0) {
+                expr=expr2;
+                printf("replacing EXP\n");
+            } 
+            else {
+                add_expr(expr,expr2);
+                printf("adding to EXP\n");
+            }
+
             if(token_at(tokens,*index)->type!=TOKEN_LIST_DELIMITER) {
                 loop=0;
             } else {
