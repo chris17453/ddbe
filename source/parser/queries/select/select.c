@@ -38,55 +38,6 @@ void            debug_expr               (expression_t *expr,int depth);
 
 
 
-/* Function: expr_select
- * -----------------------------
- * process a length of tokens from a token_array_t 
- *          and build a select object;
- * 
- * returns: select_t object if a match is found
- *          returns zero (NULL) otherwise
- */
-int expr_select(token_array_t *tokens,int depth){
-    ++depth;
-    #ifdef PARSE_ENTRANCE
-    goop(depth,"SELECT","IN");
-    #endif
-
-    int pos=tokens->position;
-    int number_of_expressions=0;
-    if(compare_token(tokens,0,TOKEN_SELECT)){
-        
-        // optional
-        if(compare_token(tokens,0,TOKEN_DISTINCT)){
-        }
-        // not optional
-        if(expr_select_expr(tokens,depth)){
-        } else {
-            tokens->position=pos;
-            return 0;
-        }
-
-        
-        if(expr_from(tokens,depth)){
-            while(expr_join(tokens,depth)){
-            }
-            if(expr_where(tokens,depth)){
-            }
-            if(expr_group_by(tokens,depth)){
-            }
-            if(expr_order_by(tokens,depth)){
-            }
-            if(expr_limit(tokens,depth)){
-            }
-        }
-        token_add_type_range(tokens,TOKEN_SELECT,pos);
-        //process_select(tokens,*pos);
-        return 1;
-    }// end token select if
-    tokens->position=pos;
-    return 0;
-}// end func
-
 /* Function: duplicate_token
  * -----------------------
  * returns a copy of a token_t from an token_array_t
@@ -812,7 +763,6 @@ int select_free(select_t select) {
     
     return 0;
 }
-
 
 /* Function: free_string
  * -----------------------------
