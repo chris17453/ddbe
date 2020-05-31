@@ -1,21 +1,13 @@
-### JOIN
-- impliment
-
-### WHERE impliment structs for...
-- simple-expr
-- boolean-primary
-- predicate
-- bit-expr
-- expr
-
 ### LEVEL 2 validation ambuity check, identity/alias check, 
 - add logic for select colum validation
 - add logic for group column validation
 - add logic for order column validation
 
-### debug
-- switch for tokens
-- select struct debug
+### INVALiD PARSE 
+# free data resources....
+ - expressiont
+ - identity
+ - columns
 
-### lexer
-- last token fall off....
+
+ 
