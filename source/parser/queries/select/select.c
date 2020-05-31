@@ -690,7 +690,7 @@ void process_select(token_array_t *tokens,int *start){
     
 
     // join
-    loop=1;
+    loop=0;
     index=0;
     while(loop){
         join_t *join;
