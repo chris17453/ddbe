@@ -22,6 +22,7 @@ void            debug_expr             (expression_t *expr,int depth);
 void            process_select(token_array_t *tokens,int start,int end);
 int             select_free(select_t select) ;
 void            free_expression(expression_t *expr);
+void            free_ident(identifier_t *ident)
 void            select_print(select_t select);
 
 /* Function: expr_select
@@ -491,8 +492,10 @@ expression_t * process_column_list(token_array_t *tokens,int *index){
                          loop=0;
                          break;
             }//end switch            
-            if(!token_at(tokens,*index)->type==TOKEN_LIST_DELIMITER) {
+            if(token_at(tokens,*index)->type!=TOKEN_LIST_DELIMITER) {
                 loop=0;
+            } else {
+                ++*index;
             }
         } else {
             loop=0;
