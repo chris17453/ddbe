@@ -562,6 +562,7 @@ void process_select(token_array_t *tokens,int *start){
     
     
     select_t select;
+    select.distinct=0;
     select.columns=0;
     select.from=0;
     select.join=0;
