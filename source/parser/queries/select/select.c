@@ -747,7 +747,7 @@ void process_select(token_array_t *tokens,int *start){
                                 select.order=process_order_column_list(tokens,start); 
                                 break;
     }
-
+/*
     // limit
     loop=1;
     while(loop){
