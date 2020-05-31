@@ -99,39 +99,41 @@ token_array_t *lex(char * query){
                         }
                     }
                     //one off.. yea clean this up TODO: dont be a bone head
-                    if(new_token==0) { 
-                        new_token=sub_str_cpy(query,i,query_length-i);
-                        skip=query_length-i-1;
-                    }
+                    if(new_token) { 
+                        //new_token=sub_str_cpy(query,i,query_length-i);
+                        //skip=query_length-i-1;
                     
-                    if (0==strncasecmp(new_token,"DISTINCT" ,8 ) ) { t=TOKEN_DISTINCT; } else
-                    if (0==strncasecmp(new_token,"UNKNOWN"  ,7 ) ) { t=TOKEN_UNKNOWN;  } else
-                    if (0==strncasecmp(new_token,"SELECT"   ,6 ) ) { t=TOKEN_SELECT;   } else
-                    if (0==strncasecmp(new_token,"WHERE"    ,5 ) ) { t=TOKEN_WHERE;    } else
-                    if (0==strncasecmp(new_token,"ORDER"    ,5 ) ) { t=TOKEN_ORDER;    } else
-                    if (0==strncasecmp(new_token,"GROUP"    ,5 ) ) { t=TOKEN_GROUP;    } else
-                    if (0==strncasecmp(new_token,"LIMIT"    ,5 ) ) { t=TOKEN_LIMIT;    } else
-                    if (0==strncasecmp(new_token,"OUTER"    ,5 ) ) { t=TOKEN_OUTER;    } else
-                    if (0==strncasecmp(new_token,"INNER"    ,5 ) ) { t=TOKEN_INNER;    } else
-                    if (0==strncasecmp(new_token,"RIGHT"    ,5 ) ) { t=TOKEN_RIGHT;    } else
-                    if (0==strncasecmp(new_token,"FALSE"    ,5 ) ) { t=TOKEN_FALSE;    } else
-                    if (0==strncasecmp(new_token,"LEFT"     ,4 ) ) { t=TOKEN_LEFT;     } else
-                    if (0==strncasecmp(new_token,"FULL"     ,4 ) ) { t=TOKEN_FULL;     } else
-                    if (0==strncasecmp(new_token,"DESC"     ,4 ) ) { t=TOKEN_DESC;     } else
-                    if (0==strncasecmp(new_token,"JOIN"     ,4 ) ) { t=TOKEN_JOIN;     } else
-                    if (0==strncasecmp(new_token,"LIKE"     ,4 ) ) { t=TOKEN_LIKE;     } else
-                    if (0==strncasecmp(new_token,"FROM"     ,4 ) ) { t=TOKEN_FROM;     } else
-                    if (0==strncasecmp(new_token,"NULL"     ,4 ) ) { t=TOKEN_NULL;     } else
-                    if (0==strncasecmp(new_token,"TRUE"     ,4 ) ) { t=TOKEN_TRUE;     } else
-                    if (0==strncasecmp(new_token,"AND"      ,3 ) ) { t=TOKEN_AND;      } else
-                    if (0==strncasecmp(new_token,"ASC"      ,3 ) ) { t=TOKEN_ASC;      } else
-                    if (0==strncasecmp(new_token,"NOT"      ,3 ) ) { t=TOKEN_NOT;      } else
-                    if (0==strncasecmp(new_token,"BY"       ,2 ) ) { t=TOKEN_BY;       } else
-                    if (0==strncasecmp(new_token,"AS"       ,2 ) ) { t=TOKEN_AS;       } else
-                    if (0==strncasecmp(new_token,"OR"       ,2 ) ) { t=TOKEN_OR;       } else
-                    if (0==strncasecmp(new_token,"ON"       ,2 ) ) { t=TOKEN_ON;       } else
-                    if (0==strncasecmp(new_token,"IS"       ,2 ) ) { t=TOKEN_IS;       } else
-                    if (0==strncasecmp(new_token,"IN"       ,2 ) ) { t=TOKEN_IN;       } else
+                        
+                        if (0==strncasecmp(new_token,"DISTINCT" ,8 ) ) { t=TOKEN_DISTINCT; } else
+                        if (0==strncasecmp(new_token,"UNKNOWN"  ,7 ) ) { t=TOKEN_UNKNOWN;  } else
+                        if (0==strncasecmp(new_token,"SELECT"   ,6 ) ) { t=TOKEN_SELECT;   } else
+                        if (0==strncasecmp(new_token,"WHERE"    ,5 ) ) { t=TOKEN_WHERE;    } else
+                        if (0==strncasecmp(new_token,"ORDER"    ,5 ) ) { t=TOKEN_ORDER;    } else
+                        if (0==strncasecmp(new_token,"GROUP"    ,5 ) ) { t=TOKEN_GROUP;    } else
+                        if (0==strncasecmp(new_token,"LIMIT"    ,5 ) ) { t=TOKEN_LIMIT;    } else
+                        if (0==strncasecmp(new_token,"OUTER"    ,5 ) ) { t=TOKEN_OUTER;    } else
+                        if (0==strncasecmp(new_token,"INNER"    ,5 ) ) { t=TOKEN_INNER;    } else
+                        if (0==strncasecmp(new_token,"RIGHT"    ,5 ) ) { t=TOKEN_RIGHT;    } else
+                        if (0==strncasecmp(new_token,"FALSE"    ,5 ) ) { t=TOKEN_FALSE;    } else
+                        if (0==strncasecmp(new_token,"LEFT"     ,4 ) ) { t=TOKEN_LEFT;     } else
+                        if (0==strncasecmp(new_token,"FULL"     ,4 ) ) { t=TOKEN_FULL;     } else
+                        if (0==strncasecmp(new_token,"DESC"     ,4 ) ) { t=TOKEN_DESC;     } else
+                        if (0==strncasecmp(new_token,"JOIN"     ,4 ) ) { t=TOKEN_JOIN;     } else
+                        if (0==strncasecmp(new_token,"LIKE"     ,4 ) ) { t=TOKEN_LIKE;     } else
+                        if (0==strncasecmp(new_token,"FROM"     ,4 ) ) { t=TOKEN_FROM;     } else
+                        if (0==strncasecmp(new_token,"NULL"     ,4 ) ) { t=TOKEN_NULL;     } else
+                        if (0==strncasecmp(new_token,"TRUE"     ,4 ) ) { t=TOKEN_TRUE;     } else
+                        if (0==strncasecmp(new_token,"AND"      ,3 ) ) { t=TOKEN_AND;      } else
+                        if (0==strncasecmp(new_token,"ASC"      ,3 ) ) { t=TOKEN_ASC;      } else
+                        if (0==strncasecmp(new_token,"NOT"      ,3 ) ) { t=TOKEN_NOT;      } else
+                        if (0==strncasecmp(new_token,"BY"       ,2 ) ) { t=TOKEN_BY;       } else
+                        if (0==strncasecmp(new_token,"AS"       ,2 ) ) { t=TOKEN_AS;       } else
+                        if (0==strncasecmp(new_token,"OR"       ,2 ) ) { t=TOKEN_OR;       } else
+                        if (0==strncasecmp(new_token,"ON"       ,2 ) ) { t=TOKEN_ON;       } else
+                        if (0==strncasecmp(new_token,"IS"       ,2 ) ) { t=TOKEN_IS;       } else
+                        if (0==strncasecmp(new_token,"IN"       ,2 ) ) { t=TOKEN_IN;       } else
+
+                    }
                     break;
 
                 case TOKEN_NUMERIC: 
