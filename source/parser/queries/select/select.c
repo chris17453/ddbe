@@ -815,6 +815,15 @@ void select_print(select_t select){
         printf(" ---WHERE---");
         debug_expr(select.where,0);
     }
+    if(select.group) {
+        printf(" ---GROUP---");
+        debug_expr(select.group,0);
+    }
+    if(select.order) {
+        printf(" ---ORDER---");
+        debug_expr(select.group,0);
+    }
+
 
     if (select.has_limit_start) printf("LIMIT_START:   %d\n",select.limit_start);
     if (select.has_limit_length) printf("LIMIT_LENGTH : %d\n",select.limit_length);
