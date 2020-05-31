@@ -735,7 +735,7 @@ void process_select(token_array_t *tokens,int *start){
                      break;
         }
     }
-/*
+
     switch(token_at(tokens,*start)->type){
         case TOKEN_GROUP_BY: ++*start; 
                                 select.group=process_group_column_list(tokens,start); 
@@ -763,7 +763,7 @@ void process_select(token_array_t *tokens,int *start){
             default: loop=0; break;
         }//end switch
     }
-*/
+
     
   select_print(select);
   select_free(select);
