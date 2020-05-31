@@ -412,13 +412,15 @@ void consolidate_tokens(token_array_t *tokens){
 void process_queries(token_array_t *tokens){
     int loop=1;
     while(loop){
-        printf( "sel.. again");
+        printf( "sel.. again\n");
         process_select(tokens,&tokens->position);
         printf("pos %d\n",tokens->position);
         //expr_select(tokens,1);
         if(!compare_token(tokens,0,TOKEN_DELIMITER)){
             loop=0;
         } 
+        printf( "After\n");
+
 
     }
     printf ("YO\n");
