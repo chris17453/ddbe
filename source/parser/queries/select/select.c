@@ -722,8 +722,8 @@ void process_select(token_array_t *tokens,int *start){
     }
 
 
-    // join
-    loop=1;
+    // where
+    loop=0;
     index=0;
     while(loop){
         switch(token_at(tokens,*start)->type){
@@ -735,20 +735,20 @@ void process_select(token_array_t *tokens,int *start){
         }
     }
 
-      switch(token_at(tokens,*start)->type){
-            case TOKEN_GROUP_BY: ++*start; 
-                                 select.group=process_group_column_list(tokens,start); 
-                                 break;
-      }
+    switch(token_at(tokens,*start)->type){
+        case TOKEN_GROUP_BY: ++*start; 
+                                select.group=process_group_column_list(tokens,start); 
+                                break;
+    }
 
-      switch(token_at(tokens,*start)->type){
-            case TOKEN_ORDER_BY: ++*start; 
-                                 select.order=process_order_column_list(tokens,start); 
-                                 break;
-      }
+    switch(token_at(tokens,*start)->type){
+        case TOKEN_ORDER_BY: ++*start; 
+                                select.order=process_order_column_list(tokens,start); 
+                                break;
+    }
 
     // limit
-    loop=1;
+    loop=0;
     while(loop){
         switch(token_at(tokens,*start)->type){
             case TOKEN_LIMIT_START: select.has_limit_start=1;
