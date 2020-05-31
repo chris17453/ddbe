@@ -501,7 +501,7 @@ expression_t * process_order_column_list(token_array_t *tokens,int *index){
     expression_t *expr2=0;
     identifier_t *ident=0;
     int loop=1;
-    printf ("ORDER BY\n")
+    printf ("ORDER BY\n");
     while(loop) {
         ident=process_identifier(tokens,index);
         if(ident) {
