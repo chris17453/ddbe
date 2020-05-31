@@ -608,31 +608,31 @@ void process_select(token_array_t *tokens,int *start){
                              dc->object=token_at(tokens,*start)->value;
                              ++index;
                              ++*start;
-                             dc->alias=process_alias(tokens,&start);
+                             dc->alias=process_alias(tokens,start);
                              break;
 
 
 
             case TOKEN_QUALIFIER:      
-                                       ident=process_identifier(tokens,&start);
+                                       ident=process_identifier(tokens,start);
                                        add_data_column(&select);
                                        dc=&select.columns[select.column_length-1];
                                        dc->ordinal=index;
                                        dc->type=TOKEN_IDENTIFIER;
                                        dc->object=ident;
-                                       ++*startndex;
-                                       dc->alias=process_alias(tokens,&start);
+                                       ++index;
+                                       dc->alias=process_alias(tokens,start);
                                        break;
 
             case TOKEN_SOURCE:         
-                                       ident=process_identifier(tokens,&start);
+                                       ident=process_identifier(tokens,start);
                                        add_data_column(&select);
                                        dc=&select.columns[select.column_length-1];
                                        dc->ordinal=index;
                                        dc->type=TOKEN_IDENTIFIER;
                                        dc->object=ident;
-                                       ++*startndex;
-                                       dc->alias=process_alias(tokens,&start);
+                                       ++index;
+                                       dc->alias=process_alias(tokens,start);
                                        break;
             default: loop=0;
         }
@@ -649,8 +649,8 @@ void process_select(token_array_t *tokens,int *start){
     // from
     switch(token_at(tokens,*start)->type){
         case TOKEN_FROM:     ++*start;
-                            select.from=process_identifier(tokens,&start);
-                            select.alias=process_alias(tokens,&start);
+                            select.from=process_identifier(tokens,start);
+                            select.alias=process_alias(tokens,start);
                             break;
     }// end switch
     
@@ -670,11 +670,11 @@ void process_select(token_array_t *tokens,int *start){
                                         ++*start;
                                         add_join(&select);
                                         join_t *join=&select.join[select.join_length-1];
-                                        join->identifier=process_identifier(tokens,&start);
-                                        join->alias=process_alias(tokens,&start);
+                                        join->identifier=process_identifier(tokens,start);
+                                        join->alias=process_alias(tokens,start);
                                         switch(token_at(tokens,*start)->type){
                                             case TOKEN_ON: ++*start; 
-                                                           join->expression=process_expression(tokens,&start);
+                                                           join->expression=process_expression(tokens,start);
                                                            if(join->expression==0)  {
                                                                printf("NO JOIN EXPRESSION\n");
                                                            }
@@ -699,7 +699,7 @@ void process_select(token_array_t *tokens,int *start){
     while(loop){
         switch(token_at(tokens,*start)->type){
             case TOKEN_WHERE: ++*start;
-                        select.where=process_expression(tokens,&start);
+                        select.where=process_expression(tokens,start);
                         break;
             default: loop=0; 
                      break;
@@ -708,14 +708,14 @@ void process_select(token_array_t *tokens,int *start){
 
       switch(token_at(tokens,*start)->type){
             case TOKEN_GROUP_BY: printf("IN GROUPBY"); ++*start; 
-                                 select.group=process_group_column_list(tokens,&start); 
+                                 select.group=process_group_column_list(tokens,start); 
                                  break;
       }
 
       switch(token_at(tokens,*start)->type){
             case TOKEN_ORDER_BY: printf("IN ORDERBY");
                                  ++*start; 
-                                 select.order=process_order_column_list(tokens,&start); 
+                                 select.order=process_order_column_list(tokens,start); 
                                  break;
       }
 
