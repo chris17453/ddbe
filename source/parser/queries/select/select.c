@@ -621,7 +621,7 @@ void process_select(token_array_t *tokens,int *start){
                              break;
     }//end switch                
 
-
+/*
     // select list
     loop=1;
     int index=0;
@@ -679,6 +679,7 @@ void process_select(token_array_t *tokens,int *start){
         // end switch
     } // end while
 
+*/
 
     // from
     switch(token_at(tokens,*start)->type){
