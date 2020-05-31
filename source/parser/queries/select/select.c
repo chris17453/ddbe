@@ -6,10 +6,12 @@
 #define EXPRESSION_GROUP_BY 3
 #define EXPRESSION_ORDER_BY 4
 
+// helpers
 token_t       * token_at                 (token_array_t *tokens,int  index);
 token_t       * duplicate_token          (token_array_t *tokens,int  index);
 char          * copy_token_value_at      (token_array_t *tokens,int  index);
 int             add_expr                 (expression_t *expression,expression_t *item);
+// workers
 char          * process_alias            (token_array_t *tokens,int *index);
 token_t       * process_litteral         (token_array_t *tokens,int *index);
 expression_t  * process_simple_expr      (token_array_t *tokens,int *index);
@@ -20,14 +22,19 @@ expression_t  * process_boolean_primary  (token_array_t *tokens,int *index);
 expression_t  * process_expression       (token_array_t *tokens,int *index);
 expression_t  * process_group_column_list(token_array_t *tokens,int *index);
 expression_t  * process_order_column_list(token_array_t *tokens,int *index);
+void            process_select(token_array_t *tokens,int *start);
+// cleaners
+int             select_free(select_t select) ;
+int             free_expression(expression_t *expr);
+int             free_ident(identifier_t *ident);
+// debuggers
+void            select_print(select_t select);
 void            debug_expr               (expression_t *expr,int depth);
 
 
-void            process_select(token_array_t *tokens,int *start);
-int             select_free(select_t select) ;
-void            free_expression(expression_t *expr);
-void            free_ident(identifier_t *ident);
-void            select_print(select_t select);
+
+
+
 
 /* Function: expr_select
  * -----------------------------
@@ -129,6 +136,13 @@ char * copy_token_value_at(token_array_t *tokens,int index){
     return 0;
 } // end func
 
+/* Function: add_expr
+ * -----------------------------
+ * append an expression to another expression
+ * 
+ * returns: 1 if successfull 
+ *          returns zero (NULL) otherwise
+ */
 int add_expr(expression_t *expression,expression_t *item){
     if(item==0) return 0;
 
@@ -464,6 +478,14 @@ expression_t * process_expression(token_array_t *tokens,int *index){
     return expr;
 } //end func
 
+/* Function: process_group_column_list
+ * -----------------------------
+ * gather a group by column list
+ * 
+ * returns: a nested linked list of 
+ *          expression_t if matched
+ *          returns zero (NULL) otherwise
+ */
 expression_t * process_group_column_list(token_array_t *tokens,int *index){
     expression_t *expr=0;
     expression_t *expr2=0;
@@ -495,7 +517,14 @@ expression_t * process_group_column_list(token_array_t *tokens,int *index){
     return expr;
 }
 
-
+/* Function: process_order_column_list
+ * -----------------------------
+ * gather a order by column list
+ * 
+ * returns: a nested linked list of 
+ *          expression_t if matched
+ *          returns zero (NULL) otherwise
+ */
 expression_t * process_order_column_list(token_array_t *tokens,int *index){
     expression_t *expr=0;
     expression_t *expr2=0;
@@ -548,6 +577,7 @@ expression_t * process_order_column_list(token_array_t *tokens,int *index){
     }
     return expr;
 }
+
 /* Function: process_select
  * -----------------------
  * process
@@ -770,10 +800,23 @@ int select_free(select_t select) {
     return 0;
 }
 
-void free_expression(expression_t *expr){
+/* Function: free_expression
+ * -----------------------------
+ * free the data structure of a expression_t
+ * 
+ * returns: 1 for success or 0 (NULL) for failure
+ */
+int free_expression(expression_t *expr){
 
 }
-void free_ident(identifier_t *ident){
+
+/* Function: free_ident
+ * -----------------------------
+ * free the data structure of a identifier_t
+ * 
+ * returns: 1 for success or 0 (NULL) for failure
+ */
+int free_ident(identifier_t *ident){
     if(ident){
         if(ident->qualifier) {
             free(ident->qualifier);
@@ -784,6 +827,7 @@ void free_ident(identifier_t *ident){
         
     }
 }
+
 /* Function: select_print
  * -----------------------
  * visibly print the select data structure
@@ -871,7 +915,12 @@ void select_print(select_t select){
     if (select.has_limit_length) printf("LIMIT_LENGTH : %d\n",select.limit_length);
 }
 
-
+/* Function: debug_expr
+ * -----------------------
+ * visibly print the nested expresison_t data structure
+ * 
+ * returns: nothing. All output is via stdio
+ */
 void debug_expr(expression_t *expr,int depth){
     if(expr==0) {
         printf ("Expression NULL\n");
