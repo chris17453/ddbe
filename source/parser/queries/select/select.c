@@ -795,20 +795,15 @@ int select_free(select_t select) {
         free_ident(select.from);
         free_string(select.alias);
     }
-    for(int i=0;i<select.join_length;i++){
-        if(select.join[i].identifier){
-            free_ident(select.join[i].identifier);
-        }
-
-    }
-    free_expression(select.group);
-    free_expression(select.order);
     if(select.join) {
         for(int i=0;i<select.join_length;i++) {
+            free_ident(select.join[i].identifier);
             free_expression(select.join[i].expression);
             free_string(select.join[i].alias);
         }
     }
+    free_expression(select.group);
+    free_expression(select.order);
     free(select.join);
     return 0;
 }
