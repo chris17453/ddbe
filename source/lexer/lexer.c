@@ -86,7 +86,6 @@ token_array_t *lex(char * query){
 
             switch(t){
                 case TOKEN_ALPHA:
-                     printf ("LOOPs\n");
                     for(int lazer=i+1;lazer<query_length;lazer++){
                         c=query[lazer];
                         if ((c>='a' && c<='z') ||   
@@ -94,7 +93,6 @@ token_array_t *lex(char * query){
                             (c=='_' ) ||
                             (c>='0' && c<='9')) continue;
                         else {
-                            printf("---%d,%d,%d\n",lazer-i,i,lazer);
                             new_token=sub_str_cpy(query,i,lazer-i);
                             skip=lazer-i-1;
                             break;
