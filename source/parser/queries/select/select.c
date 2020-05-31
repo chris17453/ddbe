@@ -689,7 +689,7 @@ void process_select(token_array_t *tokens,int *start){
                             break;
     }// end switch
     
-    /*
+    
     // join
     loop=1;
     index=0;
@@ -722,7 +722,7 @@ void process_select(token_array_t *tokens,int *start){
         }
     }
 
-
+/*
     // where
     loop=1;
     index=0;
