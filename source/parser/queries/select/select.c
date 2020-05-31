@@ -679,7 +679,7 @@ void process_select(token_array_t *tokens,int *start){
         // end switch
     } // end while
 
-/*
+
     // from
     switch(token_at(tokens,*start)->type){
         case TOKEN_FROM:     ++*start;
@@ -687,7 +687,7 @@ void process_select(token_array_t *tokens,int *start){
                             select.alias=process_alias(tokens,start);
                             break;
     }// end switch
-  */  
+    
     /*
     // join
     loop=1;
