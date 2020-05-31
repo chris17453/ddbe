@@ -37,6 +37,7 @@ typedef struct expression_t{
     int in;                   // predicate
     int negative;             // simple expr  
     int positive;             // simple expr             
+    int direction;            // column_list
     int comparitor;           // expression
     int operator;             // bit_expr
     

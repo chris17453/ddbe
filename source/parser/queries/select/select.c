@@ -464,6 +464,40 @@ expression_t * process_expression(token_array_t *tokens,int *index){
     return expr;
 } //end func
 
+
+expression_t * process_column_list(token_array_t *tokens,int *index){
+    expression_t *expr=0;
+    expression_t *expr2=0;
+    int loop=1;
+    while(loop) {
+        start_pos=*index;
+        ident=process_identifier(tokens,index);
+        if(ident) {
+            int token=token_at(tokens,index)->type;
+            switch(token){
+                case TOKEN_ASC:  
+                case TOKEN_DESC: ++*index; 
+                                expr2=safe_malloc(sizeof(expression_t),1); 
+                                expr2->direction=token;
+                                expr2->identifier=ident;
+                                expr2->mode=3;
+                                if(expr==0) expr=expr2;
+                                else add_expr(expr,expr2);
+                                break;
+                default: free_ident(ident); 
+                         *index=start_pos;
+                         loop=0;
+                         break;
+            }//end switch            
+            if(!token_at(tokens,&index)->type==TOKEN_LIST_DELIMITER) {
+                loop=0;
+            }
+        } else {
+            loop=0;
+        }
+    }
+    return expr;
+}
 /* Function: process_select
  * -----------------------
  * process
@@ -626,11 +660,13 @@ void process_select(token_array_t *tokens,int start,int end){
         }
     }
 
+      switch(token_at(tokens,i)->type){
+            case TOKEN_GROUP_BY: ++i; process_column_list(tokens,&i); break;
+      }
 
-  /*                                
-            case TOKEN_GROUP_BY: break;
-            case TOKEN_ORDER_BY: break;
-*/            
+      switch(token_at(tokens,i)->type){
+            case TOKEN_ORDER_BY: ++i; process_column_list(tokens,&i); break;
+      }
 
     // limit
     loop=1;
