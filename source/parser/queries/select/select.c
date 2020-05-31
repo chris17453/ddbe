@@ -475,7 +475,6 @@ expression_t * process_group_column_list(token_array_t *tokens,int *index){
     identifier_t *ident=0;
     int loop=1;
     while(loop) {
-        start_pos=*index;
         ident=process_identifier(tokens,index);
         
         if(ident) {
