@@ -478,11 +478,9 @@ expression_t * process_group_column_list(token_array_t *tokens,int *index){
             expr2->mode=EXPRESSION_GROUP_BY;
             if(expr==0) {
                 expr=expr2;
-                printf("replacing EXP\n");
             } 
             else {
                 add_expr(expr,expr2);
-                printf("adding to EXP\n");
             }
 
             if(token_at(tokens,*index)->type!=TOKEN_LIST_DELIMITER) {
@@ -503,6 +501,7 @@ expression_t * process_order_column_list(token_array_t *tokens,int *index){
     expression_t *expr2=0;
     identifier_t *ident=0;
     int loop=1;
+    printf ("ORDER BY\n")
     while(loop) {
         ident=process_identifier(tokens,index);
         if(ident) {
