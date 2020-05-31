@@ -420,6 +420,7 @@ void process_queries(token_array_t *tokens){
         } 
 
     }
+    printf ("YO\n")
     printf("\nToken Count:%d of %d\n",tokens->position,tokens->top);
     if(tokens->position<tokens->top){
 
