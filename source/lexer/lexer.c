@@ -106,7 +106,7 @@ token_array_t *lex(char * query){
                     
                     int new_token_len=strlen(new_token);
                     int o=0;
-                    if (0==strncasecmp(new_token,"DISTINCT" ,8 ) ) { t=TOKEN_DISTINCT; } else
+                    if (0==strncasecmp(new_token,"DISTINCT" ,9 ) ) { t=TOKEN_DISTINCT; } else
                     if (0==strncasecmp(new_token,"UNKNOWN"  ,7 ) ) { t=TOKEN_UNKNOWN;  } else
                     if (0==strncasecmp(new_token,"SELECT"   ,6 ) ) { t=TOKEN_SELECT;   } else
                     if (0==strncasecmp(new_token,"WHERE"    ,5 ) ) { t=TOKEN_WHERE;    } else
