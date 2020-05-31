@@ -679,7 +679,7 @@ void process_select(token_array_t *tokens,int *start){
         // end switch
     } // end while
 
-
+/*
     // from
     switch(token_at(tokens,*start)->type){
         case TOKEN_FROM:     ++*start;
@@ -687,7 +687,7 @@ void process_select(token_array_t *tokens,int *start){
                             select.alias=process_alias(tokens,start);
                             break;
     }// end switch
-    
+  */  
     /*
     // join
     loop=1;
@@ -801,10 +801,10 @@ int select_free(select_t select) {
             free_expression(select.join[i].expression);
             free_string(select.join[i].alias);
         }
+        free(select.join);
     }
     free_expression(select.group);
     free_expression(select.order);
-    free(select.join);
     return 0;
 }
 
