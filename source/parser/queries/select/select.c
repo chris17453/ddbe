@@ -621,7 +621,7 @@ void process_select(token_array_t *tokens,int *start){
                              break;
     }//end switch                
 
-/*
+
     // select list
     loop=1;
     int index=0;
@@ -679,7 +679,7 @@ void process_select(token_array_t *tokens,int *start){
         // end switch
     } // end while
 
-*/
+
 
     // from
     switch(token_at(tokens,*start)->type){
@@ -786,7 +786,10 @@ int select_free(select_t select) {
             case TOKEN_BINARY:
             case TOKEN_REAL:
             case TOKEN_NULL: break;
-            case TOKEN_IDENTIFIER: free(select.columns[i].object); break;
+            case TOKEN_IDENTIFIER: 
+            free(select.columns[i].object); 
+            free_string(select.columns[i].alias);
+            break;
         }
 //        if(select.columns->type)
   //      select.columns->object;
