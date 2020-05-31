@@ -475,7 +475,7 @@ expression_t * process_column_list(token_array_t *tokens,int *index){
         start_pos=*index;
         ident=process_identifier(tokens,index);
         if(ident) {
-            int token=token_at(tokens,index)->type;
+            int token=token_at(tokens,&index)->type;
             switch(token){
                 case TOKEN_ASC:  
                 case TOKEN_DESC: ++*index; 
