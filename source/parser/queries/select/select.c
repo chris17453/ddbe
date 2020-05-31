@@ -737,7 +737,7 @@ void process_select(token_array_t *tokens,int *start){
     }
 
 
-  *start=2;
+  *start=&i;
     
   select_print(select);
   select_free(select);
