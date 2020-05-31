@@ -44,15 +44,19 @@ int main(int argc, char* argv[]) {
     }
 
 
-
-    printf ("PROCESSING\n");
+    // this tokenizes...
     token_array_t *tokens=lex(query_str);
     free(query_str);
+    
+    // this validates gramar and created data structure
     process_queries(tokens);
+    
+    // debugging visuals
     if(opt_debug) debug(tokens);
     if(opt_print_tokens) token_print(tokens);
     
     
+    // cleanup
     tokens_destroy(tokens);
     atexit(janitor);
     return 0;
