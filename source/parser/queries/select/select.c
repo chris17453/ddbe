@@ -807,7 +807,7 @@ int select_free(select_t select) {
  * returns: 1 for success or 0 (NULL) for failure
  */
 int free_expression(expression_t *expr){
-
+ return 1;
 }
 
 /* Function: free_ident
@@ -824,8 +824,8 @@ int free_ident(identifier_t *ident){
         if(ident->source) {
             free(ident->source);
         }
-        
     }
+    return 1;
 }
 
 /* Function: select_print
