@@ -416,6 +416,8 @@ void process_queries(token_array_t *tokens){
         //expr_select(tokens,1);
         printf("SELECT\n");
         if(!compare_token(tokens,0,TOKEN_DELIMITER)){
+                printf("SELECT\n");
+
             loop=0;
         } 
 
