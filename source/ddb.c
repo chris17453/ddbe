@@ -45,9 +45,9 @@ int main(int argc, char* argv[]) {
 
 
 
+    printf ("PROCESSING\n");
     token_array_t *tokens=lex(query_str);
     free(query_str);
-    printf ("PROCESSING\n");
     //process_queries(tokens);
     //if(opt_debug) debug(tokens);
     //if(opt_print_tokens) token_print(tokens);
