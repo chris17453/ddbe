@@ -418,7 +418,10 @@ void process_queries(token_array_t *tokens){
         if(!compare_token(tokens,0,TOKEN_DELIMITER)){
             loop=0;
         } 
+
     }
+    printf("SELECT\n");
+
     printf("\nToken Count:%d of %d\n",tokens->position,tokens->top);
     if(tokens->position<tokens->top){
 
