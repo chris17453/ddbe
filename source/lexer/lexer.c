@@ -93,7 +93,7 @@ token_array_t *lex(char * query){
                             (c=='_' ) ||
                             (c>='0' && c<='9')) continue;
                         else {
-                            printf("%d,%d,%d",lazer-i,i,lazer);
+                            printf("---%d,%d,%d\n",lazer-i,i,lazer);
                             new_token=sub_str_cpy(query,i,lazer-i);
                             skip=lazer-i-1;
                             break;
