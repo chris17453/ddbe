@@ -94,9 +94,6 @@ typedef struct select_t{
         // internal
         int             column_length;     
         int             join_length;     
-        int             where_length;     
-        int             order_length;     
-        int             group_length;     
         int             has_limit_length;
         int             has_limit_start;
     } select_t;

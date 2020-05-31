@@ -529,10 +529,7 @@ void process_select(token_array_t *tokens,int start,int end){
     select.limit_length=0;
     select.column_length=0;
     select.join_length=0;
-    select.where_length=0;
-    select.order_length=0;
-    select.group_length=0;
-
+    
 
     // switch        
     switch(token_at(tokens,i)->type){
