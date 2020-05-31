@@ -279,7 +279,6 @@ token_array_t *lex(char * query){
             i+=skip;
         }//end new word
     }
-    printf("CONSOLIDATE");
     consolidate_tokens(tokens);
     return tokens;
 
