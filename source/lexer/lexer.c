@@ -414,7 +414,7 @@ void process_queries(token_array_t *tokens){
     while(loop){
         process_select(tokens,&tokens->position);
         //expr_select(tokens,1);
-        
+        printf("SELECT\n");
         if(!compare_token(tokens,0,TOKEN_DELIMITER)){
             loop=0;
         } 
