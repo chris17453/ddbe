@@ -100,8 +100,8 @@ token_array_t *lex(char * query){
                         }
                     }
                      
-                    printf("%d,%d,%d\n",i,query_length,buffer_len);
                     int new_token_len=strlen(new_token);
+                    printf("%d,%d,%d---%d\n",i,query_length,buffer_len,new_token_len);
                     int o=0;
                     if (new_token_len>=8 &&  buffer_len>=8 && 0==strncasecmp(new_token,"DISTINCT" ,8 ) ) {  printf("%d,%d\n",buffer_len,++o);  t=TOKEN_DISTINCT; } else
                     if (new_token_len>=7 &&  buffer_len>=7 && 0==strncasecmp(new_token,"UNKNOWN"  ,7 ) ) {  printf("%d,%d\n",buffer_len,++o);  t=TOKEN_UNKNOWN; } else
