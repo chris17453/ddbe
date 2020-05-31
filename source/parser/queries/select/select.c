@@ -785,7 +785,7 @@ int select_free(select_t select) {
             case TOKEN_HEX:
             case TOKEN_BINARY:
             case TOKEN_REAL:
-            case TOKEN_NULL: free_litteral(select.columns[i].object); break;
+            case TOKEN_NULL: break;
             case TOKEN_IDENTIFIER: free_ident(select.columns[i].object); 
             break;
         }
