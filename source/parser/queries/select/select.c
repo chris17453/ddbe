@@ -555,6 +555,7 @@ expression_t * process_order_column_list(token_array_t *tokens,int *index){
  * returns: nothing. All output is via stdio
  */
 void process_select(token_array_t *tokens,int *start){
+    if(start>=tokens->top) return 0;
     int limit_length=0;
     int limit_start=0;
     int loop=1;
@@ -735,8 +736,6 @@ void process_select(token_array_t *tokens,int *start){
         }//end switch
     }
 
-  printf("%d\n",*start);
-  ;
     
   select_print(select);
   select_free(select);
