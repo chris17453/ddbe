@@ -688,7 +688,7 @@ void process_select(token_array_t *tokens,int *start){
                             break;
     }// end switch
     
-    return;l
+    return;
     // join
     loop=1;
     index=0;
