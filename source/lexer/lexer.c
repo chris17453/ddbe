@@ -98,7 +98,7 @@ token_array_t *lex(char * query){
                             break;
                         }
                     }
-                    printf("%d,%d\n",i,query_length);
+                    printf("%d,%d,%d\n",i,query_length,buffer_len);
                      
                     int o=0;
                     if (buffer_len>8 && 0==strncasecmp(new_token,"DISTINCT" ,8 ) ) {  printf("%d,%d\n",buffer_len,++o);  t=TOKEN_DISTINCT; } else
