@@ -100,34 +100,35 @@ token_array_t *lex(char * query){
                     }
                     printf("%d,%d\n",i,query_length);
                     
-                    if     (0==strncasecmp(new_token,"DISTINCT" ,10) ) t=TOKEN_DISTINCT;
-                    else if(0==strncasecmp(new_token,"SELECT"   ,10) ) t=TOKEN_SELECT;
-                    else if(0==strncasecmp(new_token,"WHERE"    ,10) ) t=TOKEN_WHERE;
-                    else if(0==strncasecmp(new_token,"ORDER"    ,10) ) t=TOKEN_ORDER;
-                    else if(0==strncasecmp(new_token,"GROUP"    ,10) ) t=TOKEN_GROUP;
-                    else if(0==strncasecmp(new_token,"LIMIT"    ,10) ) t=TOKEN_LIMIT;
-                    else if(0==strncasecmp(new_token,"OUTER"    ,10) ) t=TOKEN_OUTER;
-                    else if(0==strncasecmp(new_token,"INNER"    ,10) ) t=TOKEN_INNER;
-                    else if(0==strncasecmp(new_token,"LEFT"     ,10) ) t=TOKEN_LEFT;
-                    else if(0==strncasecmp(new_token,"RIGHT"    ,10) ) t=TOKEN_RIGHT;
-                    else if(0==strncasecmp(new_token,"FULL"     ,10) ) t=TOKEN_FULL;
-                    else if(0==strncasecmp(new_token,"DESC"     ,10) ) t=TOKEN_DESC;
-                    else if(0==strncasecmp(new_token,"JOIN"     ,10) ) t=TOKEN_JOIN;
-                    else if(0==strncasecmp(new_token,"LIKE"     ,10) ) t=TOKEN_LIKE;
-                    else if(0==strncasecmp(new_token,"FROM"     ,10) ) t=TOKEN_FROM;
-                    else if(0==strncasecmp(new_token,"NULL"     ,10) ) t=TOKEN_NULL;
-                    else if(0==strncasecmp(new_token,"FALSE"    ,10) ) t=TOKEN_FALSE;
-                    else if(0==strncasecmp(new_token,"TRUE"     ,10) ) t=TOKEN_TRUE;
-                    else if(0==strncasecmp(new_token,"UNKNOWN"  ,10) ) t=TOKEN_UNKNOWN;
-                    else if(0==strncasecmp(new_token,"AND"      ,10) ) t=TOKEN_AND;
-                    else if(0==strncasecmp(new_token,"ASC"      ,10) ) t=TOKEN_ASC;
-                    else if(0==strncasecmp(new_token,"BY"       ,10) ) t=TOKEN_BY;
-                    else if(0==strncasecmp(new_token,"AS"       ,10) ) t=TOKEN_AS;
-                    else if(0==strncasecmp(new_token,"OR"       ,10) ) t=TOKEN_OR;
-                    else if(0==strncasecmp(new_token,"ON"       ,10) ) t=TOKEN_ON;
-                    else if(0==strncasecmp(new_token,"IS"       ,10) ) t=TOKEN_IS;
-                    else if(0==strncasecmp(new_token,"IN"       ,10) ) t=TOKEN_IN;
-                    else if(0==strncasecmp(new_token,"NOT"      ,10) ) t=TOKEN_NOT;
+
+                    if     (buffer_len>8 && 0==strncasecmp(new_token,"DISTINCT" ,10) ) t=TOKEN_DISTINCT;
+                    else if(buffer_len>7 && 0==strncasecmp(new_token,"UNKNOWN"  ,10) ) t=TOKEN_UNKNOWN;
+                    else if(buffer_len>6 && 0==strncasecmp(new_token,"SELECT"   ,10) ) t=TOKEN_SELECT;
+                    else if(buffer_len>5 && 0==strncasecmp(new_token,"WHERE"    ,10) ) t=TOKEN_WHERE;
+                    else if(buffer_len>5 && 0==strncasecmp(new_token,"ORDER"    ,10) ) t=TOKEN_ORDER;
+                    else if(buffer_len>5 && 0==strncasecmp(new_token,"GROUP"    ,10) ) t=TOKEN_GROUP;
+                    else if(buffer_len>5 && 0==strncasecmp(new_token,"LIMIT"    ,10) ) t=TOKEN_LIMIT;
+                    else if(buffer_len>5 && 0==strncasecmp(new_token,"OUTER"    ,10) ) t=TOKEN_OUTER;
+                    else if(buffer_len>5 && 0==strncasecmp(new_token,"INNER"    ,10) ) t=TOKEN_INNER;
+                    else if(buffer_len>5 && 0==strncasecmp(new_token,"RIGHT"    ,10) ) t=TOKEN_RIGHT;
+                    else if(buffer_len>5 && 0==strncasecmp(new_token,"FALSE"    ,10) ) t=TOKEN_FALSE;
+                    else if(buffer_len>4 && 0==strncasecmp(new_token,"LEFT"     ,10) ) t=TOKEN_LEFT;
+                    else if(buffer_len>4 && 0==strncasecmp(new_token,"FULL"     ,10) ) t=TOKEN_FULL;
+                    else if(buffer_len>4 && 0==strncasecmp(new_token,"DESC"     ,10) ) t=TOKEN_DESC;
+                    else if(buffer_len>4 && 0==strncasecmp(new_token,"JOIN"     ,10) ) t=TOKEN_JOIN;
+                    else if(buffer_len>4 && 0==strncasecmp(new_token,"LIKE"     ,10) ) t=TOKEN_LIKE;
+                    else if(buffer_len>4 && 0==strncasecmp(new_token,"FROM"     ,10) ) t=TOKEN_FROM;
+                    else if(buffer_len>4 && 0==strncasecmp(new_token,"NULL"     ,10) ) t=TOKEN_NULL;
+                    else if(buffer_len>4 && 0==strncasecmp(new_token,"TRUE"     ,10) ) t=TOKEN_TRUE;
+                    else if(buffer_len>3 && 0==strncasecmp(new_token,"AND"      ,10) ) t=TOKEN_AND;
+                    else if(buffer_len>3 && 0==strncasecmp(new_token,"ASC"      ,10) ) t=TOKEN_ASC;
+                    else if(buffer_len>3 && 0==strncasecmp(new_token,"NOT"      ,10) ) t=TOKEN_NOT;
+                    else if(buffer_len>2 && 0==strncasecmp(new_token,"BY"       ,10) ) t=TOKEN_BY;
+                    else if(buffer_len>2 && 0==strncasecmp(new_token,"AS"       ,10) ) t=TOKEN_AS;
+                    else if(buffer_len>2 && 0==strncasecmp(new_token,"OR"       ,10) ) t=TOKEN_OR;
+                    else if(buffer_len>2 && 0==strncasecmp(new_token,"ON"       ,10) ) t=TOKEN_ON;
+                    else if(buffer_len>2 && 0==strncasecmp(new_token,"IS"       ,10) ) t=TOKEN_IS;
+                    else if(buffer_len>2 && 0==strncasecmp(new_token,"IN"       ,10) ) t=TOKEN_IN;
                     break;
 
                 case TOKEN_NUMERIC: 
