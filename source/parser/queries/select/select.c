@@ -558,7 +558,6 @@ void process_select(token_array_t *tokens,int *start){
     int limit_length=0;
     int limit_start=0;
     int loop=1;
-    int i=*start;
     
     
     select_t select;
@@ -577,14 +576,14 @@ void process_select(token_array_t *tokens,int *start){
     
 
     // switch        
-    switch(token_at(tokens,i)->type){
-        case TOKEN_SELECT:   ++i; break;
+    switch(token_at(tokens,*start)->type){
+        case TOKEN_SELECT:   ++*start; break;
     }//end switch                
 
     // distinct
-    switch(token_at(tokens,i)->type){
+    switch(token_at(tokens,*start)->type){
         case TOKEN_DISTINCT: select.distinct=1;         
-                             ++i;
+                             ++*start;
                              break;
     }//end switch                
 
@@ -595,7 +594,7 @@ void process_select(token_array_t *tokens,int *start){
     while(loop){
         data_column_t *dc;
         identifier_t *ident;
-        switch(token_at(tokens,i)->type){
+        switch(token_at(tokens,*start)->type){
             // litterals
             case TOKEN_STRING:
             case TOKEN_NUMERIC:
@@ -604,11 +603,11 @@ void process_select(token_array_t *tokens,int *start){
             case TOKEN_REAL:
             case TOKEN_NULL: add_data_column(&select);
                              dc=&select.columns[select.column_length-1];
-                             dc->type=token_at(tokens,i)->type;
+                             dc->type=token_at(tokens,*start)->type;
                              dc->ordinal=index;
-                             dc->object=token_at(tokens,i)->value;
-                             ++index;
-                             ++i;
+                             dc->object=token_at(tokens,*start)->value;
+                             ++*startndex;
+                             ++*start;
                              dc->alias=process_alias(tokens,&i);
                              break;
 
@@ -621,7 +620,7 @@ void process_select(token_array_t *tokens,int *start){
                                        dc->ordinal=index;
                                        dc->type=TOKEN_IDENTIFIER;
                                        dc->object=ident;
-                                       ++index;
+                                       ++*startndex;
                                        dc->alias=process_alias(tokens,&i);
                                        break;
 
@@ -632,13 +631,13 @@ void process_select(token_array_t *tokens,int *start){
                                        dc->ordinal=index;
                                        dc->type=TOKEN_IDENTIFIER;
                                        dc->object=ident;
-                                       ++index;
+                                       ++*startndex;
                                        dc->alias=process_alias(tokens,&i);
                                        break;
             default: loop=0;
         }
-        switch(token_at(tokens,i)->type){
-            case TOKEN_LIST_DELIMITER: ++i; 
+        switch(token_at(tokens,*start)->type){
+            case TOKEN_LIST_DELIMITER: ++*start; 
                                        break;
             default: loop=0;
         }
@@ -648,8 +647,8 @@ void process_select(token_array_t *tokens,int *start){
 
 
     // from
-    switch(token_at(tokens,i)->type){
-        case TOKEN_FROM:     ++i;
+    switch(token_at(tokens,*start)->type){
+        case TOKEN_FROM:     ++*start;
                             select.from=process_identifier(tokens,&i);
                             select.alias=process_alias(tokens,&i);
                             break;
@@ -662,19 +661,19 @@ void process_select(token_array_t *tokens,int *start){
     index=0;
     while(loop){
         join_t *join;
-        switch(token_at(tokens,i)->type){
+        switch(token_at(tokens,*start)->type){
             case TOKEN_JOIN:
             case TOKEN_LEFT_JOIN:
             case TOKEN_RIGHT_JOIN:
             case TOKEN_FULL_OUTER_JOIN:
             case TOKEN_INNER_JOIN: 
-                                        ++i;
+                                        ++*start;
                                         add_join(&select);
                                         join_t *join=&select.join[select.join_length-1];
                                         join->identifier=process_identifier(tokens,&i);
                                         join->alias=process_alias(tokens,&i);
-                                        switch(token_at(tokens,i)->type){
-                                            case TOKEN_ON: ++i; 
+                                        switch(token_at(tokens,*start)->type){
+                                            case TOKEN_ON: ++*start; 
                                                            join->expression=process_expression(tokens,&i);
                                                            if(join->expression==0)  {
                                                                printf("NO JOIN EXPRESSION\n");
@@ -698,8 +697,8 @@ void process_select(token_array_t *tokens,int *start){
     loop=1;
     index=0;
     while(loop){
-        switch(token_at(tokens,i)->type){
-            case TOKEN_WHERE: ++i;
+        switch(token_at(tokens,*start)->type){
+            case TOKEN_WHERE: ++*start;
                         select.where=process_expression(tokens,&i);
                         break;
             default: loop=0; 
@@ -707,15 +706,15 @@ void process_select(token_array_t *tokens,int *start){
         }
     }
 
-      switch(token_at(tokens,i)->type){
-            case TOKEN_GROUP_BY: printf("IN GROUPBY"); ++i; 
+      switch(token_at(tokens,*start)->type){
+            case TOKEN_GROUP_BY: printf("IN GROUPBY"); ++*start; 
                                  select.group=process_group_column_list(tokens,&i); 
                                  break;
       }
 
-      switch(token_at(tokens,i)->type){
+      switch(token_at(tokens,*start)->type){
             case TOKEN_ORDER_BY: printf("IN ORDERBY");
-                                 ++i; 
+                                 ++*start; 
                                  select.order=process_order_column_list(tokens,&i); 
                                  break;
       }
@@ -723,21 +722,21 @@ void process_select(token_array_t *tokens,int *start){
     // limit
     loop=1;
     while(loop){
-        switch(token_at(tokens,i)->type){
+        switch(token_at(tokens,*start)->type){
             case TOKEN_LIMIT_START: select.has_limit_start=1;
-                                    select.limit_start=atoi(token_at(tokens,i)->value);
-                                    i++;
+                                    select.limit_start=atoi(token_at(tokens,*start)->value);
+                                    ++*start;
                                     break;
             case TOKEN_LIMIT_LENGTH: select.has_limit_length=1;
-                                     select.limit_length=atoi(token_at(tokens,i)->value);    
-                                     i++;
+                                     select.limit_length=atoi(token_at(tokens,*start)->value);    
+                                     ++*start;
                                      break;
             default: loop=0; break;
         }//end switch
     }
 
-  printf("%d\n",i);
-  start=i;
+  printf("%d\n",*start);
+  ;
     
   select_print(select);
   select_free(select);
