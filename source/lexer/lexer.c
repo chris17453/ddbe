@@ -400,7 +400,7 @@ void consolidate_tokens(token_array_t *tokens){
                     ++i;
                     continue;
                 }
-            if( tokens->array[i].type=TOKEN_NUMERIC){
+            if( tokens->array[i].type==TOKEN_NUMERIC){
                 tokens->array[i].type=TOKEN_LIMIT_LENGTH;
             }
         }
