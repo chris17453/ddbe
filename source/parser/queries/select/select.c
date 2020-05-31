@@ -793,7 +793,7 @@ int select_free(select_t select) {
     if(select.from) free(select.from);
     for(int i=0;i<select.join_length;i++){
         if(select.join[i].identifier){
-            free(select.join[i].identifier);
+            free_ident(select.join[i].identifier);
         }
 
     }
@@ -841,6 +841,7 @@ int free_ident(identifier_t *ident){
             free(ident->source);
         }
     }
+    free(ident);
     return 1;
 }
 
