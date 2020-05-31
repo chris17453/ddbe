@@ -29,7 +29,7 @@ if [[ -f "$version" ]]; then
     patch=$((patch+PATCH_INC))
     if [[ $patch -gt $PATCH_MAX ]]; 
     then 
-    patch=#PATCH_MIN
+    patch=$PATCH_MIN
     minor=$((minor+MINOR_INC))
     fi
     if [[ $minor -gt $MINOR_MAX ]]; 
