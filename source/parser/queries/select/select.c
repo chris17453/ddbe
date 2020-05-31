@@ -22,7 +22,7 @@ void            debug_expr             (expression_t *expr,int depth);
 void            process_select(token_array_t *tokens,int start,int end);
 int             select_free(select_t select) ;
 void            free_expression(expression_t *expr);
-void            free_ident(identifier_t *ident)
+void            free_ident(identifier_t *ident);
 void            select_print(select_t select);
 
 /* Function: expr_select
