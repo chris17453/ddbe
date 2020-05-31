@@ -71,7 +71,7 @@ int expr_select(token_array_t *tokens,int depth){
             }
         }
         token_add_type_range(tokens,TOKEN_SELECT,pos);
-        process_select(tokens,pos,tokens->position);
+        //process_select(tokens,*pos);
         return 1;
     }// end token select if
     tokens->position=pos;
