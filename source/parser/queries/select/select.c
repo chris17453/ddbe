@@ -868,7 +868,7 @@ void select_print(select_t select){
     }
     if(select.order) {
         printf(" ---ORDER---");
-        debug_expr(select.group,0);
+        debug_expr(select.order,0);
     }
 
 
