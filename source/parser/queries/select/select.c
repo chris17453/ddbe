@@ -27,6 +27,7 @@ void            process_select(token_array_t *tokens,int *start);
 int             select_free(select_t select) ;
 int             free_expression(expression_t *expr);
 int             free_ident(identifier_t *ident);
+int             free_litteral(token_t *token);
 // debuggers
 void            select_print(select_t select);
 void            debug_expr               (expression_t *expr,int depth);
@@ -796,6 +797,9 @@ int select_free(select_t select) {
         }
 
     }
+    free_expression(select.join->expression);
+    free_expression(select.group);
+    free_expression(select.order);
     free(select.join);
     return 0;
 }
@@ -807,6 +811,14 @@ int select_free(select_t select) {
  * returns: 1 for success or 0 (NULL) for failure
  */
 int free_expression(expression_t *expr){
+ expression_t *expr_ptr=expr;
+ while(expr_ptr){
+     if(expr_ptr->literal) free_litteral(expr_ptr->literal);
+     if(expr_ptr->identifier) free_ident(expr_ptr->identifier);
+     expression_t * last=expr_ptr;
+     expr_ptr=expr_ptr->expression;
+     free(last);
+ }
  return 1;
 }
 
@@ -823,6 +835,21 @@ int free_ident(identifier_t *ident){
         }
         if(ident->source) {
             free(ident->source);
+        }
+    }
+    return 1;
+}
+
+/* Function: free_litteral
+ * -----------------------------
+ * free the data structure of a token_t
+ * 
+ * returns: 1 for success or 0 (NULL) for failure
+ */
+int free_litteral(token_t *token){
+    if(token){
+        if(token->value) {
+            free(token->value);
         }
     }
     return 1;
