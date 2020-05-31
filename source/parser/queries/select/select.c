@@ -443,8 +443,6 @@ expression_t * process_expression(token_array_t *tokens,int *index){
             case TOKEN_NOT : ++*index; not=1; break;
     }
 
-    printf( "expr-- INDEX:%d\n",*index);
-    
     expr=process_boolean_primary(tokens,index);
     if(expr) {
         expr->not=not;
@@ -454,8 +452,6 @@ expression_t * process_expression(token_array_t *tokens,int *index){
             case TOKEN_SHORT_OR  :
             case TOKEN_AND       : 
             case TOKEN_OR        : ++*index;
-                                printf( "expr AND-- INDEX:%d\n",*index);
-    
                                 if(add_expr(expr,process_expression(tokens,index))){
                                     expr->comparitor=token;
                                 } else {
@@ -464,7 +460,6 @@ expression_t * process_expression(token_array_t *tokens,int *index){
                                 break;
         } //end switch
     } //end if
-   printf( "EXIT:INDEX:%d\n",*index);
 
     return expr;
 } //end func
@@ -508,9 +503,7 @@ expression_t * process_order_column_list(token_array_t *tokens,int *index){
     expression_t *expr2=0;
     identifier_t *ident=0;
     int loop=1;
-    int start_pos;
     while(loop) {
-        start_pos=*index;
         ident=process_identifier(tokens,index);
         if(ident) {
             printf("Ident column");
