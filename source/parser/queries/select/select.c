@@ -485,8 +485,14 @@ expression_t * process_column_list(token_array_t *tokens,int *index){
                                 expr2->direction=token;
                                 expr2->identifier=ident;
                                 expr2->mode=3;
-                                if(expr==0) expr=expr2;
-                                else add_expr(expr,expr2);
+                                if(expr==0) {
+                                    expr=expr2;
+                                    printf("replacing EXP\n");
+                                } 
+                                else {
+                                    add_expr(expr,expr2);
+                                    printf("adding to EXP\n");
+                                }
                                 break;
                 default: free_ident(ident); 
                          *index=start_pos;
