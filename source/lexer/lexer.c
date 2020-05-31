@@ -384,8 +384,8 @@ void consolidate_tokens(token_array_t *tokens){
         length--;
     }
 
-    for(int i=0;i<tokens->top;i++) {
     // limit fixup
+    for(int i=0;i<tokens->top;i++) {
         if(tokens->array[i].type== TOKEN_LIMIT) {
             token_delete(tokens,i);
 
@@ -404,10 +404,10 @@ void consolidate_tokens(token_array_t *tokens){
                 tokens->array[i].type==TOKEN_LIMIT_LENGTH;
             }
         }
-
+    }//end limit fixup
       
 
-}
+}//end funciton
 
 void process_queries(token_array_t *tokens){
     int loop=1;
