@@ -468,6 +468,7 @@ expression_t * process_expression(token_array_t *tokens,int *index){
 expression_t * process_column_list(token_array_t *tokens,int *index){
     expression_t *expr=0;
     expression_t *expr2=0;
+    identifier_t *ident=0;
     int loop=1;
     int start_pos;
     while(loop) {
