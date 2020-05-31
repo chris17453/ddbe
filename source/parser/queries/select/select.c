@@ -801,7 +801,7 @@ int select_free(select_t select) {
     free_expression(select.order);
     if(select.join) {
         for(int i=0;i<select.join_length;i++) {
-            free_expression(select.join[i]->expression);
+            free_expression(select.join[i].expression);
         }
     }
     free(select.join);
