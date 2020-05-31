@@ -663,7 +663,7 @@ void process_select(token_array_t *tokens,int start,int end){
     }
 
       switch(token_at(tokens,i)->type){
-            case TOKEN_GROUP_BY: ++i; select.group=process_column_list(tokens,&i); break;
+            case TOKEN_GROUP_BY: printf("IN GROUPBY"); ++i; select.group=process_column_list(tokens,&i); break;
       }
 
       switch(token_at(tokens,i)->type){
