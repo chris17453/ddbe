@@ -101,7 +101,6 @@ token_array_t *lex(char * query){
                     printf("%d,%d\n",i,query_length);
                      
                     int o=0;
-                      printf("%d,%d\n",buffer_len,++o);   
                     if (buffer_len>8 && 0==strncasecmp(new_token,"DISTINCT" ,8 ) ) {  printf("%d,%d\n",buffer_len,++o);  t=TOKEN_DISTINCT; } else
                     if (buffer_len>7 && 0==strncasecmp(new_token,"UNKNOWN"  ,7 ) ) {  printf("%d,%d\n",buffer_len,++o);  t=TOKEN_UNKNOWN; } else
                     if (buffer_len>6 && 0==strncasecmp(new_token,"SELECT"   ,6 ) ) {  printf("%d,%d\n",buffer_len,++o);  t=TOKEN_SELECT; } else
