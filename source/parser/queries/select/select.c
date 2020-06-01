@@ -587,7 +587,7 @@ select_t * process_select(token_array_t *tokens,int *start){
             case TOKEN_BINARY:
             case TOKEN_REAL:
             case TOKEN_NULL: add_data_column(select);
-                             dc=select->columns[select->column_length-1];
+                             dc=&select->columns[select->column_length-1];
                              dc->type=token_at(tokens,*start)->type;
                              dc->ordinal=index;
                              dc->object=token_at(tokens,*start)->value;
@@ -601,7 +601,7 @@ select_t * process_select(token_array_t *tokens,int *start){
             case TOKEN_QUALIFIER:      
                                        ident=process_identifier(tokens,start);
                                        add_data_column(select);
-                                       dc=select->columns[select->column_length-1];
+                                       dc=&select->columns[select->column_length-1];
                                        dc->ordinal=index;
                                        dc->type=TOKEN_IDENTIFIER;
                                        dc->object=ident;
@@ -612,7 +612,7 @@ select_t * process_select(token_array_t *tokens,int *start){
             case TOKEN_SOURCE:         
                                        ident=process_identifier(tokens,start);
                                        add_data_column(&select);
-                                       dc=select->columns[select->column_length-1];
+                                       dc=&select->columns[select->column_length-1];
                                        dc->ordinal=index;
                                        dc->type=TOKEN_IDENTIFIER;
                                        dc->object=ident;
