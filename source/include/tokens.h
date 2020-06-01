@@ -123,6 +123,10 @@
     #define TOKEN_ARRAY            132
     #define TOKEN_QUOTED           133
     #define TOKEN_STRICT           134
+    #define TOKEN_REPO_PATH        135  // calculated
+    #define TOKEN_REPO_BASE        136  // calculated
+    #define TOKEN_PUSH_ON_COMMIT   137  // calculated
+    #define TOKEN_PULL_ON_COMMIT   138  // calculated
 
 
     

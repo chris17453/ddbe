@@ -63,10 +63,6 @@ typedef struct join_t {
 typedef struct table_def_t{
     identifier_t *identifier;
     expression_t *columns;
-    int errors;
-    int whitespace;
-    int delmiter;
-    int strict;
     char *file;
     char *fifo;
     // repo related items
@@ -74,10 +70,14 @@ typedef struct table_def_t{
     char *url;
     char *account;
     char *password;
-    char *repo_file;
-    char *repo_directory;
+    char *repo_path;
+    char *repo_base;
     int push_on_commit;
     int pull_on_read;
+    int column;
+    int array;
+    int strict;
+
 }table_def_t;
 
 

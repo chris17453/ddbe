@@ -5,8 +5,11 @@
 
 #define EXPRESSION_GROUP_BY 3
 #define EXPRESSION_ORDER_BY 4
+#define EXPRESSION_COLUMN   5
 
 
+expression_t * process_column_list(token_array_t *tokens,int *index);
+int free_table_def(table_def_t *table_def);
 
 
 
@@ -928,8 +931,41 @@ void debug_expr(expression_t *expr,int depth){
 }
 
 
+int free_table_def(table_def_t *table_def){
+
+    free(table_def);
+}
 
 
+expression_t * process_column_list(token_array_t *tokens,int *index){
+    expression_t *expr=0;
+    expression_t *expr2=0;
+    identifier_t *ident=0;
+    int loop=1;
+    while(loop) {
+        ident=process_identifier(tokens,index);
+        if(ident) {
+            expr2=safe_malloc(sizeof(expression_t),1); 
+            expr2->identifier=ident;
+            expr2->mode=EXPRESSION_COLUMN;
+            if(expr==0) {
+                expr=expr2;
+            } 
+            else {
+                add_expr(expr,expr2);
+            }
+
+            if(token_at(tokens,*index)->type!=TOKEN_LIST_DELIMITER) {
+                loop=0;
+            } else {
+                ++*index;
+            }
+        } else {
+            loop=0;
+        }
+    }
+    return expr;
+}
 
 table_def_t * process_create_table(token_array_t *tokens,int *start){
     table_def_t *table_def=safe_malloc(sizeof(table_def),1);
@@ -937,18 +973,30 @@ table_def_t * process_create_table(token_array_t *tokens,int *start){
    
    // switch        
     switch(token_at(tokens,*start)->type){
-        case TOKEN_CREATE:   ++*start; break;
+        case TOKEN_CREATE_TABLE: ++*start; break;
     }//end switch                
 
-    // distinct
-    switch(token_at(tokens,*start)->type){
-        case TOKEN_DISTINCT: select->distinct=1;         
-                             ++*start;
-                             break;
-    }//end switch                
+    table_def->identifier=process_identity(tokens,start);
 
+    if(table_def->identifier==0) {  free_table_def(table_def); return 0; }
 
+    table_def->columns=process_column_list(tokens,start);
+    if(table_def->columns==0) {  free_table_def(table_def); return 0; }
 
-
+    table_def->file            =match_key(tokens,start,TOKEN_FILE);
+    table_def->fifo            =match_key(tokens,start,TOKEN_FIFO);
+    // repo related items
+    table_def->repo            =match_key(tokens,start,TOKEN_REPO);
+    table_def->url             =match_key(tokens,start,TOKEN_URL);
+    table_def->account         =match_key(tokens,start,TOKEN_ACCOUNT);
+    table_def->password        =match_key(tokens,start,TOKEN_PASSWORD);
+    table_def->repo_path       =match_key(tokens,start,TOKEN_REPO_PATH);
+    table_def->repo_base       =match_key(tokens,start,TOKEN_REPO_BASE);
+    table_def->push_on_commit  =match_key(tokens,start,TOKEN_PUSH_ON_COMMIT);
+    table_def->pull_on_read    =match_key(tokens,start,TOKEN_PULL_ON_COMMIT);
+    table_def->strict          =match_key(tokens,start,TOKEN_STRICT);
+    table_def->column          =match_key(tokens,start,TOKEN_COLUMN);
+    table_def->array           =match_key(tokens,start,TOKEN_ARRAY);
+    
     return table_def;
 }

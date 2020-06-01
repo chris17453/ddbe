@@ -125,6 +125,10 @@ char *token_type(int t){
         case  TOKEN_COLUMN_DELIMITER: return "COLUMN_DELIMITER";
         case  TOKEN_QUOTED:           return "QUOTED";
         case  TOKEN_STRICT:           return "STRICT";
+        case  TOKEN_REPO_PATH:        return "REPO_PATH";
+        case  TOKEN_REPO_BASE:        return "REPO_BASE";
+        case  TOKEN_PUSH_ON_COMMIT:   return "PUSH_ON_COMMIT";
+        case  TOKEN_PULL_ON_COMMIT:   return "PULL_ON_COMMIT";
 
 
 /*
