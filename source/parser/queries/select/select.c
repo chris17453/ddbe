@@ -611,7 +611,7 @@ select_t * process_select(token_array_t *tokens,int *start){
 
             case TOKEN_SOURCE:         
                                        ident=process_identifier(tokens,start);
-                                       add_data_column(&select);
+                                       add_data_column(select);
                                        dc=&select->columns[select->column_length-1];
                                        dc->ordinal=index;
                                        dc->type=TOKEN_IDENTIFIER;
