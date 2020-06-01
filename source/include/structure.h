@@ -60,11 +60,25 @@ typedef struct join_t {
 } join_t;
 
 
-typedef struct comparison_t {
-    identifier_t * identity;
-    int            comparitor;
-    //identifier_t *identity;
-} comparison_t;
+typedef struct table_def_t{
+    identifier_t *identifier;
+    expression_t *columns;
+    int errors;
+    int whitespace;
+    int delmiter;
+    int strict;
+    char *file;
+    char *fifo;
+    // repo related items
+    char *repo;
+    char *url;
+    char *account;
+    char *password;
+    char *repo_file;
+    char *repo_directory;
+    int push_on_commit;
+    int pull_on_read;
+}table_def_t;
 
 
 /****

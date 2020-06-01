@@ -954,3 +954,18 @@ void debug_expr(expression_t *expr,int depth){
     printf("\n");
 
 }
+
+
+
+
+
+create_t * process_create_table(token_array_t *tokens,int index){
+
+
+    table_def_t *table_def=safe_malloc(sizeof(create_t),1);
+
+
+
+
+    return table_def;
+}
