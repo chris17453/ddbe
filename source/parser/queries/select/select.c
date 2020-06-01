@@ -586,7 +586,7 @@ select_t * process_select(token_array_t *tokens,int *start){
             case TOKEN_HEX:
             case TOKEN_BINARY:
             case TOKEN_REAL:
-            case TOKEN_NULL: add_data_column(&select);
+            case TOKEN_NULL: add_data_column(select);
                              dc=&select->columns[select->column_length-1];
                              dc->type=token_at(tokens,*start)->type;
                              dc->ordinal=index;
