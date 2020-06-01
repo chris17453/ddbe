@@ -737,7 +737,7 @@ int free_select(select_t *select) {
             case TOKEN_BINARY:
             case TOKEN_REAL:
             case TOKEN_NULL: break;
-            case TOKEN_IDENTIFIER: free_ident(select.columns[i].object); 
+            case TOKEN_IDENTIFIER: free_ident(select->columns[i].object); 
             break;
         }
         free_string(select->columns[i].alias);
