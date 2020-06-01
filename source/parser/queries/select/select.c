@@ -1,7 +1,7 @@
 #include "../../../include/errors.h"
 #include "../../../include/tokens.h"
 #include "../../../include/structure.h"
-#include "../../../include/select.h"
+#include "../../../include/select->h"
 
 #define EXPRESSION_GROUP_BY 3
 #define EXPRESSION_ORDER_BY 4
@@ -24,13 +24,13 @@ expression_t  * process_group_column_list(token_array_t *tokens,int *index);
 expression_t  * process_order_column_list(token_array_t *tokens,int *index);
 void            process_select           (token_array_t *tokens,int *start);
 // cleaners
-int             select_free              (select_t select) ;
+int             select_free              (select_t *select) ;
 int             free_string              (char *data);
 int             free_expression          (expression_t *expr);
 int             free_ident               (identifier_t *ident);
 int             free_litteral            (token_t *token);
 // debuggers
-void            select_print             (select_t select);
+void            select_print             (select_t *select);
 void            debug_expr               (expression_t *expr,int depth);
 
 
@@ -537,27 +537,27 @@ expression_t * process_order_column_list(token_array_t *tokens,int *index){
  * 
  * returns: nothing. All output is via stdio
  */
-void process_select(token_array_t *tokens,int *start){
+select_t * process_select(token_array_t *tokens,int *start){
     //if(*start>=tokens->top) return;
     int limit_length=0;
     int limit_start=0;
     int loop=1;
     
     
-    select_t select;
-    select.distinct=0;
-    select.columns=0;
-    select.from=0;
-    select.join=0;
-    select.where=0;
-    select.order=0;
-    select.group=0;
-    select.has_limit_length=0;
-    select.has_limit_start=0;
-    select.limit_start=0;
-    select.limit_length=0;
-    select.column_length=0;
-    select.join_length=0;
+    select_t *select=safe_malloc(sizeof(select_t),1);
+    select->distinct=0;
+    select->columns=0;
+    select->from=0;
+    select->join=0;
+    select->where=0;
+    select->order=0;
+    select->group=0;
+    select->has_limit_length=0;
+    select->has_limit_start=0;
+    select->limit_start=0;
+    select->limit_length=0;
+    select->column_length=0;
+    select->join_length=0;
     
 
     // switch        
@@ -567,7 +567,7 @@ void process_select(token_array_t *tokens,int *start){
 
     // distinct
     switch(token_at(tokens,*start)->type){
-        case TOKEN_DISTINCT: select.distinct=1;         
+        case TOKEN_DISTINCT: select->distinct=1;         
                              ++*start;
                              break;
     }//end switch                
@@ -587,7 +587,7 @@ void process_select(token_array_t *tokens,int *start){
             case TOKEN_BINARY:
             case TOKEN_REAL:
             case TOKEN_NULL: add_data_column(&select);
-                             dc=&select.columns[select.column_length-1];
+                             dc=&select->columns[select->column_length-1];
                              dc->type=token_at(tokens,*start)->type;
                              dc->ordinal=index;
                              dc->object=token_at(tokens,*start)->value;
@@ -601,7 +601,7 @@ void process_select(token_array_t *tokens,int *start){
             case TOKEN_QUALIFIER:      
                                        ident=process_identifier(tokens,start);
                                        add_data_column(&select);
-                                       dc=&select.columns[select.column_length-1];
+                                       dc=&select->columns[select->column_length-1];
                                        dc->ordinal=index;
                                        dc->type=TOKEN_IDENTIFIER;
                                        dc->object=ident;
@@ -612,7 +612,7 @@ void process_select(token_array_t *tokens,int *start){
             case TOKEN_SOURCE:         
                                        ident=process_identifier(tokens,start);
                                        add_data_column(&select);
-                                       dc=&select.columns[select.column_length-1];
+                                       dc=&select->columns[select->column_length-1];
                                        dc->ordinal=index;
                                        dc->type=TOKEN_IDENTIFIER;
                                        dc->object=ident;
@@ -635,8 +635,8 @@ void process_select(token_array_t *tokens,int *start){
     // from
     switch(token_at(tokens,*start)->type){
         case TOKEN_FROM:     ++*start;
-                            select.from=process_identifier(tokens,start);
-                            select.alias=process_alias(tokens,start);
+                            select->from=process_identifier(tokens,start);
+                            select->alias=process_alias(tokens,start);
                             break;
     }// end switch
     
@@ -654,7 +654,7 @@ void process_select(token_array_t *tokens,int *start){
             case TOKEN_INNER_JOIN: 
                                         ++*start;
                                         add_join(&select);
-                                        join_t *join=&select.join[select.join_length-1];
+                                        join_t *join=&select->join[select->join_length-1];
                                         join->identifier=process_identifier(tokens,start);
                                         join->alias=process_alias(tokens,start);
                                         switch(token_at(tokens,*start)->type){
@@ -680,7 +680,7 @@ void process_select(token_array_t *tokens,int *start){
     while(loop){
         switch(token_at(tokens,*start)->type){
             case TOKEN_WHERE: ++*start;
-                        select.where=process_expression(tokens,start);
+                        select->where=process_expression(tokens,start);
                         break;
             default: loop=0; 
                      break;
@@ -689,13 +689,13 @@ void process_select(token_array_t *tokens,int *start){
 
     switch(token_at(tokens,*start)->type){
         case TOKEN_GROUP_BY: ++*start; 
-                                select.group=process_group_column_list(tokens,start); 
+                                select->group=process_group_column_list(tokens,start); 
                                 break;
     }
 
     switch(token_at(tokens,*start)->type){
         case TOKEN_ORDER_BY: ++*start; 
-                                select.order=process_order_column_list(tokens,start); 
+                                select->order=process_order_column_list(tokens,start); 
                                 break;
     }
 
@@ -703,12 +703,12 @@ void process_select(token_array_t *tokens,int *start){
     loop=1;
     while(loop){
         switch(token_at(tokens,*start)->type){
-            case TOKEN_LIMIT_START: select.has_limit_start=1;
-                                    select.limit_start=atoi(token_at(tokens,*start)->value);
+            case TOKEN_LIMIT_START: select->has_limit_start=1;
+                                    select->limit_start=atoi(token_at(tokens,*start)->value);
                                     ++*start;
                                     break;
-            case TOKEN_LIMIT_LENGTH: select.has_limit_length=1;
-                                     select.limit_length=atoi(token_at(tokens,*start)->value);    
+            case TOKEN_LIMIT_LENGTH: select->has_limit_length=1;
+                                     select->limit_length=atoi(token_at(tokens,*start)->value);    
                                      ++*start;
                                      break;
             default: loop=0; break;
@@ -717,7 +717,7 @@ void process_select(token_array_t *tokens,int *start){
 
     
   select_print(select);
-  select_free(select);
+  return select;
 }
 
 /* Function: select_free
@@ -834,15 +834,15 @@ int free_litteral(token_t *token){
  * 
  * returns: nothing. All output is via stdio
  */
-void select_print(select_t select){
+void select_print(select_t *select){
     // DEBUGGING INFORMATION
 
     printf("SELECT\n");
-    if (select.distinct) printf("HAS DISTINCT\n");
-    if (select.columns){
+    if (select->distinct) printf("HAS DISTINCT\n");
+    if (select->columns){
 
-        for(int i=0;i<select.column_length;i++) {
-            switch(select.columns[i].type){
+        for(int i=0;i<select->column_length;i++) {
+            switch(select->columns[i].type){
 
                 case TOKEN_STRING:
                 case TOKEN_NUMERIC:
@@ -850,69 +850,69 @@ void select_print(select_t select){
                 case TOKEN_BINARY:
                 case TOKEN_REAL:
                 case TOKEN_NULL:  printf("%s-%s ALIAS %s%d\n",
-                                                        token_type(select.columns[i].type),
-                                                        (char*)select.columns[i].object ,
-                                                        select.columns[i].alias ,
-                                                        select.columns[i].ordinal);
+                                                        token_type(select->columns[i].type),
+                                                        (char*)select->columns[i].object ,
+                                                        select->columns[i].alias ,
+                                                        select->columns[i].ordinal);
                                   break;
                 case TOKEN_IDENTIFIER: 
-                                  printf("%s- %s.%s ALIAS %s,%d\n",token_type(select.columns[i].type),
-                                                            ((identifier_t *)select.columns[i].object)->qualifier ,
-                                                            ((identifier_t *)select.columns[i].object)->source ,
-                                                            select.columns[i].alias ,
-                                                            select.columns[i].ordinal );
+                                  printf("%s- %s.%s ALIAS %s,%d\n",token_type(select->columns[i].type),
+                                                            ((identifier_t *)select->columns[i].object)->qualifier ,
+                                                            ((identifier_t *)select->columns[i].object)->source ,
+                                                            select->columns[i].alias ,
+                                                            select->columns[i].ordinal );
                                     break;
             }
         }
     }
    
 
-     if (select.from) {
+     if (select->from) {
         printf("FROM\n");
-        if(select.from->qualifier) {
-            printf("%s.",select.from->qualifier);
+        if(select->from->qualifier) {
+            printf("%s.",select->from->qualifier);
         }
-        if(select.from->source) {
-            printf("%s",select.from->source);
-            if(select.alias) printf(" ALIAS: %s ",select.alias);
+        if(select->from->source) {
+            printf("%s",select->from->source);
+            if(select->alias) printf(" ALIAS: %s ",select->alias);
             printf("\n");
         }
         
     }
 
-    if (select.join) {
-        printf("JOIN %d\n",select.join_length);
-        for(int i=0;i<select.join_length;i++){
-            if(select.join[i].identifier) {
-                if(select.join[i].identifier->qualifier) {
-                    printf("%s.",select.join[i].identifier->qualifier);
+    if (select->join) {
+        printf("JOIN %d\n",select->join_length);
+        for(int i=0;i<select->join_length;i++){
+            if(select->join[i].identifier) {
+                if(select->join[i].identifier->qualifier) {
+                    printf("%s.",select->join[i].identifier->qualifier);
                 }
-                if(select.join[i].identifier->source) {
-                    printf("%s ",select.join[i].identifier->source);
+                if(select->join[i].identifier->source) {
+                    printf("%s ",select->join[i].identifier->source);
                 }
-                if(select.join[i].alias) printf("ALIAS: %s",select.join[i].alias);
+                if(select->join[i].alias) printf("ALIAS: %s",select->join[i].alias);
                 printf("\n");
             }
-            debug_expr(select.join[i].expression,0);
+            debug_expr(select->join[i].expression,0);
         }
         
     }
-    if(select.where) {
+    if(select->where) {
         printf(" ---WHERE---");
-        debug_expr(select.where,0);
+        debug_expr(select->where,0);
     }
-    if(select.group) {
+    if(select->group) {
         printf(" ---GROUP---");
-        debug_expr(select.group,0);
+        debug_expr(select->group,0);
     }
-    if(select.order) {
+    if(select->order) {
         printf(" ---ORDER---");
-        debug_expr(select.order,0);
+        debug_expr(select->order,0);
     }
 
 
-    if (select.has_limit_start) printf("LIMIT_START:   %d\n",select.limit_start);
-    if (select.has_limit_length) printf("LIMIT_LENGTH : %d\n",select.limit_length);
+    if (select->has_limit_start) printf("LIMIT_START:   %d\n",select->limit_start);
+    if (select->has_limit_length) printf("LIMIT_LENGTH : %d\n",select->limit_length);
 }
 
 /* Function: debug_expr
@@ -960,9 +960,7 @@ void debug_expr(expression_t *expr,int depth){
 
 
 table_def_t * process_create_table(token_array_t *tokens,int index){
-
-
-    table_def_t *table_def=safe_malloc(sizeof(create_t),1);
+    table_def_t table_def;
 
 
 
