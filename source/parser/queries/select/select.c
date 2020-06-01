@@ -960,7 +960,7 @@ void debug_expr(expression_t *expr,int depth){
 
 
 table_def_t * process_create_table(token_array_t *tokens,int index){
-    table_def_t table_def;
+    table_def_t *table_def;
 
 
 
