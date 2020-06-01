@@ -654,7 +654,7 @@ select_t * process_select(token_array_t *tokens,int *start){
             case TOKEN_INNER_JOIN: 
                                         ++*start;
                                         add_join(select);
-                                        join_t *join=select->join[select->join_length-1];
+                                        join_t *join=&select->join[select->join_length-1];
                                         join->identifier=process_identifier(tokens,start);
                                         join->alias=process_alias(tokens,start);
                                         switch(token_at(tokens,*start)->type){
@@ -729,7 +729,7 @@ select_t * process_select(token_array_t *tokens,int *start){
 int free_select(select_t *select) {
     // free resources
     for(int i=0;i<select->column_length;i++) {
-        switch(select.columns[i].type){
+        switch(select->columns[i].type){
 
             case TOKEN_STRING:
             case TOKEN_NUMERIC:
@@ -740,7 +740,7 @@ int free_select(select_t *select) {
             case TOKEN_IDENTIFIER: free_ident(select.columns[i].object); 
             break;
         }
-        free_string(select.columns[i].alias);
+        free_string(select->columns[i].alias);
 //        if(select.columns->type)
   //      select.columns->object;
     }
