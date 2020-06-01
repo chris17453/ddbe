@@ -746,8 +746,8 @@ int free_select(select_t *select) {
     }
     free(select->columns);
     if(select->from) {
-        free_ident(select.from);
-        free_string(select.alias);
+        free_ident(select->from);
+        free_string(select->alias);
     }
     if(select->join) {
         for(int i=0;i<select->join_length;i++) {
@@ -755,7 +755,7 @@ int free_select(select_t *select) {
             free_expression(select->join[i].expression);
             free_string(select->join[i].alias);
         }
-        free(select.join);
+        free(select->join);
     }
     free_expression(select->where);
     free_expression(select->group);
