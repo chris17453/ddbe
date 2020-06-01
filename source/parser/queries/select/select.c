@@ -24,7 +24,7 @@ expression_t  * process_group_column_list(token_array_t *tokens,int *index);
 expression_t  * process_order_column_list(token_array_t *tokens,int *index);
 select_t      * process_select           (token_array_t *tokens,int *start);
 // cleaners
-int             select_free              (select_t *select) ;
+int             free_select              (select_t *select) ;
 int             free_string              (char *data);
 int             free_expression          (expression_t *expr);
 int             free_ident               (identifier_t *ident);
@@ -726,9 +726,9 @@ select_t * process_select(token_array_t *tokens,int *start){
  * 
  * returns: 1 for success or 0 (NULL) for failure
  */
-int select_free(select_t select) {
+int free_select(select_t *select) {
     // free resources
-    for(int i=0;i<select.column_length;i++) {
+    for(int i=0;i<select->column_length;i++) {
         switch(select.columns[i].type){
 
             case TOKEN_STRING:
@@ -744,23 +744,23 @@ int select_free(select_t select) {
 //        if(select.columns->type)
   //      select.columns->object;
     }
-    free(select.columns);
-    if(select.from) {
+    free(select->columns);
+    if(select->from) {
         free_ident(select.from);
         free_string(select.alias);
     }
-    if(select.join) {
-        for(int i=0;i<select.join_length;i++) {
-            free_ident(select.join[i].identifier);
-            free_expression(select.join[i].expression);
-            free_string(select.join[i].alias);
+    if(select->join) {
+        for(int i=0;i<select->join_length;i++) {
+            free_ident(select->join[i].identifier);
+            free_expression(select->join[i].expression);
+            free_string(select->join[i].alias);
         }
         free(select.join);
     }
-    free_expression(select.where);
-    free_expression(select.group);
-    free_expression(select.order);
-    
+    free_expression(select->where);
+    free_expression(select->group);
+    free_expression(select->order);
+    free(select);
     return 0;
 }
 
