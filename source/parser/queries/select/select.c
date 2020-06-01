@@ -938,7 +938,7 @@ int free_table_def(table_def_t *table_def){
 
 char* match_key(token_array_t *tokens,int *index,int key){
     char *value=0;
-    if(token_at(tokens,&index)->type==key) {
+    if(token_at(tokens,index)->type==key) {
         ++*index;
         value=copy_token_value_at(tokens,&index);
         ++*index;
