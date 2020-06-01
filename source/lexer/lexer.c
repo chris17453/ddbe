@@ -153,7 +153,7 @@ token_array_t *lex(char * query){
                         if (0==strncasecmp(new_token,"PUSH"      ,4 ) ) { t=TOKEN_PUSH;             } else
                         if (0==strncasecmp(new_token,"PULL"      ,4 ) ) { t=TOKEN_PULL;             } else
                         if (0==strncasecmp(new_token,"READ"      ,4 ) ) { t=TOKEN_READ;             } else
-                        if (0==strncasecmp(new_token,"URL"       ,3 ) ) { t=TOKEN_URL;              } else
+                        if (0==strncasecmp(new_token,"URL"       ,3 ) ) { t=TOKEN_URL;              } 
 
 
 
