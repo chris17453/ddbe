@@ -959,7 +959,7 @@ void debug_expr(expression_t *expr,int depth){
 
 
 
-create_t * process_create_table(token_array_t *tokens,int index){
+table_def_t * process_create_table(token_array_t *tokens,int index){
 
 
     table_def_t *table_def=safe_malloc(sizeof(create_t),1);
