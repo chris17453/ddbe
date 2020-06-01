@@ -102,7 +102,27 @@
     #define TOKEN_IS_NULL          110  // calculated 
     #define TOKEN_NOT_IN           112  // calculated
     #define TOKEN_IS_NOT_NULL      113  // calculated
-
+    #define TOKEN_CREATE           114
+    #define TOKEN_TABLE            115
+    #define TOKEN_CREATE_TABLE     116
+    #define TOKEN_FILE             117
+    #define TOKEN_FIFO             118
+    #define TOKEN_REPO             119
+    #define TOKEN_URL              120
+    #define TOKEN_ACCOUNT          121
+    #define TOKEN_PASSWORD         122
+    #define TOKEN_BASE             123
+    #define TOKEN_PATH             124
+    #define TOKEN_PUSH             125
+    #define TOKEN_COMMIT           126
+    #define TOKEN_PULL             127
+    #define TOKEN_READ             128
+    #define TOKEN_COLUMN           129
+    #define TOKEN_ARRAY_DELIMITER  130
+    #define TOKEN_COLUMN_DELIMITER 131
+    #define TOKEN_ARRAY            132
+    #define TOKEN_QUOTED           133
+    #define TOKEN_STRICT           134
 
 
     

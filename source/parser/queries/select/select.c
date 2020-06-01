@@ -931,8 +931,21 @@ void debug_expr(expression_t *expr,int depth){
 
 
 
-table_def_t * process_create_table(token_array_t *tokens,int index){
-    table_def_t *table_def;
+table_def_t * process_create_table(token_array_t *tokens,int *start){
+    table_def_t *table_def=safe_malloc(sizeof(table_def),1);
+   
+   
+   // switch        
+    switch(token_at(tokens,*start)->type){
+        case TOKEN_CREATE:   ++*start; break;
+    }//end switch                
+
+    // distinct
+    switch(token_at(tokens,*start)->type){
+        case TOKEN_DISTINCT: select->distinct=1;         
+                             ++*start;
+                             break;
+    }//end switch                
 
 
 

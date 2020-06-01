@@ -105,8 +105,67 @@ char *token_type(int t){
         case  TOKEN_IS_NULL:         return "IS_NULL";
         case  TOKEN_NOT_IN:          return "NOT_IN";
         case  TOKEN_IS_NOT_NULL:     return "IS_NOT_NULL";
+        case  TOKEN_CREATE:          return "CREATE";
+        case  TOKEN_TABLE:           return "TABLE";
+        case  TOKEN_CREATE_TABLE:    return "CREATE_TABLE";
+        case  TOKEN_FILE:            return "FILE";
+        case  TOKEN_FIFO:            return "FIFO";
+        case  TOKEN_REPO:            return "REPO";
+        case  TOKEN_URL:             return "URL";
+        case  TOKEN_ACCOUNT:         return "ACCOUNT";
+        case  TOKEN_PASSWORD:        return "PASSWORD";
+        case  TOKEN_BASE:            return "BASE";
+        case  TOKEN_PATH:            return "PATH";
+        case  TOKEN_PUSH:            return "PUSH";
+        case  TOKEN_COMMIT:          return "COMMIT";
+        case  TOKEN_PULL:            return "PULL";
+        case  TOKEN_READ:            return "READ";
+        case  TOKEN_COLUMN:          return "COLUMN";
+        case  TOKEN_ARRAY_DELIMITER:  return "ARRAY_DELIMITER";
+        case  TOKEN_COLUMN_DELIMITER: return "COLUMN_DELIMITER";
+        case  TOKEN_QUOTED:           return "QUOTED";
+        case  TOKEN_STRICT:           return "STRICT";
 
-    
+
+/*
+     CREATE 
+     TABLE
+     FILE
+     FIFO
+     REPO
+     URL
+     ACCOUNT
+     PASSWORD
+     REPO_FILE
+     REPO_DIRECTORY
+     PUSH ON COMMIT 
+     PULL ON READ
+     COLUMN_DELIMITER
+     ARRAY_DELIMITER
+     QUOTED_DELIMITER
+     STRICT
+  */   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
     char *token_id=calloc(1,10);
