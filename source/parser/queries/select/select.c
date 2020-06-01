@@ -976,7 +976,7 @@ table_def_t * process_create_table(token_array_t *tokens,int *start){
         case TOKEN_CREATE_TABLE: ++*start; break;
     }//end switch                
 
-    table_def->identifier=process_identity(tokens,start);
+    table_def->identifier=process_identifier(tokens,start);
 
     if(table_def->identifier==0) {  free_table_def(table_def); return 0; }
 
