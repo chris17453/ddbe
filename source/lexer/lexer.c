@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "../include/errors.h"
 #include "../include/tokens.h"
+#include "../include/select.h"
 #include "../include/debug.h"
 
 
@@ -417,7 +418,9 @@ void consolidate_tokens(token_array_t *tokens){
 void process_queries(token_array_t *tokens){
     int loop=1;
     while(loop){
-        process_select(tokens,&tokens->position);
+        select_t *select=process_select(tokens,&tokens->position);
+
+        free_select(select);
 
         if(!compare_token(tokens,0,TOKEN_DELIMITER)){
             loop=0;
