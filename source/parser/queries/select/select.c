@@ -936,11 +936,44 @@ int free_table_def(table_def_t *table_def){
     free(table_def);
 }
 
-char* match_key(token_array_t *tokens,int *index,int key){
+token_t* match_key_numeric_value(token_array_t *tokens,int *index,int key){
+    if(token_at(tokens,*index)->type==key) {
+        ++*index;
+        token_t *token=token_at(tokens,*index);
+            if(token->type!=TOKEN_NUMERIC) { 
+                --*index;
+                return 0;
+            }
+        ++*index;
+        return token->type;
+    }
+    return 0;
+}
+
+token_t* match_key_bool_value(token_array_t *tokens,int *index,int key){
+    if(token_at(tokens,*index)->type==key) {
+        ++*index;
+        token_t *token=token_at(tokens,*index);
+            if(token->type!=TOKEN_TRUE && token->type==TOKEN_FALSE) { 
+                --*index;
+                return 0;
+            }
+        ++*index;
+        return token->type;
+    }
+    return 0;
+}
+
+char* match_key_string_value(token_array_t *tokens,int *index,int key){
     char *value=0;
     if(token_at(tokens,*index)->type==key) {
         ++*index;
-        value=copy_token_value_at(tokens,*index);
+        token_t *token=token_at(tokens,*index);
+        if(token->type!=TOKEN_STRING) {
+            --*index;
+            return 0;
+        }
+        token=copy_token__at(tokens,*index);
         ++*index;
     }
     return value;
@@ -992,20 +1025,22 @@ table_def_t * process_create_table(token_array_t *tokens,int *start){
     table_def->columns=process_column_list(tokens,start);
     if(table_def->columns==0) {  free_table_def(table_def); return 0; }
 
-    table_def->file            =match_key(tokens,start,TOKEN_FILE);
-    table_def->fifo            =match_key(tokens,start,TOKEN_FIFO);
-    // repo related items
-    table_def->repo            =match_key(tokens,start,TOKEN_REPO);
-    table_def->url             =match_key(tokens,start,TOKEN_URL);
-    table_def->account         =match_key(tokens,start,TOKEN_ACCOUNT);
-    table_def->password        =match_key(tokens,start,TOKEN_PASSWORD);
-    table_def->repo_path       =match_key(tokens,start,TOKEN_REPO_PATH);
-    table_def->repo_base       =match_key(tokens,start,TOKEN_REPO_BASE);
-    table_def->push_on_commit  =match_key(tokens,start,TOKEN_PUSH_ON_COMMIT);
-    table_def->pull_on_read    =match_key(tokens,start,TOKEN_PULL_ON_COMMIT);
-    table_def->strict          =match_key(tokens,start,TOKEN_STRICT);
-    table_def->column          =match_key(tokens,start,TOKEN_COLUMN);
-    table_def->array           =match_key(tokens,start,TOKEN_ARRAY);
+    table_def->file            =match_key_string_value(tokens,start,TOKEN_FILE          ,0);  
+    table_def->fifo            =match_key_string_value(tokens,start,TOKEN_FIFO          ,0);  // optional
+    // repo related items a group.... entire group is optional..
+    table_def->repo            =match_key_string_value(tokens,start,TOKEN_REPO          ,0);  
+    table_def->url             =match_key_string_value(tokens,start,TOKEN_URL           ,0);
+    table_def->account         =match_key_string_value(tokens,start,TOKEN_ACCOUNT       ,0); 
+    table_def->password        =match_key_string_value(tokens,start,TOKEN_PASSWORD      ,0);
+    table_def->repo_path       =match_key_string_value(tokens,start,TOKEN_REPO_PATH     ,0);
+    table_def->repo_base       =match_key_string_value(tokens,start,TOKEN_REPO_BASE     ,0);
+    table_def->push_on_commit  =match_key_bool_value  (tokens,start,TOKEN_PUSH_ON_COMMIT,1);  // optional
+    table_def->pull_on_read    =match_key_bool_value  (tokens,start,TOKEN_PULL_ON_COMMIT,1);  // optional  
+    
+    table_def->strict          =match_key_bool_value  (tokens,start,TOKEN_STRICT        ,0);  // optional
+    table_def->column          =match_key_string_value(tokens,start,TOKEN_COLUMN        ,DEFAULT_COLUMN_DEIMITER);  // optional
+    //table_def->array           =match_key_string_value(tokens,start,TOKEN_ARRAY         ,DEFAULT_ARRAY_DEIMITER);  // optional
+
     
     return table_def;
 }
